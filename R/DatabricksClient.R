@@ -180,11 +180,11 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
 
   # TODO: add retries as with other SDKs See: client/client.go#L269-L280 in Go
   # SDK
-  do <- function(method, path, body = NULL, query = NULL) {
+  do <- function(method, path, body = NULL, query = NULL, json_wrap_body = TRUE) {
     visitor <- authenticate()
     headers <- visitor()
     headers["Connection"] <- "close"
-    if (!is.null(body)) {
+    if (!is.null(body) && json_wrap_body) {
       body <- base::Filter(length, body)
       body <- jsonlite::toJSON(body, auto_unbox = TRUE, digits = 22, null = "null")
     }
@@ -192,6 +192,7 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
     response <- httr::VERB(method, url, httr::add_headers(headers), httr::user_agent(user_agent()),
                            httr::config(verbose = FALSE, connecttimeout = 30), httr::accept_json(),
                            httr::write_memory(), query = base::Filter(length, query), body = body)
+
     if (httr::http_error(response)) {
       # httr::warn_for_status()
       json <- httr::content(response, as = "parsed", encoding = "UTF-8")
@@ -209,9 +210,20 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       }
       rlang::abort(msg, call = rlang::caller_env())
     }
-    json_string <- httr::content(response, as = "text", encoding = "UTF-8")
+    if (httr::has_content(response)) {
+
+      # In case of a raw bite stream we cannot convert to json
+      if (is.raw(httr::content(response))) {
+        return(httr::content(response))
+      }
+
+      json_string <- httr::content(response, as = "text", encoding = "UTF-8")
+    } else {
+      json_string <- "{}"
+    }
     jsonlite::fromJSON(json_string)
   }
 
-  return(list(is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do, debug_string = debug_string))
+  return(list(is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do,
+              debug_string = debug_string, login = cfg))
 }
