@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rtemplate
+# connector.databricks
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/NN-OpenSource/Rtemplate/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NN-OpenSource/Rtemplate/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This package is a template for future R packages developed by the ATMOS
