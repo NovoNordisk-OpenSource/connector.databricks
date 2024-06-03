@@ -14,7 +14,7 @@
 #' temp_csv <- tempfile("iris", fileext = ".csv")
 #' databrics_volume <- "/Volumes/my_adam/tester"
 #' databricks_file_csv <- file.path(databrics_volume, basename(temp_csv))
-#' write_fs_databricks(iris, databricks_file_csv)
+#' try(write_fs_databricks(iris, databricks_file_csv))
 #'
 #' @export
 #' @importFrom connector write_file
@@ -36,7 +36,8 @@ write_fs_databricks <- function(x, file, ..., overwrite = TRUE,
   # Clean up
   unlink(temp_file)
 
-  # if the length of res is positive a mistake may have occured and the object is printed
+  # if the length of res is positive a mistake may have occurred
+  # and the object is printed for debugging
   if (length(res) > 0) {
     print(res)
   }

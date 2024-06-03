@@ -33,6 +33,6 @@ Write a file based on this extension
 temp_csv <- tempfile("iris", fileext = ".csv")
 databrics_volume <- "/Volumes/my_adam/tester"
 databricks_file_csv <- file.path(databrics_volume, basename(temp_csv))
-write_fs_databricks(iris, databricks_file_csv)
+try(write_fs_databricks(iris, databricks_file_csv))
 
 }
