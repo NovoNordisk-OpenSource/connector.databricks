@@ -23,8 +23,8 @@ The aim of this function is to identify the extension on the file to dispatch it
 temp_csv <- tempfile("iris", fileext = ".csv")
 databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
 databricks_file_csv <- file.path(databrics_volume, basename(temp_csv))
-write_fs_databricks(iris, databricks_file_csv)
+try(write_fs_databricks(iris, databricks_file_csv))
 
 # Read the file from databricks
-read_fs_databricks(databricks_file_csv)
+try(read_fs_databricks(databricks_file_csv))
 }
