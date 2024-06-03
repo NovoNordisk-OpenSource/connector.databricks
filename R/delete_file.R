@@ -7,7 +7,6 @@
 #'
 #'
 #' @rdname delete_file
-#' @alias filesDelete
 #' @export
 delete_file <- function(client, file_path) {
 

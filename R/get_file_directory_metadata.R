@@ -28,7 +28,6 @@
 #'   get_file_directory_metadata(db_client, databrics_volume)
 #' }
 #'
-#' @alias filesGetDirectoryMetadata
 #' @export
 get_file_directory_metadata <- function(client, directory_path) {
 
@@ -58,6 +57,7 @@ check_databricks_directory_exists = function(x, client = DatabricksClient()) {
   return(TRUE)
 }
 
+#' @importFrom checkmate makeAssertCollection
 assert_databricks_directory_exists <-
   checkmate::makeAssertionFunction(check_databricks_directory_exists)
 
@@ -71,7 +71,7 @@ assert_databricks_directory_exists <-
 #'
 #' @export
 #'
-#' @importFrom checkmate makeAssertCollection assert_character assert_directory_exists reportAssertions
+#' @importFrom checkmate makeAssertCollection assert_character reportAssertions
 assert_databicks_path <- function(path) {
   val <- checkmate::makeAssertCollection()
 

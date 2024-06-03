@@ -12,7 +12,6 @@
 #'
 #'
 #' @rdname list_file_directory_contents
-#' @alias filesListDirectoryContents
 #' @examples
 #' # In order to connect to databricks on environments where configurations are
 #' # available via the environment variable DATABRICKS_CONFIG_FILE or located
@@ -28,6 +27,7 @@
 #' }
 #'
 #' @export
+#' @importFrom dplyr bind_rows
 list_file_directory_contents <- function(client, directory_path, page_size = NULL,
                                          page_token = NULL) {
   query <- list(page_size = page_size, page_token = page_token)
