@@ -36,6 +36,11 @@ write_fs_databricks <- function(x, file, ..., overwrite = TRUE,
   # Clean up
   unlink(temp_file)
 
+  # if the length of res is positive a mistake may have occured and the object is printed
+  if (length(res) > 0) {
+    print(res)
+  }
+
   # Return the saved object invisible
   return(invisible(x))
 }
