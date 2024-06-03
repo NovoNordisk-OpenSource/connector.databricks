@@ -1,3 +1,5 @@
+
+# nolint start
 # The package version of databricks from which the code was copied and modified
 VERSION = "0.4.4"
 
@@ -236,3 +238,4 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   return(list(is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do,
               debug_string = debug_string, login = cfg))
 }
+# nolint end
