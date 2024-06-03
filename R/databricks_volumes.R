@@ -15,14 +15,14 @@
 #' @examples
 #' # Connect to a file system
 #'
-#' path_to_adam <- system.file("demo_trial", "adam", package = "connector")
-#' db <- connector_databricks_volumes(path_to_adam)
+#' databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
+#' db <- connector_databricks_volumes(databrics_volume)
 #'
 #' db
 #'
 #' # Create subclass connection
 #'
-#' db_subclass <- connector_databricks_volumes(path_to_adam, extra_class = "subclass")
+#' db_subclass <- connector_databricks_volumes(databrics_volume, extra_class = "subclass")
 #'
 #' db_subclass
 #' class(db_subclass)
