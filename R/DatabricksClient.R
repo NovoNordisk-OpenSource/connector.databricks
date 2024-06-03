@@ -1,5 +1,5 @@
-#' @include version.R
-NULL
+# The package version of databricks from which the code was copied and modified
+VERSION = "0.4.4"
 
 .productInfo <- tryCatch({
   v <- RStudio.Version()
@@ -9,8 +9,6 @@ NULL
   c("unknown", "0.0.0")
 })
 
-# The package version of databricks from which the code was copied and modified
-VERSION = "0.4.4"
 
 #' DatabricksClient is a constructor for class that performs any operations with
 #' Databricks REST API and handle a subset of Unified Client Authentication.
@@ -19,6 +17,17 @@ VERSION = "0.4.4"
 #' @param profile configuration profile from ~/.databrickscfg. Defaults to DEFAULT
 #' @param host URL of Databricks Workspace
 #' @param token Personal Access Token
+#' @examples
+#' # In order to connect to databricks on environments where configurations are
+#' # available via the environment variable DATABRICKS_CONFIG_FILE or located
+#' # at ~/.databrickscfg - simply write
+#' db_client <- DatabricksClient()
+#' # To check if connection is established
+#' system.time(a <- db_client$do("GET", "/api/2.0/preview/scim/v2/Me"))
+#' open_connection <- db_client$debug_string() != ""
+#'
+#' if (open_connection)
+#'   db_client$do("GET", "/api/2.1/unity-catalog/catalogs")
 #'
 #' @export
 DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_file = NULL) {
