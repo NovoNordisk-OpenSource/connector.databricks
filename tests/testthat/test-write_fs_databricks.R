@@ -1,3 +1,11 @@
+
+db_client <- DatabricksClient()
+
+# To check if connection is established
+open_connection <- db_client$debug_string() != ""
+
+if (!open_connection) skip("A connection to databricks could not be established")
+
 test_that("write and read to/from data bricks works", {
 
   temp_rds <- tempfile("iris", fileext = ".rds")
