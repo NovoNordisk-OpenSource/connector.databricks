@@ -10,7 +10,6 @@
 #'
 #'
 #' @rdname create_file_directory
-#' @alias filesCreateDirectory
 #' @export
 create_file_directory <- function(client, directory_path) {
 

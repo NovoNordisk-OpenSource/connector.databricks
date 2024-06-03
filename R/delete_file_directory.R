@@ -11,7 +11,6 @@
 #'
 #'
 #' @rdname delete_file_directory
-#' @alias filesDeleteDirectory
 #' @export
 delete_file_directory <- function(client, directory_path) {
 

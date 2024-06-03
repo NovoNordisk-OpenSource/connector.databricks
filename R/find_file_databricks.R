@@ -2,6 +2,7 @@
 #'
 #' @param name Name of a file
 #' @param root Path to the root folder
+#' @param client DatabricksClient
 #'
 #' @return A full name path to the file or a error if multiples files or 0.
 #'
