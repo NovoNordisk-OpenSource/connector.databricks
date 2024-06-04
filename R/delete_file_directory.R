@@ -11,8 +11,11 @@
 #'
 #'
 #' @rdname delete_file_directory
-#' @export
 delete_file_directory <- function(client, directory_path) {
-
   client$do("DELETE", paste("/api/2.0/fs/directories", directory_path, sep = ""))
+}
+
+delete_volume_directory <- function(file, client = DatabricksClient()) {
+  res <- delete_file_directory(client, directory_path = file)
+  return(invisible(res))
 }

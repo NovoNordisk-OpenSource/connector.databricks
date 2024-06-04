@@ -27,8 +27,6 @@
 #'   databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
 #'   get_file_directory_metadata(db_client, databrics_volume)
 #' }
-#'
-#' @export
 get_file_directory_metadata <- function(client, directory_path) {
 
 
@@ -68,8 +66,6 @@ assert_databricks_dir_exists <-
 #' @param path Path to be validated
 #'
 #' @return Invisible path
-#'
-#' @export
 #'
 #' @importFrom checkmate makeAssertCollection assert_character reportAssertions
 assert_databicks_path <- function(path) {

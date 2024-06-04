@@ -30,7 +30,6 @@
 #'
 #'   upload_file(db_client, databricks_file, contents = tempfile_orig)
 #' }
-#' @export
 #' @importFrom httr upload_file
 upload_file <- function(client, file_path, contents, overwrite = TRUE) {
 

@@ -119,13 +119,15 @@ private access path and additional options
 \subsection{Method \code{create_directory()}}{
 Create directory on databricks
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$create_directory(dir)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$create_directory(dir, client = DatabricksClient())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{dir}}{directory name}
+
+\item{\code{client}}{a databricks client made using DatabricksClient}
 }
 \if{html}{\out{</div>}}
 }
@@ -136,13 +138,15 @@ Create directory on databricks
 \subsection{Method \code{remove()}}{
 Remove the specified file by given name with extension
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$remove(file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$remove(file, client = DatabricksClient())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{file}}{File name}
+
+\item{\code{client}}{a databricks client made using DatabricksClient}
 }
 \if{html}{\out{</div>}}
 }
@@ -153,13 +157,15 @@ Remove the specified file by given name with extension
 \subsection{Method \code{remove_directory()}}{
 Remove the specified directory
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$remove_directory(dir)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$remove_directory(dir, client = DatabricksClient())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{dir}}{directory name}
+
+\item{\code{client}}{a databricks client made using DatabricksClient}
 }
 \if{html}{\out{</div>}}
 }
