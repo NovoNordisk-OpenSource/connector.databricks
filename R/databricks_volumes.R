@@ -38,12 +38,13 @@ connector_databricks_volumes <- function(path, ..., extra_class = NULL) {
 }
 
 #' Class Connector_databricks_volumes
-#' @description The connector_databricks_volumes class is a file system connector for accessing and manipulating files in a local file system.
+#' @description The connector_databricks_volumes class is a file system connector
+#'   for accessing and manipulating files in a local file system.
 #' @importFrom R6 R6Class
 #'
 #' @name Connector_databricks_volumes_object
 #' @export
-Connector_databricks_volumes <- R6::R6Class(
+Connector_databricks_volumes <- R6::R6Class( # nolint
   "Connector_databricks_volumes",
   public = list(
     #' @description Initializes the connector_databricks_volumes class
@@ -69,7 +70,8 @@ Connector_databricks_volumes <- R6::R6Class(
         find_file_databricks(root = private$path) |>
         read_fs_databricks(...)
     },
-    #' @description Writes the specified content to the specified file using the private access path and additional options
+    #' @description Writes the specified content to the specified file using the
+    #'   private access path and additional options
     #' @param x Content to write to the file
     #' @param file File name
     #' @param ... Other parameters to pass to the write_file function (depends on the extension of a file)
@@ -88,4 +90,3 @@ Connector_databricks_volumes <- R6::R6Class(
   ),
   cloneable = FALSE
 )
-
