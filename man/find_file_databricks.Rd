@@ -19,3 +19,11 @@ A full name path to the file or a error if multiples files or 0.
 \description{
 Find File
 }
+\examples{
+iris_csv <- "iris.csv"
+databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
+databricks_file_csv <- file.path(databrics_volume, iris_csv)
+write_fs_databricks(iris, databricks_file_csv)
+connector.databricks:::find_file_databricks("iris", root = databrics_volume)
+
+}
