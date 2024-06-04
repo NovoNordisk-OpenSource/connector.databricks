@@ -18,7 +18,8 @@ list_file_directory_contents(
 
 \item{page_size}{The maximum number of directory entries to return.}
 
-\item{page_token}{An opaque page token which was the \code{next_page_token} in the response of the previous request to list the contents of this directory.}
+\item{page_token}{An opaque page token which was the \code{next_page_token} in the
+response of the previous request to list the contents of this directory.}
 }
 \value{
 \code{data.frame} with all of the response pages.

@@ -5,7 +5,8 @@
 \alias{Connector_databricks_volumes}
 \title{Class Connector_databricks_volumes}
 \description{
-The connector_databricks_volumes class is a file system connector for accessing and manipulating files in a local file system.
+The connector_databricks_volumes class is a file system connector
+for accessing and manipulating files in a local file system.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -92,7 +93,8 @@ Reads the content of the specified file using the private access path and additi
 \if{html}{\out{<a id="method-Connector_databricks_volumes-write"></a>}}
 \if{latex}{\out{\hypertarget{method-Connector_databricks_volumes-write}{}}}
 \subsection{Method \code{write()}}{
-Writes the specified content to the specified file using the private access path and additional options
+Writes the specified content to the specified file using the
+private access path and additional options
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$write(x, file, ...)}\if{html}{\out{</div>}}
 }
