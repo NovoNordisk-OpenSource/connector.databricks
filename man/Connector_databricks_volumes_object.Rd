@@ -16,7 +16,9 @@ for accessing and manipulating files in a local file system.
 \item \href{#method-Connector_databricks_volumes-construct_path}{\code{Connector_databricks_volumes$construct_path()}}
 \item \href{#method-Connector_databricks_volumes-read}{\code{Connector_databricks_volumes$read()}}
 \item \href{#method-Connector_databricks_volumes-write}{\code{Connector_databricks_volumes$write()}}
+\item \href{#method-Connector_databricks_volumes-create_directory}{\code{Connector_databricks_volumes$create_directory()}}
 \item \href{#method-Connector_databricks_volumes-remove}{\code{Connector_databricks_volumes$remove()}}
+\item \href{#method-Connector_databricks_volumes-remove_directory}{\code{Connector_databricks_volumes$remove_directory()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -48,7 +50,7 @@ Returns the list of files in the specified path
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Other parameters to pass to the list.files function}
+\item{\code{...}}{Other parameters to pass to the list_file_dir_contents function}
 }
 \if{html}{\out{</div>}}
 }
@@ -112,6 +114,23 @@ private access path and additional options
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Connector_databricks_volumes-create_directory"></a>}}
+\if{latex}{\out{\hypertarget{method-Connector_databricks_volumes-create_directory}{}}}
+\subsection{Method \code{create_directory()}}{
+Create directory on databricks
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$create_directory(dir)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dir}}{directory name}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Connector_databricks_volumes-remove"></a>}}
 \if{latex}{\out{\hypertarget{method-Connector_databricks_volumes-remove}{}}}
 \subsection{Method \code{remove()}}{
@@ -124,6 +143,23 @@ Remove the specified file by given name with extension
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{file}}{File name}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Connector_databricks_volumes-remove_directory"></a>}}
+\if{latex}{\out{\hypertarget{method-Connector_databricks_volumes-remove_directory}{}}}
+\subsection{Method \code{remove_directory()}}{
+Remove the specified directory
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$remove_directory(dir)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dir}}{directory name}
 }
 \if{html}{\out{</div>}}
 }
