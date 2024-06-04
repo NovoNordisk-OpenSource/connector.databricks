@@ -9,7 +9,6 @@
 #' @rdname download_file
 #' @returns The repsonse from databricks.
 #' If \code{!is.null(local_path)} the response is returned invisible.
-#' @export
 download_file <- function(client, file_path, local_path = NULL) {
 
   response <- client$do("GET", paste("/api/2.0/fs/files", file_path, sep = ""))
