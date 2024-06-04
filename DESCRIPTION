@@ -2,7 +2,7 @@ Package: connector.databricks
 Title: Expansion of the connector package for enabling connections to databricks
 Version: 0.0.0.9000
 Authors@R: c(
-    person(given = "Steffen", family = "Larsen", middle = "Falgreen", 
+    person(given = "Steffen Falgreen", family = "Larsen",
            email = "sffl@novonordisk.com", role = c("aut", "cre")),
     person(given = "Novo Nordisk A/S", role = c("cph"))
   )

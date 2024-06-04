@@ -53,9 +53,9 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
       private$path <- assert_databicks_path(path)
     },
     #' @description Returns the list of files in the specified path
-    #' @param ... Other parameters to pass to the list.files function
+    #' @param ... Other parameters to pass to the list_file_dir_contents function
     list_content = function(...) {
-      list_file_directory_contents(client = DatabricksClient(), directory_path = private$path)
+      list_file_dir_contents(path = private$path, ...)
     },
     #' @description Constructs a complete path by combining the specified access path with the provided elements
     #' @param ... Elements to construct the path
@@ -78,11 +78,20 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
     write = function(x, file, ...) {
       write_fs_databricks(x, self$construct_path(file), ...)
     },
+    #' @description Create directory on databricks
+    #' @param dir directory name
+    create_directory = function(dir) {
+      create_file_directory(client = DatabricksClient(), self$construct_path(dir))
+    },
     #' @description Remove the specified file by given name with extension
     #' @param file File name
-    #'
     remove = function(file) {
       delete_file(client = DatabricksClient(), self$construct_path(file))
+    },
+    #' @description Remove the specified directory
+    #' @param dir directory name
+    remove_directory = function(dir) {
+      delete_file_directory(client = DatabricksClient(), self$construct_path(dir))
     }
   ),
   private = list(

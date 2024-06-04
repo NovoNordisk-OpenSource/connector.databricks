@@ -49,3 +49,7 @@ list_file_directory_contents <- function(client, directory_path, page_size = NUL
   }
   return(results)
 }
+
+list_file_dir_contents <- function(path, ..., client = DatabricksClient()) {
+  list_file_directory_contents(client, path)
+}
