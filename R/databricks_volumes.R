@@ -55,7 +55,7 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
     #' @description Returns the list of files in the specified path
     #' @param ... Other parameters to pass to the list_file_dir_contents function
     list_content = function(...) {
-      list_file_dir_contents(path = private$path, ...)
+      list_file_dir_contents(file.path(path = private$path, ...))
     },
     #' @description Constructs a complete path by combining the specified access path with the provided elements
     #' @param ... Elements to construct the path
