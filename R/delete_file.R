@@ -11,5 +11,6 @@ delete_file <- function(client, file_path) {
 }
 
 delete_volume_file <- function(file_path, client = DatabricksClient()) {
-  delete_file(client = client, file_path)
+  res <- delete_file(client = client, file_path)
+  return(invisible(res))
 }
