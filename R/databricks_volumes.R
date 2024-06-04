@@ -80,18 +80,21 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
     },
     #' @description Create directory on databricks
     #' @param dir directory name
-    create_directory = function(dir) {
-      create_file_directory(client = DatabricksClient(), self$construct_path(dir))
+    #' @param client a databricks client made using DatabricksClient
+    create_directory = function(dir, client = DatabricksClient()) {
+      create_volume_dir(self$construct_path(dir), client = client)
     },
     #' @description Remove the specified file by given name with extension
     #' @param file File name
-    remove = function(file) {
-      delete_file(client = DatabricksClient(), self$construct_path(file))
+    #' @param client a databricks client made using DatabricksClient
+    remove = function(file, client = DatabricksClient()) {
+      delete_volume_file(self$construct_path(file), client = client)
     },
     #' @description Remove the specified directory
     #' @param dir directory name
-    remove_directory = function(dir) {
-      delete_file_directory(client = DatabricksClient(), self$construct_path(dir))
+    #' @param client a databricks client made using DatabricksClient
+    remove_directory = function(dir, client = DatabricksClient()) {
+      delete_volume_directory(self$construct_path(dir), client = client)
     }
   ),
   private = list(

@@ -9,3 +9,7 @@
 delete_file <- function(client, file_path) {
   client$do("DELETE", paste("/api/2.0/fs/files", file_path, sep = ""))
 }
+
+delete_volume_file <- function(file_path, client = DatabricksClient()) {
+  delete_file(client = client, file_path)
+}

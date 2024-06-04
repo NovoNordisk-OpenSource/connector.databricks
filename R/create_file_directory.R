@@ -10,8 +10,12 @@
 #'
 #'
 #' @rdname create_file_directory
-#' @export
 create_file_directory <- function(client, directory_path) {
 
   client$do("PUT", paste("/api/2.0/fs/directories", directory_path, sep = ""))
+}
+
+create_volume_dir <- function(path, client = DatabricksClient()) {
+  res <- create_file_directory(client = client, directory_path = path)
+  return(invisible(res))
 }

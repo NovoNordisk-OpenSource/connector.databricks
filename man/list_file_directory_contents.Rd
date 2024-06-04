@@ -41,5 +41,4 @@ if (open_connection) {
   databrics_volume <- "/Volumes/my_adam/tester"
   list_file_directory_contents(db_client, databrics_volume)
 }
-
 }

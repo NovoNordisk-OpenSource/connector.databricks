@@ -35,5 +35,4 @@ if (open_connection) {
   databrics_volume <- "/Volumes/my_adam/tester"
   get_file_directory_metadata(db_client, databrics_volume)
 }
-
 }

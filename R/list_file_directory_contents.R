@@ -26,8 +26,6 @@
 #'   databrics_volume <- "/Volumes/my_adam/tester"
 #'   list_file_directory_contents(db_client, databrics_volume)
 #' }
-#'
-#' @export
 #' @importFrom dplyr bind_rows
 list_file_directory_contents <- function(client, directory_path, page_size = NULL,
                                          page_token = NULL) {
