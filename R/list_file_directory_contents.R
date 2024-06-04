@@ -49,5 +49,5 @@ list_file_directory_contents <- function(client, directory_path, page_size = NUL
 }
 
 list_file_dir_contents <- function(path, ..., client = DatabricksClient()) {
-  list_file_directory_contents(client, path)
+  list_file_directory_contents(client, path, ...)
 }
