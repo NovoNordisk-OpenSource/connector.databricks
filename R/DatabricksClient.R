@@ -191,7 +191,8 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
 
   # TODO: add retries as with other SDKs See: client/client.go#L269-L280 in Go
   # SDK
-  do <- function(method, path, body = NULL, query = NULL, json_wrap_body = TRUE) {
+  do <- function(method, path, body = NULL, query = NULL, json_wrap_body = TRUE,
+                 return_response_raw = FALSE) {
     visitor <- authenticate()
     headers <- visitor()
     headers["Connection"] <- "close"
@@ -200,9 +201,14 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       body <- jsonlite::toJSON(body, auto_unbox = TRUE, digits = 22, null = "null")
     }
     url <- paste0(cfg$host, path)
+
     response <- httr::VERB(method, url, httr::add_headers(headers), httr::user_agent(user_agent()),
                            httr::config(verbose = FALSE, connecttimeout = 30), httr::accept_json(),
                            httr::write_memory(), query = base::Filter(length, query), body = body)
+
+    if (return_response_raw) {
+      return(response)
+    }
 
     if (httr::http_error(response)) {
       # httr::warn_for_status()
@@ -221,6 +227,9 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       }
       rlang::abort(msg, call = rlang::caller_env())
     }
+
+
+
     if (httr::has_content(response)) {
 
       # In case of a raw bite stream we cannot convert to json
