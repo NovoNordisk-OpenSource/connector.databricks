@@ -48,18 +48,18 @@ get_file_directory_metadata <- function(client, directory_path) {
 }
 
 
-check_databricks_directory_exists = function(x, client = DatabricksClient()) {
+check_databricks_dir_exists <- function(x, client = DatabricksClient()) {
   # check functions must return TRUE on success
   # and a custom error message otherwise
-  res = get_file_directory_metadata(client = client, x)
+  res <- get_file_directory_metadata(client = client, x)
   if (!isTRUE(res))
     return("Directory must exist on databricks")
   return(TRUE)
 }
 
 #' @importFrom checkmate makeAssertCollection
-assert_databricks_directory_exists <-
-  checkmate::makeAssertionFunction(check_databricks_directory_exists)
+assert_databricks_dir_exists <-
+  checkmate::makeAssertionFunction(check_databricks_dir_exists)
 
 #' Validate the path
 #'
@@ -82,7 +82,7 @@ assert_databicks_path <- function(path) {
     add = val
   )
 
-  assert_databricks_directory_exists(
+  assert_databricks_dir_exists(
     x = path,
     add = val
   )
@@ -95,4 +95,3 @@ assert_databicks_path <- function(path) {
     invisible(path)
   )
 }
-

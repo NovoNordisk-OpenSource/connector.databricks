@@ -6,7 +6,8 @@
 #'
 #' @param directory_path Required. The absolute path of a directory.
 #' @param page_size The maximum number of directory entries to return.
-#' @param page_token An opaque page token which was the `next_page_token` in the response of the previous request to list the contents of this directory.
+#' @param page_token An opaque page token which was the `next_page_token` in the
+#'   response of the previous request to list the contents of this directory.
 #'
 #' @return `data.frame` with all of the response pages.
 #'
