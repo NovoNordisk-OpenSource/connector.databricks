@@ -42,6 +42,6 @@ if (open_connection) {
   databrics_volume <- "/Volumes/my_adam/tester"
   databricks_file <- file.path(databrics_volume, basename(tempfile_orig))
 
-  upload_file(db_client, databricks_file, contents = tempfile_orig)
+  connector.databricks:::upload_file(db_client, databricks_file, contents = tempfile_orig)
 }
 }
