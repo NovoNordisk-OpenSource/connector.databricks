@@ -24,7 +24,7 @@
 #'
 #' if (open_connection) {
 #'   databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
-#'   list_file_directory_contents(db_client, databrics_volume)
+#'   connector.databricks:::list_file_directory_contents(db_client, databrics_volume)
 #' }
 #' @importFrom dplyr bind_rows
 list_file_directory_contents <- function(client, directory_path, page_size = NULL,
@@ -48,6 +48,13 @@ list_file_directory_contents <- function(client, directory_path, page_size = NUL
   return(results)
 }
 
-list_file_dir_contents <- function(path, ..., client = DatabricksClient()) {
-  list_file_directory_contents(client, path, ...)
+list_file_dir_contents <- function(path, ...,
+                                   full.names = FALSE,
+                                   client = DatabricksClient()) {
+  res <- list_file_directory_contents(client, path, ...)
+
+  if (full.names)
+    return(res$path)
+
+  return(res$name)
 }

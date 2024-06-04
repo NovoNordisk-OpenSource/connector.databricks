@@ -33,6 +33,6 @@ open_connection <- db_client$debug_string() != ""
 
 if (open_connection) {
   databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
-  get_file_directory_metadata(db_client, databrics_volume)
+  connector.databricks:::get_file_directory_metadata(db_client, databrics_volume)
 }
 }
