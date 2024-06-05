@@ -53,9 +53,15 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
       private$path <- assert_databicks_path(path)
     },
     #' @description Returns the list of files in the specified path
-    #' @param ... Other parameters to pass to the list_file_dir_contents function
-    list_content = function(...) {
-      list_file_dir_contents(path = private$path, ...)
+    #'
+    #' @param full.names a logical value. If TRUE, the directory path is
+    #'   prepended to the file names to give a relative file path.
+    #'   If FALSE, the file names (rather than paths) are returned.
+    #' @param client the Databricks client
+    #' @param ... used to construct nested paths
+    list_content = function(..., full.names = FALSE, client = DatabricksClient()) {
+      list_file_dir_contents(file.path(path = private$path, ...),
+                             full.names = full.names, client = client)
     },
     #' @description Constructs a complete path by combining the specified access path with the provided elements
     #' @param ... Elements to construct the path
