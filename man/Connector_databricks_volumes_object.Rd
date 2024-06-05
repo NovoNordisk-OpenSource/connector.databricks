@@ -44,13 +44,23 @@ Initializes the connector_databricks_volumes class
 \subsection{Method \code{list_content()}}{
 Returns the list of files in the specified path
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$list_content(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Connector_databricks_volumes$list_content(
+  ...,
+  full.names = FALSE,
+  client = DatabricksClient()
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Other parameters to pass to the list_file_dir_contents function}
+\item{\code{...}}{used to construct nested paths}
+
+\item{\code{full.names}}{a logical value. If TRUE, the directory path is
+prepended to the file names to give a relative file path.
+If FALSE, the file names (rather than paths) are returned.}
+
+\item{\code{client}}{the Databricks client}
 }
 \if{html}{\out{</div>}}
 }
