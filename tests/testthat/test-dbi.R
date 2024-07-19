@@ -9,7 +9,7 @@ test_that("connector_databricks_dbi", {
     http_path = "sql/protocolv1/o/273240340063409/0216-121054-v8tdvp00",
     catalog = "amace_cdr_bronze_dev",
     schema = "nn1234_4321_adam"
-    ) |>
+  ) |>
     expect_no_condition()
 
   # Note: Below is almost the same code as in the example to make sure it runs

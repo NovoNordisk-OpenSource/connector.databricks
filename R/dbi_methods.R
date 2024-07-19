@@ -1,5 +1,4 @@
 #' @export
-
 cnt_read.connector_databricks_dbi <- function(connector_object, name, ...) {
   name <- DBI::Id(
     catalog = connector_object$catalog,
@@ -10,7 +9,6 @@ cnt_read.connector_databricks_dbi <- function(connector_object, name, ...) {
 }
 
 #' @export
-
 cnt_write.connector_databricks_dbi <- function(connector_object, x, name, ...) {
   name <- DBI::Id(
     catalog = connector_object$catalog,
