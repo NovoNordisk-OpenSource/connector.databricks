@@ -4,6 +4,7 @@ Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Steffen Falgreen", family = "Larsen",
            email = "sffl@novonordisk.com", role = c("aut", "cre")),
+    person("Aksel", "Thomsen", , "oath@novonordisk.com", role = "aut"),
     person(given = "Novo Nordisk A/S", role = c("cph"))
   )
 Description: Expands the connector package to handle databricks. This includes 
@@ -11,15 +12,17 @@ Description: Expands the connector package to handle databricks. This includes
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 URL: https://jubilant-adventure-yr95p3g.pages.github.io/
 Imports: 
     checkmate,
     connector,
+    DBI,
     dplyr,
     httr,
     jsonlite,
+    odbc (>= 1.4),
     R6 (>= 2.4.0),
     rlang
 Suggests: 
