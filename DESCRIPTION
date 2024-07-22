@@ -11,7 +11,7 @@ Description: Expands the connector package to handle databricks. This includes
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 URL: https://jubilant-adventure-yr95p3g.pages.github.io/
 Imports: 
@@ -21,7 +21,11 @@ Imports:
     httr,
     jsonlite,
     R6 (>= 2.4.0),
-    rlang
+    rlang,
+    sparklyr,
+    pysparklyr,
+    connector,
+    magrittr
 Suggests: 
     testthat (>= 3.0.0)
 Remotes: 
