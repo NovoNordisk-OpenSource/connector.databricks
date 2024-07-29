@@ -1,3 +1,8 @@
+#' @description
+#' * [connector_databricks_dbi]: Reuses the [connector::cnt_write()] method for [connector::connector_dbi],
+#' but always sets the `catalog` and `schema` as defined in wehen initializing the connector.
+#'
+#' @rdname cnt_read
 #' @export
 cnt_read.connector_databricks_dbi <- function(connector_object, name, ...) {
   name <- DBI::Id(
@@ -8,6 +13,11 @@ cnt_read.connector_databricks_dbi <- function(connector_object, name, ...) {
   NextMethod()
 }
 
+#' @description
+#' * [connector_databricks_dbi]: Reuses the [connector::cnt_read()] method for [connector::connector_dbi],
+#' but always sets the `catalog` and `schema` as defined in wehen initializing the connector.
+#'
+#' @rdname cnt_write
 #' @export
 cnt_write.connector_databricks_dbi <- function(connector_object, x, name, ...) {
   name <- DBI::Id(
@@ -18,6 +28,11 @@ cnt_write.connector_databricks_dbi <- function(connector_object, x, name, ...) {
   NextMethod()
 }
 
+#' @description
+#' * [connector_databricks_dbi]: Reuses the [connector::cnt_list_content()] method for [connector::connector_dbi],
+#' but always sets the `catalog` and `schema` as defined in wehen initializing the connector.
+#'
+#' @rdname cnt_list_content
 #' @export
 cnt_list_content.connector_databricks_dbi <- function(connector_object, ...) {
   DBI::dbListTables(
@@ -27,6 +42,11 @@ cnt_list_content.connector_databricks_dbi <- function(connector_object, ...) {
   )
 }
 
+#' @description
+#' * [connector_databricks_dbi]: Reuses the [connector::cnt_remove()] method for [connector::connector_dbi],
+#' but always sets the `catalog` and `schema` as defined in wehen initializing the connector.
+#'
+#' @rdname cnt_remove
 #' @export
 cnt_remove.connector_databricks_dbi <- function(connector_object, name, ...) {
   name <- DBI::Id(
@@ -37,6 +57,11 @@ cnt_remove.connector_databricks_dbi <- function(connector_object, name, ...) {
   NextMethod()
 }
 
+#' @description
+#' * [connector_databricks_dbi]: Reuses the [connector::cnt_tbl()] method for [connector::connector_dbi],
+#' but always sets the `catalog` and `schema` as defined in wehen initializing the connector.
+#'
+#' @rdname cnt_tbl
 #' @export
 cnt_tbl.connector_databricks_dbi <- function(connector_object, name, ...) {
   name <- DBI::Id(
