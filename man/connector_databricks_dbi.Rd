@@ -29,12 +29,6 @@ httpPath = "path-to-cluster",
   schema = "my_schema"
 )
 
-con_databricks <- connector_databricks_dbi$new(
-  http_path = "sql/protocolv1/o/273240340063409/0216-121054-v8tdvp00",
-catalog = "amace_cdr_bronze_dev",
-schema = "nn1234_4321_adam"
-)
-
 # List tables in my_schema
 
 con_databricks$list_content()
@@ -82,12 +76,13 @@ con_databricks$disconnect()
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="list_content"><a href='../../connector/html/connector.html#method-connector-list_content'><code>connector::connector$list_content()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="read"><a href='../../connector/html/connector.html#method-connector-read'><code>connector::connector$read()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="remove"><a href='../../connector/html/connector.html#method-connector-remove'><code>connector::connector$remove()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="write"><a href='../../connector/html/connector.html#method-connector-write'><code>connector::connector$write()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_dbi" data-id="disconnect"><a href='../../connector/html/connector_dbi.html#method-connector_dbi-disconnect'><code>connector::connector_dbi$disconnect()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_dbi" data-id="tbl"><a href='../../connector/html/connector_dbi.html#method-connector_dbi-tbl'><code>connector::connector_dbi$tbl()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="cnt_list_content"><a href='../../connector/html/connector.html#method-connector-cnt_list_content'><code>connector::connector$cnt_list_content()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="cnt_read"><a href='../../connector/html/connector.html#method-connector-cnt_read'><code>connector::connector$cnt_read()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="cnt_remove"><a href='../../connector/html/connector.html#method-connector-cnt_remove'><code>connector::connector$cnt_remove()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="cnt_write"><a href='../../connector/html/connector.html#method-connector-cnt_write'><code>connector::connector$cnt_write()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="print"><a href='../../connector/html/connector.html#method-connector-print'><code>connector::connector$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_dbi" data-id="cnt_disconnect"><a href='../../connector/html/connector_dbi.html#method-connector_dbi-cnt_disconnect'><code>connector::connector_dbi$cnt_disconnect()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_dbi" data-id="cnt_tbl"><a href='../../connector/html/connector_dbi.html#method-connector_dbi-cnt_tbl'><code>connector::connector_dbi$cnt_tbl()</code></a></span></li>
 </ul>
 </details>
 }}
