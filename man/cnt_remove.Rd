@@ -24,6 +24,6 @@ Addition remove methods for databricks connectors implemented for \code{\link[co
 
 \itemize{
 \item \link{connector_databricks_dbi}: Reuses the \code{\link[connector:cnt_remove]{connector::cnt_remove()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in wehen initializing the connector.
+but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }

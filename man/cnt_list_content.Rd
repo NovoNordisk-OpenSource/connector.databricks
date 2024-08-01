@@ -22,6 +22,6 @@ Addition list content methods for databricks connectors implemented for \code{\l
 
 \itemize{
 \item \link{connector_databricks_dbi}: Reuses the \code{\link[connector:cnt_list_content]{connector::cnt_list_content()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in wehen initializing the connector.
+but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }
