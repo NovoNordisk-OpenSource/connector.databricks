@@ -92,7 +92,7 @@ con_databricks$disconnect()
 \subsection{Method \code{new()}}{
 Initialize the connection to Databricks
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{connector_databricks_dbi$new(http_path, catalog, schema)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{connector_databricks_dbi$new(http_path, catalog, schema, extra_class = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -103,6 +103,8 @@ Initialize the connection to Databricks
 \item{\code{catalog}}{\link{character} The catalog to use}
 
 \item{\code{schema}}{\link{character} The schema to use}
+
+\item{\code{extra_class}}{\link{character} Extra class to assign to the new connector}
 }
 \if{html}{\out{</div>}}
 }
