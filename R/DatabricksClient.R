@@ -26,7 +26,6 @@ VERSION = "0.4.4"
 #' # at ~/.databrickscfg - simply write
 #' db_client <- DatabricksClient()
 #' # To check if connection is established
-#' system.time(a <- db_client$do("GET", "/api/2.0/preview/scim/v2/Me"))
 #' open_connection <- db_client$debug_string() != ""
 #'
 #' if (open_connection)
