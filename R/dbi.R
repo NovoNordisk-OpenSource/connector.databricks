@@ -59,7 +59,7 @@ connector_databricks_dbi <- R6::R6Class(
     #' @param catalog [character] The catalog to use
     #' @param schema [character] The schema to use
     #' @return A [connector_databricks_dbi] object
-    initialize = function(http_path, catalog, schema) {
+    initialize = function(http_path, catalog, schema, extra_class = NULL) {
       checkmate::assert_character(x = http_path, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = catalog, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = schema, len = 1, any.missing = FALSE)
@@ -70,7 +70,8 @@ connector_databricks_dbi <- R6::R6Class(
       super$initialize(
         drv = odbc::databricks(),
         httpPath = http_path,
-        useNativeQuery = FALSE
+        useNativeQuery = FALSE.
+        extra_class = extra_class
       )
     }
   ),
