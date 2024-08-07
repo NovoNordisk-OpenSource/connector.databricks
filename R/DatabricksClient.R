@@ -20,6 +20,7 @@ VERSION = "0.4.4"
 #' @param host URL of Databricks Workspace
 #' @param token Personal Access Token
 #' @examples
+#' \dontrun{
 #' # In order to connect to databricks on environments where configurations are
 #' # available via the environment variable DATABRICKS_CONFIG_FILE or located
 #' # at ~/.databrickscfg - simply write
@@ -30,7 +31,7 @@ VERSION = "0.4.4"
 #'
 #' if (open_connection)
 #'   db_client$do("GET", "/api/2.1/unity-catalog/catalogs")
-#'
+#' }
 #' @export
 DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_file = NULL) {
   # coalesce(a, b, c) takes any number of arguments using the ...  ellipsis,
