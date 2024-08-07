@@ -16,6 +16,7 @@
 #' general use of personal access tokens and credentials through Posit Workbench.
 #' See also [odbc::databricks()] On more information on how the connection to Databricks is established.
 #'
+#' @importFrom odbc databricks
 #' @examplesIf FALSE
 #' # Establish connection to your cluster
 #'
@@ -63,7 +64,7 @@ connector_databricks_dbi <- R6::R6Class(
       checkmate::assert_character(x = http_path, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = catalog, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = schema, len = 1, any.missing = FALSE)
-      checkmate::assert_character(x = extra_class, len = 1, any.missing = FALSE)
+      checkmate::assert_character(x = extra_class, len = 1, any.missing = FALSE, null.ok = TRUE)
 
       private$.catalog <- catalog
       private$.schema <- schema
