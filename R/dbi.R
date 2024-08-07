@@ -70,7 +70,7 @@ connector_databricks_dbi <- R6::R6Class(
       super$initialize(
         drv = odbc::databricks(),
         httpPath = http_path,
-        useNativeQuery = FALSE.
+        useNativeQuery = FALSE,
         extra_class = extra_class
       )
     }
