@@ -22,5 +22,5 @@ test_that("delete file directory fails when needed", {
   testthat::expect_error(delete_file_directory(client = 1))
 
   # Test bad directory path fails
-  testthat::expect_error(create_file_directory(client = setup_db_client, directory_path = 1))
+  testthat::expect_error(delete_file_directory(client = setup_db_client, directory_path = 1))
 })

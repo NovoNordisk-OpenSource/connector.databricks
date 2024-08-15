@@ -3,7 +3,7 @@ test_that("read file works", {
   skip_on_cran()
 
   # Create a test file
-  test_file <- tempfile("test_file", fileext = ".csv", tmpdir = test_directory)
+  test_file <- tempfile("test_file", fileext = ".csv", tmpdir = setup_db_volume)
   local_create_file(setup_db_client, test_file)
 
   # List items in root directory

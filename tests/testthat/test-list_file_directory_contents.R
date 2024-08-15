@@ -1,4 +1,4 @@
-test_that("create file directory works", {
+test_that("list file directory works", {
   skip_on_ci()
   skip_on_cran()
 
@@ -21,7 +21,7 @@ test_that("create file directory works", {
 })
 
 
-test_that("create file directory fails when needed", {
+test_that("list file directory fails when needed", {
   # Test bad client fails
   testthat::expect_error(list_file_dir_contents(client = 1))
 
