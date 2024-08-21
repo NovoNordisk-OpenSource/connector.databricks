@@ -1,13 +1,3 @@
-# Create a temporary dataset for testing
-create_temp_dataset <- function() {
-  # Sample data
-  x <- mtcars
-  x$car <- rownames(x)
-  rownames(x) <- NULL
-  return(x)
-}
-
-
 test_that(paste("DBI generics work for connector_databricks_dbi"), {
   if (all(c("http_path_local", "catalog_local", "schema_local") %in%
           names(Sys.getenv()))) {
@@ -20,7 +10,7 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     schema_local <- Sys.getenv("schema_local")
 
     temp_table_name <- paste0(
-      "temp_mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
+      "temp-mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
       )
 
     expect_error(connector_databricks_dbi$new(http_path = 1))
@@ -63,7 +53,7 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     cnt$conn |>
       DBI::dbGetQuery(paste(
         "SELECT * FROM ",
-        paste(catalog_local, schema_local, temp_table_name, sep = ".")
+        custom_paste_with_back_quotes(cnt$catalog, cnt$schema, temp_table_name, sep = ".")
       )) |>
       expect_equal(create_temp_dataset())
 
