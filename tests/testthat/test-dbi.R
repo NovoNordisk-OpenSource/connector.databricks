@@ -7,12 +7,10 @@ create_temp_dataset <- function() {
   return(x)
 }
 
+
 test_that(paste("DBI generics work for connector_databricks_dbi"), {
-
-  if (!is.null(Sys.getenv("http_path_local")) &
-      !is.null(Sys.getenv("catalog_local")) &
-      !is.null(Sys.getenv("schema_local"))) {
-
+  if (all(c("http_path_local", "catalog_local", "schema_local") %in%
+          names(Sys.getenv()))) {
     skip_on_ci()
     skip_on_cran()
 
@@ -21,15 +19,16 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     catalog_local <- Sys.getenv("catalog_local")
     schema_local <- Sys.getenv("schema_local")
 
-    temp_table_name <- paste0("temp_mtcars_", format(Sys.time(), "%Y%m%d%H%M%S"))
+    temp_table_name <- paste0(
+      "temp_mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
+      )
 
     expect_error(connector_databricks_dbi$new(http_path = 1))
 
     # initialized with appropriate values for catalog, schema, and conn
-    cnt <- connector_databricks_dbi$new(
-      http_path = http_path_local,
-      catalog = catalog_local,
-      schema = schema_local)
+    cnt <- connector_databricks_dbi$new(http_path = http_path_local,
+                                        catalog = catalog_local,
+                                        schema = schema_local)
 
     cnt |>
       expect_no_error()
@@ -61,9 +60,12 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
       dplyr::collect() |>
       expect_equal(dplyr::tibble(car = "Mazda RX4", mpg = 21))
 
-    # cnt$conn |>
-    #   DBI::dbGetQuery("SELECT * FROM temp_table_name") |>
-    #   expect_equal(create_temp_dataset())
+    cnt$conn |>
+      DBI::dbGetQuery(paste(
+        "SELECT * FROM ",
+        paste(catalog_local, schema_local, temp_table_name, sep = ".")
+      )) |>
+      expect_equal(create_temp_dataset())
 
     cnt$cnt_remove(temp_table_name) |>
       expect_no_condition()
@@ -79,6 +81,8 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     ) |>
       expect_equal("Error occurred")
   } else {
-    skip("Skipping test as http_path_local, catalog_local, or schema_local is NULL")
+    skip(
+      "Skipping test as http_path_local, catalog_local, or schema_local is NULL"
+      )
   }
 })
