@@ -27,13 +27,14 @@
 #'   databrics_volume <- "/Volumes/my_adam/tester"
 #'   connector.databricks:::get_file_directory_metadata(db_client, databrics_volume)
 #' }
-get_file_directory_metadata <- function(client, directory_path) {
+get_file_directory_metadata <- function(client = DatabricksClient(), directory_path) {
 
 
   response <- client$do("HEAD",
                         paste0("/api/2.0/fs/directories", directory_path),
                         return_response_raw = TRUE)
 
+  browser()
   if (httr::status_code(response) == 200) {
     return(TRUE) # The directory exists.
   }
@@ -56,38 +57,4 @@ check_databricks_dir_exists <- function(x, client = DatabricksClient()) {
 }
 
 #' @importFrom checkmate makeAssertCollection
-assert_databricks_dir_exists <-
-  checkmate::makeAssertionFunction(check_databricks_dir_exists)
-
-#' Validate the path
-#'
-#' @description The assert_path function validates the path for file system operations.
-#'
-#' @param path Path to be validated
-#'
-#' @return Invisible path
-#'
-#' @importFrom checkmate makeAssertCollection assert_character reportAssertions
-assert_databicks_path <- function(path) {
-  val <- checkmate::makeAssertCollection()
-
-  checkmate::assert_character(
-    x = path,
-    len = 1,
-    any.missing = FALSE,
-    add = val
-  )
-
-  assert_databricks_dir_exists(
-    x = path,
-    add = val
-  )
-
-  checkmate::reportAssertions(
-    val
-  )
-
-  return(
-    invisible(path)
-  )
-}
+assert_databricks_dir_exists <- checkmate::makeAssertionFunction(check_databricks_dir_exists)

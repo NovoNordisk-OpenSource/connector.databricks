@@ -228,8 +228,6 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       rlang::abort(msg, call = rlang::caller_env())
     }
 
-
-
     if (httr::has_content(response)) {
 
       # In case of a raw bite stream we cannot convert to json
