@@ -1,8 +1,8 @@
 #' @description
-#' * [cnt_read.connector_databricks_volume]: Reuses the [connector::cnt_write()]
+#' * [cnt_read.connector_databricks_volume]: Reuses the [connector::cnt_read()]
 #'  method for [connector::connector_volume].
 #'
-#' @rdname cnt_read
+#' @rdname connector::cnt_read
 #' @export
 cnt_read.connector_databricks_volume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$path, name)
@@ -10,10 +10,10 @@ cnt_read.connector_databricks_volume <- function(connector_object, name, ...) {
 }
 
 #' @description
-#' * [connector_databricks_volume]: Reuses the [connector::cnt_read()] method for [connector::connector_volume],
+#' * [connector_databricks_volume]: Reuses the [connector::cnt_write()] method for [connector::connector_databricks_volume],
 #' but always sets the `catalog` and `schema` as defined in when initializing the connector.
 #'
-#' @rdname cnt_write
+#' @rdname connector::cnt_write
 #' @export
 cnt_write.connector_databricks_volume <- function(connector_object, x, name, ...) {
   name <- DBI::Id(
@@ -25,10 +25,10 @@ cnt_write.connector_databricks_volume <- function(connector_object, x, name, ...
 }
 
 #' @description
-#' * [connector_databricks_volume]: Reuses the [connector::cnt_list_content()] method for [connector::connector_volume],
+#' * [connector_databricks_volume]: Reuses the [connector::cnt_list_content()] method for [connector::connector_databricks_volume],
 #' but always sets the `catalog` and `schema` as defined in when initializing the connector.
 #'
-#' @rdname cnt_list_content
+#' @rdname connector::cnt_list_content
 #' @export
 cnt_list_content.connector_databricks_volume <- function(connector_object, ...) {
   DBI::dbListTables(
@@ -39,7 +39,7 @@ cnt_list_content.connector_databricks_volume <- function(connector_object, ...) 
 }
 
 #' @description
-#' * [connector_databricks_volume]: Reuses the [connector::cnt_remove()] method for [connector::connector_volume],
+#' * [connector_databricks_volume]: Reuses the [connector::cnt_remove()] method for [connector::connector_databricks_volume],
 #' but always sets the `catalog` and `schema` as defined in when initializing the connector.
 #'
 #' @rdname cnt_remove
@@ -50,7 +50,6 @@ cnt_remove.connector_databricks_volume <- function(connector_object, name, ...) 
     schema = connector_object$schema,
     table = name
   )
-  NextMethod()
 }
 
 #' @description

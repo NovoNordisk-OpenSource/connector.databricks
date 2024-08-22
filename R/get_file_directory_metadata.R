@@ -58,3 +58,20 @@ check_databricks_dir_exists <- function(x, client = DatabricksClient()) {
 
 #' @importFrom checkmate makeAssertCollection
 assert_databricks_dir_exists <- checkmate::makeAssertionFunction(check_databricks_dir_exists)
+
+#' Validate the path
+#' @description The assert_path function validates the path for file system operations.
+#' @param path Path to be validated
+#' @return Invisible path
+#' @importFrom checkmate makeAssertCollection assert_character reportAssertions
+assert_databricks_path <- function(path) {
+  val <- checkmate::makeAssertCollection()
+
+  checkmate::assert_string(x = path, add = val)
+
+  assert_databricks_dir_exists(x = path, add = val)
+
+  checkmate::reportAssertions(val)
+
+  return(invisible(path))
+}

@@ -4,12 +4,10 @@
 \alias{read_fs_databricks}
 \title{Read files based on the extension}
 \usage{
-read_fs_databricks(path, ..., client = DatabricksClient())
+read_fs_databricks(path, client = DatabricksClient())
 }
 \arguments{
 \item{path}{Path to the file}
-
-\item{...}{Other parameters for read's functions}
 
 \item{client}{a databricks client as returned from \code{DatabricksClient}}
 }

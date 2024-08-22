@@ -68,8 +68,7 @@ connector_databricks_volume <- function(full_path = NULL,
 #' class. It is a file storage connector for accessing and manipulating files
 #' inside Databricks volumes.
 #'
-#' @details
-#'
+#' @importFrom R6 R6Class
 #'
 #' @examples
 #' # Create file storage connector
@@ -113,6 +112,10 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' asking if it does not exist.
     #' @param ... Additional arguments passed to the [connector::connector]
     #'
+    #' @importFrom cli cli_abort
+    #' @importFrom checkmate assert_string assert_logical
+    #'
+    #' @return A new [ConnectorDatabricksVolume] object
     initialize = function(full_path = NULL,
                           catalog = NULL,
                           schema = NULL,
@@ -149,7 +152,8 @@ ConnectorDatabricksVolume <- R6::R6Class(
       )
 
       # Try and create a directory, if it already exists, it will be returned
-      create_file_directory(directory_path = paste0("/Volumes/", full_path))
+      full_path <- paste0("/Volumes/", full_path)
+      create_file_directory(directory_path = full_path)
 
       private$.full_path <- full_path
       private$.path <- path
@@ -172,7 +176,6 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @description
     #' Upload a file to the file storage.
     #' See also [cnt_upload].
-    #' @return `r rd_connector_utils("inv_self")`
     cnt_upload = function(file, name = basename(file), ...) {
       self %>%
         cnt_upload(file, name, ...)
@@ -182,7 +185,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' Create a directory in the file storage.
     #' See also [cnt_create_directory].
     #' @param name [character] The name of the directory to create
-    #' @return `r rd_connector_utils("inv_self")`
+    #'
     cnt_create_directory = function(name, ...) {
       self %>%
         cnt_create_directory(name, ...)
@@ -192,7 +195,6 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' Remove a directory from the file storage.
     #' See also [cnt_remove_directory].
     #' @param name [character] The name of the directory to remove
-    #' @return `r rd_connector_utils("inv_self")`
     cnt_remove_directory = function(name, ...) {
       self %>%
         cnt_remove_directory(name, ...)
@@ -205,7 +207,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
     },
     #' @field catalog [character] Databricks catalog
     catalog = function() {
-      private$.path
+      private$.catalog
     },
     #' @field schema [character] Databricks schema
     schema = function() {
@@ -258,19 +260,3 @@ ConnectorDatabricksVolume <- R6::R6Class(
   )
 )
 
-#' Validate the path
-#' @description The assert_path function validates the path for file system operations.
-#' @param path Path to be validated
-#' @return Invisible path
-#' @importFrom checkmate makeAssertCollection assert_character reportAssertions
-assert_databricks_path <- function(path) {
-  val <- checkmate::makeAssertCollection()
-
-  checkmate::assert_string(x = path, add = val)
-
-  assert_databricks_dir_exists(x = path, add = val)
-
-  checkmate::reportAssertions(val)
-
-  return(invisible(path))
-}
