@@ -4,7 +4,7 @@
 \alias{create_file_directory}
 \title{Create a directory.}
 \usage{
-create_file_directory(client, directory_path)
+create_file_directory(client = DatabricksClient(), directory_path)
 }
 \arguments{
 \item{client}{Required. Instance of DatabricksClient()}

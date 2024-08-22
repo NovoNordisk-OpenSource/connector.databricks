@@ -4,7 +4,7 @@
 \alias{get_file_directory_metadata}
 \title{Get directory metadata.}
 \usage{
-get_file_directory_metadata(client, directory_path)
+get_file_directory_metadata(client = DatabricksClient(), directory_path)
 }
 \arguments{
 \item{client}{Required. Instance of DatabricksClient()}

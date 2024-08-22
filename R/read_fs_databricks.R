@@ -3,7 +3,6 @@
 #' The aim of this function is to identify the extension on the file to dispatch it.
 #'
 #' @param path Path to the file
-#' @param ... Other parameters for read's functions
 #' @param client a databricks client as returned from \code{DatabricksClient}
 #'
 #' @return the result of the reading function
@@ -19,8 +18,7 @@
 #' try(read_fs_databricks(databricks_file_csv))
 #' @export
 #' @importFrom connector read_file
-read_fs_databricks <- function(path, ..., client = DatabricksClient()) {
-
+read_fs_databricks <- function(path, client = DatabricksClient()) {
   # Find extension of file
   find_ext <- tools::file_ext(path)
 
