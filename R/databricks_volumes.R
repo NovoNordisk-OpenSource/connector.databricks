@@ -50,7 +50,7 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
     #' @description Initializes the connector_databricks_volumes class
     #' @param path Path to the file system
     initialize = function(path) {
-      private$path <- assert_databicks_path(path)
+      private$path <- assert_databricks_path(path)
     },
     #' @description Returns the list of files in the specified path
     #'
@@ -59,7 +59,7 @@ Connector_databricks_volumes <- R6::R6Class( # nolint
     #'   If FALSE, the file names (rather than paths) are returned.
     #' @param client the Databricks client
     #' @param ... used to construct nested paths
-    list_content = function(..., full.names = FALSE, client = DatabricksClient()) {
+    list_content = function(full.names = FALSE, client = DatabricksClient(), ...) {
       list_file_dir_contents(file.path(path = private$path, ...),
                              full.names = full.names, client = client)
     },
