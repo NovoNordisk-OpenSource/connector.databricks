@@ -58,7 +58,8 @@ db
 
 # Create subclass connection
 db_subclass <- connector_databricks_volume(databricks_volume,
-                                           extra_class = "subclass")
+  extra_class = "subclass"
+)
 
 db_subclass
 class(db_subclass)

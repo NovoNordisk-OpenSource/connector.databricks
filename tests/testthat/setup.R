@@ -1,14 +1,41 @@
 ### Script for setting up tests
 
-# Databrick client used throught testing
-setup_db_client <- DatabricksClient()
+testing_env_variables <- c("DATABRICKS_VOLUME",
+                           "DATABRICKS_CATALOG_NAME",
+                           "DATABRICKS_SCHEMA_NAME")
+if (all(testing_env_variables %in% names(Sys.getenv()))) {
+  # Dummy DatabricksClient object (used for failing tests)
+  dummy_db_client <- list(a = 1, b = 2)
 
-# Databricks volume used throughout tests
-setup_db_volume <- Sys.getenv("DATABRICKS_VOLUME")
+  # Databricks catalog used throughout tests
+  setup_db_catalog <- Sys.getenv("DATABRICKS_CATALOG_NAME")
 
-# Databricks Connector
-setup_db_volume_connector <- connector_databricks_volumes(setup_db_volume)
+  # Databricks schema used throughout tests
+  setup_db_schema <- Sys.getenv("DATABRICKS_SCHEMA_NAME")
 
-##  Run after all tests
-# Placeholder for whatever needs to be removed in the end
-# withr::defer(rm(setup_db_volume), teardown_env())
+  # Setup databricks volume path
+  setup_databricks_volume <- Sys.getenv("DATABRICKS_VOLUME")
+
+  # Databricks volume used throughout tests
+  setup_db_volume_path <- paste(setup_db_catalog, setup_db_schema, "local_test_volume", sep = "/")
+
+  # Databricks volume used throughout tests
+  setup_db_volume <- create_databricks_volume(name = "local_test_volume",
+                                              catalog_name = setup_db_catalog,
+                                              schema_name = setup_db_schema)
+  # Connector object testing
+  setup_volume_connector <- ConnectorDatabricksVolume$new(catalog = setup_db_catalog,
+                                                          schema = setup_db_schema,
+                                                          path = "local_test_volume")
+
+  ##  Run after all tests
+  # Placeholder for whatever needs to be removed in the end
+  withr::defer(
+    delete_databricks_volume(
+      name = "local_test_volume",
+      catalog_name = setup_db_catalog,
+      schema_name = setup_db_schema
+    ),
+    teardown_env()
+  )
+}

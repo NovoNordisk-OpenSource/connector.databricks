@@ -1,7 +1,4 @@
-
-
 working_databrick_client <- function(client) {
-
   # If no connection have been made
   if (client$debug_string() == "") {
     return(FALSE)
