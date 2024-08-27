@@ -23,7 +23,7 @@ It use the \code{\link[=files_download_file]{files_download_file()}} method to d
 from a Databricks volume
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
 databricks_volume \%>\%
   cnt_download_content("file.csv", "file.csv")

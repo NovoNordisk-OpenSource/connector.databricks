@@ -33,7 +33,7 @@ Returns the contents of a directory. If there is no directory at the
 specified path, the API returns a HTTP 404 error.
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # In order to connect to databricks on environments where configurations are
 # available via the environment variable DATABRICKS_CONFIG_FILE or located
 # at ~/.databrickscfg - simply write
