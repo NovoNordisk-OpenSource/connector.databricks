@@ -335,7 +335,7 @@ test_that("ConnectorDatabricksVolume methods work", {
   con$cnt_download("test_file.csv", "test_file.csv")
 
   # Check if file exists
-  expect_true(fs::file_exists("test_file.csv"))
+  expect_true(file.exists("test_file.csv"))
 
   # Read the file
   file_content <- con$cnt_read("test_file.csv")

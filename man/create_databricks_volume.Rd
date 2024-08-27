@@ -22,6 +22,12 @@ are.}
 
 \item{schema_name}{The name of the schema where the volume will be created.}
 
+\item{volume_type}{Type of the volume. Can be: "MANAGED" or "EXTERNAL".}
+
+\item{storage_location}{The storage location on the cloud}
+
+\item{comment}{A comment for the volume}
+
 \item{client}{Instance of DatabricksClient().}
 }
 \description{
@@ -32,7 +38,7 @@ More details can be found here:
 https://docs.databricks.com/api/workspace/volumes/create
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 # In order to connect to databricks on environments where configurations are
 # available via the environment variable DATABRICKS_CONFIG_FILE or located
 # at ~/.databrickscfg - simply write

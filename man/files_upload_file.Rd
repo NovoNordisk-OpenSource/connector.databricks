@@ -32,7 +32,7 @@ exactly the bytes sent in the request body. If the request is successful,
 there is no response body.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 # In order to connect to databricks on environments where configurations are
 # available via the environment variable DATABRICKS_CONFIG_FILE or located
 # at ~/.databrickscfg - simply write
