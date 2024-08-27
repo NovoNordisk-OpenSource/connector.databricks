@@ -9,7 +9,7 @@ class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 # Create file storage connector
 
 cnt <- ConnectorDatabricksVolume$new(full_path = "my_adam/tester")
@@ -80,8 +80,7 @@ Initializes the connector for Databricks volume storage.
   schema = NULL,
   path = NULL,
   extra_class = NULL,
-  force = FALSE,
-  ...
+  force = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -102,8 +101,6 @@ provided.}
 
 \item{\code{force}}{\link{logical} If TRUE, the volume will be created without
 asking if it does not exist.}
-
-\item{\code{...}}{Additional arguments passed to the \link[connector:connector]{connector::connector}}
 }
 \if{html}{\out{</div>}}
 }
@@ -192,7 +189,6 @@ The directory created
 \if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_remove_directory}{}}}
 \subsection{Method \code{cnt_remove_directory()}}{
 Remove a directory from the file storage.
-See also \link{cnt_remove_directory}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_remove_directory(name, ...)}\if{html}{\out{</div>}}
 }
@@ -201,6 +197,8 @@ See also \link{cnt_remove_directory}.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{\link{character} The name of the directory to remove}
+
+\item{\code{...}}{Additional parameters to pass to the \link{cnt_remove_directory} method}
 }
 \if{html}{\out{</div>}}
 }

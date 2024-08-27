@@ -89,6 +89,9 @@ list_databricks_volumes <- function(catalog_name,
 #' @param catalog_name The name of the catalog where the schema and the volume
 #' are.
 #' @param schema_name The name of the schema where the volume will be created.
+#' @param volume_type Type of the volume. Can be: "MANAGED" or "EXTERNAL".
+#' @param storage_location The storage location on the cloud
+#' @param comment A comment for the volume
 #' @param client Instance of DatabricksClient().
 #'
 #' @examplesIf FALSE

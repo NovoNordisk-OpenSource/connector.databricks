@@ -13,9 +13,9 @@ cnt_upload_content(connector_object, src, dest, overwrite, ...)
 
 \item{dest}{The destination of the file}
 
-\item{...}{Additional parameters to pass to the upload method}
+\item{overwrite}{Overwrite file if already exists}
 
-\item{recursive}{A boolean to upload recursively if folder}
+\item{...}{Additional parameters to pass to the upload method}
 }
 \value{
 Information about success of the request
@@ -24,7 +24,7 @@ Information about success of the request
 Upload content to ConnectorDatabricksVolume
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
 databricks_volume \%>\%
   cnt_upload_content("file.csv", "file.csv")

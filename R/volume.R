@@ -107,9 +107,6 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @param extra_class [character] Extra class to assign to the new connector.
     #' @param force [logical] If TRUE, the volume will be created without
     #' asking if it does not exist.
-    #' @param ... Additional arguments passed to the [connector::connector]
-    #'
-    #' @inheritParams files_list_directory_contents
     #'
     #' @importFrom cli cli_abort
     #' @importFrom checkmate assert_string assert_logical
@@ -120,8 +117,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
                           schema = NULL,
                           path = NULL,
                           extra_class = NULL,
-                          force = FALSE,
-                          ...) {
+                          force = FALSE) {
       if (is.null(full_path)) {
         checkmate::assert_string(x = path, null.ok = FALSE)
         checkmate::assert_string(x = catalog, null.ok = FALSE)
@@ -193,10 +189,9 @@ ConnectorDatabricksVolume <- R6::R6Class(
         cnt_create_directory(name = name, ...)
     },
 
-    #' @description
-    #' Remove a directory from the file storage.
-    #' See also [cnt_remove_directory].
+    #' @description Remove a directory from the file storage.
     #' @param name [character] The name of the directory to remove
+    #' @param ... Additional parameters to pass to the [cnt_remove_directory] method
     cnt_remove_directory = function(name, ...) {
       self %>%
         cnt_remove_directory(name, ...)
@@ -226,14 +221,13 @@ ConnectorDatabricksVolume <- R6::R6Class(
     .catalog = character(0),
     .schema = character(0),
     .full_path = character(0),
-    #' @description
-    #' Check if volume does not exist and create it if user wants.
-    #' @param catalog [character] The name of the catalog
-    #' @param schema [character] The name of the schema
-    #' @param volume [character] The name of the volume to create
-    #' @param force [boolean] If TRUE, the volume will be created without asking
-    #'  the user
-    #' @importFrom cli cli_alert cli_abort
+    # Check if volume does not exist and create it if user wants.
+    # @param catalog [character] The name of the catalog
+    # @param schema [character] The name of the schema
+    # @param volume [character] The name of the volume to create
+    # @param force [boolean] If TRUE, the volume will be created without asking
+    #  the user
+    # @importFrom cli cli_alert cli_abort
     .check_databricks_volume_exists = function(catalog, schema, volume, force = FALSE) {
       db_client <- DatabricksClient()
       volumes <- list_databricks_volumes(catalog_name = catalog, schema_name = schema)

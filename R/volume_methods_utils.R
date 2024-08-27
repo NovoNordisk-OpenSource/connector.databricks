@@ -29,8 +29,8 @@ cnt_download_content <- function(connector_object, name, dest, ...) {
 #' @param connector_object The [ConnectorDatabricksVolume] object
 #' @param src The source of the file to upload
 #' @param dest The destination of the file
+#' @param overwrite Overwrite file if already exists
 #' @param ... Additional parameters to pass to the upload method
-#' @param recursive A boolean to upload recursively if folder
 #'
 #' @return Information about success of the request
 #' @export

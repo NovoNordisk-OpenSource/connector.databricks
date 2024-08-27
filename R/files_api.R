@@ -264,25 +264,3 @@ files_delete_file <- function(file_path, client = DatabricksClient()) {
   cli::cli_alert_success("File deleted successfully.")
   return(invisible(res))
 }
-
-#' @importFrom checkmate makeAssertCollection
-assert_databricks_dir_exists <- checkmate::makeAssertionFunction(files_check_databricks_dir_exists)
-
-#' Validate the path
-#' @description The assert_path function validates the path for file system operations.
-#' @param path Path to be validated
-#' @return Invisible path
-#' @importFrom checkmate makeAssertCollection assert_character reportAssertions
-assert_databricks_path <- function(path) {
-  checkmate::assert_character(path, null.ok = FALSE)
-
-  val <- checkmate::makeAssertCollection()
-
-  checkmate::assert_string(x = path, add = val)
-
-  assert_databricks_dir_exists(x = path, add = val)
-
-  checkmate::reportAssertions(val)
-
-  return(invisible(path))
-}
