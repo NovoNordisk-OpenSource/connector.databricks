@@ -107,6 +107,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @param extra_class [character] Extra class to assign to the new connector.
     #' @param force [logical] If TRUE, the volume will be created without
     #' asking if it does not exist.
+    #' @param ... Additional arguments passed to the superclass's initialize method
     #'
     #' @importFrom cli cli_abort
     #' @importFrom checkmate assert_string assert_logical
@@ -117,7 +118,8 @@ ConnectorDatabricksVolume <- R6::R6Class(
                           schema = NULL,
                           path = NULL,
                           extra_class = NULL,
-                          force = FALSE) {
+                          force = FALSE,
+                          ...) {
       if (is.null(full_path)) {
         checkmate::assert_string(x = path, null.ok = FALSE)
         checkmate::assert_string(x = catalog, null.ok = FALSE)
