@@ -1,5 +1,5 @@
 test_that(paste("DBI generics work for connector_databricks_dbi"), {
-  if (all(c("http_path_local", "catalog_local", "schema_local") %in%
+  if (all(c("HTTP_PATH_LOCAL", "CATALOG_LOCAL", "SCHEMA_LOCAL") %in%
           names(Sys.getenv()))) {
     skip_on_ci()
     skip_on_cran()
