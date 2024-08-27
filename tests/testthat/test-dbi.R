@@ -1,5 +1,4 @@
 test_that("connector_databricks_dbi", {
-
   skip_on_ci()
   skip_on_cran()
 

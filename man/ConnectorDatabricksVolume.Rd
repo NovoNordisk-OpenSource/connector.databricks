@@ -9,29 +9,26 @@ class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create file storage connector
 
-cnt <- ConnectorDatabricksVolume$new(tempdir())
+cnt <- ConnectorDatabricksVolume$new(full_path = "my_adam/tester")
 
 cnt
 
 # List content
-
 cnt$cnt_list_content()
 
 # Write to the connector
-
 cnt$cnt_write(iris, "iris.rds")
 
 # Check it is there
-
 cnt$cnt_list_content()
 
 # Read the result back
-
 cnt$cnt_read("iris.rds") |>
   head()
-
+\dontshow{\}) # examplesIf}
 }
 \section{Super class}{
 \code{\link[connector:connector]{connector::connector}} -> \code{ConnectorDatabricksVolume}
@@ -118,33 +115,61 @@ A new \link{ConnectorDatabricksVolume} object
 \if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_download"></a>}}
 \if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_download}{}}}
 \subsection{Method \code{cnt_download()}}{
-Download content from the file storage.
-See also \link{cnt_download}.
+Download a file
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_download(name, file = basename(name), ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_download(
+  file_path,
+  local_path = basename(name),
+  ...
+)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file_path}}{Required. The absolute path of the file.}
+
+\item{\code{local_path}}{local path for the file.}
+
+\item{\code{...}}{Additional parameters to pass to the \link{cnt_download_content} method}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
-\link{invisible} \code{file}
+The file downloaded
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_upload"></a>}}
 \if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_upload}{}}}
 \subsection{Method \code{cnt_upload()}}{
-Upload a file to the file storage.
-See also \link{cnt_upload}.
+Upload a file
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_upload(file, name = basename(file), ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_upload(file_path, contents, overwrite, ...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file_path}}{The absolute path of the file.}
+
+\item{\code{contents}}{File content}
+
+\item{\code{overwrite}}{If true, an existing file will be overwritten.}
+
+\item{\code{...}}{Additional parameters to pass to the \link{cnt_upload_content} method}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The file uploaded
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_create_directory"></a>}}
 \if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_create_directory}{}}}
 \subsection{Method \code{cnt_create_directory()}}{
-Create a directory in the file storage.
-See also \link{cnt_create_directory}.
+Create a directory
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_create_directory(name, ...)}\if{html}{\out{</div>}}
 }
@@ -152,9 +177,14 @@ See also \link{cnt_create_directory}.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{name}}{\link{character} The name of the directory to create}
+\item{\code{name}}{The name of the directory to create}
+
+\item{\code{...}}{Additional parameters to pass to the \link{cnt_create_directory} method}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The directory created
 }
 }
 \if{html}{\out{<hr>}}

@@ -24,7 +24,8 @@ Imports:
     jsonlite,
     odbc (>= 1.4),
     R6 (>= 2.4.0),
-    rlang
+    rlang,
+    cli
 Suggests: 
     testthat (>= 3.0.0)
 Remotes: 

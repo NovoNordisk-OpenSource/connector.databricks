@@ -106,7 +106,6 @@ test_that("list_databricks_volumes fails with invalid inputs", {
       include_browse = 1
     )
   )
-
 })
 
 test_that("delete_databricks_volume works", {

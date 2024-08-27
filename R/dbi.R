@@ -21,7 +21,7 @@
 #' # Establish connection to your cluster
 #'
 #' con_databricks <- connector_databricks_dbi$new(
-#' httpPath = "path-to-cluster",
+#'   httpPath = "path-to-cluster",
 #'   catalog = "my_catalog",
 #'   schema = "my_schema"
 #' )

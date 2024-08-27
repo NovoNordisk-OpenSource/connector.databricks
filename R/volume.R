@@ -35,7 +35,8 @@
 #'
 #' # Create subclass connection
 #' db_subclass <- connector_databricks_volume(databricks_volume,
-#'                                            extra_class = "subclass")
+#'   extra_class = "subclass"
+#' )
 #'
 #' db_subclass
 #' class(db_subclass)
@@ -70,27 +71,23 @@ connector_databricks_volume <- function(full_path = NULL,
 #'
 #' @importFrom R6 R6Class
 #'
-#' @examples
+#' @examplesIf FALSE
 #' # Create file storage connector
 #'
-#' cnt <- ConnectorDatabricksVolume$new(tempdir())
+#' cnt <- ConnectorDatabricksVolume$new(full_path = "my_adam/tester")
 #'
 #' cnt
 #'
 #' # List content
-#'
 #' cnt$cnt_list_content()
 #'
 #' # Write to the connector
-#'
 #' cnt$cnt_write(iris, "iris.rds")
 #'
 #' # Check it is there
-#'
 #' cnt$cnt_list_content()
 #'
 #' # Read the result back
-#'
 #' cnt$cnt_read("iris.rds") |>
 #'   head()
 #'
@@ -111,6 +108,8 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @param force [logical] If TRUE, the volume will be created without
     #' asking if it does not exist.
     #' @param ... Additional arguments passed to the [connector::connector]
+    #'
+    #' @inheritParams files_list_directory_contents
     #'
     #' @importFrom cli cli_abort
     #' @importFrom checkmate assert_string assert_logical
@@ -153,7 +152,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
 
       # Try and create a directory, if it already exists, it will be returned
       full_path <- paste0("/Volumes/", full_path)
-      create_file_directory(directory_path = full_path)
+      files_create_directory(directory_path = full_path)
 
       private$.full_path <- full_path
       private$.path <- path
@@ -164,31 +163,34 @@ ConnectorDatabricksVolume <- R6::R6Class(
       super$initialize(extra_class = extra_class, ...)
     },
 
-    #' @description
-    #' Download content from the file storage.
-    #' See also [cnt_download].
-    #' @return [invisible] `file`
-    cnt_download = function(name, file = basename(name), ...) {
+    #' @description Download a file
+    #' @param file_path Required. The absolute path of the file.
+    #' @param local_path local path for the file.
+    #' @param ... Additional parameters to pass to the [cnt_download_content] method
+    #' @return The file downloaded
+    cnt_download = function(file_path, local_path = basename(name), ...) {
       self %>%
-        cnt_download(name, file, ...)
+        cnt_download_content(name = file_path, dest = local_path, ...)
     },
 
-    #' @description
-    #' Upload a file to the file storage.
-    #' See also [cnt_upload].
-    cnt_upload = function(file, name = basename(file), ...) {
+    #' @description Upload a file
+    #' @param file_path The absolute path of the file.
+    #' @param contents File content
+    #' @param overwrite If true, an existing file will be overwritten.
+    #' @param ... Additional parameters to pass to the [cnt_upload_content] method
+    #' @return The file uploaded
+    cnt_upload = function(file_path, contents, overwrite, ...) {
       self %>%
-        cnt_upload(file, name, ...)
+        cnt_upload_content(src = contents, dest = file_path, overwrite, ...)
     },
 
-    #' @description
-    #' Create a directory in the file storage.
-    #' See also [cnt_create_directory].
-    #' @param name [character] The name of the directory to create
-    #'
+    #' @description Create a directory
+    #' @param name The name of the directory to create
+    #' @param ... Additional parameters to pass to the [cnt_create_directory] method
+    #' @return The directory created
     cnt_create_directory = function(name, ...) {
       self %>%
-        cnt_create_directory(name, ...)
+        cnt_create_directory(name = name, ...)
     },
 
     #' @description
@@ -231,25 +233,29 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @param volume [character] The name of the volume to create
     #' @param force [boolean] If TRUE, the volume will be created without asking
     #'  the user
+    #' @importFrom cli cli_alert cli_abort
     .check_databricks_volume_exists = function(catalog, schema, volume, force = FALSE) {
       db_client <- DatabricksClient()
-      browser()
       volumes <- list_databricks_volumes(catalog_name = catalog, schema_name = schema)
       if (!(volume %in% volumes$name)) {
         cli::cli_alert("Volume does not exist.")
         if (force) {
           cli::cli_alert("Creating volume...")
-          create_databricks_volume(name = volume,
-                                   catalog_name = catalog,
-                                   schema_name = schema)
+          create_databricks_volume(
+            name = volume,
+            catalog_name = catalog,
+            schema_name = schema
+          )
           cli::cli_alert("Volume created!")
         }
         menu <- menu(c("Create volume", "Exit"), title = "What would you like to do?")
         if (menu == 1) {
           cli::cli_alert("Creating volume...")
-          create_databricks_volume(name = volume,
-                                   catalog_name = catalog,
-                                   schema_name = schema)
+          create_databricks_volume(
+            name = volume,
+            catalog_name = catalog,
+            schema_name = schema
+          )
           cli::cli_alert("Volume created!")
         } else {
           cli::cli_abort("Exiting...")
@@ -259,4 +265,3 @@ ConnectorDatabricksVolume <- R6::R6Class(
     }
   )
 )
-
