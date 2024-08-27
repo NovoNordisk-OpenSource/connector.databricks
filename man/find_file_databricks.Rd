@@ -20,7 +20,7 @@ A full name path to the file or a error if multiples files or 0.
 Find File
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 iris_csv <- "iris.csv"
 databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
 databricks_file_csv <- file.path(databrics_volume, iris_csv)

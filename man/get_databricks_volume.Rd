@@ -29,7 +29,7 @@ More details can be found here:
 https://docs.databricks.com/api/workspace/volumes/get
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # In order to connect to databricks on environments where configurations are
 # available via the environment variable DATABRICKS_CONFIG_FILE or located
 # at ~/.databrickscfg - simply write

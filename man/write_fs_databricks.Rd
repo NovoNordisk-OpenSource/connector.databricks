@@ -37,7 +37,7 @@ The object \code{x} is returned invisibly
 The aim of this function is to identify the extension on the file to dispatch it.
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 temp_csv <- tempfile("iris", fileext = ".csv")
 databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
 databricks_file_csv <- file.path(databrics_volume, basename(temp_csv))
@@ -46,7 +46,7 @@ try(write_fs_databricks(iris, databricks_file_csv))
 # Read the file from databricks
 try(read_fs_databricks(databricks_file_csv))
 \dontshow{\}) # examplesIf}
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 temp_csv <- tempfile("iris", fileext = ".csv")
 databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
 databricks_file_csv <- file.path(databrics_volume, basename(temp_csv))

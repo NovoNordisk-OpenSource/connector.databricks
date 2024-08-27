@@ -24,7 +24,7 @@ Information about success of the request
 Upload content to ConnectorDatabricksVolume
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
 databricks_volume \%>\%
   cnt_upload_content("file.csv", "file.csv")

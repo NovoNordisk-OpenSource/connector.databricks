@@ -17,7 +17,7 @@ cnt_remove_directory(connector_object, name, ...)
 Remove a directory
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
 databricks_volume \%>\%
   cnt_create_directory("folder")

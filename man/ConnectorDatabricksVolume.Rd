@@ -9,7 +9,7 @@ class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create file storage connector
 
 cnt <- ConnectorDatabricksVolume$new(full_path = "amace_cdr_bronze_dev/nn9536_4373_adam/tester")
@@ -80,7 +80,8 @@ Initializes the connector for Databricks volume storage.
   schema = NULL,
   path = NULL,
   extra_class = NULL,
-  force = FALSE
+  force = FALSE,
+  ...
 )}\if{html}{\out{</div>}}
 }
 
@@ -101,6 +102,8 @@ provided.}
 
 \item{\code{force}}{\link{logical} If TRUE, the volume will be created without
 asking if it does not exist.}
+
+\item{\code{...}}{Additional arguments passed to the superclass's initialize method}
 }
 \if{html}{\out{</div>}}
 }

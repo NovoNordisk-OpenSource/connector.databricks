@@ -20,7 +20,7 @@ general use of personal access tokens and credentials through Posit Workbench.
 See also \code{\link[odbc:databricks]{odbc::databricks()}} On more information on how the connection to Databricks is established.
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Establish connection to your cluster
 
 con_databricks <- connector_databricks_dbi$new(
