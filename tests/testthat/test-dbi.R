@@ -5,9 +5,9 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     skip_on_cran()
 
     # Retrieve the stored values
-    http_path_local <- Sys.getenv("http_path_local")
-    catalog_local <- Sys.getenv("catalog_local")
-    schema_local <- Sys.getenv("schema_local")
+    http_path_local <- Sys.getenv("HTTP_PATH_LOCAL")
+    catalog_local <- Sys.getenv("CATALOG_LOCAL")
+    schema_local <- Sys.getenv("SCHEMA_LOCAL")
 
     temp_table_name <- paste0(
       "temp-mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
