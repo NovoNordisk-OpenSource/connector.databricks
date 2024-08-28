@@ -1,2 +1,2 @@
-# connector.databricks 0.3.0
+# connector.databricks 0.0.1
 * Initial release to internal package manager
