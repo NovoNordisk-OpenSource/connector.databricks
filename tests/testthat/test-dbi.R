@@ -11,7 +11,7 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
 
     temp_table_name <- paste0(
       "temp-mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
-      )
+    )
 
     expect_error(connector_databricks_dbi$new(http_path = 1))
 
@@ -73,6 +73,6 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
   } else {
     skip(
       "Skipping test as http_path_local, catalog_local, or schema_local is NULL"
-      )
+    )
   }
 })

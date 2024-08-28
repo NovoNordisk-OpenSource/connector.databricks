@@ -29,7 +29,8 @@ db_client <- DatabricksClient()
 # To check if connection is established
 open_connection <- db_client$debug_string() != ""
 
-if (open_connection)
+if (open_connection) {
   db_client$do("GET", "/api/2.1/unity-catalog/catalogs")
+}
 }
 }

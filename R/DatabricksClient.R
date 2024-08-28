@@ -1,15 +1,17 @@
-
 # nolint start
 # The package version of databricks from which the code was copied and modified
-VERSION = "0.4.4"
+VERSION <- "0.4.4"
 
-.productInfo <- tryCatch({
-  v <- RStudio.Version()
-  c("rstudio", v$long_version)
-}, error = function(e) {
-  # TODO: check if we can use RSTUDIO_PROJ_NAME as product name
-  c("unknown", "0.0.0")
-})
+.productInfo <- tryCatch(
+  {
+    v <- RStudio.Version()
+    c("rstudio", v$long_version)
+  },
+  error = function(e) {
+    # TODO: check if we can use RSTUDIO_PROJ_NAME as product name
+    c("unknown", "0.0.0")
+  }
+)
 
 
 #' DatabricksClient is a constructor for class that performs any operations with
@@ -28,8 +30,9 @@ VERSION = "0.4.4"
 #' # To check if connection is established
 #' open_connection <- db_client$debug_string() != ""
 #'
-#' if (open_connection)
+#' if (open_connection) {
 #'   db_client$do("GET", "/api/2.1/unity-catalog/catalogs")
+#' }
 #' }
 #' @export
 DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_file = NULL) {
@@ -54,8 +57,9 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       # Remove leading/trailing whitespace
       line <- trimws(line)
       # Skip empty lines and comments
-      if (nchar(line) == 0 || substr(line, 1, 1) == "#")
+      if (nchar(line) == 0 || substr(line, 1, 1) == "#") {
         next
+      }
       # Check for section headers
       if (substr(line, 1, 1) == "[") {
         section <- trimws(substr(line, 2, nchar(line) - 1))
@@ -89,7 +93,8 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
     }
     if (!profile_exists) {
       rlang::abort(paste("Profile", profile_name, "not found in", config_path),
-                   call = rlang::caller_env())
+        call = rlang::caller_env()
+      )
     }
     return(as.list(parsed_file[[profile_name]]))
   }
@@ -100,10 +105,12 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
 
   # cfg is the current unified authentication config of direct parameters,
   # environment variables, and values loaded from ~/.databrickscfg file
-  cfg <- list(host = coalesce(host, Sys.getenv("DATABRICKS_HOST"), from_cli$host),
-              token = coalesce(token, Sys.getenv("DATABRICKS_TOKEN"), from_cli$token),
-              client_id = coalesce(Sys.getenv("DATABRICKS_CLIENT_ID"), from_cli$client_id),
-              client_secret = coalesce(Sys.getenv("DATABRICKS_CLIENT_SECRET"), from_cli$client_secret))
+  cfg <- list(
+    host = coalesce(host, Sys.getenv("DATABRICKS_HOST"), from_cli$host),
+    token = coalesce(token, Sys.getenv("DATABRICKS_TOKEN"), from_cli$token),
+    client_id = coalesce(Sys.getenv("DATABRICKS_CLIENT_ID"), from_cli$client_id),
+    client_secret = coalesce(Sys.getenv("DATABRICKS_CLIENT_SECRET"), from_cli$client_secret)
+  )
 
   # add the missing https:// prefix to bare, ODBC-style hosts
   if (!is.null(cfg$host) && !startsWith(cfg$host, "http")) {
@@ -117,8 +124,10 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   # configs.
   debug_string <- function() {
     used <- c()
-    sensitive <- c("token", "password", "client_secret", "google_credentials",
-                   "azure_client_secret")
+    sensitive <- c(
+      "token", "password", "client_secret", "google_credentials",
+      "azure_client_secret"
+    )
     for (attr in names(cfg)) {
       value <- cfg[[attr]]
       if (is.null(value)) {
@@ -203,8 +212,10 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
     url <- paste0(cfg$host, path)
 
     response <- httr::VERB(method, url, httr::add_headers(headers), httr::user_agent(user_agent()),
-                           httr::config(verbose = FALSE, connecttimeout = 30), httr::accept_json(),
-                           httr::write_memory(), query = base::Filter(length, query), body = body)
+      httr::config(verbose = FALSE, connecttimeout = 30), httr::accept_json(),
+      httr::write_memory(),
+      query = base::Filter(length, query), body = body
+    )
 
     if (return_response_raw) {
       return(response)
@@ -228,10 +239,7 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       rlang::abort(msg, call = rlang::caller_env())
     }
 
-
-
     if (httr::has_content(response)) {
-
       # In case of a raw bite stream we cannot convert to json
       if (is.raw(httr::content(response))) {
         return(httr::content(response))
@@ -244,7 +252,9 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
     jsonlite::fromJSON(json_string)
   }
 
-  return(list(is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do,
-              debug_string = debug_string, login = cfg))
+  return(list(
+    is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do,
+    debug_string = debug_string, login = cfg
+  ))
 }
 # nolint end
