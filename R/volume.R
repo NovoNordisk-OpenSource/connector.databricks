@@ -79,16 +79,16 @@ connector_databricks_volume <- function(full_path = NULL,
 #' cnt
 #'
 #' # List content
-#' cnt$cnt_list_content()
+#' cnt$list_content_cnt()
 #'
 #' # Write to the connector
-#' cnt$cnt_write(iris, "iris.rds")
+#' cnt$write_cnt(iris, "iris.rds")
 #'
 #' # Check it is there
-#' cnt$cnt_list_content()
+#' cnt$list_content_cnt()
 #'
 #' # Read the result back
-#' cnt$cnt_read("iris.rds") |>
+#' cnt$read_cnt("iris.rds") |>
 #'   head()
 #'
 #' @export
@@ -193,10 +193,10 @@ ConnectorDatabricksVolume <- R6::R6Class(
 
     #' @description Remove a directory from the file storage.
     #' @param name [character] The name of the directory to remove
-    #' @param ... Additional parameters to pass to the [cnt_remove_directory] method
-    cnt_remove_directory = function(name, ...) {
+    #' @param ... Additional parameters to pass to the [remove_directory_cnt] method
+    remove_directory_cnt = function(name, ...) {
       self %>%
-        cnt_remove_directory(name, ...)
+        remove_directory_cnt(name, ...)
     }
   ),
   active = list(
