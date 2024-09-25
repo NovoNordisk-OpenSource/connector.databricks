@@ -131,12 +131,12 @@ test_that("ConnectorDatabricksVolume creation works", {
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -151,12 +151,12 @@ test_that("ConnectorDatabricksVolume creation works", {
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -172,12 +172,12 @@ test_that("ConnectorDatabricksVolume creation works", {
     classes = c("connector", "ConnectorDatabricksVolume", "extra_class"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -193,12 +193,12 @@ test_that("ConnectorDatabricksVolume creation works", {
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -218,12 +218,12 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -238,12 +238,12 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -259,12 +259,12 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
     classes = c("connector", "ConnectorDatabricksVolume", "extra_class"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -280,12 +280,12 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
     classes = c("connector", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
-      "cnt_create_directory",
+      "create_directory_cnt",
       "read_cnt",
       "write_cnt",
       "remove_cnt",
-      "cnt_upload",
-      "cnt_download",
+      "upload_cnt",
+      "download_cnt",
       "remove_directory_cnt"
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
@@ -304,7 +304,7 @@ test_that("ConnectorDatabricksVolume methods work", {
 
   # Create a test directory
   test_directory <- "test_directory"
-  con$cnt_create_directory(test_directory)
+  con$create_directory_cnt(test_directory)
 
   # List contents of root folder
   list_of_items <- con$list_content_cnt()
@@ -332,7 +332,7 @@ test_that("ConnectorDatabricksVolume methods work", {
   expect_contains(list_of_items, basename("test_file.csv"))
 
   # Download the file
-  con$cnt_download("test_file.csv", "test_file.csv")
+  con$download_cnt("test_file.csv", "test_file.csv")
 
   # Check if file exists
   expect_true(file.exists("test_file.csv"))
@@ -353,7 +353,7 @@ test_that("ConnectorDatabricksVolume methods work", {
   expect_false(basename("test_file.csv") %in% list_of_items)
 
   # Create a test file
-  con$cnt_upload("test_file.csv", "test_file.csv")
+  con$upload_cnt("test_file.csv", "test_file.csv")
 
   # List contents of root folder
   list_of_items <- con$list_content_cnt()
