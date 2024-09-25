@@ -14,12 +14,12 @@
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   cnt_download_content("file.csv", "file.csv")
+#'   download_content_cnt("file.csv", "file.csv")
 #'
 #' # This function is used by the method download_content
 #' databricks_volume$download_content("file.csv", "file.csv")
 #'
-cnt_download_content <- function(connector_object, name, dest, ...) {
+download_content_cnt <- function(connector_object, name, dest, ...) {
   file_path <- file.path(connector_object$full_path, name)
   files_download_file(file_path = file_path, local_path = dest, ...)
 }
@@ -38,11 +38,11 @@ cnt_download_content <- function(connector_object, name, dest, ...) {
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   cnt_upload_content("file.csv", "file.csv")
+#'   upload_content_cnt("file.csv", "file.csv")
 #'
 #' # This function is used by the method upload_content
 #' databricks_volume$upload_content("file.csv", "file.csv")
-cnt_upload_content <- function(connector_object, src, dest, overwrite, ...) {
+upload_content_cnt <- function(connector_object, src, dest, overwrite, ...) {
   file_path <- file.path(connector_object$full_path, dest)
   files_upload_file(file_path = file_path, contents = src, ...)
 }
@@ -59,10 +59,10 @@ cnt_upload_content <- function(connector_object, src, dest, overwrite, ...) {
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   cnt_create_directory("folder")
+#'   create_directory_cnt("folder")
 #' # This function is used by the method create_directory
 #' databricks_volume$create_directory("folder")
-cnt_create_directory <- function(connector_object, name, ...) {
+create_directory_cnt <- function(connector_object, name, ...) {
   directory_path <- file.path(connector_object$full_path, name)
   files_create_directory(directory_path = directory_path, ...)
 }
@@ -78,7 +78,7 @@ cnt_create_directory <- function(connector_object, name, ...) {
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   cnt_create_directory("folder")
+#'   create_directory_cnt("folder")
 #'
 #' # This function is used by the method create_directory
 #' databricks_volume$create_directory("folder")
