@@ -50,9 +50,9 @@ cnt$read_cnt("iris.rds") |>
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ConnectorDatabricksVolume-new}{\code{ConnectorDatabricksVolume$new()}}
-\item \href{#method-ConnectorDatabricksVolume-cnt_download}{\code{ConnectorDatabricksVolume$cnt_download()}}
-\item \href{#method-ConnectorDatabricksVolume-cnt_upload}{\code{ConnectorDatabricksVolume$cnt_upload()}}
-\item \href{#method-ConnectorDatabricksVolume-cnt_create_directory}{\code{ConnectorDatabricksVolume$cnt_create_directory()}}
+\item \href{#method-ConnectorDatabricksVolume-download_cnt}{\code{ConnectorDatabricksVolume$download_cnt()}}
+\item \href{#method-ConnectorDatabricksVolume-upload_cnt}{\code{ConnectorDatabricksVolume$upload_cnt()}}
+\item \href{#method-ConnectorDatabricksVolume-create_directory_cnt}{\code{ConnectorDatabricksVolume$create_directory_cnt()}}
 \item \href{#method-ConnectorDatabricksVolume-remove_directory_cnt}{\code{ConnectorDatabricksVolume$remove_directory_cnt()}}
 \item \href{#method-ConnectorDatabricksVolume-clone}{\code{ConnectorDatabricksVolume$clone()}}
 }
@@ -112,12 +112,12 @@ A new \link{ConnectorDatabricksVolume} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_download"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_download}{}}}
-\subsection{Method \code{cnt_download()}}{
+\if{html}{\out{<a id="method-ConnectorDatabricksVolume-download_cnt"></a>}}
+\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-download_cnt}{}}}
+\subsection{Method \code{download_cnt()}}{
 Download a file
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_download(
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$download_cnt(
   file_path,
   local_path = basename(name),
   ...
@@ -131,7 +131,7 @@ Download a file
 
 \item{\code{local_path}}{local path for the file.}
 
-\item{\code{...}}{Additional parameters to pass to the \link{cnt_download_content} method}
+\item{\code{...}}{Additional parameters to pass to the \link{download_content_cnt} method}
 }
 \if{html}{\out{</div>}}
 }
@@ -140,12 +140,12 @@ The file downloaded
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_upload"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_upload}{}}}
-\subsection{Method \code{cnt_upload()}}{
+\if{html}{\out{<a id="method-ConnectorDatabricksVolume-upload_cnt"></a>}}
+\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-upload_cnt}{}}}
+\subsection{Method \code{upload_cnt()}}{
 Upload a file
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_upload(file_path, contents, overwrite, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$upload_cnt(file_path, contents, overwrite, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -157,7 +157,7 @@ Upload a file
 
 \item{\code{overwrite}}{If true, an existing file will be overwritten.}
 
-\item{\code{...}}{Additional parameters to pass to the \link{cnt_upload_content} method}
+\item{\code{...}}{Additional parameters to pass to the \link{upload_content_cnt} method}
 }
 \if{html}{\out{</div>}}
 }
@@ -166,12 +166,12 @@ The file uploaded
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-cnt_create_directory"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-cnt_create_directory}{}}}
-\subsection{Method \code{cnt_create_directory()}}{
+\if{html}{\out{<a id="method-ConnectorDatabricksVolume-create_directory_cnt"></a>}}
+\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-create_directory_cnt}{}}}
+\subsection{Method \code{create_directory_cnt()}}{
 Create a directory
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$cnt_create_directory(name, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$create_directory_cnt(name, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -179,7 +179,7 @@ Create a directory
 \describe{
 \item{\code{name}}{The name of the directory to create}
 
-\item{\code{...}}{Additional parameters to pass to the \link{cnt_create_directory} method}
+\item{\code{...}}{Additional parameters to pass to the \link{create_directory_cnt} method}
 }
 \if{html}{\out{</div>}}
 }

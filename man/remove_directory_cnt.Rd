@@ -20,7 +20,7 @@ Remove a directory
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
 databricks_volume \%>\%
-  cnt_create_directory("folder")
+  create_directory_cnt("folder")
 
 # This function is used by the method create_directory
 databricks_volume$create_directory("folder")
