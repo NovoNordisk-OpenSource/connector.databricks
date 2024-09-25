@@ -82,7 +82,7 @@ cnt_create_directory <- function(connector_object, name, ...) {
 #'
 #' # This function is used by the method create_directory
 #' databricks_volume$create_directory("folder")
-cnt_remove_directory <- function(connector_object, name, ...) {
+remove_directory_cnt <- function(connector_object, name, ...) {
   directory_path <- file.path(connector_object$full_path, name)
   files_delete_directory(directory_path = directory_path, ...)
 }
