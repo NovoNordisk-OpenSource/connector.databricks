@@ -43,7 +43,7 @@ open_connection <- db_client$debug_string() != ""
 
 if (open_connection) {
   databrics_volume <- "/Volumes/my_adam/tester"
-  connector.databricks:::list_file_directory_contents(db_client, databrics_volume)
+  connector.databricks:::files_list_directory_contents(db_client, databrics_volume)
 }
 \dontshow{\}) # examplesIf}
 }
