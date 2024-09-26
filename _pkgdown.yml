@@ -5,10 +5,10 @@ reference:
     - connector_databricks_dbi
   - title: Connector functions
     contents:
-    - matches("^cnt_[^\\.]+$")
+    - matches(".*_cnt$")
   - title: Placeholder for other stuff
     contents:
-    - -matches("connector_databricks_dbi|^cnt_[^\\.]+$")
+    - -matches("connector_databricks_dbi|.*_cnt$")
 template:
   bootstrap: 5
 

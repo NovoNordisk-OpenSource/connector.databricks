@@ -79,16 +79,16 @@ connector_databricks_volume <- function(full_path = NULL,
 #' cnt
 #'
 #' # List content
-#' cnt$cnt_list_content()
+#' cnt$list_content_cnt()
 #'
 #' # Write to the connector
-#' cnt$cnt_write(iris, "iris.rds")
+#' cnt$write_cnt(iris, "iris.rds")
 #'
 #' # Check it is there
-#' cnt$cnt_list_content()
+#' cnt$list_content_cnt()
 #'
 #' # Read the result back
-#' cnt$cnt_read("iris.rds") |>
+#' cnt$read_cnt("iris.rds") |>
 #'   head()
 #'
 #' @export
@@ -164,39 +164,39 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @description Download a file
     #' @param file_path Required. The absolute path of the file.
     #' @param local_path local path for the file.
-    #' @param ... Additional parameters to pass to the [cnt_download_content] method
+    #' @param ... Additional parameters to pass to the [download_content_cnt] method
     #' @return The file downloaded
-    cnt_download = function(file_path, local_path = basename(name), ...) {
+    download_cnt = function(file_path, local_path = basename(name), ...) {
       self %>%
-        cnt_download_content(name = file_path, dest = local_path, ...)
+        download_content_cnt(name = file_path, dest = local_path, ...)
     },
 
     #' @description Upload a file
     #' @param file_path The absolute path of the file.
     #' @param contents File content
     #' @param overwrite If true, an existing file will be overwritten.
-    #' @param ... Additional parameters to pass to the [cnt_upload_content] method
+    #' @param ... Additional parameters to pass to the [upload_content_cnt] method
     #' @return The file uploaded
-    cnt_upload = function(file_path, contents, overwrite, ...) {
+    upload_cnt = function(file_path, contents, overwrite, ...) {
       self %>%
-        cnt_upload_content(src = contents, dest = file_path, overwrite, ...)
+        upload_content_cnt(src = contents, dest = file_path, overwrite, ...)
     },
 
     #' @description Create a directory
     #' @param name The name of the directory to create
-    #' @param ... Additional parameters to pass to the [cnt_create_directory] method
+    #' @param ... Additional parameters to pass to the [create_directory_cnt] method
     #' @return The directory created
-    cnt_create_directory = function(name, ...) {
+    create_directory_cnt = function(name, ...) {
       self %>%
-        cnt_create_directory(name = name, ...)
+        create_directory_cnt(name = name, ...)
     },
 
     #' @description Remove a directory from the file storage.
     #' @param name [character] The name of the directory to remove
-    #' @param ... Additional parameters to pass to the [cnt_remove_directory] method
-    cnt_remove_directory = function(name, ...) {
+    #' @param ... Additional parameters to pass to the [remove_directory_cnt] method
+    remove_directory_cnt = function(name, ...) {
       self %>%
-        cnt_remove_directory(name, ...)
+        remove_directory_cnt(name, ...)
     }
   ),
   active = list(

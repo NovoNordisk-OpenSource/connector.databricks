@@ -25,7 +25,7 @@
 #'
 #' if (open_connection) {
 #'   databrics_volume <- "/Volumes/amace_cdr_bronze_dev/nn9536_4373_adam/tester"
-#'   connector.databricks:::list_file_directory_contents(db_client, databrics_volume)
+#'   connector.databricks:::files_list_directory_contents(db_client, databrics_volume)
 #' }
 #' @importFrom dplyr bind_rows
 files_list_directory_contents <- function(directory_path,

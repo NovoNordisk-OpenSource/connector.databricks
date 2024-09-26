@@ -1,45 +1,45 @@
 #' @description
-#' Addition read methods for databricks connectors implemented for [connector::cnt_read()]:
-#' @inherit connector::cnt_read params return title details
-#' @importFrom connector cnt_read
-#' @name cnt_read
+#' Addition read methods for databricks connectors implemented for [connector::read_cnt()]:
+#' @inherit connector::read_cnt params return title details
+#' @importFrom connector read_cnt
+#' @name read_cnt
 #' @export
-connector::cnt_read
+connector::read_cnt
 
 #' @description
-#' Addition write methods for databricks connectors implemented for [connector::cnt_write()]:
-#' @inherit connector::cnt_write params return title details
-#' @importFrom connector cnt_write
-#' @name cnt_write
+#' Addition write methods for databricks connectors implemented for [connector::write_cnt()]:
+#' @inherit connector::write_cnt params return title details
+#' @importFrom connector write_cnt
+#' @name write_cnt
 #' @export
-connector::cnt_write
+connector::write_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for [connector::cnt_list_content()]:
-#' @inherit connector::cnt_list_content params return title details
-#' @importFrom connector cnt_list_content
-#' @name cnt_list_content
+#' Addition list content methods for databricks connectors implemented for [connector::list_content_cnt()]:
+#' @inherit connector::list_content_cnt params return title details
+#' @importFrom connector list_content_cnt
+#' @name list_content_cnt
 #' @export
-connector::cnt_list_content
+connector::list_content_cnt
 
 #' @description
-#' Addition remove methods for databricks connectors implemented for [connector::cnt_remove()]:
-#' @inherit connector::cnt_remove params return title details
-#' @importFrom connector cnt_remove
-#' @name cnt_remove
+#' Addition remove methods for databricks connectors implemented for [connector::remove_cnt()]:
+#' @inherit connector::remove_cnt params return title details
+#' @importFrom connector remove_cnt
+#' @name remove_cnt
 #' @export
-connector::cnt_remove
+connector::remove_cnt
 
 #' @description
-#' Addition tbl methods for databricks connectors implemented for [connector::cnt_tbl()]:
-#' @inherit connector::cnt_tbl params return title details
-#' @importFrom connector cnt_tbl
-#' @name cnt_tbl
+#' Addition tbl methods for databricks connectors implemented for [connector::tbl_cnt()]:
+#' @inherit connector::tbl_cnt params return title details
+#' @importFrom connector tbl_cnt
+#' @name tbl_cnt
 #' @export
-connector::cnt_tbl
+connector::tbl_cnt
 
-#' @inherit connector::cnt_disconnect title description params return details
-#' @importFrom connector cnt_disconnect
-#' @name cnt_disconnect
+#' @inherit connector::disconnect_cnt title description params return details
+#' @importFrom connector disconnect_cnt
+#' @name disconnect_cnt
 #' @export
-connector::cnt_disconnect
+connector::disconnect_cnt

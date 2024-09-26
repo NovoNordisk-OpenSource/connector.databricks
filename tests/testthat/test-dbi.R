@@ -29,22 +29,22 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
       private = c(".catalog", ".schema")
     )
 
-    cnt$cnt_write(create_temp_dataset(), temp_table_name) |>
+    cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
       expect_no_condition()
 
-    cnt$cnt_list_content() |>
+    cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
 
-    cnt$cnt_write(create_temp_dataset(), temp_table_name) |>
+    cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
       expect_error()
 
-    cnt$cnt_read(temp_table_name) |>
+    cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
 
-    cnt$cnt_write(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
+    cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
       expect_no_condition()
 
-    cnt$cnt_tbl(temp_table_name) |>
+    cnt$tbl_cnt(temp_table_name) |>
       dplyr::filter(car == "Mazda RX4") |>
       dplyr::select(car, mpg) |>
       dplyr::collect() |>
@@ -57,14 +57,14 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
       )) |>
       expect_equal(create_temp_dataset())
 
-    cnt$cnt_remove(temp_table_name) |>
+    cnt$remove_cnt(temp_table_name) |>
       expect_no_condition()
 
-    cnt$cnt_disconnect() |>
+    cnt$disconnect_cnt() |>
       expect_no_condition()
 
     tryCatch(
-      cnt$cnt_read(temp_table_name),
+      cnt$read_cnt(temp_table_name),
       error = function(e) {
         return("Error occurred")
       }
