@@ -27,8 +27,11 @@ Imports:
     rlang,
     cli
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0),
     tibble,
     withr
 Remotes: 
-    NN-OpenSource/connector
+    github::NN-OpenSource/connector
+VignetteBuilder: knitr
