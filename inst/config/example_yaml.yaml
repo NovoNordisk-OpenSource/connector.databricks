@@ -1,0 +1,21 @@
+# An example of the configuration file for Databricks Tables and Volumes
+metadata:
+  catalog:  !!expr Sys.getenv("databricks_calatog")
+  http_path: "path-to-cluster"
+  path: "path-to-file-storage"
+  project: "project_name"
+  trial: "trial_name"
+
+datasources:
+  - name: "tables"
+    backend:
+      type: "connector.databricks::connector_databricks_dbi"
+      http_path: "{metadata.http_path}"
+      catalog: "{metadata.catalog}"
+      schema: "{metadata.project}_{metadata.trial}_adam"
+  - name: "volume"
+    backend:
+      type: "connector.databricks::connector_databricks_volume"
+      path: "{metadata.path}"
+      catalog: "{metadata.catalog}"
+      schema: "{metadata.project}_{metadata.trial}_tfl"

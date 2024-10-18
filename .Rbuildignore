@@ -8,3 +8,5 @@
 ^\.lintr$
 ^cspell\.yaml$
 ^\.github$
+^\.pre-commit-config\.yaml$
+^cran-comments\.md$
