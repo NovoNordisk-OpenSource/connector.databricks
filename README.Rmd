@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
 # connector.databricks <a href="https://nn-opensource.github.io/connector.databricks"><img src="man/figures/logo.png" align="right" height="138" alt="connector.databricks website" /></a>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml)
+[![Checks](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/connector.databricks)](https://CRAN.R-project.org/package=connector.databricks)
 <!-- badges: end -->
 
 The connector.databricks package provides a convenient interface for accessing and interacting with Databricks volumes and tables directly from R. This vignette will guide you through the process of connecting to databricks, retrieving data, and performing various operations using this package.
 
-This package is meant to be used with [connector]("https://github.com/NN-OpenSource/connector") package, which 
+This package is meant to be used with {connector} package, which 
 provides a common interface for interacting with various data sources. The connector.databricks package extends the connector package to support Databricks **volumes** and **tables**.
 
 ## Installation
@@ -36,6 +36,7 @@ install.packages("connector.databricks")
 
 # Alternatively, you can install the development version from GitHub:
 devtools::install_github("NN-OpenSource/connector.databricks")
+
 ```
 
 
@@ -90,6 +91,7 @@ con$read_cnt("iris.rds") |>
 
 # Remove a file
 con$remove_cnt("file_name.csv")
+
 ```
 
 ## Usage with connector package
@@ -97,9 +99,7 @@ con$remove_cnt("file_name.csv")
 Here is an example how it can be used with connector package and configuration YAML file (for more information take a look at the connector package):
 ```{r, eval=FALSE}
 # Connect using configuration file
-yaml <- yaml::read_yaml(system.file("config", "example_yaml.yaml", package = "connector.databricks"), eval.expr=TRUE)
-
-connector <- connector::connect(yaml)
+connector <- connector::connect(config = system.file("config", "example_yaml.yaml", package = "connector.databricks"))
 
 # List contents in Volume
 connector$volumes$list_content_cnt()
@@ -121,5 +121,3 @@ suggestions or find any issues, please open an issue or submit a pull request on
 
 ## License
 This package is licensed under the Apache License.
-
-

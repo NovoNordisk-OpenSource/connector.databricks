@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/R-CMD-check.yaml)
+[![Checks](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
@@ -18,11 +18,10 @@ from R. This vignette will guide you through the process of connecting
 to databricks, retrieving data, and performing various operations using
 this package.
 
-This package is meant to be used with
-[connector](%22https://github.com/NN-OpenSource/connector%22) package,
-which provides a common interface for interacting with various data
-sources. The connector.databricks package extends the connector package
-to support Databricks **volumes** and **tables**.
+This package is meant to be used with {connector} package, which
+provides a common interface for interacting with various data sources.
+The connector.databricks package extends the connector package to
+support Databricks **volumes** and **tables**.
 
 ## Installation
 
@@ -103,9 +102,7 @@ connector package):
 
 ``` r
 # Connect using configuration file
-yaml <- yaml::read_yaml(system.file("config", "example_yaml.yaml", package = "connector.databricks"), eval.expr=TRUE)
-
-connector <- connector::connect(yaml)
+connector <- connector::connect(config = system.file("config", "example_yaml.yaml", package = "connector.databricks"))
 
 # List contents in Volume
 connector$volumes$list_content_cnt()

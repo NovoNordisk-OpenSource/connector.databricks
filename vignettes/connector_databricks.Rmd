@@ -1,5 +1,5 @@
 ---
-title: "connector_databricks"
+title: "Getting started with connector.databricks"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{connector_databricks}
@@ -111,13 +111,39 @@ db$volume
 
 After the setup is done we can use these connections to manipulate Databricks data.
 
+## Listing data
+
+You can do some basic directory operations, such as creating, removing, and listing
+data inside directory, or listing tables inside database.
+
+```{r, eval=FALSE}
+
+# Create a directory
+db$volume |>
+  create_directory_cnt("new_directory")
+
+# Remove a directory
+db$volume |>
+  remove_directory_cnt("new_directory")
+
+# List content inside volume directory
+db$volume |>
+  list_content_cnt()
+
+# List tables inside database
+db$tables |>
+  list_content_cnt()
+
+```
+
+
 ## Reading and writing data
 
-The `connector` packages provide a set of functions to read and write data from
+The `connector` packages provide a set of functions to read and write data from/to
 the datasources. They all have similar interface, so it's easy to switch between
 them.
 
-Now, we will show how to read and write different types data from/to Databricks.
+Now, we will show how to read and write different types of data from/to Databricks.
 In these examples we will be using `iris` and `mtcars` datasets.
 
 Here is an example of writing data to a table on a cluster:
