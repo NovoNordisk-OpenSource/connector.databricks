@@ -2,7 +2,7 @@
 title: "Getting started with connector.databricks"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{connector_databricks}
+  %\VignetteIndexEntry{connectordatabricks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
