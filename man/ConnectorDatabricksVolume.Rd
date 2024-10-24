@@ -131,7 +131,7 @@ Download a file
 
 \item{\code{local_path}}{local path for the file.}
 
-\item{\code{...}}{Additional parameters to pass to the \link{download_content_cnt} method}
+\item{\code{...}}{Additional parameters to pass to the \link{download_cnt} method}
 }
 \if{html}{\out{</div>}}
 }
@@ -157,7 +157,7 @@ Upload a file
 
 \item{\code{overwrite}}{If true, an existing file will be overwritten.}
 
-\item{\code{...}}{Additional parameters to pass to the \link{upload_content_cnt} method}
+\item{\code{...}}{Additional parameters to pass to the \link{upload_cnt} method}
 }
 \if{html}{\out{</div>}}
 }

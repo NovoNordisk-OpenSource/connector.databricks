@@ -14,12 +14,12 @@
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   download_content_cnt("file.csv", "file.csv")
+#'   download_cnt("file.csv", "file.csv")
 #'
 #' # This function is used by the method download_content
 #' databricks_volume$download_content("file.csv", "file.csv")
 #'
-download_content_cnt <- function(connector_object, name, dest, ...) {
+download_cnt <- function(connector_object, name, dest, ...) {
   file_path <- file.path(connector_object$full_path, name)
   files_download_file(file_path = file_path, local_path = dest, ...)
 }
@@ -38,11 +38,11 @@ download_content_cnt <- function(connector_object, name, dest, ...) {
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
 #' databricks_volume %>%
-#'   upload_content_cnt("file.csv", "file.csv")
+#'   upload_cnt("file.csv", "file.csv")
 #'
 #' # This function is used by the method upload_content
 #' databricks_volume$upload_content("file.csv", "file.csv")
-upload_content_cnt <- function(connector_object, src, dest, overwrite, ...) {
+upload_cnt <- function(connector_object, src, dest, overwrite, ...) {
   file_path <- file.path(connector_object$full_path, dest)
   files_upload_file(file_path = file_path, contents = src, ...)
 }
