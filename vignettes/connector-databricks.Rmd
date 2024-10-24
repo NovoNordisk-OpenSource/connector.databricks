@@ -154,10 +154,10 @@ library(dplyr)
 # Manipulate data
 
 ## Iris data
-setosa <- iris |> 
+setosa <- iris |>
   filter(Species == "setosa")
 
-mean_for_all_iris <- iris  |> 
+mean_for_all_iris <- iris  |>
   group_by(Species) |>
   summarise_all(list(mean, median, sd, min, max))
 
@@ -167,17 +167,22 @@ cars <- mtcars |>
 
 mean_for_all_mtcars <- mtcars |>
   group_by(gear) |>
-  summarise(
-    across(
-      everything(),
-      list("mean" = mean, "median" = median, "sd" = sd, "min" = min, "max" = max),
-      .names = "{.col}_{.fn}")
-    ) |>
+  summarise(across(
+    everything(),
+    list(
+      "mean" = mean,
+      "median" = median,
+      "sd" = sd,
+      "min" = min,
+      "max" = max
+    ),
+    .names = "{.col}_{.fn}"
+  )) |>
   tidyr::pivot_longer(
     cols = -gear,
     names_to = c(".value", "stat"),
     names_sep = "_"
-    )
+  )
 
 ## Store data
 db$tables |>
@@ -236,7 +241,7 @@ db$volume |>
 tmp_file <- tempfile(fileext = ".png")
 ggsave(tmp_file, fsetosa)
 db$volume |> 
-  upload(tmp_file, "fsetosa.png")
+  upload_cnt(tmp_file, "fsetosa.png")
 
 ```
 
