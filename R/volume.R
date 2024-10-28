@@ -164,22 +164,22 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @description Download a file
     #' @param file_path Required. The absolute path of the file.
     #' @param local_path local path for the file.
-    #' @param ... Additional parameters to pass to the [download_content_cnt] method
+    #' @param ... Additional parameters to pass to the [download_cnt] method
     #' @return The file downloaded
     download_cnt = function(file_path, local_path = basename(name), ...) {
       self %>%
-        download_content_cnt(name = file_path, dest = local_path, ...)
+        download_cnt(name = file_path, dest = local_path, ...)
     },
 
     #' @description Upload a file
     #' @param file_path The absolute path of the file.
     #' @param contents File content
     #' @param overwrite If true, an existing file will be overwritten.
-    #' @param ... Additional parameters to pass to the [upload_content_cnt] method
+    #' @param ... Additional parameters to pass to the [upload_cnt] method
     #' @return The file uploaded
     upload_cnt = function(file_path, contents, overwrite, ...) {
       self %>%
-        upload_content_cnt(src = contents, dest = file_path, overwrite, ...)
+        upload_cnt(src = contents, dest = file_path, overwrite, ...)
     },
 
     #' @description Create a directory
