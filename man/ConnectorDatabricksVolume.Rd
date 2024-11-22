@@ -184,7 +184,7 @@ Create a directory
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-The directory created
+New \link{ConnectorDatabricksVolume} object of the directory created
 }
 }
 \if{html}{\out{<hr>}}

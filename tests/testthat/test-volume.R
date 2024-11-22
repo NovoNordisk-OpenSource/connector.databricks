@@ -304,7 +304,9 @@ test_that("ConnectorDatabricksVolume methods work", {
 
   # Create a test directory
   test_directory <- "test_directory"
-  con$create_directory_cnt(test_directory)
+  new_directory <- con$create_directory_cnt(test_directory)
+  checkmate::assert_r6(new_diretory, "ConnectorDatabricksVolume")
+  expect_true(basename(new_directory$full_path) == "test_directory")
 
   # List contents of root folder
   list_of_items <- con$list_content_cnt()
