@@ -185,7 +185,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @description Create a directory
     #' @param name The name of the directory to create
     #' @param ... Additional parameters to pass to the [create_directory_cnt] method
-    #' @return The directory created
+    #' @return New [ConnectorDatabricksVolume] object of the directory created
     create_directory_cnt = function(name, ...) {
       self %>%
         create_directory_cnt(name = name, ...)

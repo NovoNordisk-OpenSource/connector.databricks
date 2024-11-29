@@ -42,7 +42,11 @@ download_cnt <- function(connector_object, name, dest, ...) {
 #'
 #' # This function is used by the method upload_content
 #' databricks_volume$upload_content("file.csv", "file.csv")
-upload_cnt <- function(connector_object, src, dest, overwrite, ...) {
+upload_cnt <- function(connector_object,
+                       src,
+                       dest,
+                       overwrite,
+                       ...) {
   file_path <- file.path(connector_object$full_path, dest)
   files_upload_file(file_path = file_path, contents = src, ...)
 }
@@ -53,18 +57,21 @@ upload_cnt <- function(connector_object, src, dest, overwrite, ...) {
 #' @param name The name of the directory to create
 #' @param ... Additional parameters to pass to the files_create_directory method
 #'
-#' @return Information about newly created directory
+#' @return New [ConnectorDatabricksVolume] object of a newly built directory
 #' @export
 #'
 #' @examplesIf FALSE
 #' # databricks_volume is a ConnectorDatabricksVolume object
-#' databricks_volume %>%
+#' new_connector <- databricks_volume %>%
 #'   create_directory_cnt("folder")
 #' # This function is used by the method create_directory
-#' databricks_volume$create_directory("folder")
+#' new_connector <- databricks_volume$create_directory("folder")
 create_directory_cnt <- function(connector_object, name, ...) {
   directory_path <- file.path(connector_object$full_path, name)
   files_create_directory(directory_path = directory_path, ...)
+  return(invisible(connector_databricks_volume(
+    full_path = paste0(connector_object$full_path, name)
+  )))
 }
 
 #' Remove a directory

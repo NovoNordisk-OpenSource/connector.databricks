@@ -14,7 +14,7 @@ create_directory_cnt(connector_object, name, ...)
 \item{...}{Additional parameters to pass to the files_create_directory method}
 }
 \value{
-Information about newly created directory
+New \link{ConnectorDatabricksVolume} object of a newly built directory
 }
 \description{
 Create a directory
@@ -22,9 +22,9 @@ Create a directory
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # databricks_volume is a ConnectorDatabricksVolume object
-databricks_volume \%>\%
+new_connector <- databricks_volume \%>\%
   create_directory_cnt("folder")
 # This function is used by the method create_directory
-databricks_volume$create_directory("folder")
+new_connector <- databricks_volume$create_directory("folder")
 \dontshow{\}) # examplesIf}
 }
