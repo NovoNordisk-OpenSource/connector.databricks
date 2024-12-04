@@ -51,7 +51,7 @@ inheriting the methods from the \code{ConnectorDatabricksVolume} object.
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # Connect to a file system
-databricks_volume <- "my_adam/tester"
+databricks_volume <- "catalog/schema/path"
 db <- connector_databricks_volume(databricks_volume)
 
 db
