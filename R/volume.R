@@ -28,7 +28,7 @@
 #' @examplesIf FALSE
 #'
 #' # Connect to a file system
-#' databricks_volume <- "amace_cdr_bronze_dev/nn9536_4373_adam/tester"
+#' databricks_volume <- "catalog/schema/path"
 #' db <- connector_databricks_volume(databricks_volume)
 #'
 #' db
@@ -74,7 +74,7 @@ connector_databricks_volume <- function(full_path = NULL,
 #' @examplesIf FALSE
 #' # Create file storage connector
 #'
-#' cnt <- ConnectorDatabricksVolume$new(full_path = "amace_cdr_bronze_dev/nn9536_4373_adam/tester")
+#' cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 #'
 #' cnt
 #'
@@ -94,7 +94,7 @@ connector_databricks_volume <- function(full_path = NULL,
 #' @export
 ConnectorDatabricksVolume <- R6::R6Class(
   classname = "ConnectorDatabricksVolume",
-  inherit = connector::connector,
+  inherit = connector::connector_fs,
   public = list(
     #' @description
     #' Initializes the connector for Databricks volume storage.
@@ -159,44 +159,6 @@ ConnectorDatabricksVolume <- R6::R6Class(
       private$.schema <- schema
 
       super$initialize(extra_class = extra_class, ...)
-    },
-
-    #' @description Download a file
-    #' @param file_path Required. The absolute path of the file.
-    #' @param local_path local path for the file.
-    #' @param ... Additional parameters to pass to the [download_cnt] method
-    #' @return The file downloaded
-    download_cnt = function(file_path, local_path = basename(name), ...) {
-      self %>%
-        download_cnt(name = file_path, dest = local_path, ...)
-    },
-
-    #' @description Upload a file
-    #' @param file_path The absolute path of the file.
-    #' @param contents File content
-    #' @param overwrite If true, an existing file will be overwritten.
-    #' @param ... Additional parameters to pass to the [upload_cnt] method
-    #' @return The file uploaded
-    upload_cnt = function(file_path, contents, overwrite, ...) {
-      self %>%
-        upload_cnt(src = contents, dest = file_path, overwrite, ...)
-    },
-
-    #' @description Create a directory
-    #' @param name The name of the directory to create
-    #' @param ... Additional parameters to pass to the [create_directory_cnt] method
-    #' @return New [ConnectorDatabricksVolume] object of the directory created
-    create_directory_cnt = function(name, ...) {
-      self %>%
-        create_directory_cnt(name = name, ...)
-    },
-
-    #' @description Remove a directory from the file storage.
-    #' @param name [character] The name of the directory to remove
-    #' @param ... Additional parameters to pass to the [remove_directory_cnt] method
-    remove_directory_cnt = function(name, ...) {
-      self %>%
-        remove_directory_cnt(name, ...)
     }
   ),
   active = list(

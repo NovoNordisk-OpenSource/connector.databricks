@@ -33,5 +33,5 @@ Suggests:
     tibble,
     withr
 Remotes: 
-    github::NN-OpenSource/connector
+    github::NovoNordisk-OpenSource/connector
 VignetteBuilder: knitr
