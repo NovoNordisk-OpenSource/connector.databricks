@@ -25,7 +25,9 @@ Imports:
     odbc (>= 1.4),
     R6 (>= 2.4.0),
     rlang,
-    cli
+    cli,
+    brickster,
+    purrr
 Suggests: 
     knitr,
     rmarkdown,

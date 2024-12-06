@@ -38,19 +38,19 @@ test_that("ConnectorDatabricksVolume creation fails", {
   )
 })
 
-test_that("ConnectorDatabricksVolume creation fails", {
+test_that("connector_databricks_volume creation fails", {
   # Invalid full path
-  expect_error(ConnectorDatabricksVolume(full_path = 1))
+  expect_error(connector_databricks_volume(full_path = 1))
 
   # Invalid catalog
-  expect_error(ConnectorDatabricksVolume(catalog = 1))
+  expect_error(connector_databricks_volume(catalog = 1))
 
   # Invalid schema
-  expect_error(ConnectorDatabricksVolume(catalog = "DATABRICKS_CATALOG_NAME", schema = 1))
+  expect_error(connector_databricks_volume(catalog = "DATABRICKS_CATALOG_NAME", schema = 1))
 
   # Invalid path
   expect_error(
-    ConnectorDatabricksVolume(
+    connector_databricks_volume(
       catalog = "DATABRICKS_CATALOG_NAME",
       schema = "DATABRICKS_SCHEMA_NAME",
       path = 1
@@ -59,7 +59,7 @@ test_that("ConnectorDatabricksVolume creation fails", {
 
   # Invalid force
   expect_error(
-    ConnectorDatabricksVolume(
+    connector_databricks_volume(
       catalog = "DATABRICKS_CATALOG_NAME",
       schema = "DATABRICKS_SCHEMA_NAME",
       path = "path",
@@ -69,47 +69,7 @@ test_that("ConnectorDatabricksVolume creation fails", {
 
   # Invalid extra class
   expect_error(
-    ConnectorDatabricksVolume(
-      catalog = "DATABRICKS_CATALOG_NAME",
-      schema = "DATABRICKS_SCHEMA_NAME",
-      path = "path",
-      extra_class = 1
-    )
-  )
-})
-
-test_that("ConnectorDatabricksVolume creation fails", {
-  # Invalid full path
-  expect_error(ConnectorDatabricksVolume(full_path = 1))
-
-  # Invalid catalog
-  expect_error(ConnectorDatabricksVolume(catalog = 1))
-
-  # Invalid schema
-  expect_error(ConnectorDatabricksVolume(catalog = "DATABRICKS_CATALOG_NAME", schema = 1))
-
-  # Invalid path
-  expect_error(
-    ConnectorDatabricksVolume(
-      catalog = "DATABRICKS_CATALOG_NAME",
-      schema = "DATABRICKS_SCHEMA_NAME",
-      path = 1
-    )
-  )
-
-  # Invalid force
-  expect_error(
-    ConnectorDatabricksVolume(
-      catalog = "DATABRICKS_CATALOG_NAME",
-      schema = "DATABRICKS_SCHEMA_NAME",
-      path = "path",
-      force = 1
-    )
-  )
-
-  # Invalid extra class
-  expect_error(
-    ConnectorDatabricksVolume(
+    connector_databricks_volume(
       catalog = "DATABRICKS_CATALOG_NAME",
       schema = "DATABRICKS_SCHEMA_NAME",
       path = "path",
@@ -124,11 +84,11 @@ test_that("ConnectorDatabricksVolume creation works", {
 
   ### Using already existing volume
   # Create connector using valid full path
-  con <- ConnectorDatabricksVolume$new(full_path = setup_db_volume_path)
+  con <- ConnectorDatabricksVolume$new(full_path = setup_db_volume_path, force = TRUE)
 
   checkmate::expect_r6(
     x = con,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -143,12 +103,15 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
 
   # Create connector using individual parameters
-  con2 <- ConnectorDatabricksVolume$new(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume")
+  con2 <- ConnectorDatabricksVolume$new(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume",
+    force = TRUE
+  )
   checkmate::expect_r6(
     x = con2,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -163,13 +126,16 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
 
   # Create connector using individual parameters and extra class
-  con3 <- ConnectorDatabricksVolume$new(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume",
-                                        extra_class = "extra_class")
+  con3 <- ConnectorDatabricksVolume$new(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume",
+    extra_class = "extra_class",
+    force = TRUE
+  )
   checkmate::expect_r6(
     x = con3,
-    classes = c("connector", "ConnectorDatabricksVolume", "extra_class"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume", "extra_class"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -184,13 +150,15 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
 
   # Create connector using individual parameters with force parameter
-  con4 <- ConnectorDatabricksVolume$new(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume/force",
-                                        force = TRUE)
+  con4 <- ConnectorDatabricksVolume$new(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume/force",
+    force = TRUE
+  )
   checkmate::expect_r6(
     x = con4,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -205,7 +173,7 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
 })
 
-test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume works", {
+test_that("ConnectorDatabricksVolume creation using connector_databricks_volume works", {
   skip_on_cran()
   skip_on_ci()
 
@@ -215,7 +183,7 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
 
   checkmate::expect_r6(
     x = con,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -230,12 +198,14 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
   )
 
   # Create connector using individual parameters
-  con2 <- connector_databricks_volume(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume")
+  con2 <- connector_databricks_volume(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume"
+  )
   checkmate::expect_r6(
     x = con2,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -250,13 +220,15 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
   )
 
   # Create connector using individual parameters and extra class
-  con3 <- connector_databricks_volume(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume",
-                                        extra_class = "extra_class")
+  con3 <- connector_databricks_volume(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume",
+    extra_class = "extra_class"
+  )
   checkmate::expect_r6(
     x = con3,
-    classes = c("connector", "ConnectorDatabricksVolume", "extra_class"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume", "extra_class"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -271,13 +243,15 @@ test_that("ConnectorDatabricksVolume creation using ConnectorDatabricksVolume wo
   )
 
   # Create connector using individual parameters with force parameter
-  con4 <- connector_databricks_volume(catalog = setup_db_catalog,
-                                        schema = setup_db_schema,
-                                        path = "local_test_volume/force",
-                                        force = TRUE)
+  con4 <- connector_databricks_volume(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume/force",
+    force = TRUE
+  )
   checkmate::expect_r6(
     x = con4,
-    classes = c("connector", "ConnectorDatabricksVolume"),
+    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -300,12 +274,12 @@ test_that("ConnectorDatabricksVolume methods work", {
 
   ## 1. Test directory method works
   # Create connector using valid full path
-  con <- ConnectorDatabricksVolume$new(full_path = setup_db_volume_path)
+  con <- connector_databricks_volume(full_path = setup_db_volume_path)
 
   # Create a test directory
   test_directory <- "test_directory"
-  new_directory <- con$create_directory_cnt(test_directory)
-  checkmate::assert_r6(new_diretory, "ConnectorDatabricksVolume")
+  new_directory <- con$create_directory_cnt(name = test_directory)
+  checkmate::assert_r6(new_directory, "ConnectorDatabricksVolume")
   expect_true(basename(new_directory$full_path) == "test_directory")
 
   # List contents of root folder
@@ -353,6 +327,9 @@ test_that("ConnectorDatabricksVolume methods work", {
 
   # Check if file exists
   expect_false(basename("test_file.csv") %in% list_of_items)
+
+  # Write a test file
+  write.table(x = tibble::tibble(x = 1, y = 2), file = "test_file.csv")
 
   # Create a test file
   con$upload_cnt("test_file.csv", "test_file.csv")
