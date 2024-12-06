@@ -1,8 +1,10 @@
 ### Script for setting up tests
 
-testing_env_variables <- c("DATABRICKS_VOLUME",
-                           "DATABRICKS_CATALOG_NAME",
-                           "DATABRICKS_SCHEMA_NAME")
+testing_env_variables <- c(
+  "DATABRICKS_VOLUME",
+  "DATABRICKS_CATALOG_NAME",
+  "DATABRICKS_SCHEMA_NAME"
+)
 if (all(testing_env_variables %in% names(Sys.getenv()))) {
   # Dummy DatabricksClient object (used for failing tests)
   dummy_db_client <- list(a = 1, b = 2)
@@ -19,14 +21,13 @@ if (all(testing_env_variables %in% names(Sys.getenv()))) {
   # Databricks volume used throughout tests
   setup_db_volume_path <- paste(setup_db_catalog, setup_db_schema, "local_test_volume", sep = "/")
 
-  # Databricks volume used throughout tests
-  setup_db_volume <- create_databricks_volume(name = "local_test_volume",
-                                              catalog_name = setup_db_catalog,
-                                              schema_name = setup_db_schema)
   # Connector object testing
-  setup_volume_connector <- ConnectorDatabricksVolume$new(catalog = setup_db_catalog,
-                                                          schema = setup_db_schema,
-                                                          path = "local_test_volume")
+  setup_volume_connector <- connector_databricks_volume(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    path = "local_test_volume",
+    force = TRUE
+  )
 
   ##  Run after all tests
   # Placeholder for whatever needs to be removed in the end

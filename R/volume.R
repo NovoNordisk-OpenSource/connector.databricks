@@ -124,21 +124,25 @@ ConnectorDatabricksVolume <- R6::R6Class(
         checkmate::assert_string(x = path, null.ok = FALSE)
         checkmate::assert_string(x = catalog, null.ok = FALSE)
         checkmate::assert_string(x = schema, null.ok = FALSE)
-        full_path <- file.path(catalog, schema, path)
+        full_path <- file.path("/Volumes", catalog, schema, path)
       } else {
         checkmate::assert_string(x = full_path, null.ok = FALSE)
       }
       checkmate::assert_string(x = extra_class, null.ok = TRUE)
       checkmate::assert_logical(x = force, max.len = 1, null.ok = FALSE)
 
+      if (!startsWith(full_path, "/Volumes/")) {
+        full_path <- paste0("/Volumes/", full_path)
+      }
+
       split_path <- unlist(strsplit(full_path, "/"))
-      if (length(split_path) < 3) {
+      if (length(split_path) < 4) {
         cli::cli_abort("Full path must be in the format catalog/schema/path.")
       }
-      catalog <- split_path[1]
-      schema <- split_path[2]
-      volume <- split_path[3]
-      path <- paste(split_path[3:length(split_path)], collapse = "/")
+      catalog <- split_path[3]
+      schema <- split_path[4]
+      volume <- split_path[5]
+      path <- paste(split_path[5:length(split_path)], collapse = "/")
 
       # Check if volume exists and create it if it does not
       private$.check_databricks_volume_exists(
@@ -149,8 +153,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
       )
 
       # Try and create a directory, if it already exists, it will be returned
-      full_path <- paste0("/Volumes/", full_path)
-      files_create_directory(directory_path = full_path)
+      brickster::db_volume_dir_create(path = full_path, ...)
 
       private$.full_path <- full_path
       private$.path <- path
@@ -158,25 +161,52 @@ ConnectorDatabricksVolume <- R6::R6Class(
       private$.catalog <- catalog
       private$.schema <- schema
 
-      super$initialize(extra_class = extra_class, ...)
+      super$initialize(path = path, extra_class = extra_class, ...)
+    },
+
+    #' @description Write a file to volume
+    #' @param x The object to write to the connection
+    #' @param name [character] Name of the content to read, write, or remove. Typically the table name.
+    #' @param overwrite If TRUE, an existing file will be overwritten (default: TRUE)
+    #' @param ... Additional arguments passed to the method for the individual connector.
+    #' Write content to the connector. See also [write_cnt].
+    write_cnt = function(x, name, overwrite = FALSE, ...) {
+      self |>
+        write_cnt(x, name, overwrite, ...)
     }
   ),
   active = list(
     #' @field path [character] Path to the file storage on Volume
-    path = function() {
-      private$.path
+    path = function(value) {
+      if (missing(value)) {
+        private$.path
+      } else {
+        stop("`$path` is read only", call. = FALSE)
+      }
     },
     #' @field catalog [character] Databricks catalog
-    catalog = function() {
-      private$.catalog
+    catalog = function(value) {
+      if (missing(value)) {
+        private$.catalog
+      } else {
+        stop("`$catalog` is read only", call. = FALSE)
+      }
     },
     #' @field schema [character] Databricks schema
-    schema = function() {
-      private$.schema
+    schema = function(value) {
+      if (missing(value)) {
+        private$.schema
+      } else {
+        stop("`$schema` is read only", call. = FALSE)
+      }
     },
     #' @field full_path [character] Full path to the file storage on Volume
-    full_path = function() {
-      private$.full_path
+    full_path = function(value) {
+      if (missing(value)) {
+        private$.full_path
+      } else {
+        stop("`$full_path` is read only", call. = FALSE)
+      }
     }
   ),
   private = list(
@@ -191,35 +221,8 @@ ConnectorDatabricksVolume <- R6::R6Class(
     # @param volume [character] The name of the volume to create
     # @param force [boolean] If TRUE, the volume will be created without asking
     #  the user
-    # @importFrom cli cli_alert cli_abort
-    .check_databricks_volume_exists = function(catalog, schema, volume, force = FALSE) {
-      db_client <- DatabricksClient()
-      volumes <- list_databricks_volumes(catalog_name = catalog, schema_name = schema)
-      if (!(volume %in% volumes$name)) {
-        cli::cli_alert("Volume does not exist.")
-        if (force) {
-          cli::cli_alert("Creating volume...")
-          create_databricks_volume(
-            name = volume,
-            catalog_name = catalog,
-            schema_name = schema
-          )
-          cli::cli_alert("Volume created!")
-        }
-        menu <- menu(c("Create volume", "Exit"), title = "What would you like to do?")
-        if (menu == 1) {
-          cli::cli_alert("Creating volume...")
-          create_databricks_volume(
-            name = volume,
-            catalog_name = catalog,
-            schema_name = schema
-          )
-          cli::cli_alert("Volume created!")
-        } else {
-          cli::cli_abort("Exiting...")
-        }
-      }
-      return(NULL)
+    .check_databricks_volume_exists = function(catalog, schema, volume, force) {
+      check_databricks_volume_exists(catalog, schema, volume, force)
     }
   )
 )
