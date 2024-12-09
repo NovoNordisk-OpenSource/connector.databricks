@@ -25,7 +25,7 @@ read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @export
 write_cnt.ConnectorDatabricksVolume <- function(connector_object, x, name, overwrite = FALSE, ...) {
   file_path <- file.path(connector_object$full_path, name)
-  tmp_name <- tempfile(pattern = basename(name), fileext = paste0(".", get_file_ext(name)))
+  tmp_name <- tempfile(pattern = basename(name), fileext = paste0(".", tools::file_ext(name)))
   connector::write_file(x = x, file = tmp_name)
   brickster::db_volume_write(path = file_path, file = tmp_name, overwrite = overwrite)
   return(invisible(connector_object))
@@ -147,6 +147,7 @@ check_databricks_volume_exists <- function(catalog, schema, volume, force = FALS
         schema_name = schema
       )
       cli::cli_alert("Volume created!")
+      return(NULL)
     }
     menu <- menu(c("Create volume", "Exit"), title = "What would you like to do?")
     if (menu == 1) {
