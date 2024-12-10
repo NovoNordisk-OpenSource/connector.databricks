@@ -43,3 +43,35 @@ connector::tbl_cnt
 #' @name disconnect_cnt
 #' @export
 connector::disconnect_cnt
+
+#' @description
+#' Addition list content methods for databricks connectors implemented for [connector::download_cnt()]:
+#' @inherit connector::download_cnt title description params return details
+#' @importFrom connector download_cnt
+#' @name download_cnt
+#' @export
+connector::download_cnt
+
+#' @description
+#' Addition list content methods for databricks connectors implemented for [connector::upload_cnt()]:
+#' @inherit connector::upload_cnt title description params return details
+#' @importFrom connector upload_cnt
+#' @name upload_cnt
+#' @export
+connector::upload_cnt
+
+#' @description
+#' Addition list content methods for databricks connectors implemented for [connector::create_directory_cnt()]:
+#' @inherit connector::create_directory_cnt title description params return details
+#' @importFrom connector create_directory_cnt
+#' @name create_directory_cnt
+#' @export
+connector::create_directory_cnt
+
+#' @description
+#' Addition list content methods for databricks connectors implemented for [connector::remove_directory_cnt()]:
+#' @inherit connector::remove_directory_cnt title description params return details
+#' @importFrom connector remove_directory_cnt
+#' @name remove_directory_cnt
+#' @export
+connector::remove_directory_cnt

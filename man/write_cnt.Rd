@@ -11,7 +11,7 @@ write_cnt(connector_object, x, name, ...)
 
 \method{write_cnt}{connector_databricks_dbi}(connector_object, x, name, ...)
 
-\method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, ...)
+\method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{connector} The connector object to use.}
@@ -20,7 +20,9 @@ write_cnt(connector_object, x, name, ...)
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{...}{Additional arguments passed to the method for the individual connector.}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+
+\item{overwrite}{Overwrite a file if it already exists}
 }
 \value{
 \link{invisible} connector_object.

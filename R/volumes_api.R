@@ -62,10 +62,12 @@ list_databricks_volumes <- function(catalog_name,
   )
 
   results <- data.frame()
+  
   while (TRUE) {
     result <- client$do("GET", path = "/api/2.1/unity-catalog/volumes", query = query)
     if (is.null(nrow(result$volumes))) {
-      cli::cli_abort("No volumes found!")
+      cli::cli_alert("No volumes found!")
+      return(list())
     }
     # append this page of results to one results data.frame
     results <- dplyr::bind_rows(results, result$volumes)
