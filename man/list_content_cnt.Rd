@@ -16,7 +16,7 @@ list_content_cnt(connector_object, ...)
 \arguments{
 \item{connector_object}{\link[connector]{connector} The connector object to use.}
 
-\item{...}{Additional arguments passed to the method for the individual connector.}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_list]{brickster::db_volume_list()}} method}
 }
 \value{
 A \link{character} vector of content names

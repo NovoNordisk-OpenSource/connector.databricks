@@ -18,7 +18,7 @@ read_cnt(connector_object, name, ...)
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{...}{Additional arguments passed to the method for the individual connector.}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
 }
 \value{
 R object with the content. For rectangular data a \link{data.frame}.
@@ -32,7 +32,8 @@ but always sets the \code{catalog} and \code{schema} as defined in when initiali
 }
 
 \itemize{
-\item \link{read_cnt.ConnectorDatabricksVolume}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}}
-method for \link{ConnectorDatabricksVolume}.
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
+\code{schema} as defined in when initializing the connector.
 }
 }

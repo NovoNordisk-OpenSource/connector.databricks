@@ -12,7 +12,7 @@ inside Databricks volumes.
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Create file storage connector
 
-cnt <- ConnectorDatabricksVolume$new(full_path = "amace_cdr_bronze_dev/nn9536_4373_adam/tester")
+cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 
 cnt
 
@@ -30,8 +30,8 @@ cnt$read_cnt("iris.rds") |>
   head()
 \dontshow{\}) # examplesIf}
 }
-\section{Super class}{
-\code{\link[connector:connector]{connector::connector}} -> \code{ConnectorDatabricksVolume}
+\section{Super classes}{
+\code{\link[connector:connector]{connector::connector}} -> \code{\link[connector:connector_fs]{connector::connector_fs}} -> \code{ConnectorDatabricksVolume}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -50,21 +50,21 @@ cnt$read_cnt("iris.rds") |>
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ConnectorDatabricksVolume-new}{\code{ConnectorDatabricksVolume$new()}}
-\item \href{#method-ConnectorDatabricksVolume-download_cnt}{\code{ConnectorDatabricksVolume$download_cnt()}}
-\item \href{#method-ConnectorDatabricksVolume-upload_cnt}{\code{ConnectorDatabricksVolume$upload_cnt()}}
-\item \href{#method-ConnectorDatabricksVolume-create_directory_cnt}{\code{ConnectorDatabricksVolume$create_directory_cnt()}}
-\item \href{#method-ConnectorDatabricksVolume-remove_directory_cnt}{\code{ConnectorDatabricksVolume$remove_directory_cnt()}}
+\item \href{#method-ConnectorDatabricksVolume-write_cnt}{\code{ConnectorDatabricksVolume$write_cnt()}}
 \item \href{#method-ConnectorDatabricksVolume-clone}{\code{ConnectorDatabricksVolume$clone()}}
 }
 }
 \if{html}{\out{
-<details open><summary>Inherited methods</summary>
+<details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="list_content_cnt"><a href='../../connector/html/connector.html#method-connector-list_content_cnt'><code>connector::connector$list_content_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="print"><a href='../../connector/html/connector.html#method-connector-print'><code>connector::connector$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="read_cnt"><a href='../../connector/html/connector.html#method-connector-read_cnt'><code>connector::connector$read_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="remove_cnt"><a href='../../connector/html/connector.html#method-connector-remove_cnt'><code>connector::connector$remove_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="write_cnt"><a href='../../connector/html/connector.html#method-connector-write_cnt'><code>connector::connector$write_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="create_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-create_directory_cnt'><code>connector::connector_fs$create_directory_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="download_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-download_cnt'><code>connector::connector_fs$download_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="remove_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-remove_directory_cnt'><code>connector::connector_fs$remove_directory_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="upload_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-upload_cnt'><code>connector::connector_fs$upload_cnt()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -112,96 +112,25 @@ A new \link{ConnectorDatabricksVolume} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-download_cnt"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-download_cnt}{}}}
-\subsection{Method \code{download_cnt()}}{
-Download a file
+\if{html}{\out{<a id="method-ConnectorDatabricksVolume-write_cnt"></a>}}
+\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-write_cnt}{}}}
+\subsection{Method \code{write_cnt()}}{
+Write a file to volume
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$download_cnt(
-  file_path,
-  local_path = basename(name),
-  ...
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$write_cnt(x, name, overwrite = FALSE, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{file_path}}{Required. The absolute path of the file.}
+\item{\code{x}}{The object to write to the connection}
 
-\item{\code{local_path}}{local path for the file.}
+\item{\code{name}}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{\code{...}}{Additional parameters to pass to the \link{download_cnt} method}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-The file downloaded
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-upload_cnt"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-upload_cnt}{}}}
-\subsection{Method \code{upload_cnt()}}{
-Upload a file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$upload_cnt(file_path, contents, overwrite, ...)}\if{html}{\out{</div>}}
-}
+\item{\code{overwrite}}{If TRUE, an existing file will be overwritten (default: TRUE)}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file_path}}{The absolute path of the file.}
-
-\item{\code{contents}}{File content}
-
-\item{\code{overwrite}}{If true, an existing file will be overwritten.}
-
-\item{\code{...}}{Additional parameters to pass to the \link{upload_cnt} method}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-The file uploaded
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-create_directory_cnt"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-create_directory_cnt}{}}}
-\subsection{Method \code{create_directory_cnt()}}{
-Create a directory
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$create_directory_cnt(name, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{The name of the directory to create}
-
-\item{\code{...}}{Additional parameters to pass to the \link{create_directory_cnt} method}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-New \link{ConnectorDatabricksVolume} object of the directory created
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-remove_directory_cnt"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-remove_directory_cnt}{}}}
-\subsection{Method \code{remove_directory_cnt()}}{
-Remove a directory from the file storage.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$remove_directory_cnt(name, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{\link{character} The name of the directory to remove}
-
-\item{\code{...}}{Additional parameters to pass to the \link{remove_directory_cnt} method}
+\item{\code{...}}{Additional arguments passed to the method for the individual connector.
+Write content to the connector. See also \link{write_cnt}.}
 }
 \if{html}{\out{</div>}}
 }
