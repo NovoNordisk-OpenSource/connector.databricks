@@ -1,6 +1,5 @@
 test_that(paste("DBI generics work for connector_databricks_dbi"), {
-  if (all(c("HTTP_PATH_LOCAL", "CATALOG_LOCAL", "SCHEMA_LOCAL") %in%
-          names(Sys.getenv()))) {
+  if (all(c("HTTP_PATH_LOCAL", "CATALOG_LOCAL", "SCHEMA_LOCAL") %in% names(Sys.getenv()))) {
     skip_on_ci()
     skip_on_cran()
 
@@ -16,9 +15,11 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     expect_error(connector_databricks_dbi$new(http_path = 1))
 
     # initialized with appropriate values for catalog, schema, and conn
-    cnt <- connector_databricks_dbi$new(http_path = http_path_local,
-                                        catalog = catalog_local,
-                                        schema = schema_local)
+    cnt <- connector_databricks_dbi$new(
+      http_path = http_path_local,
+      catalog = catalog_local,
+      schema = schema_local
+    )
 
     cnt |>
       expect_no_error()

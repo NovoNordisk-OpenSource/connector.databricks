@@ -32,6 +32,7 @@ repos:
           .*\.jpeg|
           .*\.pdf|
           .*\.png|
+          .*\.svg|
           .*\.py|
           .*\.RData|
           .*\.rds|
@@ -55,6 +56,8 @@ repos:
           data/.*|
           )$
     -   id: lintr
+        exclude: >
+          vignettes/.*|
     -   id: readme-rmd-rendered
     -   id: parsable-R
     -   id: no-browser-statement

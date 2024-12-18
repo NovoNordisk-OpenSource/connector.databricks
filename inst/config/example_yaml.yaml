@@ -1,6 +1,6 @@
 # An example of the configuration file for Databricks Tables and Volumes
 metadata:
-  catalog:  !!expr Sys.getenv("databricks_calatog")
+  catalog:  !!expr Sys.getenv("databricks_catalog")
   http_path: "path-to-cluster"
   path: "path-to-file-storage"
   project: "project_name"
