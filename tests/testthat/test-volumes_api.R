@@ -1,9 +1,9 @@
-test_that("create_databricks_volume works", {
+test_that("create_databricks_volume and delete_databricks_volume works", {
   skip_on_cran()
   skip_on_ci()
 
   # Create volume
-  test_volume <- create_databricks_volume(
+  create_databricks_volume(
     name = "test_volume",
     catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
     schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
@@ -22,6 +22,14 @@ test_that("create_databricks_volume works", {
     catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
     schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
   )
+
+  volumes <- list_databricks_volumes(
+    catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
+    schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
+  )
+
+  # Check if volume exists
+  testthat::expect_false("test_volume" %in% volumes$name)
 })
 
 
@@ -106,40 +114,6 @@ test_that("list_databricks_volumes fails with invalid inputs", {
       include_browse = 1
     )
   )
-})
-
-test_that("delete_databricks_volume works", {
-  skip_on_cran()
-  skip_on_ci()
-
-  # Create volume
-  create_databricks_volume(
-    name = "test_volume",
-    catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
-    schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
-  )
-
-  volumes <- list_databricks_volumes(
-    catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
-    schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
-  )
-
-  # Check if volume exists
-  testthat::expect_true("test_volume" %in% volumes$name)
-
-  delete_databricks_volume(
-    name = "test_volume",
-    catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
-    schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
-  )
-
-  volumes <- list_databricks_volumes(
-    catalog_name = Sys.getenv("DATABRICKS_CATALOG_NAME"),
-    schema_name = Sys.getenv("DATABRICKS_SCHEMA_NAME")
-  )
-
-  # Check if volume exists
-  testthat::expect_false("test_volume" %in% volumes$name)
 })
 
 test_that("delete_databricks_volume fails with invalid inputs", {
