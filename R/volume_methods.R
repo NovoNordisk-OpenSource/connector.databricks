@@ -41,7 +41,7 @@ write_cnt.ConnectorDatabricksVolume <- function(connector_object, x, name, overw
 #' @export
 list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
   list_of_items <- brickster::db_volume_list(path = connector_object$full_path, ...)
-  content_names <- unlist(purrr::map(list_of_items, ~ purrr::map(.x, "name")),use.names = FALSE)
+  content_names <- unlist(purrr::map(list_of_items, ~ purrr::map(.x, "name")), use.names = FALSE)
   return(content_names)
 }
 
@@ -81,7 +81,7 @@ download_cnt.ConnectorDatabricksVolume <- function(connector_object, name, file,
 #' @rdname upload_cnt
 #' @param overwrite Overwrite file if it already exists
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the [brickster::db_volume_write()] method
-#' 
+#'
 #' @return Information about success of the request
 #' @export
 upload_cnt.ConnectorDatabricksVolume <- function(connector_object,
@@ -112,7 +112,8 @@ create_directory_cnt.ConnectorDatabricksVolume <- function(connector_object, nam
 #' Remove a directory
 #'
 #' @rdname remove_directory_cnt
-#' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the [brickster::db_volume_dir_delete()] method
+#' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
+#' [brickster::db_volume_dir_delete()] method
 #'
 #' @export
 remove_directory_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
@@ -122,22 +123,22 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(connector_object, nam
 }
 
 #' Check if databricks volume exists
-#' 
+#'
 #' Utility function used as a private function for [ConnectorDatabricksVolume] object
 #' to check if volume already exists, if not it will promt user to create a new one.
-#' 
+#'
 #' @param catalog [character] The name of the catalog
 #' @param schema [character] The name of the schema
 #' @param volume [character] The name of the volume to create
 #' @param force [boolean] If TRUE, the volume will be created without asking
-#' 
+#'
 #' @keywords internal
 #' @noRd
 check_databricks_volume_exists <- function(catalog, schema, volume, force = FALSE) {
   db_client <- DatabricksClient()
   volumes <- list_databricks_volumes(catalog_name = catalog, schema_name = schema)
 
-  if (length(volumes) == 0 | !(volume %in% volumes$name)) {
+  if (length(volumes) == 0 || !(volume %in% volumes$name)) {
     cli::cli_alert("Volume does not exist.")
     if (force) {
       cli::cli_alert("Creating volume...")
