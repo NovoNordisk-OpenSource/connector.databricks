@@ -61,8 +61,9 @@ specified datasources (for detailed explanation have a look at the `connector` p
 Configuration file for connecting to Databricks should look like this:
 
 ```{yaml}
+# nolint start
 metadata:
-  catalog:  !!expr Sys.getenv("databricks_catalog")
+  catalog:  "databricks_calatog"
   http_path: "path-to-cluster"
   path: "path-to-file-storage"
   project: "project_name"
@@ -81,6 +82,7 @@ datasources:
       path: "{metadata.path}"
       catalog: "{metadata.catalog}"
       schema: "{metadata.project}_{metadata.trial}_tfl"
+# nolint end
 ```
 
 Save this to `_connector.yml` file and use the `connect()` function to connect 
