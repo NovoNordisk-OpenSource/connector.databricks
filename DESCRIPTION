@@ -22,7 +22,7 @@ Imports:
     dplyr,
     httr,
     jsonlite,
-    odbc (>= 1.4.0),
+    odbc,
     purrr,
     R6 (>= 2.4.0),
     rlang
