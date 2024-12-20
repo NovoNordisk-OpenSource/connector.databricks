@@ -7,4 +7,4 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        sudo apt-get install unixodbc-dev
+        brew install unixodbc-dev
