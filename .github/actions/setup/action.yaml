@@ -1,0 +1,10 @@
+name: Specific setup for connector.databricks
+description: Installs unixodbc on MacOS
+runs:
+  using: "composite"
+  steps:
+    - name: Install unixodbc
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        sudo apt-get install unixodbc-dev

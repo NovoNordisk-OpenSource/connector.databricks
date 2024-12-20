@@ -20,6 +20,7 @@ DatabricksClient
 databrickslabs
 datasources
 dbi
+dev
 dplyr
 dw
 expr
@@ -39,6 +40,7 @@ knitr
 licensable
 Licensor
 Lifecycle
+MacOS
 maskable
 md
 MERCHANTABILITY
@@ -50,6 +52,7 @@ NovoNordisk
 odbc
 opensource
 OpenSource
+os
 png
 purrr
 Qbt
@@ -64,6 +67,7 @@ sqlpath
 src
 Steffen
 sublicense
+sudo
 superclass's
 Sys
 tbl
@@ -71,6 +75,7 @@ testthat
 tfl
 Thomsen
 tibble
+unixodbc
 VignetteBuilder
 withr
 YAML
