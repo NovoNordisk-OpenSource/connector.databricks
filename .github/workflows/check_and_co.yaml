@@ -13,10 +13,14 @@ jobs:
     name: Check current version
     uses: >-
       NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
+    with:
+      use_local_setup_action: true
   check-nn-version:
     name: Check NN version
     uses: >-
       NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main
+    with:
+      use_local_setup_action: true
   pkgdown:
     name: Pkgdown site
     uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/pkgdown.yaml@main
