@@ -36,7 +36,7 @@ VignetteBuilder:
     knitr, rmarkdown
 Remotes: 
     github::databrickslabs/brickster,
-    github::NovoNordisk-OpenSource/connector
+    github::NovoNordisk-OpenSource/connector,
     github::r-dbi/odbc
 Config/testthat/edition: 3
 Encoding: UTF-8
