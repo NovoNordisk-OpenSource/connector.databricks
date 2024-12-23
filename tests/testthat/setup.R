@@ -13,16 +13,16 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   } else {
     # Databricks catalog used throughout tests
     setup_db_catalog <- Sys.getenv("DATABRICKS_CATALOG_NAME")
-  
+
     # Databricks schema used throughout tests
     setup_db_schema <- Sys.getenv("DATABRICKS_SCHEMA_NAME")
-  
+
     # Setup databricks volume path
     setup_databricks_volume <- Sys.getenv("DATABRICKS_VOLUME")
-  
+
     # Databricks volume used throughout tests
     setup_db_volume_path <- paste(setup_db_catalog, setup_db_schema, "local_test_volume", sep = "/")
-  
+
     # Connector object testing
     setup_volume_connector <- connector_databricks_volume(
       catalog = setup_db_catalog,
@@ -30,7 +30,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       path = "local_test_volume",
       force = TRUE
     )
-  
+
     ##  Run after all tests
     # Placeholder for whatever needs to be removed in the end
     withr::defer(
@@ -41,5 +41,5 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       ),
       teardown_env()
     )
-  }  
+  }
 }

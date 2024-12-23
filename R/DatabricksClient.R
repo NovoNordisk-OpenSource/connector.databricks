@@ -8,7 +8,6 @@ VERSION <- "0.4.4"
     c("rstudio", v$long_version)
   },
   error = function(e) {
-    # TODO: check if we can use RSTUDIO_PROJ_NAME as product name
     c("unknown", "0.0.0")
   }
 )
@@ -198,7 +197,6 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
     paste(product_info, sdk_info, lang_info, os_info)
   }
 
-  # TODO: add retries as with other SDKs See: client/client.go#L269-L280 in Go
   # SDK
   do <- function(method, path, body = NULL, query = NULL, json_wrap_body = TRUE,
                  return_response_raw = FALSE) {
