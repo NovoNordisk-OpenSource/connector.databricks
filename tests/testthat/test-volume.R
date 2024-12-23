@@ -83,24 +83,29 @@ test_that("ConnectorDatabricksVolume creation works", {
   skip_on_ci()
 
   ### Using already existing volume
-  # Create connector using valid full path
-  con <- ConnectorDatabricksVolume$new(full_path = setup_db_volume_path, force = TRUE)
-
-  checkmate::expect_r6(
-    x = con,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
-    public = c(
-      "list_content_cnt",
-      "create_directory_cnt",
-      "read_cnt",
-      "write_cnt",
-      "remove_cnt",
-      "upload_cnt",
-      "download_cnt",
-      "remove_directory_cnt"
-    ),
-    private = c(".path", ".full_path", ".catalog", ".schema")
+  # Create connectors using two different ways with valid full path
+  cons <- list(
+    ConnectorDatabricksVolume$new(full_path = setup_db_volume_path, force = TRUE),
+    connector_databricks_volume(full_path = setup_db_volume_path)
   )
+
+  for (con in cons) {
+    checkmate::expect_r6(
+      x = con,
+      classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
+      public = c(
+        "list_content_cnt",
+        "create_directory_cnt",
+        "read_cnt",
+        "write_cnt",
+        "remove_cnt",
+        "upload_cnt",
+        "download_cnt",
+        "remove_directory_cnt"
+      ),
+      private = c(".path", ".full_path", ".catalog", ".schema")
+    )
+  }
 
   # Create connector using individual parameters
   con2 <- ConnectorDatabricksVolume$new(
@@ -124,6 +129,7 @@ test_that("ConnectorDatabricksVolume creation works", {
     ),
     private = c(".path", ".full_path", ".catalog", ".schema")
   )
+
 
   # Create connector using individual parameters and extra class
   con3 <- ConnectorDatabricksVolume$new(
@@ -151,99 +157,6 @@ test_that("ConnectorDatabricksVolume creation works", {
 
   # Create connector using individual parameters with force parameter
   con4 <- ConnectorDatabricksVolume$new(
-    catalog = setup_db_catalog,
-    schema = setup_db_schema,
-    path = "local_test_volume/force",
-    force = TRUE
-  )
-  checkmate::expect_r6(
-    x = con4,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
-    public = c(
-      "list_content_cnt",
-      "create_directory_cnt",
-      "read_cnt",
-      "write_cnt",
-      "remove_cnt",
-      "upload_cnt",
-      "download_cnt",
-      "remove_directory_cnt"
-    ),
-    private = c(".path", ".full_path", ".catalog", ".schema")
-  )
-})
-
-test_that("ConnectorDatabricksVolume creation using connector_databricks_volume works", {
-  skip_on_cran()
-  skip_on_ci()
-
-  ### Using already existing volume
-  # Create connector using valid full path
-  con <- connector_databricks_volume(full_path = setup_db_volume_path)
-
-  checkmate::expect_r6(
-    x = con,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
-    public = c(
-      "list_content_cnt",
-      "create_directory_cnt",
-      "read_cnt",
-      "write_cnt",
-      "remove_cnt",
-      "upload_cnt",
-      "download_cnt",
-      "remove_directory_cnt"
-    ),
-    private = c(".path", ".full_path", ".catalog", ".schema")
-  )
-
-  # Create connector using individual parameters
-  con2 <- connector_databricks_volume(
-    catalog = setup_db_catalog,
-    schema = setup_db_schema,
-    path = "local_test_volume"
-  )
-  checkmate::expect_r6(
-    x = con2,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
-    public = c(
-      "list_content_cnt",
-      "create_directory_cnt",
-      "read_cnt",
-      "write_cnt",
-      "remove_cnt",
-      "upload_cnt",
-      "download_cnt",
-      "remove_directory_cnt"
-    ),
-    private = c(".path", ".full_path", ".catalog", ".schema")
-  )
-
-  # Create connector using individual parameters and extra class
-  con3 <- connector_databricks_volume(
-    catalog = setup_db_catalog,
-    schema = setup_db_schema,
-    path = "local_test_volume",
-    extra_class = "extra_class"
-  )
-  checkmate::expect_r6(
-    x = con3,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume", "extra_class"),
-    public = c(
-      "list_content_cnt",
-      "create_directory_cnt",
-      "read_cnt",
-      "write_cnt",
-      "remove_cnt",
-      "upload_cnt",
-      "download_cnt",
-      "remove_directory_cnt"
-    ),
-    private = c(".path", ".full_path", ".catalog", ".schema")
-  )
-
-  # Create connector using individual parameters with force parameter
-  con4 <- connector_databricks_volume(
     catalog = setup_db_catalog,
     schema = setup_db_schema,
     path = "local_test_volume/force",

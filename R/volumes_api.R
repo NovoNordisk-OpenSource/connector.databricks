@@ -62,7 +62,7 @@ list_databricks_volumes <- function(catalog_name,
   )
 
   results <- data.frame()
-  
+
   while (TRUE) {
     result <- client$do("GET", path = "/api/2.1/unity-catalog/volumes", query = query)
     if (is.null(nrow(result$volumes))) {
@@ -192,7 +192,8 @@ delete_databricks_volume <- function(name,
 
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
   result <- client$do("DELETE",
-                      path = paste0("/api/2.0/unity-catalog/volumes/", volume_path))
+    path = paste0("/api/2.0/unity-catalog/volumes/", volume_path)
+  )
 
   cli::cli_alert_success("Volume successfully deleted!")
   return(invisible(NULL))
@@ -243,7 +244,8 @@ get_databricks_volume <- function(name,
 
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
   result <- client$do("GET",
-                      path = paste0("/api/2.0/unity-catalog/volumes/", volume_path))
+    path = paste0("/api/2.0/unity-catalog/volumes/", volume_path)
+  )
 
   return(result)
 }

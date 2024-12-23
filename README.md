@@ -8,8 +8,6 @@
 [![Checks](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml/badge.svg)](https://github.com/NN-OpenSource/connector.databricks/actions/workflows/check_and_co.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/connector.databricks)](https://CRAN.R-project.org/package=connector.databricks)
 <!-- badges: end -->
 
 The connector.databricks package provides a convenient interface for
@@ -47,17 +45,17 @@ library(connector.databricks)
 
 # Connect to databricks tables using DBI
 con <- connector_databricks_dbi$new(
-   httpPath = "path-to-cluster",
-   catalog = "my_catalog",
-   schema = "my_schema"
- )
+  httpPath = "path-to-cluster",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
 
 # Connect to databricks volume
 con <- connector_databricks_volume(
-   catalog = "my_catalog",
-   schema = "my_schema",
-   path = "path-to-file-storage"
- )
+  catalog = "my_catalog",
+  schema = "my_schema",
+  path = "path-to-file-storage"
+)
 ```
 
 When connecting to **Databricks tables**, authentication to databricks
@@ -87,7 +85,7 @@ con$list_content_cnt()
 con$write_cnt(iris, "iris.rds")
 
 # Read a file
-con$read_cnt("iris.rds") |> 
+con$read_cnt("iris.rds") |>
   head()
 
 # Remove a file
