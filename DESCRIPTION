@@ -5,6 +5,7 @@ Version: 0.0.2
 Authors@R: c(
     person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = c("aut", "cre")),
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = "aut"),
+    person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = "aut"),
     person("Novo Nordisk A/S", role = "cph")
   )
 Description: Expands the connector package to handle databricks. This
