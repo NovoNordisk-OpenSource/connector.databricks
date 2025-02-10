@@ -21,7 +21,7 @@ remove_cnt(connector_object, name, ...)
 \item{...}{Additional arguments passed to the method for the individual connector.}
 }
 \value{
-\link{invisible} connector_object.
+\link{ConnectorDatabricksVolume} object
 }
 \description{
 Addition remove methods for databricks connectors implemented for \code{\link[connector:remove_cnt]{connector::remove_cnt()}}:
