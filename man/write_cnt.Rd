@@ -25,7 +25,7 @@ write_cnt(connector_object, x, name, ...)
 \item{overwrite}{Overwrite a file if it already exists}
 }
 \value{
-\link{invisible} connector_object.
+\link{ConnectorDatabricksVolume} object
 }
 \description{
 Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:

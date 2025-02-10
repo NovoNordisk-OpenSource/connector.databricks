@@ -7,7 +7,13 @@
 \usage{
 upload_cnt(connector_object, file, name = basename(file), ...)
 
-\method{upload_cnt}{ConnectorDatabricksVolume}(connector_object, file, name, overwrite = FALSE, ...)
+\method{upload_cnt}{ConnectorDatabricksVolume}(
+  connector_object,
+  file,
+  name = basename(file),
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{connector_object}{\link[connector]{connector} The connector object to use.}
@@ -21,7 +27,7 @@ upload_cnt(connector_object, file, name = basename(file), ...)
 \item{overwrite}{Overwrite file if it already exists}
 }
 \value{
-Information about success of the request
+\link{ConnectorDatabricksVolume} object
 }
 \description{
 Addition list content methods for databricks connectors implemented for \code{\link[connector:upload_cnt]{connector::upload_cnt()}}:
