@@ -11,4 +11,3 @@ reference:
     - -matches("connector_databricks_dbi|.*_cnt$")
 template:
   bootstrap: 5
-

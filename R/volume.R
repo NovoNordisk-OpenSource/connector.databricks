@@ -92,7 +92,7 @@ connector_databricks_volume <- function(full_path = NULL,
 #'   head()
 #'
 #' @export
-ConnectorDatabricksVolume <- R6::R6Class(
+ConnectorDatabricksVolume <- R6::R6Class( # nolint
   classname = "ConnectorDatabricksVolume",
   inherit = connector::connector_fs,
   public = list(
