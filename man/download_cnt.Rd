@@ -7,7 +7,7 @@
 \usage{
 download_cnt(connector_object, name, file = basename(name), ...)
 
-\method{download_cnt}{ConnectorDatabricksVolume}(connector_object, name, file, ...)
+\method{download_cnt}{ConnectorDatabricksVolume}(connector_object, name, file = basename(name), ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{connector} The connector object to use.}
@@ -19,7 +19,7 @@ download_cnt(connector_object, name, file = basename(name), ...)
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
 }
 \value{
-Response from the request
+\link{ConnectorDatabricksVolume} object
 }
 \description{
 Addition list content methods for databricks connectors implemented for \code{\link[connector:download_cnt]{connector::download_cnt()}}:

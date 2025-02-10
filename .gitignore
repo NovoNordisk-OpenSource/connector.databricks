@@ -51,5 +51,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 inst/doc
+.DS_Store
 /doc/
 /Meta/
