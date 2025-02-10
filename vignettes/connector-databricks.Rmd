@@ -38,18 +38,17 @@ library(connector.databricks)
 
 # Connect to databricks tables using DBI
 con <- connector_databricks_dbi$new(
-   httpPath = "path-to-cluster",
-   catalog = "my_catalog",
-   schema = "my_schema"
- )
+  httpPath = "path-to-cluster",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
 
 # Connect to databricks volume
 con <- connector_databricks_volume(
-   catalog = "my_catalog",
-   schema = "my_schema",
-   path = "path-to-file-storage"
- )
-
+  catalog = "my_catalog",
+  schema = "my_schema",
+  path = "path-to-file-storage"
+)
 ```
 
 ### With connector package (recommended)
@@ -61,9 +60,10 @@ specified datasources (for detailed explanation have a look at the `connector` p
 
 Configuration file for connecting to Databricks should look like this:
 
-```{r, eval=FALSE}
+```{yaml}
+# nolint start
 metadata:
-  catalog:  !!expr Sys.getenv("databricks_calatog")
+  catalog:  "databricks_calatog"
   http_path: "path-to-cluster"
   path: "path-to-file-storage"
   project: "project_name"
@@ -82,7 +82,7 @@ datasources:
       path: "{metadata.path}"
       catalog: "{metadata.catalog}"
       schema: "{metadata.project}_{metadata.trial}_tfl"
-
+# nolint end
 ```
 
 Save this to `_connector.yml` file and use the `connect()` function to connect 
@@ -93,7 +93,6 @@ library(connector)
 
 # Create connector object
 db <- connect()
-
 ```
 
 Now you can access the Databricks cluster and volume using the `db` object and 
@@ -106,7 +105,6 @@ db$tables
 
 # Connection to Databricks cluster. This will print object details
 db$volume
-
 ```
 
 After the setup is done we can use these connections to manipulate Databricks data.
@@ -117,7 +115,6 @@ You can do some basic directory operations, such as creating, removing, and list
 data inside directory, or listing tables inside database.
 
 ```{r, eval=FALSE}
-
 # Create a directory
 db$volume |>
   create_directory_cnt("new_directory")
@@ -133,7 +130,6 @@ db$volume |>
 # List tables inside database
 db$tables |>
   list_content_cnt()
-
 ```
 
 
@@ -157,7 +153,7 @@ library(dplyr)
 setosa <- iris |>
   filter(Species == "setosa")
 
-mean_for_all_iris <- iris  |>
+mean_for_all_iris <- iris |>
   group_by(Species) |>
   summarise_all(list(mean, median, sd, min, max))
 
@@ -196,7 +192,6 @@ db$tables |>
 
 db$tables |>
   write_cnt(mean_for_all_mtcars, "mean_mtcars", overwrite = TRUE)
-
 ```
 
 Now, let's read the data back manipulate it a bit and write it to the Databricks
@@ -220,7 +215,7 @@ gttable <- table |>
 # Save nontabular data to databricks volume
 tmp_file <- tempfile(fileext = ".docx")
 gtsave(gttable, tmp_file)
-db$volume |> 
+db$volume |>
   upload_cnt(tmp_file, "tmeanallmtcars.docx")
 
 # Manipulate data
@@ -233,16 +228,15 @@ fsetosa <- ggplot(setosa) +
   geom_point()
 
 ## Store data into output location
-db$volume |> 
+db$volume |>
   write_cnt(fsetosa$data, "fsetosa.csv")
-db$volume |> 
+db$volume |>
   write_cnt(fsetosa, "fsetosa.rds")
 
 tmp_file <- tempfile(fileext = ".png")
 ggsave(tmp_file, fsetosa)
-db$volume |> 
+db$volume |>
   upload_cnt(tmp_file, "fsetosa.png")
-
 ```
 
 ## Conclusion
