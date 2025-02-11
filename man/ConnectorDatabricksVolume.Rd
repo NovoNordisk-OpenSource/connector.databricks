@@ -64,6 +64,7 @@ cnt$read_cnt("iris.rds") |>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="create_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-create_directory_cnt'><code>connector::connector_fs$create_directory_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="download_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-download_cnt'><code>connector::connector_fs$download_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="remove_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-remove_directory_cnt'><code>connector::connector_fs$remove_directory_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="tbl_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-tbl_cnt'><code>connector::connector_fs$tbl_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="upload_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-upload_cnt'><code>connector::connector_fs$upload_cnt()</code></a></span></li>
 </ul>
 </details>

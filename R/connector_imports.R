@@ -75,3 +75,27 @@ connector::create_directory_cnt
 #' @name remove_directory_cnt
 #' @export
 connector::remove_directory_cnt
+
+#' @description
+#' Addition log read methods for databricks connectors implemented for [connector::log_read_connector()]:
+#' @inherit connector::log_read_connector params return title details
+#' @importFrom connector log_read_connector
+#' @name log_read_connector
+#' @export
+connector::log_read_connector
+
+#' @description
+#' Addition log write methods for databricks connectors implemented for [connector::log_write_connector()]:
+#' @inherit connector::log_write_connector params return title details
+#' @importFrom connector log_write_connector
+#' @name log_write_connector
+#' @export
+connector::log_write_connector
+
+#' @description
+#' Addition log remove methods for databricks connectors implemented for [connector::log_remove_connector()]:
+#' @inherit connector::log_remove_connector params return title details
+#' @importFrom connector log_remove_connector
+#' @name log_remove_connector
+#' @export
+connector::log_remove_connector
