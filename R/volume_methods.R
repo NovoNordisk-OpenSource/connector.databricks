@@ -8,9 +8,12 @@
 #' @export
 read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
-  brickster::db_volume_read(path = file_path, destination = name, ...)
-  content <- connector::read_file(name)
-  unlink(name)
+  withr::with_tempdir({
+    brickster::db_volume_read(path = file_path, destination = name, ...)
+    content <- connector::read_file(name)
+    unlink(name)
+  })
+
   return(content)
 }
 
@@ -73,8 +76,10 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
+
   file_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_delete(path = file_path)
+
   return(invisible(connector_object))
 }
 
