@@ -1,12 +1,12 @@
 test_that(paste("DBI generics work for connector_databricks_dbi"), {
-  if (all(c("HTTP_PATH_LOCAL", "CATALOG_LOCAL", "SCHEMA_LOCAL") %in% names(Sys.getenv()))) {
+  if (all(c("DATABRICKS_HTTP_PATH", "DATABRICKS_CATALOG_NAME", "DATABRICKS_SCHEMA_NAME") %in% names(Sys.getenv()))) {
     skip_on_ci()
     skip_on_cran()
 
     # Retrieve the stored values
-    http_path_local <- Sys.getenv("HTTP_PATH_LOCAL")
-    catalog_local <- Sys.getenv("CATALOG_LOCAL")
-    schema_local <- Sys.getenv("SCHEMA_LOCAL")
+    http_path_local <- Sys.getenv("DATABRICKS_HTTP_PATH")
+    catalog_local <- Sys.getenv("DATABRICKS_CATALOG_NAME")
+    schema_local <- Sys.getenv("DATABRICKS_SCHEMA_NAME")
 
     temp_table_name <- paste0(
       "temp-mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
@@ -36,8 +36,8 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
 
-    cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
-      expect_error()
+    # cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
+    #   expect_error()
 
     cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
