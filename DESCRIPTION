@@ -23,6 +23,7 @@ Imports:
     DBI,
     dplyr,
     httr,
+    httr2 (>= 1.1.0),
     jsonlite,
     odbc (>= 1.4.0),
     purrr,
@@ -39,12 +40,13 @@ Suggests:
     whirl (>= 0.1.8.9000)
 VignetteBuilder: 
     knitr, rmarkdown
-Remotes: 
+Remotes:  
     github::databrickslabs/brickster,
     github::NovoNordisk-OpenSource/connector,
     github::r-dbi/odbc@v1.4.0,
     novonordisk-opensource/whirl,
     r-lib/mockery
+    r-lib/httr2
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
