@@ -5,6 +5,8 @@ testing_env_variables <- c(
   "DATABRICKS_SCHEMA_NAME"
 )
 
+rlang::check_installed("glue")
+
 if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   if (!all(testing_env_variables %in% names(Sys.getenv()))) {
     cli::cli_abort("Not all testing parameters are set. Please set environment variables:

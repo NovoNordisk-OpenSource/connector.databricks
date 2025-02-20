@@ -9,5 +9,6 @@ reference:
   - title: Placeholder for other stuff
     contents:
     - -matches("connector_databricks_dbi|.*_cnt$")
+    - matches(".*log.*$")
 template:
   bootstrap: 5
