@@ -45,7 +45,7 @@ Remotes:
     github::NovoNordisk-OpenSource/connector,
     github::r-dbi/odbc@v1.4.0,
     novonordisk-opensource/whirl,
-    r-lib/mockery
+    r-lib/mockery,
     r-lib/httr2
 Config/testthat/edition: 3
 Encoding: UTF-8
