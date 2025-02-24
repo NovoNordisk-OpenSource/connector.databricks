@@ -1,7 +1,7 @@
 Package: connector.databricks
 Title: Expansion of the connector package for enabling connections to
     databricks
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(
     person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = c("aut", "cre")),
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = "aut"),
@@ -41,7 +41,7 @@ VignetteBuilder:
     knitr, rmarkdown
 Remotes: 
     github::databrickslabs/brickster,
-    github::NovoNordisk-OpenSource/connector,
+    github::NovoNordisk-OpenSource/connector@5a4232e226,
     github::r-dbi/odbc@v1.4.0,
     novonordisk-opensource/whirl,
     r-lib/mockery
