@@ -13,12 +13,12 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
     schema = schema_local,
     extra_class = "connector_logger"
   )
-}
 
-driver_name <- dbi_connector$conn@info$drivername
-driver_version <- dbi_connector$conn@info$driver.version
-driver_dbversion <- dbi_connector$conn@info$db.version
-driver_odbcdriverversion <- dbi_connector$conn@info$odbcdriver.version
+  driver_name <- dbi_connector$conn@info$drivername
+  driver_version <- dbi_connector$conn@info$driver.version
+  driver_dbversion <- dbi_connector$conn@info$db.version
+  driver_odbcdriverversion <- dbi_connector$conn@info$odbcdriver.version
+}
 
 test_that("log_read_connector.connector_databricks_dbi logs correct message", {
   skip_if_not_installed("whirl")
