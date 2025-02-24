@@ -6,7 +6,12 @@ test_that("ConnectorDatabricksVolume creation fails", {
   expect_error(ConnectorDatabricksVolume$new(catalog = 1))
 
   # Invalid schema
-  expect_error(ConnectorDatabricksVolume$new(catalog = "DATABRICKS_CATALOG_NAME", schema = 1))
+  expect_error(
+    ConnectorDatabricksVolume$new(
+      catalog = "DATABRICKS_CATALOG_NAME",
+      schema = 1
+    )
+  )
 
   # Invalid path
   expect_error(
@@ -46,7 +51,9 @@ test_that("connector_databricks_volume creation fails", {
   expect_error(connector_databricks_volume(catalog = 1))
 
   # Invalid schema
-  expect_error(connector_databricks_volume(catalog = "DATABRICKS_CATALOG_NAME", schema = 1))
+  expect_error(
+    connector_databricks_volume(catalog = "DATABRICKS_CATALOG_NAME", schema = 1)
+  )
 
   # Invalid path
   expect_error(
@@ -85,14 +92,17 @@ test_that("ConnectorDatabricksVolume creation works", {
   ### Using already existing volume
   # Create connectors using two different ways with valid full path
   cons <- list(
-    ConnectorDatabricksVolume$new(full_path = setup_db_volume_path, force = TRUE),
+    ConnectorDatabricksVolume$new(
+      full_path = setup_db_volume_path,
+      force = TRUE
+    ),
     connector_databricks_volume(full_path = setup_db_volume_path)
   )
 
   for (con in cons) {
     checkmate::expect_r6(
       x = con,
-      classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
+      classes = c("Connector", "ConnectorFS", "ConnectorDatabricksVolume"),
       public = c(
         "list_content_cnt",
         "create_directory_cnt",
@@ -116,7 +126,7 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
   checkmate::expect_r6(
     x = con2,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
+    classes = c("Connector", "ConnectorFS", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -130,7 +140,6 @@ test_that("ConnectorDatabricksVolume creation works", {
     private = c(".path", ".full_path", ".catalog", ".schema")
   )
 
-
   # Create connector using individual parameters and extra class
   con3 <- ConnectorDatabricksVolume$new(
     catalog = setup_db_catalog,
@@ -141,7 +150,12 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
   checkmate::expect_r6(
     x = con3,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume", "extra_class"),
+    classes = c(
+      "Connector",
+      "ConnectorFS",
+      "ConnectorDatabricksVolume",
+      "extra_class"
+    ),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
@@ -164,7 +178,7 @@ test_that("ConnectorDatabricksVolume creation works", {
   )
   checkmate::expect_r6(
     x = con4,
-    classes = c("connector", "connector_fs", "ConnectorDatabricksVolume"),
+    classes = c("Connector", "ConnectorFS", "ConnectorDatabricksVolume"),
     public = c(
       "list_content_cnt",
       "create_directory_cnt",
