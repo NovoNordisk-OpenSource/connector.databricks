@@ -52,7 +52,7 @@
 
 connector_databricks_dbi <- R6::R6Class(
   classname = "connector_databricks_dbi",
-  inherit = connector::connector_dbi,
+  inherit = connector::ConnectorDBI,
   public = list(
     #' @description Initialize the connection to Databricks
     #' @param http_path [character] The path to the Databricks cluster or SQL warehouse you want to connect to
@@ -64,7 +64,12 @@ connector_databricks_dbi <- R6::R6Class(
       checkmate::assert_character(x = http_path, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = catalog, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = schema, len = 1, any.missing = FALSE)
-      checkmate::assert_character(x = extra_class, len = 1, any.missing = FALSE, null.ok = TRUE)
+      checkmate::assert_character(
+        x = extra_class,
+        len = 1,
+        any.missing = FALSE,
+        null.ok = TRUE
+      )
 
       private$.catalog <- catalog
       private$.schema <- schema
