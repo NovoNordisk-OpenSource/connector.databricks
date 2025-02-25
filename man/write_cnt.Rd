@@ -3,18 +3,24 @@
 %   R/volume_methods.R
 \name{write_cnt}
 \alias{write_cnt}
-\alias{write_cnt.connector_databricks_dbi}
+\alias{write_cnt.ConnectorDatabricksTable}
 \alias{write_cnt.ConnectorDatabricksVolume}
 \title{Write content to the connector}
 \usage{
 write_cnt(connector_object, x, name, ...)
 
-\method{write_cnt}{connector_databricks_dbi}(connector_object, x, name, ...)
+write_cnt.ConnectorDatabricksTable(connector_object, x, name, ...)
 
-\method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
+write_cnt.ConnectorDatabricksVolume(
+  connector_object,
+  x,
+  name,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{x}{The object to write to the connection}
 
@@ -31,7 +37,7 @@ write_cnt(connector_object, x, name, ...)
 Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
-\item \link{connector_databricks_dbi}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
 but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 

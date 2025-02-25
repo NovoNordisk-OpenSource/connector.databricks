@@ -44,7 +44,7 @@ databricks and retrieve data:
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
-con <- connector_databricks_dbi$new(
+con <- ConnectorDatabricksTable$new(
   httpPath = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
@@ -100,7 +100,13 @@ connector package):
 
 ``` r
 # Connect using configuration file
-connector <- connector::connect(config = system.file("config", "example_yaml.yaml", package = "connector.databricks"))
+connector <- connector::connect(
+  config = system.file(
+    "config",
+    "example_yaml.yaml",
+    package = "connector.databricks"
+  )
+)
 
 # List contents in Volume
 connector$volumes$list_content_cnt()

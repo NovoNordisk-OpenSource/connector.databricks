@@ -47,7 +47,7 @@ Here is an example of how to connect to databricks and retrieve data:
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
-con <- connector_databricks_dbi$new(
+con <- ConnectorDatabricksTable$new(
   httpPath = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
@@ -95,7 +95,13 @@ con$remove_cnt("file_name.csv")
 Here is an example how it can be used with connector package and configuration YAML file (for more information take a look at the connector package):
 ```{r, eval=FALSE}
 # Connect using configuration file
-connector <- connector::connect(config = system.file("config", "example_yaml.yaml", package = "connector.databricks"))
+connector <- connector::connect(
+  config = system.file(
+    "config",
+    "example_yaml.yaml",
+    package = "connector.databricks"
+  )
+)
 
 # List contents in Volume
 connector$volumes$list_content_cnt()

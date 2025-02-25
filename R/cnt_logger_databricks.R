@@ -1,14 +1,14 @@
 #' Log Read Operation for Databricks dbi connector
 #'
 #' Implementation of the log_read_connector function for the
-#' connector_databricks_dbi class.
+#' ConnectorDatabricksTable class.
 #'
-#' @param connector_object The connector_databricks_dbi object.
+#' @param connector_object The ConnectorDatabricksTable object.
 #' @param name The name of the connector.
 #' @param ... Additional parameters.
 #'
 #' @export
-log_read_connector.connector_databricks_dbi <- function(
+log_read_connector.ConnectorDatabricksTable <- function(
   connector_object,
   name,
   ...
@@ -41,14 +41,14 @@ log_read_connector.connector_databricks_dbi <- function(
 #' Log Write Operation for Databricks dbi connector
 #'
 #' Implementation of the log_write_connector function for the
-#' connector_databricks_dbi class.
+#' ConnectorDatabricksTable class.
 #'
-#' @param connector_object The connector_databricks_dbi object.
+#' @param connector_object The ConnectorDatabricksTable object.
 #' @param name The name of the connector.
 #' @param ... Additional parameters.
 #'
 #' @export
-log_write_connector.connector_databricks_dbi <- function(
+log_write_connector.ConnectorDatabricksTable <- function(
   connector_object,
   name,
   ...
@@ -81,14 +81,14 @@ log_write_connector.connector_databricks_dbi <- function(
 #' Log Remove Operation for Databricks dbi connector
 #'
 #' Implementation of the log_remove_connector function for the
-#' connector_databricks_dbi class.
+#' ConnectorDatabricksTable class.
 #'
-#' @param connector_object The connector_databricks_dbi object.
+#' @param connector_object The ConnectorDatabricksTable object.
 #' @param name The name of the connector.
 #' @param ... Additional parameters.
 #'
 #' @export
-log_remove_connector.connector_databricks_dbi <- function(
+log_remove_connector.ConnectorDatabricksTable <- function(
   connector_object,
   name,
   ...

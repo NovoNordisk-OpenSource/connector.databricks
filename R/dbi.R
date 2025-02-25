@@ -4,11 +4,11 @@
 #' Extension of the [connector::connector_dbi] making it easier to connect to, and work with tables in Databricks.
 #'
 #' @details
-#' All methods for [connector_databricks_dbi] object are working from the catalog
+#' All methods for [ConnectorDatabricksTable] object are working from the catalog
 #' and schema provided when initializing the connection.
 #' This means you only need to provide the table name when using the built in methods.
 #' If you want to access tables outside of the chosen schema, you can either retrieve
-#' the connection with `connector_databricks_dbi$conn` or create a new connector.
+#' the connection with `ConnectorDatabricksTable$conn` or create a new connector.
 #'
 #' When creating the connections to Databricks you either need to provide the sqlpath to
 #' the Databricks cluster or the SQL warehouse you want to connect to.
@@ -20,7 +20,7 @@
 #' @examplesIf FALSE
 #' # Establish connection to your cluster
 #'
-#' con_databricks <- connector_databricks_dbi$new(
+#' con_databricks <- ConnectorDatabricksTable$new(
 #'   httpPath = "path-to-cluster",
 #'   catalog = "my_catalog",
 #'   schema = "my_schema"
@@ -50,8 +50,8 @@
 #'
 #' @export
 
-connector_databricks_dbi <- R6::R6Class(
-  classname = "connector_databricks_dbi",
+ConnectorDatabricksTable <- R6::R6Class(
+  classname = "ConnectorDatabricksTable",
   inherit = connector::ConnectorDBI,
   public = list(
     #' @description Initialize the connection to Databricks
@@ -59,7 +59,7 @@ connector_databricks_dbi <- R6::R6Class(
     #' @param catalog [character] The catalog to use
     #' @param schema [character] The schema to use
     #' @param extra_class [character] Extra class to assign to the new connector
-    #' @return A [connector_databricks_dbi] object
+    #' @return A [ConnectorDatabricksTable] object
     initialize = function(http_path, catalog, schema, extra_class = NULL) {
       checkmate::assert_character(x = http_path, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = catalog, len = 1, any.missing = FALSE)
