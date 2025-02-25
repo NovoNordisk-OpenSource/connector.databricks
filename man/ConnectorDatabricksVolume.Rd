@@ -4,7 +4,7 @@
 \alias{ConnectorDatabricksVolume}
 \title{Connector for databricks volume storage}
 \description{
-The ConnectorDatabricksVolume class, built on top of \link[connector:connector]{connector::connector}
+The ConnectorDatabricksVolume class, built on top of \link[connector:connector-package]{connector::connector}
 class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
@@ -31,7 +31,7 @@ cnt$read_cnt("iris.rds") |>
 \dontshow{\}) # examplesIf}
 }
 \section{Super classes}{
-\code{\link[connector:connector]{connector::connector}} -> \code{\link[connector:connector_fs]{connector::connector_fs}} -> \code{ConnectorDatabricksVolume}
+\code{\link[connector:Connector]{connector::Connector}} -> \code{\link[connector:ConnectorFS]{connector::ConnectorFS}} -> \code{ConnectorDatabricksVolume}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -57,15 +57,15 @@ cnt$read_cnt("iris.rds") |>
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="list_content_cnt"><a href='../../connector/html/connector.html#method-connector-list_content_cnt'><code>connector::connector$list_content_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="print"><a href='../../connector/html/connector.html#method-connector-print'><code>connector::connector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="read_cnt"><a href='../../connector/html/connector.html#method-connector-read_cnt'><code>connector::connector$read_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector" data-id="remove_cnt"><a href='../../connector/html/connector.html#method-connector-remove_cnt'><code>connector::connector$remove_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="create_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-create_directory_cnt'><code>connector::connector_fs$create_directory_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="download_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-download_cnt'><code>connector::connector_fs$download_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="remove_directory_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-remove_directory_cnt'><code>connector::connector_fs$remove_directory_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="tbl_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-tbl_cnt'><code>connector::connector_fs$tbl_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="connector_fs" data-id="upload_cnt"><a href='../../connector/html/connector_fs.html#method-connector_fs-upload_cnt'><code>connector::connector_fs$upload_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="list_content_cnt"><a href='../../connector/html/Connector.html#method-Connector-list_content_cnt'><code>connector::Connector$list_content_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href='../../connector/html/Connector.html#method-Connector-print'><code>connector::Connector$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href='../../connector/html/Connector.html#method-Connector-read_cnt'><code>connector::Connector$read_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href='../../connector/html/Connector.html#method-Connector-remove_cnt'><code>connector::Connector$remove_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="create_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-create_directory_cnt'><code>connector::ConnectorFS$create_directory_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="download_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-download_cnt'><code>connector::ConnectorFS$download_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="remove_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-remove_directory_cnt'><code>connector::ConnectorFS$remove_directory_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="tbl_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-tbl_cnt'><code>connector::ConnectorFS$tbl_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="upload_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-upload_cnt'><code>connector::ConnectorFS$upload_cnt()</code></a></span></li>
 </ul>
 </details>
 }}

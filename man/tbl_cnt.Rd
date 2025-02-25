@@ -3,18 +3,18 @@
 %   R/volume_methods.R
 \name{tbl_cnt}
 \alias{tbl_cnt}
-\alias{tbl_cnt.connector_databricks_dbi}
+\alias{tbl_cnt.ConnectorDatabricksTable}
 \alias{tbl_cnt.ConnectorDatabricksVolume}
 \title{Use dplyr verbs to interact with the remote database table}
 \usage{
 tbl_cnt(connector_object, name, ...)
 
-\method{tbl_cnt}{connector_databricks_dbi}(connector_object, name, ...)
+tbl_cnt.ConnectorDatabricksTable(connector_object, name, ...)
 
-\method{tbl_cnt}{ConnectorDatabricksVolume}(connector_object, name, ...)
+tbl_cnt.ConnectorDatabricksVolume(connector_object, name, ...)
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
@@ -27,7 +27,7 @@ A \link[dplyr:tbl]{dplyr::tbl} object.
 Addition tbl methods for databricks connectors implemented for \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}}:
 
 \itemize{
-\item \link{connector_databricks_dbi}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
 but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 

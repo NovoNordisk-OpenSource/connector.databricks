@@ -6,8 +6,8 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
 
   skip_if_not_installed("whirl")
 
-  # Create a mock connector_databricks_dbi object with a temporary folder path
-  dbi_connector <- connector.databricks::connector_databricks_dbi$new(
+  # Create a mock ConnectorDatabricksTable object with a temporary folder path
+  dbi_connector <- connector.databricks::ConnectorDatabricksTable$new(
     http_path = http_path_local,
     catalog = catalog_local,
     schema = schema_local,
@@ -20,7 +20,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   driver_odbcdriverversion <- dbi_connector$conn@info$odbcdriver.version
 }
 
-test_that("log_read_connector.connector_databricks_dbi logs correct message", {
+test_that("log_read_connector.ConnectorDatabricksTable logs correct message", {
   skip_if_not_installed("whirl")
   skip_on_cran()
   skip_on_ci()
@@ -28,13 +28,13 @@ test_that("log_read_connector.connector_databricks_dbi logs correct message", {
   # Create mock for whirl::log_read
   log_mock <- mockery::mock()
   mockery::stub(
-    log_read_connector.connector_databricks_dbi,
+    log_read_connector.ConnectorDatabricksTable,
     "whirl::log_read",
     log_mock
   )
 
   # Test the function
-  log_read_connector.connector_databricks_dbi(dbi_connector, "test.csv")
+  log_read_connector.ConnectorDatabricksTable(dbi_connector, "test.csv")
 
   # Verify log_read was called with correct message
   expected_msg <- glue::glue(
@@ -51,7 +51,7 @@ test_that("log_read_connector.connector_databricks_dbi logs correct message", {
   mockery::expect_args(log_mock, 1, expected_msg)
 })
 
-test_that("log_write_connector.connector_databricks_dbi logs correct message", {
+test_that("log_write_connector.ConnectorDatabricksTable logs correct message", {
   skip_if_not_installed("whirl")
   skip_on_cran()
   skip_on_ci()
@@ -59,13 +59,13 @@ test_that("log_write_connector.connector_databricks_dbi logs correct message", {
   # Create mock for whirl::log_write
   log_mock <- mockery::mock()
   mockery::stub(
-    log_write_connector.connector_databricks_dbi,
+    log_write_connector.ConnectorDatabricksTable,
     "whirl::log_write",
     log_mock
   )
 
   # Test the function
-  log_write_connector.connector_databricks_dbi(dbi_connector, "test.csv")
+  log_write_connector.ConnectorDatabricksTable(dbi_connector, "test.csv")
 
   # Verify log_write was called with correct message
   expected_msg <- glue::glue(
@@ -83,7 +83,7 @@ test_that("log_write_connector.connector_databricks_dbi logs correct message", {
   mockery::expect_args(log_mock, 1, expected_msg)
 })
 
-test_that("log_remove_connector.connector_databricks_dbi logs correct message", {
+test_that("log_remove_connector.ConnectorDatabricksTable logs correct message", {
   skip_if_not_installed("whirl")
   skip_on_cran()
   skip_on_ci()
@@ -91,13 +91,13 @@ test_that("log_remove_connector.connector_databricks_dbi logs correct message", 
   # Create mock for whirl::log_delete
   log_mock <- mockery::mock()
   mockery::stub(
-    log_remove_connector.connector_databricks_dbi,
+    log_remove_connector.ConnectorDatabricksTable,
     "whirl::log_delete",
     log_mock
   )
 
   # Test the function
-  log_remove_connector.connector_databricks_dbi(dbi_connector, "test.csv")
+  log_remove_connector.ConnectorDatabricksTable(dbi_connector, "test.csv")
 
   # Verify log_delete was called with correct message
   expected_msg <- glue::glue(

@@ -7,7 +7,7 @@
 \usage{
 upload_cnt(connector_object, file, name = basename(file), ...)
 
-\method{upload_cnt}{ConnectorDatabricksVolume}(
+upload_cnt.ConnectorDatabricksVolume(
   connector_object,
   file,
   name = basename(file),
@@ -16,7 +16,7 @@ upload_cnt(connector_object, file, name = basename(file), ...)
 )
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{file}{\link{character} Path to the file to download to or upload from}
 

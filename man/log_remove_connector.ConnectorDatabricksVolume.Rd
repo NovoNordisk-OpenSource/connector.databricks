@@ -4,7 +4,7 @@
 \alias{log_remove_connector.ConnectorDatabricksVolume}
 \title{Log Remove Operation for ConnectorDatabricksVolume connector}
 \usage{
-\method{log_remove_connector}{ConnectorDatabricksVolume}(connector_object, name, ...)
+log_remove_connector.ConnectorDatabricksVolume(connector_object, name, ...)
 }
 \arguments{
 \item{connector_object}{The ConnectorDatabricksVolume object.}

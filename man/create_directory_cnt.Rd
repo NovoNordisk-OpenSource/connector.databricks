@@ -7,10 +7,15 @@
 \usage{
 create_directory_cnt(connector_object, name, ...)
 
-\method{create_directory_cnt}{ConnectorDatabricksVolume}(connector_object, name, ..., open = TRUE)
+create_directory_cnt.ConnectorDatabricksVolume(
+  connector_object,
+  name,
+  ...,
+  open = TRUE
+)
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{name}{\link{character} The name of the directory to create}
 
