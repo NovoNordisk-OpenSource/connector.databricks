@@ -7,7 +7,7 @@
 \usage{
 remove_directory_cnt(connector_object, name, ...)
 
-remove_directory_cnt.ConnectorDatabricksVolume(connector_object, name, ...)
+\method{remove_directory_cnt}{ConnectorDatabricksVolume}(connector_object, name, ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
