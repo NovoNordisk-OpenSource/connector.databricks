@@ -7,7 +7,7 @@
 disconnect_cnt(connector_object, ...)
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{...}{Additional arguments passed to the method for the individual connector.}
 }
@@ -19,6 +19,6 @@ Generic implementing of how to disconnect from the relevant connections.
 Mostly relevant for DBI connectors.
 
 \itemize{
-\item \link[connector]{connector_dbi}: Uses \code{\link[DBI:dbDisconnect]{DBI::dbDisconnect()}} to create a table reference to close a DBI connection.
+\item \link[connector]{ConnectorDBI}: Uses \code{\link[DBI:dbDisconnect]{DBI::dbDisconnect()}} to create a table reference to close a DBI connection.
 }
 }

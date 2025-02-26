@@ -42,13 +42,15 @@
 #' class(db_subclass)
 #'
 #' @export
-connector_databricks_volume <- function(full_path = NULL,
-                                        catalog = NULL,
-                                        schema = NULL,
-                                        path = NULL,
-                                        extra_class = NULL,
-                                        force = FALSE,
-                                        ...) {
+connector_databricks_volume <- function(
+  full_path = NULL,
+  catalog = NULL,
+  schema = NULL,
+  path = NULL,
+  extra_class = NULL,
+  force = FALSE,
+  ...
+) {
   connector <- ConnectorDatabricksVolume$new(
     full_path = full_path,
     catalog = catalog,
@@ -92,9 +94,11 @@ connector_databricks_volume <- function(full_path = NULL,
 #'   head()
 #'
 #' @export
-ConnectorDatabricksVolume <- R6::R6Class( # nolint
+# nolint start
+ConnectorDatabricksVolume <- R6::R6Class(
+  # nolint end
   classname = "ConnectorDatabricksVolume",
-  inherit = connector::connector_fs,
+  inherit = connector::ConnectorFS,
   public = list(
     #' @description
     #' Initializes the connector for Databricks volume storage.
@@ -113,13 +117,15 @@ ConnectorDatabricksVolume <- R6::R6Class( # nolint
     #' @importFrom checkmate assert_string assert_logical
     #'
     #' @return A new [ConnectorDatabricksVolume] object
-    initialize = function(full_path = NULL,
-                          catalog = NULL,
-                          schema = NULL,
-                          path = NULL,
-                          extra_class = NULL,
-                          force = FALSE,
-                          ...) {
+    initialize = function(
+      full_path = NULL,
+      catalog = NULL,
+      schema = NULL,
+      path = NULL,
+      extra_class = NULL,
+      force = FALSE,
+      ...
+    ) {
       if (is.null(full_path)) {
         checkmate::assert_string(x = path, null.ok = FALSE)
         checkmate::assert_string(x = catalog, null.ok = FALSE)

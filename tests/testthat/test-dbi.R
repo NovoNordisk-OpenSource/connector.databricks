@@ -1,5 +1,14 @@
-test_that(paste("DBI generics work for connector_databricks_dbi"), {
-  if (all(c("DATABRICKS_HTTP_PATH", "DATABRICKS_CATALOG_NAME", "DATABRICKS_SCHEMA_NAME") %in% names(Sys.getenv()))) {
+test_that(paste("DBI generics work for connector_databricks_table"), {
+  if (
+    all(
+      c(
+        "DATABRICKS_HTTP_PATH",
+        "DATABRICKS_CATALOG_NAME",
+        "DATABRICKS_SCHEMA_NAME"
+      ) %in%
+        names(Sys.getenv())
+    )
+  ) {
     skip_on_ci()
     skip_on_cran()
 
@@ -9,13 +18,14 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     schema_local <- Sys.getenv("DATABRICKS_SCHEMA_NAME")
 
     temp_table_name <- paste0(
-      "temp-mtcars_", format(Sys.time(), "%Y%m%d%H%M%S")
+      "temp-mtcars_",
+      format(Sys.time(), "%Y%m%d%H%M%S")
     )
 
-    expect_error(connector_databricks_dbi$new(http_path = 1))
+    expect_error(connector_databricks_table(http_path = 1))
 
     # initialized with appropriate values for catalog, schema, and conn
-    cnt <- connector_databricks_dbi$new(
+    cnt <- connector_databricks_table(
       http_path = http_path_local,
       catalog = catalog_local,
       schema = schema_local
@@ -26,7 +36,7 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
 
     checkmate::assert_r6(
       cnt,
-      classes = c("connector_databricks_dbi"),
+      classes = c("ConnectorDatabricksTable"),
       private = c(".catalog", ".schema")
     )
 
@@ -35,9 +45,6 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
 
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
-
-    # cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
-    #   expect_error()
 
     cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
@@ -54,7 +61,12 @@ test_that(paste("DBI generics work for connector_databricks_dbi"), {
     cnt$conn |>
       DBI::dbGetQuery(paste(
         "SELECT * FROM ",
-        custom_paste_with_back_quotes(cnt$catalog, cnt$schema, temp_table_name, sep = ".")
+        custom_paste_with_back_quotes(
+          cnt$catalog,
+          cnt$schema,
+          temp_table_name,
+          sep = "."
+        )
       )) |>
       expect_equal(create_temp_dataset())
 
