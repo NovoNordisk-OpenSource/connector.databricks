@@ -2,13 +2,15 @@ url: https://nn-opensource.github.io/connector.databricks
 reference:
   - title: Connectors
     contents:
-    - ConnectorDatabricksTable
+    - connector_databricks_table
+    - connector_databricks_volume
+    - matches("$Connector.*")
   - title: Connector functions
     contents:
     - matches(".*_cnt$")
   - title: Placeholder for other stuff
     contents:
-    - -matches("ConnectorDatabricksTable|.*_cnt$")
+    - -matches("connector_databricks_table|.*_cnt$")
     - matches(".*log.*$")
 template:
   bootstrap: 5

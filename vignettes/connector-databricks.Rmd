@@ -28,7 +28,7 @@ retrieving data, and performing various operations using this package.
 To get started, you need to establish a connection to your Databricks cluster
 or volume storage. Use:
 
-* `ConnectorDatabricksTable$new()` function to authenticate and connect to your Databricks cluster
+* `connector_databricks_table()` function to authenticate and connect to your Databricks cluster
 * `connector_databricks_volume()` function to connect to your Databricks volume storage
 
 Here's an example of how to do this:
@@ -37,7 +37,7 @@ Here's an example of how to do this:
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
-con <- ConnectorDatabricksTable$new(
+con <- connector_databricks_table(
   httpPath = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
@@ -72,7 +72,7 @@ metadata:
 datasources:
   - name: "tables"
     backend:
-      type: "connector.databricks::ConnectorDatabricksTable"
+      type: "connector.databricks::connector_databricks_table"
       http_path: "{metadata.http_path}"
       catalog: "{metadata.catalog}"
       schema: "{metadata.project}_{metadata.trial}_adam"

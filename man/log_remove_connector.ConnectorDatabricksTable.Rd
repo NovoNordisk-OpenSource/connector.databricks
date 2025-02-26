@@ -4,7 +4,7 @@
 \alias{log_remove_connector.ConnectorDatabricksTable}
 \title{Log Remove Operation for Databricks dbi connector}
 \usage{
-log_remove_connector.ConnectorDatabricksTable(connector_object, name, ...)
+\method{log_remove_connector}{ConnectorDatabricksTable}(connector_object, name, ...)
 }
 \arguments{
 \item{connector_object}{The ConnectorDatabricksTable object.}

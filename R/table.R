@@ -1,3 +1,68 @@
+#' Create `ConnectorDatabricksTable` connector
+#'
+#' @description
+#' Initializes the connector for table type of storage.
+#' See [ConnectorDatabricksTable] for details.
+#'
+#' @param http_path [character] The path to the Databricks cluster or SQL warehouse you want to connect to
+#' @param catalog [character] The catalog to use
+#' @param schema [character] The schema to use
+#' @param extra_class [character] Extra class to assign to the new connector
+#'
+#' @return A new [ConnectorDatabricksTable] object
+#'
+#' @details
+#' The `extra_class` parameter allows you to create a subclass of the
+#' `ConnectorDatabricksTable` object. This can be useful if you want to create
+#' a custom connection object for easier dispatch of new s3 methods, while still
+#' inheriting the methods from the `ConnectorDatabricksTable` object.
+#'
+#' @examplesIf FALSE
+#' # Establish connection to your cluster
+#'
+#' con_databricks <- connector_databricks_table(
+#'   httpPath = "path-to-cluster",
+#'   catalog = "my_catalog",
+#'   schema = "my_schema"
+#' )
+#'
+#' # List tables in my_schema
+#'
+#' con_databricks$list_content()
+#'
+#' # Read and write tables
+#'
+#' con_databricks$write(mtcars, "my_mtcars_table")
+#'
+#' con_databricks$read("my_mtcars_table")
+#'
+#' # Use dplyr::tbl
+#'
+#' con_databricks$tbl("my_mtcars_table")
+#'
+#' # Remove table
+#'
+#' con_databricks$remove("my_mtcars_table")
+#'
+#' # Disconnect
+#'
+#' con_databricks$disconnect()
+#'
+#' @export
+connector_databricks_table <- function(
+  http_path,
+  catalog,
+  schema,
+  extra_class = NULL
+) {
+  ConnectorDatabricksTable$new(
+    http_path = http_path,
+    catalog = catalog,
+    schema = schema,
+    extra_class = extra_class
+  )
+}
+
 #' Connector for connecting to Databricks using DBI
 #'
 #' @description

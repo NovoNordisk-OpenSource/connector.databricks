@@ -7,7 +7,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   skip_if_not_installed("whirl")
 
   # Create a mock ConnectorDatabricksTable object with a temporary folder path
-  dbi_connector <- connector.databricks::ConnectorDatabricksTable$new(
+  dbi_connector <- connector_databricks_table(
     http_path = http_path_local,
     catalog = catalog_local,
     schema = schema_local,

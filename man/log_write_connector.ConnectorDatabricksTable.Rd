@@ -4,7 +4,7 @@
 \alias{log_write_connector.ConnectorDatabricksTable}
 \title{Log Write Operation for Databricks dbi connector}
 \usage{
-log_write_connector.ConnectorDatabricksTable(connector_object, name, ...)
+\method{log_write_connector}{ConnectorDatabricksTable}(connector_object, name, ...)
 }
 \arguments{
 \item{connector_object}{The ConnectorDatabricksTable object.}

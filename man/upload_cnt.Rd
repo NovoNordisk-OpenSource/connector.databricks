@@ -7,7 +7,7 @@
 \usage{
 upload_cnt(connector_object, file, name = basename(file), ...)
 
-upload_cnt.ConnectorDatabricksVolume(
+\method{upload_cnt}{ConnectorDatabricksVolume}(
   connector_object,
   file,
   name = basename(file),

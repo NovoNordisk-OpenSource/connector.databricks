@@ -1,4 +1,4 @@
-test_that(paste("DBI generics work for ConnectorDatabricksTable"), {
+test_that(paste("DBI generics work for connector_databricks_table"), {
   if (
     all(
       c(
@@ -22,10 +22,10 @@ test_that(paste("DBI generics work for ConnectorDatabricksTable"), {
       format(Sys.time(), "%Y%m%d%H%M%S")
     )
 
-    expect_error(ConnectorDatabricksTable$new(http_path = 1))
+    expect_error(connector_databricks_table(http_path = 1))
 
     # initialized with appropriate values for catalog, schema, and conn
-    cnt <- ConnectorDatabricksTable$new(
+    cnt <- connector_databricks_table(
       http_path = http_path_local,
       catalog = catalog_local,
       schema = schema_local
