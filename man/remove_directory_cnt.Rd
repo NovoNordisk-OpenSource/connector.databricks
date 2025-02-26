@@ -10,7 +10,7 @@ remove_directory_cnt(connector_object, name, ...)
 \method{remove_directory_cnt}{ConnectorDatabricksVolume}(connector_object, name, ...)
 }
 \arguments{
-\item{connector_object}{\link[connector]{connector} The connector object to use.}
+\item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{name}{\link{character} The name of the directory to remove}
 
