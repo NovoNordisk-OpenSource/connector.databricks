@@ -44,7 +44,7 @@ databricks and retrieve data:
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
-con <- ConnectorDatabricksTable$new(
+con <- connector_databricks_table(
   httpPath = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"

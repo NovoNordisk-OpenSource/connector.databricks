@@ -46,9 +46,6 @@ test_that(paste("DBI generics work for connector_databricks_table"), {
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
 
-    # cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
-    #   expect_error()
-
     cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
 

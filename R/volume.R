@@ -94,8 +94,9 @@ connector_databricks_volume <- function(
 #'   head()
 #'
 #' @export
+# nolint start
 ConnectorDatabricksVolume <- R6::R6Class(
-  # nolint
+  # nolint end
   classname = "ConnectorDatabricksVolume",
   inherit = connector::ConnectorFS,
   public = list(
