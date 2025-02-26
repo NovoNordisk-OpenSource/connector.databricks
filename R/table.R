@@ -114,8 +114,9 @@ connector_databricks_table <- function(
 #' con_databricks$disconnect()
 #'
 #' @export
-
+# nolint start
 ConnectorDatabricksTable <- R6::R6Class(
+  # nolint end
   classname = "ConnectorDatabricksTable",
   inherit = connector::ConnectorDBI,
   public = list(

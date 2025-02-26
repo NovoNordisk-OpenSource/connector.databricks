@@ -19,7 +19,7 @@ Imports:
     brickster,
     checkmate,
     cli,
-    connector (>= 0.0.4),
+    connector (>= 0.0.8),
     DBI,
     dplyr,
     httr,
@@ -41,7 +41,7 @@ VignetteBuilder:
     knitr, rmarkdown
 Remotes: 
     github::databrickslabs/brickster,
-    github::NovoNordisk-OpenSource/connector@5a4232e226,
+    github::NovoNordisk-OpenSource/connector,
     github::r-dbi/odbc@v1.4.0,
     novonordisk-opensource/whirl,
     r-lib/mockery
