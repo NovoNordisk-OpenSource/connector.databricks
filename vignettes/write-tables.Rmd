@@ -1,0 +1,461 @@
+---
+title: "write-tables"
+output: rmarkdown::html_vignette
+vignette: >
+%\VignetteIndexEntry{write-tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  ---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+  
+``` {r setup}
+library(dplyr)
+library(ggplot2)
+library(connector.databricks)
+cache <- memoise::cache_filesystem("cache")
+m_pmap <- memoise::memoize(
+  purrr::pmap,
+  cache = cache
+)
+```
+  
+  Writing tables in databricks using the normal DBI interface is slow and may not work for large tables. This vignette will compare different methods of writing tables to databricks. Our idea is to find the best solution compare to the normal DBI interface.
+  
+  We will use capabilities of the brickster package to write tables to databricks. We will compare the following methods:
+  - Using the SQL COPY TO method
+  - For CSV
+  - For Parquet
+  - Using stream method
+  - For CSV
+  - For Parquet
+  
+  In both cases, we will compare the time taken to write the tables and the number of rows and columns in the table.
+  
+  This will only work if you can create a volume into databricks.
+  
+  
+## Setup the connection
+  
+```{r, eval=FALSE}
+con <- connector::connectors(
+  tables = connector_databricks_dbi$new(
+    http_path = Sys.getenv("DATABRICKS_HTTP_PATH"),
+    catalog = Sys.getenv("DATABRICKS_CATALOG_NAME"),
+    schema = Sys.getenv("DATABRICKS_SCHEMA_NAME")
+  ),
+  volumes = connector_databricks_volume(
+    full_path = paste0(Sys.getenv("DATABRICKS_VOLUME"), "/test")
+  )
+)
+```
+
+
+## Some logic
+
+```{r, eval=FALSE}
+id_of_cluster <- brickster::db_sql_warehouse_list()[[1]]$id
+```
+
+
+## First method: Using the SQL COPY TO method for CSV and PARQUET
+
+Test for CSV copyto:
+
+```{r, eval=FALSE}
+csv_copyto <- m_pmap(
+  expand.grid(c(5) * 2, c(100) * 100),
+  ~{
+    big_iris <- iris
+    big_iris <- suppressMessages(purrr::map_dfr(1:.y, ~iris))
+    big_iris <- suppressMessages(purrr::map_dfc(1:.x, ~big_iris))
+
+    try(
+      {
+        con$tables |>
+          remove_cnt("test")
+      },
+      silent = TRUE
+    )
+
+    tictoc::tic()
+
+    con$volumes |>
+      write_cnt(big_iris, "big_iris.csv", overwrite = TRUE)
+
+    ok <- tictoc::toc()
+    time_upload <- ok$toc - ok$tic
+
+    file_info <- paste0(
+      brickster::db_volume_list(
+        "/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test"
+      )[[1]][[1]][["file_size"]] /
+        1000000,
+      " MB"
+    )
+    message("file: ", file_info)
+
+    tictoc::tic()
+    result <- try(
+      {
+        brickster::db_sql_exec_query(
+          "CREATE TABLE IF NOT EXISTS amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test USING DELTA;",
+          id_of_cluster
+        )
+        test <- brickster::db_sql_exec_query(
+          "COPY INTO amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test FROM '/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test/big_iris.csv' FILEFORMAT = CSV  FORMAT_OPTIONS ('header' = 'true') COPY_OPTIONS ('mergeSchema' = 'true', 'force' = 'true');",
+          id_of_cluster
+        )
+        time_ <- Sys.time()
+        while (test$status$state != "SUCCEEDED" | time_ < 180){
+          try(
+            test <- brickster::db_sql_exec_status(test$statement_id),
+            silent = TRUE
+          )
+          time_ <- Sys.time() - time_
+          }
+      },
+      silent = TRUE
+    )
+
+    ok <- tictoc::toc()
+    message("done")
+
+    time_table <- ok$toc - ok$tic
+
+    list(
+      time_upload = time_upload,
+      time_table = time_table,
+      time_total = time_upload + time_table,
+      error = ifelse(class(result) == "try-error", TRUE, FALSE),
+      rows = nrow(big_iris),
+      columns = ncol(big_iris),
+      file_info = file_info,
+      method = "csv_copyto"
+    )
+  }
+)
+```
+
+
+```{r, include=FALSE, eval=FALSE}
+con$volumes |>
+      remove_cnt("big_iris.csv")
+```
+
+```{r}
+cache$get("21d4291e5ccffcc5")
+```
+
+
+
+Test for PARQUET copyto:
+
+```{r, eval=FALSE}
+parquet_copyto <- m_pmap(
+  expand.grid(c(5) * 2, c(100) * 100),
+  #expand.grid(c(5, 10) * 2, c(100, 1000) * 100),
+  ~{
+    big_iris <- iris
+    big_iris <- suppressMessages(purrr::map_dfr(1:.y, ~iris))
+    big_iris <- suppressMessages(purrr::map_dfc(1:.x, ~big_iris))
+
+    # try(
+    #   {
+    #     con$tables |>
+    #       remove_cnt("test")
+    #   },
+    #   silent = TRUE
+    # )
+
+    tictoc::tic()
+
+    con$volumes |>
+      write_cnt(big_iris, "big_iris.parquet", overwrite = TRUE)
+
+    ok <- tictoc::toc()
+    time_upload <- ok$toc - ok$tic
+
+    file_info <- paste0(
+      brickster::db_volume_list(
+        "/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test"
+      )[[1]][[1]][["file_size"]] /
+        1000000,
+      " MB"
+    )
+    message("file: ", file_info)
+
+    tictoc::tic()
+    result <- try(
+      {
+        brickster::db_sql_exec_query(
+          "CREATE TABLE IF NOT EXISTS amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test USING DELTA;",
+          id_of_cluster
+        )
+        test <- brickster::db_sql_exec_query(
+          "COPY INTO amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test FROM '/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test/big_iris.parquet' FILEFORMAT = PARQUET  FORMAT_OPTIONS ('header' = 'true') COPY_OPTIONS ('mergeSchema' = 'true', 'force' = 'true');",
+          id_of_cluster
+        )
+        time_ <- Sys.time()
+        while (test$status$state != "SUCCEEDED" | time_ < 120){
+          try(
+            {
+              test <- brickster::db_sql_exec_status(test$statement_id)
+              time_ <- Sys.time() - time_
+              },
+            silent = TRUE
+          )}
+        test
+      },
+      silent = TRUE
+    )
+    
+    print(result)
+    ok <- tictoc::toc()
+    message("done")
+
+    time_table <- ok$toc - ok$tic
+    
+    list(
+      time_upload = time_upload,
+      time_table = time_table,
+      time_total = time_upload + time_table,
+      error = ifelse(class(result) == "try-error", TRUE, FALSE),
+      rows = nrow(big_iris),
+      columns = ncol(big_iris),
+      file_info = file_info,
+      method = "parquet_copyto"
+    )
+  }
+)
+```
+
+```{r, include=FALSE, eval=FALSE}
+con$volumes |>
+      remove_cnt("big_iris.parquet")
+```
+
+```{r}
+cache$get("a1044bbd2674ba0c")
+```
+
+Compare CSV and PARQUET: 
+
+```{r}
+csv_copyto <- cache$get("21d4291e5ccffcc5")$value
+parquet_copyto <- cache$get("a1044bbd2674ba0c")$value
+
+table <- csv_copyto |>
+  purrr::map_df(as.data.frame) |>
+      bind_rows(
+        parquet_copyto |>
+          purrr::map_df(as.data.frame)
+      ) |>
+  arrange(columns, rows ) |>
+  mutate(ok = row_number(),
+         test = paste0(columns, "-", rows),
+         test = forcats::fct_reorder(test, ok)) |> 
+  mutate(across(is.double, round, 2))
+knitr::kable(table)
+```
+
+So, we will use the parquet method to upload the file to databricks. This is because it is faster than the CSV method.
+
+Based on those results, we can try to compare two methods to write the table after uploading the file.
+
+
+## Compare COPY TO and streamming
+
+For copy into
+
+```{r, eval=FALSE}
+copyto_c <- m_pmap(
+  expand.grid(c(5), c(10, 100, 1000, 10000) * 100),
+  ~{
+    big_iris <- iris
+    big_iris <- suppressMessages(purrr::map_dfr(1:.y, ~iris))
+    big_iris <- suppressMessages(purrr::map_dfc(1:.x, ~big_iris))
+
+    # try(
+    #   {
+    #     con$tables |>
+    #       remove_cnt("test")
+    #   },
+    #   silent = TRUE
+    # )
+
+    tictoc::tic()
+
+    con$volumes |>
+      write_cnt(big_iris, "big_iris.parquet", overwrite = TRUE)
+
+    ok <- tictoc::toc()
+    time_upload <- ok$toc - ok$tic
+
+    file_info <- paste0(
+      brickster::db_volume_list(
+        "/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test"
+      )[[1]][[1]][["file_size"]] /
+        1000000,
+      " MB"
+    )
+    message("file: ", file_info)
+
+    tictoc::tic()
+    result <- try(
+      {
+        brickster::db_sql_exec_query(
+          "CREATE TABLE IF NOT EXISTS amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test USING DELTA;",
+          id_of_cluster
+        )
+        test <- brickster::db_sql_exec_query(
+          "COPY INTO amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test FROM '/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test/big_iris.parquet' FILEFORMAT = PARQUET  FORMAT_OPTIONS ('header' = 'true') COPY_OPTIONS ('mergeSchema' = 'true', 'force' = 'true');",
+          id_of_cluster
+        )
+        time_ <- Sys.time()
+        while (test$status$state != "SUCCEEDED" | time_ < 120){
+          try(
+            {
+              test <- brickster::db_sql_exec_status(test$statement_id)
+              time_ <- Sys.time() - time_
+              },
+            silent = TRUE
+          )}
+        test
+      },
+      silent = TRUE
+    )
+    
+    print(result)
+    ok <- tictoc::toc()
+    message("done")
+
+    time_table <- ok$toc - ok$tic
+    
+    list(
+      time_upload = time_upload,
+      time_table = time_table,
+      time_total = time_upload + time_table,
+      error = ifelse(class(result) == "try-error", TRUE, FALSE),
+      rows = nrow(big_iris),
+      columns = ncol(big_iris),
+      file_info = file_info,
+      method = "copyto"
+    )
+  }
+)
+```
+
+For streamming
+
+```{r, eval=FALSE}
+stream_c <- m_pmap(
+  expand.grid(c(5), c(10, 100, 1000, 10000) * 100),
+  ~{
+    big_iris <- iris
+    big_iris <- suppressMessages(purrr::map_dfr(1:.y, ~iris))
+    big_iris <- suppressMessages(purrr::map_dfc(1:.x, ~big_iris))
+
+    # try(
+    #   {
+    #     con$tables |>
+    #       remove_cnt("test")
+    #   },
+    #   silent = TRUE
+    # )
+
+    tictoc::tic()
+
+    con$volumes |>
+      write_cnt(big_iris, "big_iris.parquet", overwrite = TRUE)
+
+    ok <- tictoc::toc()
+    time_upload <- ok$toc - ok$tic
+
+    file_info <- paste0(
+      brickster::db_volume_list(
+        "/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test"
+      )[[1]][[1]][["file_size"]] /
+        1000000,
+      " MB"
+    )
+    message("file: ", file_info)
+
+    tictoc::tic()
+    result <- try(
+      {
+
+        test <- brickster::db_sql_exec_query(
+          "CREATE OR REFRESH STREAMING TABLE amace_cdr_bronze_dev.nnxxxx_yyyy_adam.test AS
+            SELECT * FROM STREAM read_files('/Volumes/amace_cdr_bronze_dev/nnxxxx_yyyy_adam/test/big_iris.parquet')",
+          id_of_cluster
+        )
+        time_ <- Sys.time()
+        while (test$status$state != "SUCCEEDED" | time_ < 120){
+          try(
+            {
+              test <- brickster::db_sql_exec_status(test$statement_id)
+              time_ <- Sys.time() - time_
+              },
+            silent = TRUE
+          )}
+        test
+      },
+      silent = TRUE
+    )
+    
+    print(result)
+    ok <- tictoc::toc()
+    message("done")
+
+    time_table <- ok$toc - ok$tic
+    
+    list(
+      time_upload = time_upload,
+      time_table = time_table,
+      time_total = time_upload + time_table,
+      error = ifelse(class(result) == "try-error", TRUE, FALSE),
+      rows = nrow(big_iris),
+      columns = ncol(big_iris),
+      file_info = file_info,
+      method = "stream"
+    )
+  }
+)
+```
+
+```{r, include=FALSE, eval=FALSE}
+con$tables |>
+  remove_cnt("test")
+con$volumes |>
+      remove_cnt("big_iris.parquet")
+```
+
+
+```{r}
+copyto_c <- cache$get("82e63312c6144972")$value
+stream_c <- cache$get("42487ab4a04adf1d")$value
+
+table <- copyto_c |>
+  purrr::map_df(as.data.frame) |>
+      bind_rows(
+        stream_c |>
+          purrr::map_df(as.data.frame)
+      ) |>
+  arrange(columns, rows ) |>
+  mutate(ok = row_number(),
+         test = paste0(columns, "-", rows),
+         test = forcats::fct_reorder(test, ok)) |> 
+  mutate(across(is.double, round, 2))
+knitr::kable(table)
+```
+
+Based on those results, we can see that the stream method is faster than the copyto method for big datasets. But the streaming process, when it returns the positive request, only means that the process can now be executed. It still has to be processed by the databases, and this takes a minute or so. In reality, therefore, the stream method is slower than the copyto method.
+
+So, we decide to use parquet files with the "COPY TO" method to write the tables to databricks. This is the fastest method we have found.
+
