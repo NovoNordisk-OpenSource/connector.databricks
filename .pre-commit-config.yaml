@@ -5,11 +5,12 @@ repos:
     rev: v0.4.3.9003
     hooks:
     -   id: style-files
-        args: [--style_pkg=styler, --style_fun=tidyverse_style]    
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
     -   id: roxygenize
         # roxygen requires loading pkg -> add dependencies from DESCRIPTION
         additional_dependencies:
         -    checkmate
+        -    NovoNordisk-OpenSource/zephyr
         -    NovoNordisk-OpenSource/connector
         -    DBI
         -    dplyr
@@ -65,7 +66,7 @@ repos:
     -   id: pkgdown
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
-    hooks: 
+    hooks:
     -   id: check-added-large-files
         args: ['--maxkb=200']
     -   id: file-contents-sorter
