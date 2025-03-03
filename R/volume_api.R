@@ -31,7 +31,7 @@
 #' if (open_connection) {
 #'   connector.databricks::list_databricks_volumes(db_client,
 #'     catalog_name = "amace_cdr_bronze_dev",
-#'     schema_name = "nn9536_4373_adam1"
+#'     schema_name = "my_study_adam1"
 #'   )
 #' }
 #'
@@ -108,7 +108,7 @@ list_databricks_volumes <- function(catalog_name,
 #'   connector.databricks::get_databricks_volume(
 #'     name = "new_volume",
 #'     catalog_name = "amace_cdr_bronze_dev",
-#'     schema_name = "nn9536_4373_adam"
+#'     schema_name = "my_study_adam"
 #'   )
 #' }
 #' @importFrom checkmate assert_string assert_list
@@ -173,7 +173,7 @@ create_databricks_volume <- function(name,
 #'     client = db_client,
 #'     name = "new_volume",
 #'     catalog_name = "amace_cdr_bronze_dev",
-#'     schema_name = "nn9536_4373_adam"
+#'     schema_name = "my_study_adam"
 #'   )
 #' }
 #'
@@ -226,7 +226,7 @@ delete_databricks_volume <- function(name,
 #'     client = db_client,
 #'     name = "new_volume",
 #'     catalog_name = "amace_cdr_bronze_dev",
-#'     schema_name = "nn9536_4373_adam"
+#'     schema_name = "my_study_adam"
 #'   )
 #' }
 #'

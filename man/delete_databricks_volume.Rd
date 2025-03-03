@@ -42,7 +42,7 @@ if (open_connection) {
     client = db_client,
     name = "new_volume",
     catalog_name = "amace_cdr_bronze_dev",
-    schema_name = "nn9536_4373_adam"
+    schema_name = "my_study_adam"
   )
 }
 \dontshow{\}) # examplesIf}

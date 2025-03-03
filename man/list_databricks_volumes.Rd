@@ -53,7 +53,7 @@ open_connection <- db_client$debug_string() != ""
 if (open_connection) {
   connector.databricks::list_databricks_volumes(db_client,
     catalog_name = "amace_cdr_bronze_dev",
-    schema_name = "nn9536_4373_adam1"
+    schema_name = "my_study_adam1"
   )
 }
 \dontshow{\}) # examplesIf}
