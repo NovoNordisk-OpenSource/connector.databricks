@@ -13,8 +13,8 @@ Description: Expands the connector package to handle databricks. This
     includes reading and writing of files to volumes as well as
     connections to sparklyr.
 License: Apache License (>= 2)
-URL: https://nn-opensource.github.io/connector.databricks,
-    https://github.com/nn-opensource/connector.databricks
+URL: https://novonordisk-opensource.github.io/connector.databricks,
+    https://github.com/novonordisk-opensource/connector.databricks
 Imports: 
     brickster,
     checkmate,
