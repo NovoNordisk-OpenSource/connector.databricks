@@ -50,7 +50,7 @@ if (open_connection) {
   connector.databricks::get_databricks_volume(
     name = "new_volume",
     catalog_name = "amace_cdr_bronze_dev",
-    schema_name = "my_adam"
+    schema_name = "my_study_adam"
   )
 }
 \dontshow{\}) # examplesIf}
