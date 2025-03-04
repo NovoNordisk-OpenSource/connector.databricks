@@ -1,3 +1,7 @@
+# connector.databricks 0.0.4
+
+* Minor tweaks to the DESCRIPTION file. Removed references to 'external' non-CRAN GitHub packages.
+
 # connector.databricks 0.0.3
 
 ## Breaking Changes
