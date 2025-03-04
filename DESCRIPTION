@@ -40,11 +40,8 @@ Suggests:
 VignetteBuilder: 
     knitr, rmarkdown
 Remotes: 
-    github::databrickslabs/brickster,
     github::NovoNordisk-OpenSource/connector,
-    github::r-dbi/odbc@v1.4.0,
-    novonordisk-opensource/whirl,
-    r-lib/mockery
+    github::NovoNordisk-Opensource/whirl
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
