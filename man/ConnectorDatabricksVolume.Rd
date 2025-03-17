@@ -66,6 +66,7 @@ cnt$read_cnt("iris.rds") |>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="remove_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-remove_directory_cnt'><code>connector::ConnectorFS$remove_directory_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="tbl_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-tbl_cnt'><code>connector::ConnectorFS$tbl_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="upload_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-upload_cnt'><code>connector::ConnectorFS$upload_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="upload_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-upload_directory_cnt'><code>connector::ConnectorFS$upload_directory_cnt()</code></a></span></li>
 </ul>
 </details>
 }}

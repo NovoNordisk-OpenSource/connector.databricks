@@ -1,4 +1,4 @@
-test_that(paste("DBI generics work for connector_databricks_table"), {
+test_that(paste("Table generics work for connector_databricks_table"), {
   if (
     all(
       c(

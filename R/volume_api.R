@@ -40,12 +40,14 @@
 #' @importFrom cli cli_abort
 #'
 #' @export
-list_databricks_volumes <- function(catalog_name,
-                                    schema_name,
-                                    max_results = 100,
-                                    page_token = NULL,
-                                    include_browse = FALSE,
-                                    client = DatabricksClient()) {
+list_databricks_volumes <- function(
+  catalog_name,
+  schema_name,
+  max_results = 100,
+  page_token = NULL,
+  include_browse = FALSE,
+  client = DatabricksClient()
+) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = FALSE)
   checkmate::assert_string(x = schema_name, null.ok = FALSE)
@@ -64,7 +66,11 @@ list_databricks_volumes <- function(catalog_name,
   results <- data.frame()
 
   while (TRUE) {
-    result <- client$do("GET", path = "/api/2.1/unity-catalog/volumes", query = query)
+    result <- client$do(
+      "GET",
+      path = "/api/2.1/unity-catalog/volumes",
+      query = query
+    )
     if (is.null(nrow(result$volumes))) {
       cli::cli_alert("No volumes found!")
       return(list())
@@ -115,13 +121,15 @@ list_databricks_volumes <- function(catalog_name,
 #' @importFrom cli cli_alert_success
 #'
 #' @export
-create_databricks_volume <- function(name,
-                                     catalog_name = NULL,
-                                     schema_name = NULL,
-                                     volume_type = c("MANAGED", "EXTERNAL)"),
-                                     storage_location = NULL,
-                                     comment = NULL,
-                                     client = DatabricksClient()) {
+create_databricks_volume <- function(
+  name,
+  catalog_name = NULL,
+  schema_name = NULL,
+  volume_type = c("MANAGED", "EXTERNAL)"),
+  storage_location = NULL,
+  comment = NULL,
+  client = DatabricksClient()
+) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = TRUE)
@@ -139,7 +147,11 @@ create_databricks_volume <- function(name,
     comment = comment
   )
 
-  result <- client$do("POST", path = "/api/2.0/unity-catalog/volumes", query = query)
+  result <- client$do(
+    "POST",
+    path = "/api/2.0/unity-catalog/volumes",
+    query = query
+  )
 
   cli::cli_alert_success("Volume successfully created!")
 
@@ -181,17 +193,20 @@ create_databricks_volume <- function(name,
 #' @importFrom cli cli_alert_success
 #'
 #' @export
-delete_databricks_volume <- function(name,
-                                     catalog_name = NULL,
-                                     schema_name = NULL,
-                                     client = DatabricksClient()) {
+delete_databricks_volume <- function(
+  name,
+  catalog_name = NULL,
+  schema_name = NULL,
+  client = DatabricksClient()
+) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = TRUE)
   checkmate::assert_string(x = schema_name, null.ok = TRUE)
 
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
-  result <- client$do("DELETE",
+  result <- client$do(
+    "DELETE",
     path = paste0("/api/2.0/unity-catalog/volumes/", volume_path)
   )
 
@@ -233,17 +248,20 @@ delete_databricks_volume <- function(name,
 #' @importFrom checkmate assert_list assert_string
 #'
 #' @export
-get_databricks_volume <- function(name,
-                                  catalog_name,
-                                  schema_name,
-                                  client = DatabricksClient()) {
+get_databricks_volume <- function(
+  name,
+  catalog_name,
+  schema_name,
+  client = DatabricksClient()
+) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = FALSE)
   checkmate::assert_string(x = schema_name, null.ok = FALSE)
 
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
-  result <- client$do("GET",
+  result <- client$do(
+    "GET",
     path = paste0("/api/2.0/unity-catalog/volumes/", volume_path)
   )
 

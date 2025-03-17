@@ -9,7 +9,7 @@
 \usage{
 write_cnt(connector_object, x, name, ...)
 
-\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, ...)
+\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, ..., method = "volume")
 
 \method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
 }
@@ -21,6 +21,8 @@ write_cnt(connector_object, x, name, ...)
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+
+\item{method}{Which method to use for writing the table. \code{volume} is used for writing bigger amounts of data.}
 
 \item{overwrite}{Overwrite a file if it already exists}
 }
