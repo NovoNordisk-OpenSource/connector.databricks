@@ -9,7 +9,7 @@
 \usage{
 write_cnt(connector_object, x, name, ...)
 
-\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, ..., method = "volume")
+\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, ..., method = "volume", overwrite = FALSE)
 
 \method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
 }
@@ -22,7 +22,10 @@ write_cnt(connector_object, x, name, ...)
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 
-\item{method}{Which method to use for writing the table. \code{volume} is used for writing bigger amounts of data.}
+\item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the table. Options:
+\itemize{
+\item \code{volume} - using temporary volume to write data and then convert it to a table.
+}}
 
 \item{overwrite}{Overwrite a file if it already exists}
 }
@@ -33,8 +36,8 @@ write_cnt(connector_object, x, name, ...)
 Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a parquet file and then
+convert it to a table.
 }
 
 \itemize{

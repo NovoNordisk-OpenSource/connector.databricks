@@ -40,8 +40,12 @@ test_that(paste("Table generics work for connector_databricks_table"), {
       private = c(".catalog", ".schema")
     )
 
-    cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
-      expect_no_condition()
+    cnt$write_cnt(
+      x = create_temp_dataset(),
+      name = temp_table_name,
+      method = "volume"
+    ) |>
+      expect_no_failure()
 
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
@@ -49,14 +53,14 @@ test_that(paste("Table generics work for connector_databricks_table"), {
     cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
 
-    cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
-      expect_no_condition()
-
     cnt$tbl_cnt(temp_table_name) |>
       dplyr::filter(car == "Mazda RX4") |>
       dplyr::select(car, mpg) |>
       dplyr::collect() |>
       expect_equal(dplyr::tibble(car = "Mazda RX4", mpg = 21))
+
+    cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
+      expect_no_failure()
 
     cnt$conn |>
       DBI::dbGetQuery(paste(

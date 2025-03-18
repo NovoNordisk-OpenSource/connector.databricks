@@ -14,41 +14,50 @@ read_cnt.ConnectorDatabricksTable <- function(connector_object, name, ...) {
 }
 
 #' @description
-#' * [ConnectorDatabricksTable]: Reuses the [connector::read_cnt()] method for [connector::connector_dbi],
-#' but always sets the `catalog` and `schema` as defined in when initializing the connector.
+#' * [ConnectorDatabricksTable]: Creates temporary volume to write object as a parquet file and then
+#' convert it to a table.
 #'
 #' @rdname write_cnt
-#' @param method Which method to use for writing the table. `volume` is used for writing bigger amounts of data.
+#' @param method [ConnectorDatabricksTable]: Which method to use for writing the table. Options:
+#' \itemize{
+#'   \item `volume` - using temporary volume to write data and then convert it to a table.
+#' }
+#'
 #' @export
 write_cnt.ConnectorDatabricksTable <- function(
   connector_object,
   x,
   name,
   ...,
-  method = "volume"
+  method = "volume",
+  overwrite = FALSE
 ) {
   checkmate::assert_character(name)
   checkmate::assert_choice(method, c("volume"), null.ok = FALSE)
   if (method == "volume") {
-    temporary_volume <- tmp_volume(connector_object)
+    volume_name <- tmp_volume_name()
+    temporary_volume <- tmp_volume(connector_object, volume_name)
 
     zephyr::msg_info("Writing to a table...")
+
     temporary_volume$write_cnt(
       x = x,
       name = paste0(name, ".parquet")
     )
+
     parquet_to_table(
       connector_object = connector_object,
       tmp_volume = temporary_volume,
-      name = name
+      name = name,
+      overwrite = overwrite
     )
     zephyr::msg_success("Table written successfully!")
 
     withr::defer(
       brickster::db_uc_volumes_delete(
-        catalog = connector_object$catalog,
-        schema = connector_object$schema,
-        volume = temporary_volume$path
+        catalog = temporary_volume$catalog,
+        schema = temporary_volume$schema,
+        volume = volume_name
       )
     )
     zephyr::msg_info("Temporary volume deleted.")

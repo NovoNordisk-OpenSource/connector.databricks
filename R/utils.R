@@ -18,15 +18,14 @@ tmp_volume_name <- function(prefix = "tmp_", length = 10) {
 #' @param connector_object Connector object
 #' @keywords internal
 #' @noRd
-tmp_volume <- function(connector_object) {
-  tmp_volume_name <- tmp_volume_name()
+tmp_volume <- function(connector_object, volume_name, envir = parent.frame()) {
   catalog <- connector_object$catalog
   schema <- connector_object$schema
 
   tmp_volume <- connector_databricks_volume(
     catalog = catalog,
     schema = schema,
-    path = tmp_volume_name,
+    path = volume_name,
     force = TRUE
   )
 }
@@ -38,27 +37,48 @@ tmp_volume <- function(connector_object) {
 #' @param name Table name
 #' @keywords internal
 #' @noRd
-parquet_to_table <- function(connector_object, tmp_volume, name) {
-  id_of_cluster <- brickster::db_sql_warehouse_list()[[1]]$id
-
+parquet_to_table <- function(
+  connector_object,
+  tmp_volume,
+  name,
+  overwrite = TRUE
+) {
   catalog <- connector_object$catalog
   schema <- connector_object$schema
 
-  # Create table
-  query_create <- glue::glue(
-    "CREATE TABLE IF NOT EXISTS {catalog}.{schema}.{name} USING DELTA;"
-  )
-  brickster::db_sql_exec_query(
-    query_create,
+  if (overwrite == TRUE) {
+    execute_sql_query(glue::glue(
+      "CREATE OR REPLACE TABLE {catalog}.{schema}.`{name}`
+      AS SELECT * FROM parquet.`{tmp_volume$full_path}/{name}.parquet`"
+    ))
+  }
+
+  if (overwrite == FALSE) {
+    # Create table
+    execute_sql_query(glue::glue(
+      "CREATE TABLE {catalog}.{schema}.`{name}`
+      AS SELECT * FROM parquet.`{tmp_volume$full_path}/{name}.parquet`"
+    ))
+  }
+}
+
+#' Execute and check SQL query
+#'
+#' @param query SQL query to be run
+#' @keywords internal
+#' @noRd
+execute_sql_query <- function(query_string) {
+  id_of_cluster <- brickster::db_sql_warehouse_list()[[1]]$id
+
+  result <- brickster::db_sql_exec_query(
+    query_string,
     id_of_cluster
   )
 
-  # Copy parquet file into table
-  query_copy <- glue::glue(
-    "COPY INTO {catalog}.{schema}.{name} FROM '{tmp_volume$full_path}/{name}.parquet' FILEFORMAT = PARQUET  FORMAT_OPTIONS ('header' = 'true') COPY_OPTIONS ('mergeSchema' = 'true', 'force' = 'true');",
-  )
-  test <- brickster::db_sql_exec_query(
-    query_copy,
-    id_of_cluster
-  )
+  if (result$status$state == "FAILED") {
+    cli::cli_abort(paste0(
+      "Execution failed with error: ",
+      result$status$error$message
+    ))
+  }
 }

@@ -28,7 +28,8 @@ Imports:
     purrr,
     R6 (>= 2.4.0),
     rlang,
-    withr
+    withr,
+    zephyr
 Suggests: 
     glue,
     knitr,
