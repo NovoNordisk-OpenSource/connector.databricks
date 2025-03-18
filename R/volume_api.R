@@ -41,13 +41,12 @@
 #'
 #' @export
 list_databricks_volumes <- function(
-  catalog_name,
-  schema_name,
-  max_results = 100,
-  page_token = NULL,
-  include_browse = FALSE,
-  client = DatabricksClient()
-) {
+    catalog_name,
+    schema_name,
+    max_results = 100,
+    page_token = NULL,
+    include_browse = FALSE,
+    client = DatabricksClient()) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = FALSE)
   checkmate::assert_string(x = schema_name, null.ok = FALSE)
@@ -122,14 +121,13 @@ list_databricks_volumes <- function(
 #'
 #' @export
 create_databricks_volume <- function(
-  name,
-  catalog_name = NULL,
-  schema_name = NULL,
-  volume_type = c("MANAGED", "EXTERNAL)"),
-  storage_location = NULL,
-  comment = NULL,
-  client = DatabricksClient()
-) {
+    name,
+    catalog_name = NULL,
+    schema_name = NULL,
+    volume_type = c("MANAGED", "EXTERNAL)"),
+    storage_location = NULL,
+    comment = NULL,
+    client = DatabricksClient()) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = TRUE)
@@ -194,11 +192,10 @@ create_databricks_volume <- function(
 #'
 #' @export
 delete_databricks_volume <- function(
-  name,
-  catalog_name = NULL,
-  schema_name = NULL,
-  client = DatabricksClient()
-) {
+    name,
+    catalog_name = NULL,
+    schema_name = NULL,
+    client = DatabricksClient()) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = TRUE)
@@ -249,11 +246,10 @@ delete_databricks_volume <- function(
 #'
 #' @export
 get_databricks_volume <- function(
-  name,
-  catalog_name,
-  schema_name,
-  client = DatabricksClient()
-) {
+    name,
+    catalog_name,
+    schema_name,
+    client = DatabricksClient()) {
   checkmate::assert_list(client, null.ok = FALSE)
   checkmate::assert_string(x = name, null.ok = FALSE)
   checkmate::assert_string(x = catalog_name, null.ok = FALSE)

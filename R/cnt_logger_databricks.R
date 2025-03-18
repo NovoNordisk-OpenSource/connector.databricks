@@ -9,10 +9,9 @@
 #'
 #' @export
 log_read_connector.ConnectorDatabricksTable <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
 
   msg <- paste0(
@@ -49,10 +48,9 @@ log_read_connector.ConnectorDatabricksTable <- function(
 #'
 #' @export
 log_write_connector.ConnectorDatabricksTable <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
 
   msg <- paste0(
@@ -89,10 +87,9 @@ log_write_connector.ConnectorDatabricksTable <- function(
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksTable <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
 
   msg <- paste0(
@@ -129,10 +126,9 @@ log_remove_connector.ConnectorDatabricksTable <- function(
 #'
 #' @export
 log_read_connector.ConnectorDatabricksVolume <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
   msg <- paste0(name, " @ ", connector_object$full_path)
   whirl::log_read(msg)
@@ -149,10 +145,9 @@ log_read_connector.ConnectorDatabricksVolume <- function(
 #'
 #' @export
 log_write_connector.ConnectorDatabricksVolume <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
   msg <- paste0(name, " @ ", connector_object$full_path)
   whirl::log_write(msg)
@@ -169,10 +164,9 @@ log_write_connector.ConnectorDatabricksVolume <- function(
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksVolume <- function(
-  connector_object,
-  name,
-  ...
-) {
+    connector_object,
+    name,
+    ...) {
   rlang::check_installed("whirl")
   msg <- paste0(name, " @ ", connector_object$full_path)
   whirl::log_delete(msg)

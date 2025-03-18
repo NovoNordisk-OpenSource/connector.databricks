@@ -25,13 +25,12 @@ read_cnt.ConnectorDatabricksTable <- function(connector_object, name, ...) {
 #'
 #' @export
 write_cnt.ConnectorDatabricksTable <- function(
-  connector_object,
-  x,
-  name,
-  ...,
-  method = "volume",
-  overwrite = FALSE
-) {
+    connector_object,
+    x,
+    name,
+    ...,
+    method = "volume",
+    overwrite = FALSE) {
   checkmate::assert_character(name)
   checkmate::assert_choice(method, c("volume"), null.ok = FALSE)
   if (method == "volume") {

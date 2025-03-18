@@ -38,11 +38,10 @@ tmp_volume <- function(connector_object, volume_name, envir = parent.frame()) {
 #' @keywords internal
 #' @noRd
 parquet_to_table <- function(
-  connector_object,
-  tmp_volume,
-  name,
-  overwrite = TRUE
-) {
+    connector_object,
+    tmp_volume,
+    name,
+    overwrite = TRUE) {
   catalog <- connector_object$catalog
   schema <- connector_object$schema
 

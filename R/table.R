@@ -50,11 +50,10 @@
 #'
 #' @export
 connector_databricks_table <- function(
-  http_path,
-  catalog,
-  schema,
-  extra_class = NULL
-) {
+    http_path,
+    catalog,
+    schema,
+    extra_class = NULL) {
   ConnectorDatabricksTable$new(
     http_path = http_path,
     catalog = catalog,
