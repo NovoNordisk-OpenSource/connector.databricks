@@ -39,10 +39,10 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, open <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksVolume'</span></span>
-<span><span class="fu">create_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, <span class="va">...</span>, open <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">create_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, open <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,12 +57,12 @@
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The name of the directory to create</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p><a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a>: Additional parameters to pass to the <a href="https://rdrr.io/pkg/brickster/man/db_volume_dir_create.html" class="external-link">brickster::db_volume_dir_create</a> method</p></dd>
-
-
 <dt id="arg-open">open<a class="anchor" aria-label="anchor" href="#arg-open"></a></dt>
 <dd><p>create a new connector object</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p><a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a>: Additional parameters to pass to the <a href="https://rdrr.io/pkg/brickster/man/db_volume_dir_create.html" class="external-link">brickster::db_volume_dir_create</a> method</p></dd>
 
 </dl></div>
     <div class="section level2">
