@@ -30,7 +30,7 @@ provided.}
 \item{force}{If TRUE, the volume will be created without
 asking if it does not exist.}
 
-\item{...}{Additional arguments passed to the \link[connector:connector-package]{connector::connector}}
+\item{...}{Additional arguments passed to the \link[connector:Connector]{connector::connector}}
 }
 \value{
 A new \link{ConnectorDatabricksVolume} object

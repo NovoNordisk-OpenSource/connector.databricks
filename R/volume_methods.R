@@ -14,7 +14,7 @@ read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
     unlink(name)
   })
 
-  return(content)
+  content
 }
 
 #' @description
@@ -44,7 +44,8 @@ write_cnt.ConnectorDatabricksVolume <- function(
     file = tmp_name,
     overwrite = overwrite
   )
-  return(invisible(connector_object))
+
+  invisible(connector_object)
 }
 
 #' @description
@@ -64,7 +65,8 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
     purrr::map(list_of_items, ~ purrr::map(.x, "name")),
     use.names = FALSE
   )
-  return(content_names)
+
+  content_names
 }
 
 #' @description
@@ -79,7 +81,7 @@ remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_delete(path = file_path)
 
-  return(invisible(connector_object))
+  invisible(connector_object)
 }
 
 #' @description
@@ -99,7 +101,8 @@ download_cnt.ConnectorDatabricksVolume <- function(
     ...) {
   file_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_read(path = file_path, destination = file, ...)
-  return(invisible(connector_object))
+
+  invisible(connector_object)
 }
 
 #' @description
@@ -126,7 +129,8 @@ upload_cnt.ConnectorDatabricksVolume <- function(
     overwrite = overwrite,
     ...
   )
-  return(invisible(connector_object))
+
+  invisible(connector_object)
 }
 
 #' Create a directory
@@ -140,15 +144,16 @@ upload_cnt.ConnectorDatabricksVolume <- function(
 create_directory_cnt.ConnectorDatabricksVolume <- function(
     connector_object,
     name,
-    ...,
-    open = TRUE) {
+    open = TRUE,
+    ...) {
   directory_path <- file.path(connector_object$full_path, name)
 
   brickster::db_volume_dir_create(path = directory_path, ...)
   if (open) {
     connector_object <- connector_databricks_volume(full_path = directory_path)
   }
-  return(invisible(connector_object))
+
+  invisible(connector_object)
 }
 
 #' Remove a directory
@@ -164,7 +169,8 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
     ...) {
   directory_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_dir_delete(path = directory_path)
-  return(invisible(connector_object))
+
+  invisible(connector_object)
 }
 
 #' @description
