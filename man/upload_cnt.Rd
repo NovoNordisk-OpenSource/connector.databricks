@@ -28,7 +28,7 @@ upload_cnt(
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{overwrite}{Overwrite file if it already exists}
+\item{overwrite}{Overwrite existing content if it exists in the connector?. Default: \code{FALSE}.}
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 }

@@ -47,6 +47,7 @@ test_that(paste("Table generics work for connector_databricks_table"), {
     ) |>
       expect_no_failure()
 
+    Sys.sleep(2)
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
 
@@ -83,7 +84,7 @@ test_that(paste("Table generics work for connector_databricks_table"), {
     tryCatch(
       cnt$read_cnt(temp_table_name),
       error = function(e) {
-        return("Error occurred")
+        "Error occurred"
       }
     ) |>
       expect_equal("Error occurred")
