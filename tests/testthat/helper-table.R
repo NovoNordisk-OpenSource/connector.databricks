@@ -4,7 +4,7 @@ create_temp_dataset <- function() {
   x <- mtcars
   x$car <- rownames(x)
   rownames(x) <- NULL
-  return(x)
+  x
 }
 
 # in DBI::dbGetQuery the - characters in arguments are being interpreted as minus operators
