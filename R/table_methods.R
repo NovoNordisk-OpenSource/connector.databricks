@@ -53,10 +53,10 @@ write_cnt.ConnectorDatabricksTable <- function(
     zephyr::msg_success("Table written successfully!")
 
     withr::defer(
-      brickster::db_uc_volumes_delete(
-        catalog = temporary_volume$catalog,
-        schema = temporary_volume$schema,
-        volume = volume_name
+      delete_databricks_volume(
+        catalog_name = temporary_volume$catalog,
+        schema_name = temporary_volume$schema,
+        name = volume_name
       )
     )
     zephyr::msg_info("Temporary volume deleted.")
