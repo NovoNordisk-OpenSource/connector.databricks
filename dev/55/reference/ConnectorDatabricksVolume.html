@@ -75,12 +75,12 @@ inside Databricks volumes.</p>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-ConnectorDatabricksVolume-new"><code>ConnectorDatabricksVolume$new()</code></a></p></li>
-<li><p><a href="#method-ConnectorDatabricksVolume-write_cnt"><code>ConnectorDatabricksVolume$write_cnt()</code></a></p></li>
 <li><p><a href="#method-ConnectorDatabricksVolume-clone"><code>ConnectorDatabricksVolume$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="list_content_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-list_content_cnt"><code>connector::Connector$list_content_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-print"><code>connector::Connector$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-read_cnt"><code>connector::Connector$read_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-remove_cnt"><code>connector::Connector$remove_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-write_cnt"><code>connector::Connector$write_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="create_directory_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorFS.html#method-create_directory_cnt"><code>connector::ConnectorFS$create_directory_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="download_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorFS.html#method-download_cnt"><code>connector::ConnectorFS$download_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="download_directory_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorFS.html#method-download_directory_cnt"><code>connector::ConnectorFS$download_directory_cnt()</code></a></span></li>
@@ -143,44 +143,15 @@ asking if it does not exist.</p></dd>
 <p>A new ConnectorDatabricksVolume object</p>
 </div>
 
-</div><p></p><hr><a id="method-ConnectorDatabricksVolume-write_cnt"></a><div class="section">
-<h3 id="method-write-cnt-">Method <code><a href="write_cnt.html">write_cnt()</a></code><a class="anchor" aria-label="anchor" href="#method-write-cnt-"></a></h3>
-<p>Write a file to volume</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ConnectorDatabricksVolume</span><span class="op">$</span><span class="fu">write_cnt</span><span class="op">(</span><span class="va">x</span>, <span class="va">name</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>x</code></dt>
-<dd><p>The object to write to the connection</p></dd>
-
-
-<dt><code>name</code></dt>
-<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> Name of the content to read, write, or remove. Typically the table name.</p></dd>
-
-
-<dt><code>overwrite</code></dt>
-<dd><p>If TRUE, an existing file will be overwritten (default: TRUE)</p></dd>
-
-
-<dt><code>...</code></dt>
-<dd><p>Additional arguments passed to the method for the individual connector.
-Write content to the connector. See also <a href="write_cnt.html">write_cnt</a>.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
 </div><p></p><hr><a id="method-ConnectorDatabricksVolume-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ConnectorDatabricksVolume</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
