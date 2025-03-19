@@ -50,7 +50,6 @@ cnt$read_cnt("iris.rds") |>
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ConnectorDatabricksVolume-new}{\code{ConnectorDatabricksVolume$new()}}
-\item \href{#method-ConnectorDatabricksVolume-write_cnt}{\code{ConnectorDatabricksVolume$write_cnt()}}
 \item \href{#method-ConnectorDatabricksVolume-clone}{\code{ConnectorDatabricksVolume$clone()}}
 }
 }
@@ -61,6 +60,7 @@ cnt$read_cnt("iris.rds") |>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href='../../connector/html/Connector.html#method-Connector-print'><code>connector::Connector$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href='../../connector/html/Connector.html#method-Connector-read_cnt'><code>connector::Connector$read_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href='../../connector/html/Connector.html#method-Connector-remove_cnt'><code>connector::Connector$remove_cnt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href='../../connector/html/Connector.html#method-Connector-write_cnt'><code>connector::Connector$write_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="create_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-create_directory_cnt'><code>connector::ConnectorFS$create_directory_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="download_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-download_cnt'><code>connector::ConnectorFS$download_cnt()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorFS" data-id="download_directory_cnt"><a href='../../connector/html/ConnectorFS.html#method-ConnectorFS-download_directory_cnt'><code>connector::ConnectorFS$download_directory_cnt()</code></a></span></li>
@@ -112,30 +112,6 @@ asking if it does not exist.}
 }
 \subsection{Returns}{
 A new \link{ConnectorDatabricksVolume} object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksVolume-write_cnt"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksVolume-write_cnt}{}}}
-\subsection{Method \code{write_cnt()}}{
-Write a file to volume
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksVolume$write_cnt(x, name, overwrite = FALSE, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{The object to write to the connection}
-
-\item{\code{name}}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
-
-\item{\code{overwrite}}{If TRUE, an existing file will be overwritten (default: TRUE)}
-
-\item{\code{...}}{Additional arguments passed to the method for the individual connector.
-Write content to the connector. See also \link{write_cnt}.}
-}
-\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
