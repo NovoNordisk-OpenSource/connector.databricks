@@ -103,8 +103,8 @@ provided.}
 
 \item{\code{extra_class}}{\link{character} Extra class to assign to the new connector.}
 
-\item{\code{force}}{\link{logical} If TRUE, the volume will be created without
-asking if it does not exist.}
+\item{\code{force}}{\link{logical} If TRUE, the volume will be created without asking
+if it does not exist.}
 
 \item{\code{...}}{Additional arguments passed to the superclass's initialize method}
 }
