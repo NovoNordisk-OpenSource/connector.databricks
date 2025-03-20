@@ -15,7 +15,15 @@ write_cnt(
   ...
 )
 
-\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, overwrite = FALSE, ..., method = "volume")
+\method{write_cnt}{ConnectorDatabricksTable}(
+  connector_object,
+  x,
+  name,
+  overwrite = FALSE,
+  ...,
+  method = "volume",
+  tags = NULL
+)
 
 \method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
 }
@@ -34,6 +42,10 @@ write_cnt(
 \itemize{
 \item \code{volume} - using temporary volume to write data and then convert it to a table.
 }}
+
+\item{tags}{Named list containing tag names and tag values, e.g.
+list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
+More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
 }
 \value{
 \link{ConnectorDatabricksVolume} object

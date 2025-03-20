@@ -22,45 +22,23 @@ read_cnt.ConnectorDatabricksTable <- function(connector_object, name, ...) {
 #' \itemize{
 #'   \item `volume` - using temporary volume to write data and then convert it to a table.
 #' }
-#'
+#' @param tags Named list containing tag names and tag values, e.g.
+#' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
+#' More info [here](https://docs.databricks.com/aws/en/database-objects/tags)
 #' @export
 write_cnt.ConnectorDatabricksTable <- function(
-    connector_object,
-    x,
-    name,
-    overwrite = FALSE,
-    ...,
-    method = "volume") {
+  connector_object,
+  x,
+  name,
+  overwrite = FALSE,
+  ...,
+  method = "volume",
+  tags = NULL
+) {
   checkmate::assert_character(name)
   checkmate::assert_choice(method, c("volume"), null.ok = FALSE)
   if (method == "volume") {
-    volume_name <- tmp_volume_name()
-    temporary_volume <- tmp_volume(connector_object, volume_name)
-
-    zephyr::msg_info("Writing to a table...")
-
-    temporary_volume$write_cnt(
-      x = x,
-      name = paste0(name, ".parquet")
-    )
-
-    parquet_to_table(
-      connector_object = connector_object,
-      tmp_volume = temporary_volume,
-      name = name,
-      overwrite = overwrite
-    )
-    zephyr::msg_success("Table written successfully!")
-
-    withr::defer(
-      delete_databricks_volume(
-        catalog_name = temporary_volume$catalog,
-        schema_name = temporary_volume$schema,
-        name = volume_name
-      )
-    )
-    zephyr::msg_info("Temporary volume deleted.")
-
+    write_table_volume(connector_object, x, name, overwrite, tags)
     return(invisible(connector_object))
   }
 }
