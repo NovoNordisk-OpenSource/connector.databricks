@@ -75,7 +75,15 @@ convert it to a table.</p></li>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksTable'</span></span>
-<span><span class="fu">write_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">x</span>, <span class="va">name</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span>, method <span class="op">=</span> <span class="st">"volume"</span><span class="op">)</span></span>
+<span><span class="fu">write_cnt</span><span class="op">(</span></span>
+<span>  <span class="va">connector_object</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">name</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"volume"</span>,</span>
+<span>  tags <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksVolume'</span></span>
 <span><span class="fu">write_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">x</span>, <span class="va">name</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -108,6 +116,12 @@ convert it to a table.</p></li>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p><a href="ConnectorDatabricksTable.html">ConnectorDatabricksTable</a>: Which method to use for writing the table. Options:</p><ul><li><p><code>volume</code> - using temporary volume to write data and then convert it to a table.</p></li>
 </ul></dd>
+
+
+<dt id="arg-tags">tags<a class="anchor" aria-label="anchor" href="#arg-tags"></a></dt>
+<dd><p>Named list containing tag names and tag values, e.g.
+list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
+More info <a href="https://docs.databricks.com/aws/en/database-objects/tags" class="external-link">here</a></p></dd>
 
 </dl></div>
     <div class="section level2">
