@@ -1,3 +1,9 @@
+# connector.databricks 0.0.4.9000
+
+## New features and improvements
+
+* Update `write_cnt()` to use temporary volume solution, in order to allow upload of bigger files.
+
 # connector.databricks 0.0.4
 
 * Minor tweaks to the DESCRIPTION file. Removed references to 'external' non-CRAN GitHub packages.

@@ -43,14 +43,13 @@
 #'
 #' @export
 connector_databricks_volume <- function(
-  full_path = NULL,
-  catalog = NULL,
-  schema = NULL,
-  path = NULL,
-  extra_class = NULL,
-  force = FALSE,
-  ...
-) {
+    full_path = NULL,
+    catalog = NULL,
+    schema = NULL,
+    path = NULL,
+    extra_class = NULL,
+    force = FALSE,
+    ...) {
   connector <- ConnectorDatabricksVolume$new(
     full_path = full_path,
     catalog = catalog,
@@ -109,23 +108,21 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #' @param schema [character] Databricks schema
     #' @param path [character] Path to the file storage
     #' @param extra_class [character] Extra class to assign to the new connector.
-    #' @param force [logical] If TRUE, the volume will be created without
-    #' asking if it does not exist.
+    #' @param force [logical] If TRUE, the volume will be created without asking
+    #' if it does not exist.
     #' @param ... Additional arguments passed to the superclass's initialize method
     #'
     #' @importFrom cli cli_abort
     #' @importFrom checkmate assert_string assert_logical
     #'
     #' @return A new [ConnectorDatabricksVolume] object
-    initialize = function(
-      full_path = NULL,
-      catalog = NULL,
-      schema = NULL,
-      path = NULL,
-      extra_class = NULL,
-      force = FALSE,
-      ...
-    ) {
+    initialize = function(full_path = NULL,
+                          catalog = NULL,
+                          schema = NULL,
+                          path = NULL,
+                          extra_class = NULL,
+                          force = FALSE,
+                          ...) {
       if (is.null(full_path)) {
         checkmate::assert_string(x = path, null.ok = FALSE)
         checkmate::assert_string(x = catalog, null.ok = FALSE)
@@ -168,17 +165,6 @@ ConnectorDatabricksVolume <- R6::R6Class(
       private$.schema <- schema
 
       super$initialize(path = path, extra_class = extra_class, ...)
-    },
-
-    #' @description Write a file to volume
-    #' @param x The object to write to the connection
-    #' @param name [character] Name of the content to read, write, or remove. Typically the table name.
-    #' @param overwrite If TRUE, an existing file will be overwritten (default: TRUE)
-    #' @param ... Additional arguments passed to the method for the individual connector.
-    #' Write content to the connector. See also [write_cnt].
-    write_cnt = function(x, name, overwrite = FALSE, ...) {
-      self |>
-        write_cnt(x, name, overwrite, ...)
     }
   ),
   active = list(

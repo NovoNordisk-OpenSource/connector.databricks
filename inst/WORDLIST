@@ -4,12 +4,15 @@ api
 aut
 brickster
 calatog
+Cervan
+cgid
 cli
 CLI
 cloneable
 CMD
 cnt
 Config
+ConnectorDatabricksTable
 ConnectorDatabricksVolume
 cph
 cre
@@ -27,6 +30,7 @@ expr
 Falgreen
 ffffff
 getenv
+Girard
 github
 http
 https
@@ -54,6 +58,7 @@ odbc
 opensource
 OpenSource
 os
+pkgdown
 png
 purrr
 Qbt
@@ -82,5 +87,6 @@ vlob
 withr
 YAML
 Yk
+yml
 ƣ
 ϥ

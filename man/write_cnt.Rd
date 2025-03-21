@@ -7,9 +7,23 @@
 \alias{write_cnt.ConnectorDatabricksVolume}
 \title{Write content to the connector}
 \usage{
-write_cnt(connector_object, x, name, ...)
+write_cnt(
+  connector_object,
+  x,
+  name,
+  overwrite = zephyr::get_option("overwrite", "connector"),
+  ...
+)
 
-\method{write_cnt}{ConnectorDatabricksTable}(connector_object, x, name, ...)
+\method{write_cnt}{ConnectorDatabricksTable}(
+  connector_object,
+  x,
+  name,
+  overwrite = FALSE,
+  ...,
+  method = "volume",
+  tags = NULL
+)
 
 \method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
 }
@@ -20,9 +34,18 @@ write_cnt(connector_object, x, name, ...)
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
+\item{overwrite}{Overwrite a file if it already exists}
+
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 
-\item{overwrite}{Overwrite a file if it already exists}
+\item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the table. Options:
+\itemize{
+\item \code{volume} - using temporary volume to write data and then convert it to a table.
+}}
+
+\item{tags}{Named list containing tag names and tag values, e.g.
+list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
+More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
 }
 \value{
 \link{ConnectorDatabricksVolume} object
@@ -31,8 +54,8 @@ write_cnt(connector_object, x, name, ...)
 Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a parquet file and then
+convert it to a table.
 }
 
 \itemize{

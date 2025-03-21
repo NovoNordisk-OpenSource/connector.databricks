@@ -1,4 +1,4 @@
-test_that(paste("DBI generics work for connector_databricks_table"), {
+test_that("write_table_volume works", {
   if (
     all(
       c(
@@ -22,8 +22,6 @@ test_that(paste("DBI generics work for connector_databricks_table"), {
       format(Sys.time(), "%Y%m%d%H%M%S")
     )
 
-    expect_error(connector_databricks_table(http_path = 1))
-
     # initialized with appropriate values for catalog, schema, and conn
     cnt <- connector_databricks_table(
       http_path = http_path_local,
@@ -31,17 +29,16 @@ test_that(paste("DBI generics work for connector_databricks_table"), {
       schema = schema_local
     )
 
-    cnt |>
-      expect_no_error()
+    write_table_volume(
+      connector_object = cnt,
+      x = create_temp_dataset(),
+      name = temp_table_name,
+      overwrite = FALSE,
+      tags = list("tag1" = "test1", "tag2" = "test2")
+    ) |>
+      expect_no_failure()
 
-    checkmate::assert_r6(
-      cnt,
-      classes = c("ConnectorDatabricksTable"),
-      private = c(".catalog", ".schema")
-    )
-
-    cnt$write_cnt(create_temp_dataset(), temp_table_name) |>
-      expect_no_condition()
+    Sys.sleep(3)
 
     cnt$list_content_cnt() |>
       expect_contains(temp_table_name)
@@ -49,14 +46,19 @@ test_that(paste("DBI generics work for connector_databricks_table"), {
     cnt$read_cnt(temp_table_name) |>
       expect_equal(create_temp_dataset())
 
-    cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
-      expect_no_condition()
-
     cnt$tbl_cnt(temp_table_name) |>
       dplyr::filter(car == "Mazda RX4") |>
       dplyr::select(car, mpg) |>
       dplyr::collect() |>
       expect_equal(dplyr::tibble(car = "Mazda RX4", mpg = 21))
+
+    write_table_volume(
+      connector_object = cnt,
+      x = create_temp_dataset(),
+      name = temp_table_name,
+      overwrite = TRUE
+    ) |>
+      expect_no_failure()
 
     cnt$conn |>
       DBI::dbGetQuery(paste(
@@ -72,17 +74,6 @@ test_that(paste("DBI generics work for connector_databricks_table"), {
 
     cnt$remove_cnt(temp_table_name) |>
       expect_no_condition()
-
-    cnt$disconnect_cnt() |>
-      expect_no_condition()
-
-    tryCatch(
-      cnt$read_cnt(temp_table_name),
-      error = function(e) {
-        return("Error occurred")
-      }
-    ) |>
-      expect_equal("Error occurred")
   } else {
     skip(
       "Skipping test as http_path_local, catalog_local, or schema_local is NULL"
