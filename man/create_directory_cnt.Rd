@@ -5,7 +5,7 @@
 \alias{create_directory_cnt.ConnectorDatabricksVolume}
 \title{Create a directory}
 \usage{
-create_directory_cnt(connector_object, name, open = TRUE, ...)
+create_directory_cnt(connector_object, name, ...)
 
 \method{create_directory_cnt}{ConnectorDatabricksVolume}(connector_object, name, open = TRUE, ...)
 }
@@ -14,9 +14,9 @@ create_directory_cnt(connector_object, name, open = TRUE, ...)
 
 \item{name}{\link{character} The name of the directory to create}
 
-\item{open}{create a new connector object}
-
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \link[brickster:db_volume_dir_create]{brickster::db_volume_dir_create} method}
+
+\item{open}{create a new connector object}
 }
 \value{
 \link{ConnectorDatabricksVolume} object or \link{ConnectorDatabricksVolume} object of a newly built directory
