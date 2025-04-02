@@ -41,19 +41,13 @@
 #'
 #' @export
 list_databricks_volumes <- function(
-    catalog_name,
-    schema_name,
-    max_results = 100,
-    page_token = NULL,
-    include_browse = FALSE,
-    client = DatabricksClient()) {
-  checkmate::assert_list(client, null.ok = FALSE)
-  checkmate::assert_string(x = catalog_name, null.ok = FALSE)
-  checkmate::assert_string(x = schema_name, null.ok = FALSE)
-  checkmate::assert_numeric(x = max_results, null.ok = FALSE)
-  checkmate::assert_string(x = page_token, null.ok = TRUE)
-  checkmate::assert_logical(x = include_browse, null.ok = TRUE)
-
+  catalog_name,
+  schema_name,
+  max_results = 100,
+  page_token = NULL,
+  include_browse = FALSE,
+  client = DatabricksClient()
+) {
   query <- list(
     catalog_name = catalog_name,
     schema_name = schema_name,
@@ -121,20 +115,15 @@ list_databricks_volumes <- function(
 #'
 #' @export
 create_databricks_volume <- function(
-    name,
-    catalog_name = NULL,
-    schema_name = NULL,
-    volume_type = c("MANAGED", "EXTERNAL)"),
-    storage_location = NULL,
-    comment = NULL,
-    client = DatabricksClient()) {
-  checkmate::assert_list(client, null.ok = FALSE)
-  checkmate::assert_string(x = name, null.ok = FALSE)
-  checkmate::assert_string(x = catalog_name, null.ok = TRUE)
-  checkmate::assert_string(x = schema_name, null.ok = TRUE)
+  name,
+  catalog_name = NULL,
+  schema_name = NULL,
+  volume_type = c("MANAGED", "EXTERNAL)"),
+  storage_location = NULL,
+  comment = NULL,
+  client = DatabricksClient()
+) {
   volume_type <- match.arg(volume_type)
-  checkmate::assert_string(x = storage_location, null.ok = TRUE)
-  checkmate::assert_string(x = comment, null.ok = TRUE)
 
   query <- list(
     name = name,
@@ -192,15 +181,11 @@ create_databricks_volume <- function(
 #'
 #' @export
 delete_databricks_volume <- function(
-    name,
-    catalog_name = NULL,
-    schema_name = NULL,
-    client = DatabricksClient()) {
-  checkmate::assert_list(client, null.ok = FALSE)
-  checkmate::assert_string(x = name, null.ok = FALSE)
-  checkmate::assert_string(x = catalog_name, null.ok = TRUE)
-  checkmate::assert_string(x = schema_name, null.ok = TRUE)
-
+  name,
+  catalog_name = NULL,
+  schema_name = NULL,
+  client = DatabricksClient()
+) {
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
   result <- client$do(
     "DELETE",
@@ -246,15 +231,11 @@ delete_databricks_volume <- function(
 #'
 #' @export
 get_databricks_volume <- function(
-    name,
-    catalog_name,
-    schema_name,
-    client = DatabricksClient()) {
-  checkmate::assert_list(client, null.ok = FALSE)
-  checkmate::assert_string(x = name, null.ok = FALSE)
-  checkmate::assert_string(x = catalog_name, null.ok = FALSE)
-  checkmate::assert_string(x = schema_name, null.ok = FALSE)
-
+  name,
+  catalog_name,
+  schema_name,
+  client = DatabricksClient()
+) {
   volume_path <- paste(c(catalog_name, schema_name, name), collapse = ".")
   result <- client$do(
     "GET",
