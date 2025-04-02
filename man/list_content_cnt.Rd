@@ -9,7 +9,7 @@
 \usage{
 list_content_cnt(connector_object, ...)
 
-\method{list_content_cnt}{ConnectorDatabricksTable}(connector_object, ...)
+\method{list_content_cnt}{ConnectorDatabricksTable}(connector_object, ..., tags = NULL)
 
 \method{list_content_cnt}{ConnectorDatabricksVolume}(connector_object, ...)
 }
@@ -17,6 +17,10 @@ list_content_cnt(connector_object, ...)
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_list]{brickster::db_volume_list()}} method}
+
+\item{tags}{Expression to be translated to SQL using \code{\link[dbplyr:translate_sql]{dbplyr::translate_sql()}} e.g.
+\code{((tag_name == "name1" && tag_value == "value1") || (tag_name == "name2"))}.
+It should contain \code{tag_name} and \code{tag_value} values to filter by.}
 }
 \value{
 A \link{character} vector of content names

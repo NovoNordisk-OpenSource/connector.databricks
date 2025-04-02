@@ -1,4 +1,4 @@
-test_that(paste("Table generics work for connector_databricks_table"), {
+test_that("Table generics work for connector_databricks_table", {
   if (
     all(
       c(
@@ -40,17 +40,18 @@ test_that(paste("Table generics work for connector_databricks_table"), {
       private = c(".catalog", ".schema")
     )
 
+    # Custom tag to search for
+    tag_value <- generate_random_string("value_")
+
     cnt$write_cnt(
       x = create_temp_dataset(),
       name = temp_table_name,
-      method = "volume"
+      method = "volume",
+      tags = list("tag_name" = tag_value)
     ) |>
       expect_no_failure()
 
-    # Wait for writing to be done
-    Sys.sleep(5)
-
-    cnt$list_content_cnt() |>
+    cnt$list_content_cnt(tags = tag_name == tag_value) |>
       expect_contains(temp_table_name)
 
     cnt$read_cnt(temp_table_name) |>
@@ -64,6 +65,9 @@ test_that(paste("Table generics work for connector_databricks_table"), {
 
     cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
       expect_no_failure()
+
+    cnt$list_content_cnt() |>
+      expect_contains(temp_table_name)
 
     cnt$conn |>
       DBI::dbGetQuery(paste(

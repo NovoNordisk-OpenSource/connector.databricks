@@ -9,9 +9,11 @@ rlang::check_installed("glue")
 
 if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   if (!all(testing_env_variables %in% names(Sys.getenv()))) {
-    cli::cli_abort("Not all testing parameters are set. Please set environment variables:
+    cli::cli_abort(
+      "Not all testing parameters are set. Please set environment variables:
       DATABRICKS_VOLUME, DATABRICKS_CATALOG_NAME and DATABRICKS_SCHEMA_NAME in order to be
-    able to test the package.")
+    able to test the package."
+    )
   } else {
     # Databricks catalog used throughout tests
     setup_db_catalog <- Sys.getenv("DATABRICKS_CATALOG_NAME")
@@ -22,15 +24,30 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
     # Setup databricks volume path
     setup_databricks_volume <- Sys.getenv("DATABRICKS_VOLUME")
 
-    # Databricks volume used throughout tests
-    setup_db_volume_path <- paste(setup_db_catalog, setup_db_schema, "local_test_volume", sep = "/")
+    # Setup Databricks table http path
+    setup_db_http_path <- Sys.getenv("DATABRICKS_HTTP_PATH")
 
-    # Connector object testing
+    # Databricks volume used throughout tests
+    setup_db_volume_path <- paste(
+      setup_db_catalog,
+      setup_db_schema,
+      "local_test_volume",
+      sep = "/"
+    )
+
+    # Connector Volume object testing
     setup_volume_connector <- connector_databricks_volume(
       catalog = setup_db_catalog,
       schema = setup_db_schema,
       path = "local_test_volume",
       force = TRUE
+    )
+
+    # Connector Table object testing
+    setup_table_connector <- connector_databricks_table(
+      catalog = setup_db_catalog,
+      schema = setup_db_schema,
+      http_path = setup_db_http_path
     )
 
     ##  Run after all tests

@@ -21,3 +21,25 @@ custom_paste_with_back_quotes <- function(..., sep = " ") {
   })
   paste(quoted_args, collapse = sep)
 }
+
+# Generate temporary table name
+temp_table_name <- function() {
+  paste0(
+    "temp-mtcars_",
+    format(Sys.time(), "%Y%m%d%H%M%S")
+  )
+}
+
+# Utility function for generating random names with prefix
+generate_random_string <- function(prefix, length = 3) {
+  # Define the characters to use
+  chars <- c(LETTERS, letters, 0:9) # Uppercase, lowercase, and digits
+
+  # Generate random part
+  random_part <- paste0(sample(chars, length, replace = TRUE), collapse = "")
+
+  # Combine prefix and random part
+  result <- paste0(prefix, random_part)
+
+  return(result)
+}

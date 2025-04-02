@@ -48,13 +48,24 @@ write_cnt.ConnectorDatabricksTable <- function(
 #' but always sets the `catalog` and `schema` as defined in when initializing the connector.
 #'
 #' @rdname list_content_cnt
+#' @param tags Expression to be translated to SQL using [dbplyr::translate_sql()] e.g.
+#' `((tag_name == "name1" && tag_value == "value1") || (tag_name == "name2"))`.
+#' It should contain `tag_name` and `tag_value` values to filter by.
 #' @export
-list_content_cnt.ConnectorDatabricksTable <- function(connector_object, ...) {
-  DBI::dbListTables(
-    conn = connector_object$conn,
-    catalog_name = connector_object$catalog,
-    schema_name = connector_object$schema
-  )
+list_content_cnt.ConnectorDatabricksTable <- function(
+  connector_object,
+  ...,
+  tags = NULL
+) {
+  tags <- dbplyr::translate_sql({{ tags }}, con = connector_object$conn)
+  if (is.na(tags["sql"])) {
+    return(DBI::dbListTables(
+      conn = connector_object$conn,
+      catalog_name = connector_object$catalog,
+      schema_name = connector_object$schema
+    ))
+  }
+  return(list_content_tags(connector_object, tags))
 }
 
 #' @description
