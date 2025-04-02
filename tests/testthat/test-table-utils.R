@@ -1,3 +1,7 @@
+# Skip interactive tests on CI and CRAN
+skip_on_ci()
+skip_on_cran()
+
 test_that("write_table_volume fails when needed", {
   temp_table_name <- paste0(
     "temp-mtcars_",
@@ -49,10 +53,6 @@ test_that("list_content_tags fails when needed", {
       regexp = "Assertion on 'tags' failed: Must be of type 'character'"
     )
 })
-
-# Skip interactive tests on CI and CRAN
-skip_on_ci()
-skip_on_cran()
 
 test_that("write_table_volume works", {
   table_name <- temp_table_name()
