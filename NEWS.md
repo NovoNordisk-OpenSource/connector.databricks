@@ -1,8 +1,9 @@
-# connector.databricks 0.0.4.9000
+# connector.databricks 0.0.4.9001
 
 ## New features and improvements
 
 * Update `write_cnt()` to use temporary volume solution, in order to allow upload of bigger files.
+* Update `list_content_cnt()` to use tags when listing tables in Databricks.
 
 # connector.databricks 0.0.4
 

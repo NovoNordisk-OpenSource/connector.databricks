@@ -23,6 +23,7 @@ DatabricksClient
 databrickslabs
 datasources
 dbi
+dbplyr
 dev
 dplyr
 dw

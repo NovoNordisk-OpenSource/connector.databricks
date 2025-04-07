@@ -59,7 +59,6 @@ parquet_to_table <- function(
   }
 
   if (overwrite == FALSE) {
-    # Create table
     execute_sql_query(
       glue::glue(
         "CREATE TABLE {catalog}.{schema}.`{name}`
@@ -124,85 +123,17 @@ execute_sql_query <- function(query_string, cluster_id) {
       result$status$error$message
     ))
   }
-}
 
-
-#' Write data to a table using Databricks Volume
-#'
-#' This function first writes parquet file to a temporary Databricks Volume and then
-#' converts it to a table.
-#'
-#' @param connector_object A [ConnectorDatabricksTable] object for interacting with Databricks
-#' @param x The data to be written to the table
-#' @param name The name of the table
-#' @param overwrite Logical indicating whether to overwrite the table if it already exists
-#' @param tags Named list containing tag names and tag values, e.g.
-#' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").
-#' More info [here](https://docs.databricks.com/aws/en/database-objects/tags)
-#' @return None
-#' @export
-#' @examples
-#' \dontrun{
-#' write_table_volume(connector_object, data, "my_table", overwrite = TRUE, tags = list("tag_name1" = "tag_value1"))
-#' }
-write_table_volume <- function(
-  connector_object,
-  x,
-  name,
-  overwrite = TRUE,
-  tags = NULL
-) {
-  checkmate::assert_r6(
-    x = connector_object,
-    classes = "ConnectorDatabricksTable",
-    null.ok = FALSE
-  )
-  checkmate::assert_character(x = name, null.ok = FALSE)
-  checkmate::assert_logical(x = overwrite, null.ok = FALSE)
-  checkmate::assert_list(tags, null.ok = TRUE)
-
-  volume_name <- tmp_volume_name()
-  temporary_volume <- tryCatch(
-    {
-      tmp_volume(connector_object, volume_name)
-    },
-    error = function(e) {
-      zephyr::msg_danger(paste0(
-        "Temporary volume creation failed. Error message:",
-        e
-      ))
-    }
-  )
-
-  zephyr::msg_info("Writing to a table...")
-
-  temporary_volume$write_cnt(
-    x = x,
-    name = paste0(name, ".parquet")
-  )
-
-  parquet_to_table(
-    connector_object = connector_object,
-    tmp_volume = temporary_volume,
-    name = name,
-    overwrite = overwrite
-  )
-
-  if (!is.null(tags)) {
-    add_table_tags(
-      connector_object = connector_object,
-      tags = tags,
-      name = name
+  time_ <- Sys.time()
+  while (result$status$state != "SUCCEEDED" || time_ < 120) {
+    try(
+      {
+        result <- brickster::db_sql_exec_status(result$statement_id)
+        time_ <- Sys.time() - time_
+      },
+      silent = TRUE
     )
   }
-  zephyr::msg_success("Table written successfully!")
 
-  withr::defer(
-    delete_databricks_volume(
-      catalog_name = temporary_volume$catalog,
-      schema_name = temporary_volume$schema,
-      name = volume_name
-    )
-  )
-  zephyr::msg_info("Temporary volume deleted.")
+  result
 }

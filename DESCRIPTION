@@ -1,5 +1,5 @@
 Package: connector.databricks
-Version: 0.0.4.9000
+Version: 0.0.4.9001
 Title: Expansion of the connector package for enabling connections to
     databricks
 Authors@R: c(
@@ -15,7 +15,7 @@ Description: Expands the connector package to handle databricks. This
 License: Apache License (>= 2)
 URL: https://novonordisk-opensource.github.io/connector.databricks,
     https://github.com/novonordisk-opensource/connector.databricks
-Imports: 
+Imports:
     brickster,
     checkmate,
     cli,
@@ -29,8 +29,9 @@ Imports:
     R6 (>= 2.4.0),
     rlang,
     withr,
-    zephyr
-Suggests: 
+    zephyr,
+    dbplyr
+Suggests:
     glue,
     knitr,
     mockery (>= 0.4.4),
@@ -38,9 +39,9 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     whirl (>= 0.1.8.9000)
-VignetteBuilder: 
+VignetteBuilder:
     knitr, rmarkdown
-Remotes: 
+Remotes:
     github::NovoNordisk-OpenSource/connector,
     github::NovoNordisk-Opensource/whirl
 Config/testthat/edition: 3

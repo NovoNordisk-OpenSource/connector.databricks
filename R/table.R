@@ -21,7 +21,7 @@
 #' # Establish connection to your cluster
 #'
 #' con_databricks <- connector_databricks_table(
-#'   httpPath = "path-to-cluster",
+#'   http_path = "path-to-cluster",
 #'   catalog = "my_catalog",
 #'   schema = "my_schema"
 #' )
@@ -50,10 +50,11 @@
 #'
 #' @export
 connector_databricks_table <- function(
-    http_path,
-    catalog,
-    schema,
-    extra_class = NULL) {
+  http_path,
+  catalog,
+  schema,
+  extra_class = NULL
+) {
   ConnectorDatabricksTable$new(
     http_path = http_path,
     catalog = catalog,
@@ -85,7 +86,7 @@ connector_databricks_table <- function(
 #' # Establish connection to your cluster
 #'
 #' con_databricks <- ConnectorDatabricksTable$new(
-#'   httpPath = "path-to-cluster",
+#'   http_path = "path-to-cluster",
 #'   catalog = "my_catalog",
 #'   schema = "my_schema"
 #' )

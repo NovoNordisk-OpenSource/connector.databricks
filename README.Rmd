@@ -48,7 +48,7 @@ library(connector.databricks)
 
 # Connect to databricks tables using DBI
 con <- connector_databricks_table(
-  httpPath = "path-to-cluster",
+  http_path = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
 )

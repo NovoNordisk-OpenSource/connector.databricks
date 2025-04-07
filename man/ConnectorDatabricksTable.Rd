@@ -24,7 +24,7 @@ See also \code{\link[odbc:databricks]{odbc::databricks()}} On more information o
 # Establish connection to your cluster
 
 con_databricks <- ConnectorDatabricksTable$new(
-  httpPath = "path-to-cluster",
+  http_path = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
 )

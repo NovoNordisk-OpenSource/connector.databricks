@@ -12,7 +12,6 @@ VERSION <- "0.4.4"
   }
 )
 
-
 #' DatabricksClient is a constructor for class that performs any operations with
 #' Databricks REST API and handle a subset of Unified Client Authentication.
 #'
@@ -34,7 +33,12 @@ VERSION <- "0.4.4"
 #' }
 #' }
 #' @export
-DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_file = NULL) {
+DatabricksClient <- function(
+  profile = NULL,
+  host = NULL,
+  token = NULL,
+  config_file = NULL
+) {
   # coalesce(a, b, c) takes any number of arguments using the ...  ellipsis,
   # loops over them, and returns the first non-null, non-missing, non-empty
   # string. If all arguments are null, missing, or empty, it returns NULL.
@@ -91,15 +95,24 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       return(list())
     }
     if (!profile_exists) {
-      rlang::abort(paste("Profile", profile_name, "not found in", config_path),
+      rlang::abort(
+        paste("Profile", profile_name, "not found in", config_path),
         call = rlang::caller_env()
       )
     }
     return(as.list(parsed_file[[profile_name]]))
   }
 
-  config_file <- coalesce(config_file, Sys.getenv("DATABRICKS_CONFIG_FILE"), "~/.databrickscfg")
-  profile <- coalesce(profile, Sys.getenv("DATABRICKS_CONFIG_PROFILE"), "DEFAULT")
+  config_file <- coalesce(
+    config_file,
+    Sys.getenv("DATABRICKS_CONFIG_FILE"),
+    "~/.databrickscfg"
+  )
+  profile <- coalesce(
+    profile,
+    Sys.getenv("DATABRICKS_CONFIG_PROFILE"),
+    "DEFAULT"
+  )
   from_cli <- load_profile(config_file, profile)
 
   # cfg is the current unified authentication config of direct parameters,
@@ -107,8 +120,14 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   cfg <- list(
     host = coalesce(host, Sys.getenv("DATABRICKS_HOST"), from_cli$host),
     token = coalesce(token, Sys.getenv("DATABRICKS_TOKEN"), from_cli$token),
-    client_id = coalesce(Sys.getenv("DATABRICKS_CLIENT_ID"), from_cli$client_id),
-    client_secret = coalesce(Sys.getenv("DATABRICKS_CLIENT_SECRET"), from_cli$client_secret)
+    client_id = coalesce(
+      Sys.getenv("DATABRICKS_CLIENT_ID"),
+      from_cli$client_id
+    ),
+    client_secret = coalesce(
+      Sys.getenv("DATABRICKS_CLIENT_SECRET"),
+      from_cli$client_secret
+    )
   )
 
   # add the missing https:// prefix to bare, ODBC-style hosts
@@ -124,7 +143,10 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   debug_string <- function() {
     used <- c()
     sensitive <- c(
-      "token", "password", "client_secret", "google_credentials",
+      "token",
+      "password",
+      "client_secret",
+      "google_credentials",
       "azure_client_secret"
     )
     for (attr in names(cfg)) {
@@ -182,7 +204,10 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
       cfg$auth_visitor <- visitor
       return(cfg$auth_visitor)
     }
-    rlang::abort("cannot configure default credentials", call = rlang::caller_env())
+    rlang::abort(
+      "cannot configure default credentials",
+      call = rlang::caller_env()
+    )
   }
 
   user_agent <- function() {
@@ -198,21 +223,38 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   }
 
   # SDK
-  do <- function(method, path, body = NULL, query = NULL, json_wrap_body = TRUE,
-                 return_response_raw = FALSE) {
+  do <- function(
+    method,
+    path,
+    body = NULL,
+    query = NULL,
+    json_wrap_body = TRUE,
+    return_response_raw = FALSE
+  ) {
     visitor <- authenticate()
     headers <- visitor()
     headers["Connection"] <- "close"
     if (!is.null(body) && json_wrap_body) {
       body <- base::Filter(length, body)
-      body <- jsonlite::toJSON(body, auto_unbox = TRUE, digits = 22, null = "null")
+      body <- jsonlite::toJSON(
+        body,
+        auto_unbox = TRUE,
+        digits = 22,
+        null = "null"
+      )
     }
     url <- paste0(cfg$host, path)
 
-    response <- httr::VERB(method, url, httr::add_headers(headers), httr::user_agent(user_agent()),
-      httr::config(verbose = FALSE, connecttimeout = 30), httr::accept_json(),
+    response <- httr::VERB(
+      method,
+      url,
+      httr::add_headers(headers),
+      httr::user_agent(user_agent()),
+      httr::config(verbose = FALSE, connecttimeout = 30),
+      httr::accept_json(),
       httr::write_memory(),
-      query = base::Filter(length, query), body = body
+      query = base::Filter(length, query),
+      body = body
     )
 
     if (return_response_raw) {
@@ -251,8 +293,12 @@ DatabricksClient <- function(profile = NULL, host = NULL, token = NULL, config_f
   }
 
   return(list(
-    is_aws = is_aws, is_azure = is_azure, is_gcp = is_gcp, do = do,
-    debug_string = debug_string, login = cfg
+    is_aws = is_aws,
+    is_azure = is_azure,
+    is_gcp = is_gcp,
+    do = do,
+    debug_string = debug_string,
+    login = cfg
   ))
 }
 # nolint end
