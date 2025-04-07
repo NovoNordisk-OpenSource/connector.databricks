@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@ your Databricks volume storage</li>
 <span></span>
 <span><span class="co"># Connect to databricks tables using DBI</span></span>
 <span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connector_databricks_table.html">connector_databricks_table</a></span><span class="op">(</span></span>
-<span>  httpPath <span class="op">=</span> <span class="st">"path-to-cluster"</span>,</span>
+<span>  http_path <span class="op">=</span> <span class="st">"path-to-cluster"</span>,</span>
 <span>  catalog <span class="op">=</span> <span class="st">"my_catalog"</span>,</span>
 <span>  schema <span class="op">=</span> <span class="st">"my_schema"</span></span>
 <span><span class="op">)</span></span>
@@ -272,9 +272,9 @@ different formats.</p>
 <span>  <span class="fu"><a href="../reference/read_cnt.html">read_cnt</a></span><span class="op">(</span><span class="st">"setosa"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fsetosa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fsetosa</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">setosa</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Store data into output location</span></span>
 <span><span class="va">db</span><span class="op">$</span><span class="va">volume</span> <span class="op">|&gt;</span></span>
@@ -283,7 +283,7 @@ different formats.</p>
 <span>  <span class="fu"><a href="../reference/write_cnt.html">write_cnt</a></span><span class="op">(</span><span class="va">fsetosa</span>, <span class="st">"fsetosa.rds"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tmp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">tmp_file</span>, <span class="va">fsetosa</span><span class="op">)</span></span>
+<span><span class="fu">ggsave</span><span class="op">(</span><span class="va">tmp_file</span>, <span class="va">fsetosa</span><span class="op">)</span></span>
 <span><span class="va">db</span><span class="op">$</span><span class="va">volume</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/upload_cnt.html">upload_cnt</a></span><span class="op">(</span><span class="va">tmp_file</span>, <span class="st">"fsetosa.png"</span><span class="op">)</span></span></code></pre></div>
 </div>

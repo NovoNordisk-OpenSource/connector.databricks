@@ -29,7 +29,7 @@ catalog and schema as defined in when initializing the connector.
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@ method for <a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">list_content_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksTable'</span></span>
-<span><span class="fu">list_content_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">list_content_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">...</span>, tags <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksVolume'</span></span>
 <span><span class="fu">list_content_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -85,6 +85,12 @@ method for <a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p><a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a>: Additional parameters to pass to the <code><a href="https://rdrr.io/pkg/brickster/man/db_volume_list.html" class="external-link">brickster::db_volume_list()</a></code> method</p></dd>
+
+
+<dt id="arg-tags">tags<a class="anchor" aria-label="anchor" href="#arg-tags"></a></dt>
+<dd><p>Expression to be translated to SQL using <code><a href="https://dbplyr.tidyverse.org/reference/translate_sql.html" class="external-link">dbplyr::translate_sql()</a></code> e.g.
+<code>((tag_name == "name1" &amp;&amp; tag_value == "value1") || (tag_name == "name2"))</code>.
+It should contain <code>tag_name</code> and <code>tag_value</code> values to filter by.</p></dd>
 
 </dl></div>
     <div class="section level2">

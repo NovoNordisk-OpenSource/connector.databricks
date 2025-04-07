@@ -19,6 +19,7 @@
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/get_databricks_volume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/index.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.html</loc></url>
+<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_tags.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_databricks_volumes.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksTable.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksVolume.html</loc></url>
