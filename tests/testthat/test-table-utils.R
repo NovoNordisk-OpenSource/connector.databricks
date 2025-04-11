@@ -3,12 +3,6 @@ skip_on_ci()
 skip_on_cran()
 
 test_that("write_table_volume fails when needed", {
-  temp_table_name <- paste0(
-    "temp-mtcars_",
-    format(Sys.time(), "%Y%m%d%H%M%S")
-  )
-
-  ## Write table using volume fails when needed
   write_table_volume(connector_object = "bad_volume") |>
     expect_error(regexp = "Assertion on 'connector_object' failed")
 
@@ -44,7 +38,6 @@ test_that("write_table_volume fails when needed", {
 })
 
 test_that("list_content_tags fails when needed", {
-  ## List tables using tags fails when needed
   list_content_tags(connector_object = "bad_connector") |>
     expect_error(regexp = "Assertion on 'connector_object' failed")
 
@@ -63,7 +56,7 @@ test_that("write_table_volume works", {
   # Write a table using volume
   write_table_volume(
     connector_object = setup_table_connector,
-    x = create_temp_dataset(),
+    x = mtcars_dataset(),
     name = table_name,
     overwrite = FALSE,
     tags = list("test_tag" = tag_value)
@@ -75,7 +68,7 @@ test_that("write_table_volume works", {
     expect_contains(table_name)
 
   setup_table_connector$read_cnt(table_name) |>
-    expect_equal(create_temp_dataset())
+    expect_equal(mtcars_dataset())
 
   setup_table_connector$tbl_cnt(table_name) |>
     dplyr::filter(car == "Mazda RX4") |>
@@ -85,7 +78,7 @@ test_that("write_table_volume works", {
 
   write_table_volume(
     connector_object = setup_table_connector,
-    x = create_temp_dataset(),
+    x = mtcars_dataset(),
     name = table_name,
     overwrite = TRUE
   ) |>
@@ -101,7 +94,7 @@ test_that("write_table_volume works", {
         sep = "."
       )
     )) |>
-    expect_equal(create_temp_dataset())
+    expect_equal(mtcars_dataset())
 
   setup_table_connector$remove_cnt(table_name) |>
     expect_no_condition()
@@ -116,7 +109,7 @@ test_that("list_content_tags works", {
   # Write a table using volume
   write_table_volume(
     connector_object = setup_table_connector,
-    x = create_temp_dataset(),
+    x = mtcars_dataset(),
     name = table_name,
     overwrite = TRUE,
     tags = list("test_tag" = tag_value)
@@ -134,4 +127,92 @@ test_that("list_content_tags works", {
 
   # Remove table
   setup_table_connector |> remove_cnt(name = table_name)
+})
+
+test_that("read_table_timepoint fails when needed", {
+  read_table_timepoint(connector_object = "bad_volume") |>
+    expect_error(regexp = "Assertion on 'connector_object' failed")
+
+  read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = 1
+  ) |>
+    expect_error(
+      regexp = "Assertion on 'name' failed: Must be of type 'character'"
+    )
+
+  read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = "iris",
+    timepoint = "2019-01-01T00:00:00.000Z",
+    version = "bad_version"
+  ) |>
+    expect_error(
+      regexp = "Assertion on 'version' failed: Must be of type 'numeric'"
+    )
+})
+
+
+test_that("read_table_timepoint works", {
+  table_name <- temp_table_name()
+
+  # First timepoint test - mtcars
+
+  data1 <- create_temp_dataset()
+  write_table_volume(
+    connector_object = setup_table_connector,
+    x = data1,
+    name = table_name,
+    overwrite = TRUE
+  )
+
+  read_data <- read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = table_name
+  )
+  timepoint1 <- Sys.time()
+
+  expect_equal(data1, read_data)
+
+  # Second timepoint test
+  data2 <- create_temp_dataset()
+  write_table_volume(
+    connector_object = setup_table_connector,
+    x = data2,
+    name = table_name,
+    overwrite = TRUE
+  )
+
+  read_data <- read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = table_name
+  )
+
+  expect_equal(data2, read_data)
+
+  # Check timepoints
+  read_data <- read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = table_name,
+    timepoint = .POSIXct(timepoint1, "UTC")
+  )
+
+  expect_equal(data1, read_data)
+
+  # Check versions
+  read_data <- read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = table_name,
+    version = 0
+  )
+
+  expect_equal(data1, read_data)
+
+  read_data <- read_table_timepoint(
+    connector_object = setup_table_connector,
+    name = table_name,
+    version = 1
+  )
+
+  expect_equal(data2, read_data)
 })
