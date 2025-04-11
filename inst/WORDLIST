@@ -76,7 +76,7 @@ src
 Steffen
 sublicense
 sudo
-superclass's
+superclass
 Sys
 tbl
 testthat
@@ -94,3 +94,9 @@ Yk
 yml
 ƣ
 ϥ
+rdname
+dname
+CRAN
+dontrun
+dataframe
+envir

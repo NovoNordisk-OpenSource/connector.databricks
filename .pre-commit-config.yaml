@@ -34,7 +34,6 @@ repos:
           .*\.jpeg|
           .*\.pdf|
           .*\.png|
-          .*\.svg|
           .*\.py|
           .*\.RData|
           .*\.rds|
@@ -56,6 +55,10 @@ repos:
           (.*/|)WORDLIST|
           \.github/workflows/.*|
           data/.*|
+          .*\.svg|
+          .*\.ico|
+          .*\.webmanifest|
+          CRAN-SUBMISSION|
           )$
     -   id: lintr
     -   id: readme-rmd-rendered

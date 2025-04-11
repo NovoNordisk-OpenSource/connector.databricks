@@ -190,7 +190,7 @@ test_that("read_table_timepoint works", {
 
   expect_equal(data2, read_data)
 
-  # Check timepoints
+  # Check timepoint
   read_data <- read_table_timepoint(
     connector_object = setup_table_connector,
     name = table_name,
