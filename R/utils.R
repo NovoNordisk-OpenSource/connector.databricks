@@ -54,7 +54,7 @@ parquet_to_table <- function(
         "CREATE OR REPLACE TABLE {catalog}.{schema}.`{name}`
       AS SELECT * FROM parquet.`{tmp_volume$full_path}/{name}.parquet`"
       ),
-      cluster_id = id_of_cluster
+      warehouse_id = id_of_cluster
     )
   }
 
@@ -64,7 +64,7 @@ parquet_to_table <- function(
         "CREATE TABLE {catalog}.{schema}.`{name}`
       AS SELECT * FROM parquet.`{tmp_volume$full_path}/{name}.parquet`"
       ),
-      cluster_id = id_of_cluster
+      warehouse_id = id_of_cluster
     )
   }
 }
@@ -100,21 +100,22 @@ add_table_tags <- function(
     glue::glue(
       "ALTER TABLE {catalog}.{schema}.`{name}` SET TAGS ({tags_glued})"
     ),
-    cluster_id = id_of_cluster
+    warehouse_id = id_of_cluster
   )
 }
 
 #' Execute and check SQL query
 #'
-#' @param query SQL query to be run
-#' @param cluster_id SQL Warehouse ID.
+#' @param query_string SQL query to be run
+#' @param warehouse_id SQL Warehouse ID.
 #' Get one here: https://docs.databricks.com/api/workspace/warehouses/get
 #' @keywords internal
 #' @noRd
-execute_sql_query <- function(query_string, cluster_id) {
+execute_sql_query <- function(query_string, warehouse_id, ...) {
   result <- brickster::db_sql_exec_query(
-    query_string,
-    cluster_id
+    statement = query_string,
+    warehouse_id = warehouse_id,
+    ...
   )
 
   if (result$status$state == "FAILED") {

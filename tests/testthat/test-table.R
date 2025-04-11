@@ -44,7 +44,7 @@ test_that("Table generics work for connector_databricks_table", {
     tag_value <- generate_random_string("value_")
 
     cnt$write_cnt(
-      x = create_temp_dataset(),
+      x = mtcars_dataset(),
       name = temp_table_name,
       method = "volume",
       tags = list("tag_name" = tag_value)
@@ -55,7 +55,7 @@ test_that("Table generics work for connector_databricks_table", {
       expect_contains(temp_table_name)
 
     cnt$read_cnt(temp_table_name) |>
-      expect_equal(create_temp_dataset())
+      expect_equal(mtcars_dataset())
 
     cnt$tbl_cnt(temp_table_name) |>
       dplyr::filter(car == "Mazda RX4") |>
@@ -63,7 +63,7 @@ test_that("Table generics work for connector_databricks_table", {
       dplyr::collect() |>
       expect_equal(dplyr::tibble(car = "Mazda RX4", mpg = 21))
 
-    cnt$write_cnt(create_temp_dataset(), temp_table_name, overwrite = TRUE) |>
+    cnt$write_cnt(mtcars_dataset(), temp_table_name, overwrite = TRUE) |>
       expect_no_failure()
 
     cnt$list_content_cnt() |>
@@ -79,7 +79,7 @@ test_that("Table generics work for connector_databricks_table", {
           sep = "."
         )
       )) |>
-      expect_equal(create_temp_dataset())
+      expect_equal(mtcars_dataset())
 
     cnt$remove_cnt(temp_table_name) |>
       expect_no_condition()

@@ -50,6 +50,7 @@ maskable
 md
 MERCHANTABILITY
 nn
+nolint
 Nordisk
 Novo
 novonordisk
@@ -75,13 +76,15 @@ src
 Steffen
 sublicense
 sudo
-superclass's
+superclass
 Sys
 tbl
 testthat
 tfl
 Thomsen
 tibble
+timepoint
+Timepoint
 unixodbc
 VignetteBuilder
 vlob
@@ -91,3 +94,9 @@ Yk
 yml
 ƣ
 ϥ
+rdname
+dname
+CRAN
+dontrun
+dataframe
+envir
