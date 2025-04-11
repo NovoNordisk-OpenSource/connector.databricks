@@ -1,0 +1,9 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  connector-databricks: connector-databricks.html
+last_built: 2025-04-11T08:34Z
+urls:
+  reference: https://novonordisk-opensource.github.io/connector.databricks/reference
+  article: https://novonordisk-opensource.github.io/connector.databricks/articles
