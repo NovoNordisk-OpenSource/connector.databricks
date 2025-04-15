@@ -2,6 +2,7 @@ adam
 Aksel
 api
 aut
+autoupdate
 brickster
 calatog
 Cervan
@@ -45,6 +46,7 @@ knitr
 licensable
 Licensor
 Lifecycle
+lintr
 MacOS
 maskable
 md
@@ -64,11 +66,16 @@ pkgdown
 png
 purrr
 Qbt
+Rbuildignore
 README
+renv
+Renviron
 rlang
 rmarkdown
 Roxygen
+roxygenize
 RoxygenNote
+Rproj
 sffl
 sparklyr
 sqlpath
@@ -83,6 +90,7 @@ testthat
 tfl
 Thomsen
 tibble
+tidyverse
 timepoint
 Timepoint
 unixodbc
