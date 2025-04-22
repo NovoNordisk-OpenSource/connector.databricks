@@ -1,5 +1,5 @@
 # Create a temporary dataset for testing
-create_temp_dataset <- function() {
+mtcars_dataset <- function() {
   # Sample data
   x <- mtcars
   x$car <- rownames(x)
@@ -42,4 +42,15 @@ generate_random_string <- function(prefix, length = 3) {
   result <- paste0(prefix, random_part)
 
   return(result)
+}
+
+# Create a temporary dataset for testing
+create_temp_dataset <- function(rows = 10, cols = 5) {
+  # Create a data frame of random numbers
+  df <- as.data.frame(matrix(rnorm(rows * cols), nrow = rows, ncol = cols))
+
+  # Optionally, name the columns
+  colnames(df) <- paste0("col_", 1:cols)
+
+  return(df)
 }
