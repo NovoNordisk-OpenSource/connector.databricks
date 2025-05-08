@@ -24,7 +24,8 @@ tbl_cnt(connector_object, name, ...)
 A \link[dplyr:tbl]{dplyr::tbl} object.
 }
 \description{
-Addition tbl methods for databricks connectors implemented for \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}}:
+Addition tbl methods for databricks connectors implemented for
+\code{\link[connector:tbl_cnt]{connector::tbl_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for

@@ -53,7 +53,8 @@ More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:
+Addition write methods for databricks connectors implemented for
+\code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a

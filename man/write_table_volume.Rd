@@ -7,13 +7,15 @@
 write_table_volume(connector_object, x, name, overwrite = TRUE, tags = NULL)
 }
 \arguments{
-\item{connector_object}{A \link{ConnectorDatabricksTable} object for interacting with Databricks}
+\item{connector_object}{A \link{ConnectorDatabricksTable} object for interacting
+with Databricks}
 
 \item{x}{The data to be written to the table}
 
 \item{name}{The name of the table}
 
-\item{overwrite}{Boolean indicating whether to overwrite the table if it already exists}
+\item{overwrite}{Boolean indicating whether to overwrite the table if it
+already exists}
 
 \item{tags}{Named list containing tag names and tag values, e.g.
 list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").
@@ -23,8 +25,8 @@ More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
 None
 }
 \description{
-This function first writes parquet file to a temporary Databricks Volume and then
-converts it to a table.
+This function first writes parquet file to a temporary Databricks Volume and
+then converts it to a table.
 }
 \examples{
 \dontrun{

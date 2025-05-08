@@ -36,7 +36,8 @@ upload_cnt(
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition list content methods for databricks connectors implemented for \code{\link[connector:upload_cnt]{connector::upload_cnt()}}:
+Addition list content methods for databricks connectors implemented for
+\code{\link[connector:upload_cnt]{connector::upload_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:upload_cnt]{connector::upload_cnt()}} method

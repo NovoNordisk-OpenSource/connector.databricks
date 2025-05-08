@@ -4,20 +4,23 @@
 \alias{ConnectorDatabricksTable}
 \title{Connector for connecting to Databricks using DBI}
 \description{
-Extension of the \link[connector:connector_dbi]{connector::connector_dbi} making it easier to connect to, and work with tables in Databricks.
+Extension of the \link[connector:connector_dbi]{connector::connector_dbi} making it easier to connect to,
+and work with tables in Databricks.
 }
 \details{
-All methods for \link{ConnectorDatabricksTable} object are working from the catalog
-and schema provided when initializing the connection.
-This means you only need to provide the table name when using the built in methods.
-If you want to access tables outside of the chosen schema, you can either retrieve
-the connection with \code{ConnectorDatabricksTable$conn} or create a new connector.
+All methods for \link{ConnectorDatabricksTable} object are working from the
+catalog and schema provided when initializing the connection.
+This means you only need to provide the table name when using the built in
+methods. If you want to access tables outside of the chosen schema, you can
+either retrieve the connection with \code{ConnectorDatabricksTable$conn} or create
+a new connector.
 
-When creating the connections to Databricks you either need to provide the sqlpath to
-the Databricks cluster or the SQL warehouse you want to connect to.
-Authentication to databricks is handed by the \code{odbc::databricks()} driver and supports
-general use of personal access tokens and credentials through Posit Workbench.
-See also \code{\link[odbc:databricks]{odbc::databricks()}} On more information on how the connection to Databricks is established.
+When creating the connections to Databricks you either need to provide the
+sqlpath to Databricks cluster or the SQL warehouse you want to connect to.
+Authentication to databricks is handed by the \code{odbc::databricks()} driver and
+supports general use of personal access tokens and credentials through Posit
+Workbench. See also \code{\link[odbc:databricks]{odbc::databricks()}} On more information on how the
+connection to Databricks is established.
 }
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -98,7 +101,8 @@ Initialize the connection to Databricks
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{http_path}}{\link{character} The path to the Databricks cluster or SQL warehouse you want to connect to}
+\item{\code{http_path}}{\link{character} The path to the Databricks cluster or SQL
+warehouse you want to connect to}
 
 \item{\code{catalog}}{\link{character} The catalog to use}
 

@@ -17,5 +17,6 @@ log_write_connector(connector_object, name, ...)
 The result of the specific method implementation.
 }
 \description{
-Addition log write methods for databricks connectors implemented for \code{\link[connector:log_write_connector]{connector::log_write_connector()}}:
+Addition log write methods for databricks connectors implemented for
+\code{\link[connector:log_write_connector]{connector::log_write_connector()}}:
 }

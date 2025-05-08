@@ -27,7 +27,8 @@ It should contain \code{tag_name} and \code{tag_value} values to filter by.}
 A \link{character} vector of content names
 }
 \description{
-Addition list content methods for databricks connectors implemented for \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}:
+Addition list content methods for databricks connectors implemented for
+\code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
