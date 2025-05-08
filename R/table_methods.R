@@ -1,6 +1,7 @@
 #' @description
-#' * [ConnectorDatabricksTable]: Reuses the [connector::write_cnt()] method for [connector::connector_dbi],
-#' but always sets the `catalog` and `schema` as defined in when initializing the connector.
+#' * [ConnectorDatabricksTable]: Reuses the [connector::write_cnt()] method for
+#' [connector::connector_dbi], but always sets the `catalog` and `schema` as
+#' defined in when initializing the connector.
 #'
 #' @rdname read_cnt
 #' @param timepoint Timepoint in [Delta time travel syntax](https://docs.databricks.com/gcp/en/delta/history#delta-time-travel-syntax)  # nolint
@@ -23,13 +24,15 @@ read_cnt.ConnectorDatabricksTable <- function(
 }
 
 #' @description
-#' * [ConnectorDatabricksTable]: Creates temporary volume to write object as a parquet file and then
-#' convert it to a table.
+#' * [ConnectorDatabricksTable]: Creates temporary volume to write object as a
+#' parquet file and then convert it to a table.
 #'
 #' @rdname write_cnt
-#' @param method [ConnectorDatabricksTable]: Which method to use for writing the table. Options:
+#' @param method [ConnectorDatabricksTable]: Which method to use for writing the
+#'  table. Options:
 #' \itemize{
-#'   \item `volume` - using temporary volume to write data and then convert it to a table.
+#'   \item `volume` - using temporary volume to write data and then convert it
+#'     to a table.
 #' }
 #' @param tags Named list containing tag names and tag values, e.g.
 #' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
@@ -53,11 +56,13 @@ write_cnt.ConnectorDatabricksTable <- function(
 }
 
 #' @description
-#' * [ConnectorDatabricksTable]: Reuses the [connector::list_content_cnt()] method for [connector::connector_dbi],
-#' but always sets the `catalog` and `schema` as defined in when initializing the connector.
+#' * [ConnectorDatabricksTable]: Reuses the [connector::list_content_cnt()]
+#' method for [connector::connector_dbi], but always sets the `catalog` and
+#' `schema` as defined in when initializing the connector.
 #'
 #' @rdname list_content_cnt
-#' @param tags Expression to be translated to SQL using [dbplyr::translate_sql()] e.g.
+#' @param tags Expression to be translated to SQL using
+#' [dbplyr::translate_sql()] e.g.
 #' `((tag_name == "name1" && tag_value == "value1") || (tag_name == "name2"))`.
 #' It should contain `tag_name` and `tag_value` values to filter by.
 #' @export
@@ -68,33 +73,37 @@ list_content_cnt.ConnectorDatabricksTable <- function(
 ) {
   tags <- dbplyr::translate_sql({{ tags }}, con = connector_object$conn)
   if (is.na(tags["sql"])) {
-    return(DBI::dbListTables(
-      conn = connector_object$conn,
-      catalog_name = connector_object$catalog,
-      schema_name = connector_object$schema
-    ))
+    tables <- brickster::db_uc_tables_list(
+      catalog = connector_object$catalog,
+      schema = connector_object$schema,
+      ...
+    )
+    return(sapply(tables, "[[", "name"))
   }
+
   return(list_content_tags(connector_object, tags))
 }
 
 #' @description
-#' * [ConnectorDatabricksTable]: Reuses the [connector::remove_cnt()] method for [connector::connector_dbi],
-#' but always sets the `catalog` and `schema` as defined in when initializing the connector.
+#' * [ConnectorDatabricksTable]: Reuses the [connector::remove_cnt()] method
+#' for [connector::connector_dbi], but always sets the `catalog` and `schema`
+#' as defined in when initializing the connector.
 #'
 #' @rdname remove_cnt
 #' @export
 remove_cnt.ConnectorDatabricksTable <- function(connector_object, name, ...) {
-  name <- DBI::Id(
+  brickster::db_uc_tables_delete(
     catalog = connector_object$catalog,
     schema = connector_object$schema,
-    table = name
+    table = name,
+    ...
   )
-  NextMethod()
 }
 
 #' @description
-#' * [ConnectorDatabricksTable]: Reuses the [connector::tbl_cnt()] method for [connector::connector_dbi],
-#' but always sets the `catalog` and `schema` as defined in when initializing the connector.
+#' * [ConnectorDatabricksTable]: Reuses the [connector::tbl_cnt()] method for
+#' [connector::connector_dbi], but always sets the `catalog` and `schema` as
+#' defined in when initializing the connector.
 #'
 #' @rdname tbl_cnt
 #' @export

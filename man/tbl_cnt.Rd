@@ -27,8 +27,9 @@ A \link[dplyr:tbl]{dplyr::tbl} object.
 Addition tbl methods for databricks connectors implemented for \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for
+\link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and \code{schema} as
+defined in when initializing the connector.
 }
 
 \itemize{

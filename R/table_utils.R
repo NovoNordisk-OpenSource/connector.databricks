@@ -1,12 +1,14 @@
 #' Write data to a table using Databricks Volume
 #'
-#' This function first writes parquet file to a temporary Databricks Volume and then
-#' converts it to a table.
+#' This function first writes parquet file to a temporary Databricks Volume and
+#' then converts it to a table.
 #'
-#' @param connector_object A [ConnectorDatabricksTable] object for interacting with Databricks
+#' @param connector_object A [ConnectorDatabricksTable] object for interacting
+#' with Databricks
 #' @param x The data to be written to the table
 #' @param name The name of the table
-#' @param overwrite Boolean indicating whether to overwrite the table if it already exists
+#' @param overwrite Boolean indicating whether to overwrite the table if it
+#' already exists
 #' @param tags Named list containing tag names and tag values, e.g.
 #' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").
 #' More info [here](https://docs.databricks.com/aws/en/database-objects/tags)
@@ -73,13 +75,13 @@ write_table_volume <- function(
   }
   zephyr::msg_success("Table written successfully!")
 
-  withr::defer(
-    delete_databricks_volume(
-      catalog_name = temporary_volume$catalog,
-      schema_name = temporary_volume$schema,
-      name = volume_name
+  withr::defer({
+    brickster::db_uc_volumes_delete(
+      catalog = temporary_volume$catalog,
+      schema = temporary_volume$schema,
+      volume = volume_name
     )
-  )
+  })
   zephyr::msg_info("Temporary volume deleted.")
 }
 
@@ -165,7 +167,7 @@ read_table_timepoint <- function(
   checkmate::assert_numeric(version, null.ok = TRUE)
 
   sql_statement <- glue::glue(
-    "SELECT * FROM {connector_object$catalog}.{connector_object$schema}.`{name}`"
+    "SELECT * FROM {connector_object$catalog}.{connector_object$schema}.`{name}`" # nolint
   )
 
   if (!is.null(timepoint)) {

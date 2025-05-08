@@ -32,8 +32,9 @@ R object with the content. For rectangular data a \link{data.frame}.
 Addition read methods for databricks connectors implemented for \code{\link[connector:read_cnt]{connector::read_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}} method for
+\link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and \code{schema} as
+defined in when initializing the connector.
 }
 
 \itemize{

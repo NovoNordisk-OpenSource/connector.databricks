@@ -18,7 +18,8 @@ list_content_cnt(connector_object, ...)
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_list]{brickster::db_volume_list()}} method}
 
-\item{tags}{Expression to be translated to SQL using \code{\link[dbplyr:translate_sql]{dbplyr::translate_sql()}} e.g.
+\item{tags}{Expression to be translated to SQL using
+\code{\link[dbplyr:translate_sql]{dbplyr::translate_sql()}} e.g.
 \code{((tag_name == "name1" && tag_value == "value1") || (tag_name == "name2"))}.
 It should contain \code{tag_name} and \code{tag_value} values to filter by.}
 }
@@ -29,8 +30,9 @@ A \link{character} vector of content names
 Addition list content methods for databricks connectors implemented for \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
+method for \link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and
+\code{schema} as defined in when initializing the connector.
 }
 
 \itemize{
