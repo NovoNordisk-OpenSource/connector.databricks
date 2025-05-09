@@ -9,7 +9,6 @@ repos:
     -   id: roxygenize
         # roxygen requires loading pkg -> add dependencies from DESCRIPTION
         additional_dependencies:
-        -    ropensci/writexl
         -    brickster
         -    checkmate
         -    cli
