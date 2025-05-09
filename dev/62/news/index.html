@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,12 +33,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.4.9002" id="connectordatabricks-0049002">connector.databricks 0.0.4.9002<a class="anchor" aria-label="anchor" href="#connectordatabricks-0049002"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.0.4.9003" id="connectordatabricks-0049003">connector.databricks 0.0.4.9003<a class="anchor" aria-label="anchor" href="#connectordatabricks-0049003"></a></h2>
 <div class="section level3">
-<h3 id="new-features-and-improvements-0-0-4-9002">New features and improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-0-0-4-9002"></a></h3>
+<h3 id="new-features-and-improvements-0-0-4-9003">New features and improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-0-0-4-9003"></a></h3>
 <ul><li>Update <code><a href="../reference/write_cnt.html">write_cnt()</a></code> to use temporary volume solution, in order to allow upload of bigger files.</li>
 <li>Update <code><a href="../reference/list_content_cnt.html">list_content_cnt()</a></code> to use tags when listing tables in Databricks.</li>
 <li>Update <code><a href="../reference/read_cnt.html">read_cnt()</a></code> to allow users to search tables using either <code>timepoint</code> or <code>version</code> parameter.</li>
+<li>Remove <code>DatabricksClient()</code> and replace table and volume methods with <code>brickster</code> methods.</li>
 </ul></div>
 </div>
     <div class="section level2">
