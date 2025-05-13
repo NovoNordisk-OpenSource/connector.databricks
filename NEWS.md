@@ -1,4 +1,4 @@
-# connector.databricks 0.0.4.9003
+# connector.databricks 0.0.5
 
 ## New features and improvements
 
