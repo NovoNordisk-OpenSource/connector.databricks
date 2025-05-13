@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Expansion of the connector package for enabling connections to databricks • connector.databricks</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -29,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +95,7 @@
 <span>  path <span class="op">=</span> <span class="st">"path-to-file-storage"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>When connecting to <strong>Databricks tables</strong>, authentication to databricks is handled by the <code><a href="https://odbc.r-dbi.org/reference/databricks.html" class="external-link">odbc::databricks()</a></code> driver and supports general use of personal access tokens and credentials through Posit Workbench. See also <code><a href="https://odbc.r-dbi.org/reference/databricks.html" class="external-link">odbc::databricks()</a></code> On more information on how the connection to Databricks is established.</p>
-<p>When connecting to <strong>Databricks volumes</strong>, authentication is handled using <code><a href="reference/DatabricksClient.html">DatabricksClient()</a></code> function, whenever a call to the API is made. Environments should have configurations available via the environment variable <code>DATABRICKS_CONFIG_FILE</code> or located at <code>~/.databrickscfg</code> in order for this to work. For more info have a look at the function documentation.</p>
+<p>When connecting to <strong>Databricks volumes</strong>, authentication is handled using <code>DatabricksClient()</code> function, whenever a call to the API is made. Environments should have configurations available via the environment variable <code>DATABRICKS_CONFIG_FILE</code> or located at <code>~/.databrickscfg</code> in order for this to work. For more info have a look at the function documentation.</p>
 <p>Both types of connections share similar interfaces for reading and writing data. Tables should be used with tabular types of data, while volumes should be used with unstructured data.</p>
 <p>Example of how to use the connector object:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -176,10 +175,10 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Steffen Falgreen Larsen <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Aksel Thomsen <br><small class="roles"> Author </small>  </li>
-<li>Vladimir Obucina <br><small class="roles"> Author </small>  </li>
-<li>Cervan Girard <br><small class="roles"> Author </small>  </li>
+<li>Steffen Falgreen Larsen <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Aksel Thomsen <br><small class="roles"> Author </small>   </li>
+<li>Vladimir Obucina <br><small class="roles"> Author </small>   </li>
+<li>Cervan Girard <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -201,7 +200,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
