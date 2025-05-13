@@ -4,7 +4,8 @@
 #' Initializes the connector for table type of storage.
 #' See [ConnectorDatabricksTable] for details.
 #'
-#' @param http_path [character] The path to the Databricks cluster or SQL warehouse you want to connect to
+#' @param http_path [character] The path to the Databricks cluster or SQL
+#' warehouse you want to connect to
 #' @param catalog [character] The catalog to use
 #' @param schema [character] The schema to use
 #' @param extra_class [character] Extra class to assign to the new connector
@@ -66,20 +67,23 @@ connector_databricks_table <- function(
 #' Connector for connecting to Databricks using DBI
 #'
 #' @description
-#' Extension of the [connector::connector_dbi] making it easier to connect to, and work with tables in Databricks.
+#' Extension of the [connector::connector_dbi] making it easier to connect to,
+#' and work with tables in Databricks.
 #'
 #' @details
-#' All methods for [ConnectorDatabricksTable] object are working from the catalog
-#' and schema provided when initializing the connection.
-#' This means you only need to provide the table name when using the built in methods.
-#' If you want to access tables outside of the chosen schema, you can either retrieve
-#' the connection with `ConnectorDatabricksTable$conn` or create a new connector.
+#' All methods for [ConnectorDatabricksTable] object are working from the
+#' catalog and schema provided when initializing the connection.
+#' This means you only need to provide the table name when using the built in
+#' methods. If you want to access tables outside of the chosen schema, you can
+#' either retrieve the connection with `ConnectorDatabricksTable$conn` or create
+#'  a new connector.
 #'
-#' When creating the connections to Databricks you either need to provide the sqlpath to
-#' the Databricks cluster or the SQL warehouse you want to connect to.
-#' Authentication to databricks is handed by the `odbc::databricks()` driver and supports
-#' general use of personal access tokens and credentials through Posit Workbench.
-#' See also [odbc::databricks()] On more information on how the connection to Databricks is established.
+#' When creating the connections to Databricks you either need to provide the
+#' sqlpath to Databricks cluster or the SQL warehouse you want to connect to.
+#' Authentication to databricks is handed by the `odbc::databricks()` driver and
+#'  supports general use of personal access tokens and credentials through Posit
+#'  Workbench. See also [odbc::databricks()] On more information on how the
+#' connection to Databricks is established.
 #'
 #' @importFrom odbc databricks
 #' @examplesIf FALSE
@@ -121,7 +125,8 @@ ConnectorDatabricksTable <- R6::R6Class(
   inherit = connector::ConnectorDBI,
   public = list(
     #' @description Initialize the connection to Databricks
-    #' @param http_path [character] The path to the Databricks cluster or SQL warehouse you want to connect to
+    #' @param http_path [character] The path to the Databricks cluster or SQL
+    #' warehouse you want to connect to
     #' @param catalog [character] The catalog to use
     #' @param schema [character] The schema to use
     #' @param extra_class [character] Extra class to assign to the new connector
@@ -152,7 +157,8 @@ ConnectorDatabricksTable <- R6::R6Class(
     #' @field conn The DBI connection object of the connector
     conn = function() {
       # Note: This is field already exist in the super class.
-      # Only done here because the active bindings from the super class are not included in the roxygen documentation.
+      # Only done here because the active bindings from the super class are not
+      # included in the roxygen documentation.
       private$.conn
     },
     #' @field catalog The catalog used in the connector

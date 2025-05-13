@@ -11,8 +11,8 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
   if (!all(testing_env_variables %in% names(Sys.getenv()))) {
     cli::cli_abort(
       "Not all testing parameters are set. Please set environment variables:
-      DATABRICKS_VOLUME, DATABRICKS_CATALOG_NAME and DATABRICKS_SCHEMA_NAME in order to be
-    able to test the package."
+      DATABRICKS_VOLUME, DATABRICKS_CATALOG_NAME and DATABRICKS_SCHEMA_NAME in
+      order to be able to test the package."
     )
   } else {
     # Databricks catalog used throughout tests
@@ -53,10 +53,10 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
     ##  Run after all tests
     # Placeholder for whatever needs to be removed in the end
     withr::defer(
-      delete_databricks_volume(
-        name = "local_test_volume",
-        catalog_name = setup_db_catalog,
-        schema_name = setup_db_schema
+      brickster::db_uc_volumes_delete(
+        volume = "local_test_volume",
+        catalog = setup_db_catalog,
+        schema = setup_db_schema
       ),
       teardown_env()
     )

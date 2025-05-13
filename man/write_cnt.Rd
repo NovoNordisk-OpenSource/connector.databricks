@@ -38,9 +38,11 @@ write_cnt(
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 
-\item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the table. Options:
+\item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the
+table. Options:
 \itemize{
-\item \code{volume} - using temporary volume to write data and then convert it to a table.
+\item \code{volume} - using temporary volume to write data and then convert it
+to a table.
 }}
 
 \item{tags}{Named list containing tag names and tag values, e.g.
@@ -51,11 +53,12 @@ More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition write methods for databricks connectors implemented for \code{\link[connector:write_cnt]{connector::write_cnt()}}:
+Addition write methods for databricks connectors implemented for
+\code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a parquet file and then
-convert it to a table.
+\item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a
+parquet file and then convert it to a table.
 }
 
 \itemize{

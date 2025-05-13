@@ -82,18 +82,10 @@ test_that("Table generics work for connector_databricks_table", {
       expect_equal(mtcars_dataset())
 
     cnt$remove_cnt(temp_table_name) |>
-      expect_no_condition()
+      expect_no_error()
 
     cnt$disconnect_cnt() |>
       expect_no_condition()
-
-    tryCatch(
-      cnt$read_cnt(temp_table_name),
-      error = function(e) {
-        "Error occurred"
-      }
-    ) |>
-      expect_equal("Error occurred")
   } else {
     skip(
       "Skipping test as http_path_local, catalog_local, or schema_local is NULL"

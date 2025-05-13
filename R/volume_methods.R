@@ -28,11 +28,12 @@ read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 write_cnt.ConnectorDatabricksVolume <- function(
-    connector_object,
-    x,
-    name,
-    overwrite = FALSE,
-    ...) {
+  connector_object,
+  x,
+  name,
+  overwrite = FALSE,
+  ...
+) {
   file_path <- file.path(connector_object$full_path, name)
   tmp_name <- tempfile(
     pattern = basename(name),
@@ -95,10 +96,11 @@ remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 download_cnt.ConnectorDatabricksVolume <- function(
-    connector_object,
-    name,
-    file = basename(name),
-    ...) {
+  connector_object,
+  name,
+  file = basename(name),
+  ...
+) {
   file_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_read(path = file_path, destination = file, ...)
 
@@ -116,11 +118,12 @@ download_cnt.ConnectorDatabricksVolume <- function(
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 upload_cnt.ConnectorDatabricksVolume <- function(
-    connector_object,
-    file,
-    name = basename(file),
-    overwrite = FALSE,
-    ...) {
+  connector_object,
+  file,
+  name = basename(file),
+  overwrite = FALSE,
+  ...
+) {
   file_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_write(
     path = file_path,
@@ -141,10 +144,11 @@ upload_cnt.ConnectorDatabricksVolume <- function(
 #' @return [ConnectorDatabricksVolume] object or [ConnectorDatabricksVolume] object of a newly built directory
 #' @export
 create_directory_cnt.ConnectorDatabricksVolume <- function(
-    connector_object,
-    name,
-    open = TRUE,
-    ...) {
+  connector_object,
+  name,
+  open = TRUE,
+  ...
+) {
   directory_path <- file.path(connector_object$full_path, name)
 
   brickster::db_volume_dir_create(path = directory_path, ...)
@@ -163,9 +167,10 @@ create_directory_cnt.ConnectorDatabricksVolume <- function(
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 remove_directory_cnt.ConnectorDatabricksVolume <- function(
-    connector_object,
-    name,
-    ...) {
+  connector_object,
+  name,
+  ...
+) {
   directory_path <- file.path(connector_object$full_path, name)
   brickster::db_volume_dir_delete(path = directory_path)
 
@@ -197,43 +202,48 @@ tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @keywords internal
 #' @noRd
 check_databricks_volume_exists <- function(
-    catalog,
-    schema,
-    volume,
-    force = FALSE) {
-  db_client <- DatabricksClient()
-  volumes <- list_databricks_volumes(
-    catalog_name = catalog,
-    schema_name = schema
-  )
-
-  if (length(volumes) == 0 || !(volume %in% volumes$name)) {
-    cli::cli_alert("Volume does not exist.")
-    if (force) {
-      cli::cli_alert("Creating volume...")
-      create_databricks_volume(
-        name = volume,
-        catalog_name = catalog,
-        schema_name = schema
+  catalog,
+  schema,
+  volume,
+  force = FALSE
+) {
+  tryCatch(
+    {
+      brickster::db_uc_volumes_get(
+        volume = volume,
+        catalog = catalog,
+        schema = schema
       )
-      cli::cli_alert("Volume created!")
       return(NULL)
-    }
-    menu <- menu(
-      c("Create volume", "Exit"),
-      title = "What would you like to do?"
-    )
-    if (menu == 1) {
-      cli::cli_alert("Creating volume...")
-      create_databricks_volume(
-        name = volume,
-        catalog_name = catalog,
-        schema_name = schema
+    },
+    error = function(e) {
+      cli::cli_alert("Volume does not exist.")
+      if (force) {
+        cli::cli_alert("Creating volume...")
+        invisible(brickster::db_uc_volumes_create(
+          volume = volume,
+          catalog = catalog,
+          schema = schema
+        ))
+        cli::cli_alert("Volume created!")
+        return(NULL)
+      }
+      menu <- menu(
+        c("Create volume", "Exit"),
+        title = "What would you like to do?"
       )
-      cli::cli_alert("Volume created!")
-    } else {
-      cli::cli_abort("Exiting...")
+      if (menu == 1) {
+        cli::cli_alert("Creating volume...")
+        invisible(brickster::db_uc_volumes_create(
+          volume = volume,
+          catalog = catalog,
+          schema = schema
+        ))
+        cli::cli_alert("Volume created!")
+      } else {
+        cli::cli_abort("Exiting...")
+      }
     }
-  }
+  )
   return(NULL)
 }

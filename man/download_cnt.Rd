@@ -22,7 +22,8 @@ download_cnt(connector_object, name, file = basename(name), ...)
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition list content methods for databricks connectors implemented for \code{\link[connector:download_cnt]{connector::download_cnt()}}:
+Addition list content methods for databricks connectors implemented for
+\code{\link[connector:download_cnt]{connector::download_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:download_cnt]{connector::download_cnt()}} method

@@ -83,7 +83,7 @@ test_that("log_write_connector.ConnectorDatabricksTable logs correct message", {
   mockery::expect_args(log_mock, 1, expected_msg)
 })
 
-test_that("log_remove_connector.ConnectorDatabricksTable logs correct message", {
+test_that("log_remove_connector for tables logs correct message", {
   skip_if_not_installed("whirl")
   skip_on_cran()
   skip_on_ci()
@@ -129,7 +129,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       force = TRUE
     )
 
-    test_that("log_read_connector.ConnectorDatabricksVolume logs correct message", {
+    test_that("log_read_connector for volumes logs correct message", {
       # Create mock for whirl::log_read
       log_mock <- mockery::mock()
       mockery::stub(
@@ -147,7 +147,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       mockery::expect_args(log_mock, 1, expected_msg)
     })
 
-    test_that("log_write_connector.ConnectorDatabricksVolume logs correct message", {
+    test_that("log_write_connector for volumes logs correct message", {
       # Create mock for whirl::log_write
       log_mock <- mockery::mock()
       mockery::stub(
@@ -168,7 +168,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       mockery::expect_args(log_mock, 1, expected_msg)
     })
 
-    test_that("log_remove_connector.ConnectorDatabricksVolume logs correct message", {
+    test_that("log_remove_connecto for volumes logs correct message", {
       # Create mock for whirl::log_delete
       log_mock <- mockery::mock()
       mockery::stub(

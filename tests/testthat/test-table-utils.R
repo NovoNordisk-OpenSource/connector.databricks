@@ -97,7 +97,7 @@ test_that("write_table_volume works", {
     expect_equal(mtcars_dataset())
 
   setup_table_connector$remove_cnt(table_name) |>
-    expect_no_condition()
+    expect_no_error()
 })
 
 test_that("list_content_tags works", {

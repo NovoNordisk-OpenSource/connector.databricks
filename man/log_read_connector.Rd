@@ -17,5 +17,6 @@ log_read_connector(connector_object, name, ...)
 The result of the specific method implementation.
 }
 \description{
-Addition log read methods for databricks connectors implemented for \code{\link[connector:log_read_connector]{connector::log_read_connector()}}:
+Addition log read methods for databricks connectors implemented for
+\code{\link[connector:log_read_connector]{connector::log_read_connector()}}:
 }

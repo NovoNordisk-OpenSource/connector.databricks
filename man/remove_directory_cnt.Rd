@@ -21,5 +21,6 @@ the \code{\link[brickster:db_volume_dir_delete]{brickster::db_volume_dir_delete(
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition list content methods for databricks connectors implemented for \code{\link[connector:remove_directory_cnt]{connector::remove_directory_cnt()}}:
+Addition list content methods for databricks connectors implemented for
+\code{\link[connector:remove_directory_cnt]{connector::remove_directory_cnt()}}:
 }

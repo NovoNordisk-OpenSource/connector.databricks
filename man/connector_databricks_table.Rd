@@ -7,7 +7,8 @@
 connector_databricks_table(http_path, catalog, schema, extra_class = NULL)
 }
 \arguments{
-\item{http_path}{\link{character} The path to the Databricks cluster or SQL warehouse you want to connect to}
+\item{http_path}{\link{character} The path to the Databricks cluster or SQL
+warehouse you want to connect to}
 
 \item{catalog}{\link{character} The catalog to use}
 

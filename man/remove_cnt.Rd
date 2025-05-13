@@ -24,11 +24,13 @@ remove_cnt(connector_object, name, ...)
 \link{ConnectorDatabricksVolume} object
 }
 \description{
-Addition remove methods for databricks connectors implemented for \code{\link[connector:remove_cnt]{connector::remove_cnt()}}:
+Addition remove methods for databricks connectors implemented for
+\code{\link[connector:remove_cnt]{connector::remove_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}} method for \link[connector:connector_dbi]{connector::connector_dbi},
-but always sets the \code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}} method
+for \link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and \code{schema}
+as defined in when initializing the connector.
 }
 
 \itemize{

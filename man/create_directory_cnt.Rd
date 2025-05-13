@@ -22,5 +22,6 @@ create_directory_cnt(connector_object, name, open = TRUE, ...)
 \link{ConnectorDatabricksVolume} object or \link{ConnectorDatabricksVolume} object of a newly built directory
 }
 \description{
-Addition list content methods for databricks connectors implemented for \code{\link[connector:create_directory_cnt]{connector::create_directory_cnt()}}:
+Addition list content methods for databricks connectors implemented for
+\code{\link[connector:create_directory_cnt]{connector::create_directory_cnt()}}:
 }
