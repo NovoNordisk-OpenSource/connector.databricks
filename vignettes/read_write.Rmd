@@ -1,0 +1,138 @@
+---
+title: "Reading and Writing Databricks Tables"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reading and Writing Databricks Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+This vignette demonstrates how to **read from** and **write to** Databricks tables using the custom functions. These functions provide a convenient interface for interacting with Databricks tables, including features like [time travel](https://docs.databricks.com/aws/en/delta/history) and [tagging](https://docs.databricks.com/aws/en/database-objects/tags).
+
+## Setup
+
+First, let's load the necessary libraries and create a connector object:
+
+```{r setup, eval=FALSE}
+library(connector.databricks)
+library(dplyr)
+
+# Create a ConnectorDatabricksTable object
+connector_object <- connector_databricks_table(
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+```
+
+## Writing to a Databricks Table
+
+To write data to a Databricks table, we use the `write_cnt()` method:
+
+```{r write_example, eval=FALSE}
+# Create sample data
+data <- data.frame(
+  id = 1:5,
+  name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  age = c(25, 30, 35, 40, 45)
+)
+
+# Write data to a table
+connector_object |>
+  write_cnt(
+    x = data,
+    name = "my_table",
+    overwrite = TRUE,
+    tags = list(source = "example", date = Sys.Date())
+  )
+```
+
+### Mechanism for Writing
+
+The `write_cnt()` method for `ConnectorDatabricksTable` objects uses a **temporary volume approach** to write data. Here's how it works:
+
+1. A **temporary volume** is created in the Databricks file system.
+2. The data is written to this temporary volume as a [**Parquet**](https://www.databricks.com/glossary/what-is-parquet) file.
+3. The Parquet file is then converted to a Databricks table using SQL commands.
+4. If specified, **tags** are added to the table.
+5. Finally, the temporary volume is deleted.
+
+This approach allows for **efficient writing of large datasets** and provides a way to add metadata (tags) to the table. The use of Parquet as an intermediate format ensures good performance and compatibility with [Databricks' Delta Lake architecture](https://docs.databricks.com/aws/en/delta/).
+
+## Reading from a Databricks Table
+
+To read data from a Databricks table, we use the `read_cnt()` method:
+
+```{r read_example, eval=FALSE}
+# Read the entire table
+table_data <- connector_object |>
+  read_cnt("my_table")
+
+# Read the table at a specific timepoint
+historical_data <- connector_object |>
+  read_cnt("my_table", timepoint = "2023-06-01 12:00:00 UTC")
+
+# Read a specific version of the table
+version_data <- connector_object |>
+  read_cnt("my_table", version = 2)
+```
+
+### Mechanism for Reading
+
+The `read_cnt` method for `ConnectorDatabricksTable` objects leverages Databricks' SQL interface and [Delta Lake time travel capabilities]((https://docs.databricks.com/aws/en/delta/history)). Here's how it works:
+
+1. A SQL query is constructed based on the table name and any time travel parameters (timepoint or version).
+2. The query is executed on a Databricks SQL warehouse.
+3. The result is streamed back in [Arrow](https://arrow.apache.org/overview/) format for efficient data transfer.
+4. The Arrow stream is converted to an R data frame.
+
+This method supports time travel, allowing you to read historical versions of the table.
+The use of Arrow for data transfer provides good performance, especially for large datasets.
+
+## Listing Tables
+
+To list tables in the Databricks catalog, use the `list_content_cnt()` method:
+
+```{r list_example, eval=FALSE}
+# List all tables
+all_tables <- connector_object |>
+  list_content_cnt()
+
+# List tables with specific tags
+tagged_tables <- connector_object |>
+  list_content_cnt(tags = (tag_name == "source" && tag_value == "example"))
+```
+
+The `list_content_cnt` method can filter tables based on their tags. It translates the tag filtering expression into SQL and queries the Databricks system tables to find matching tables.
+
+## Working with Table References
+
+You can create a reference to a Databricks table using the `tbl_cnt()` method:
+
+```{r tbl_example, eval=FALSE}
+table_ref <- connector_object |>
+  tbl_cnt("my_table")
+
+# Use dplyr operations on the table reference
+filtered_data <- table_ref |>
+  filter(age > 30) |>
+  collect()
+```
+
+The `tbl_cnt()` method creates a reference to the table that can be used with dplyr operations. These operations are translated to SQL and executed on the Databricks cluster, allowing for efficient processing of large datasets.
+
+## Conclusion
+
+This vignette demonstrated the basic usage of custom functions for reading from and writing to Databricks tables. These functions provide a convenient interface for working with Databricks, including features like time travel, tagging, and easy integration with dplyr operations.
+
+The writing mechanism uses temporary volumes and Parquet files for efficient data transfer, while the reading mechanism leverages SQL queries and Arrow streaming for performance. Both methods take advantage of Databricks' Delta Lake architecture, providing features like ACID transactions, time travel, and metadata management.
+
+Remember to refer to the documentation of individual functions for more detailed information on their usage and parameters.
