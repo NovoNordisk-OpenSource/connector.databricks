@@ -1,3 +1,7 @@
+# connector.databricks dev
+
+* Set dependency `brickster (>= 0.2.7)`
+
 # connector.databricks 0.0.5
 
 ## New features and improvements
