@@ -1,5 +1,5 @@
 Package: connector.databricks
-Version: 0.0.5
+Version: 0.0.5.9000
 Title: Expansion of the connector package for enabling connections to
     databricks
 Authors@R: c(
@@ -16,7 +16,7 @@ License: Apache License (>= 2)
 URL: https://novonordisk-opensource.github.io/connector.databricks,
     https://github.com/novonordisk-opensource/connector.databricks
 Imports:
-    brickster,
+    brickster (>= 0.2.7),
     checkmate,
     cli,
     connector (>= 0.0.8),
