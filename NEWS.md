@@ -1,6 +1,7 @@
 # connector.databricks dev
 
 * Set dependency `brickster (>= 0.2.7)`
+* Add github templates for issues, features and PRs
 
 # connector.databricks 0.0.5
 
