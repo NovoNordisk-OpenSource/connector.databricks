@@ -19,7 +19,7 @@
 #'  write_table_volume(connector_object,
 #'     data,
 #'     "my_table",
-#'     overwrite = TRUE,
+#'     overwrite = zephyr::get_option("overwrite", "connector.databricks"),
 #'     tags = list("tag_name1" = "tag_value1")
 #'  )
 #' }
@@ -27,7 +27,7 @@ write_table_volume <- function(
   connector_object,
   x,
   name,
-  overwrite = TRUE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   tags = NULL
 ) {
   checkmate::assert_r6(
