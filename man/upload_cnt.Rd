@@ -5,19 +5,13 @@
 \alias{upload_cnt.ConnectorDatabricksVolume}
 \title{Upload content to the connector}
 \usage{
-upload_cnt(
-  connector_object,
-  file,
-  name = basename(file),
-  overwrite = zephyr::get_option("overwrite", "connector"),
-  ...
-)
+upload_cnt(connector_object, file, name = basename(file), ...)
 
 \method{upload_cnt}{ConnectorDatabricksVolume}(
   connector_object,
   file,
   name = basename(file),
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 )
 }
@@ -28,9 +22,9 @@ upload_cnt(
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{overwrite}{Overwrite existing content if it exists in the connector?. Default: \code{FALSE}.}
-
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+
+\item{overwrite}{needs describtion}
 }
 \value{
 \link{ConnectorDatabricksVolume} object

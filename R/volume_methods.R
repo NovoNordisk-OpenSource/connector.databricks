@@ -31,7 +31,7 @@ write_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
   x,
   name,
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
@@ -114,14 +114,14 @@ download_cnt.ConnectorDatabricksVolume <- function(
 #'
 #' @rdname upload_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the [brickster::db_volume_write()] method
-#'
+#' @param overwrite needs describtion
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 upload_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
   file,
   name = basename(file),
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
@@ -217,15 +217,15 @@ check_databricks_volume_exists <- function(
       return(NULL)
     },
     error = function(e) {
-      cli::cli_alert("Volume does not exist.")
+      zephyr::msg_info("Volume does not exist.")
       if (force) {
-        cli::cli_alert("Creating volume...")
+        zephyr::msg_info("Creating volume...")
         invisible(brickster::db_uc_volumes_create(
           volume = volume,
           catalog = catalog,
           schema = schema
         ))
-        cli::cli_alert("Volume created!")
+        zephyr::msg_info("Volume created!")
         return(NULL)
       }
       menu <- menu(
@@ -233,13 +233,13 @@ check_databricks_volume_exists <- function(
         title = "What would you like to do?"
       )
       if (menu == 1) {
-        cli::cli_alert("Creating volume...")
+        zephyr::msg_info("Creating volume...")
         invisible(brickster::db_uc_volumes_create(
           volume = volume,
           catalog = catalog,
           schema = schema
         ))
-        cli::cli_alert("Volume created!")
+        zephyr::msg_info("Volume created!")
       } else {
         cli::cli_abort("Exiting...")
       }
