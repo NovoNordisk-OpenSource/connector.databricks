@@ -8,7 +8,7 @@ write_table_volume(
   connector_object,
   x,
   name,
-  overwrite = zephyr::get_option("overwrite_write_table", "connector.databricks"),
+  overwrite = zephyr::get_option("overwrite", "connector"),
   tags = NULL
 )
 }
@@ -20,7 +20,7 @@ with Databricks}
 
 \item{name}{The name of the table}
 
-\item{overwrite}{needs describtion}
+\item{overwrite}{Overwrite existing content if it exists in the connector. Default: \code{FALSE}.}
 
 \item{tags}{Named list containing tag names and tag values, e.g.
 list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").

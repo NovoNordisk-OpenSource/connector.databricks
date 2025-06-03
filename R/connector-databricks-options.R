@@ -1,11 +1,9 @@
 #' @title Options for connector.databricks
 #' @name connector-options-databricks
-#' @description 
+#' @description
 #' Configuration options for the connector.databricks
-#' 
 #' `r zephyr::list_options(as = "markdown", .envir = "connector")`
 NULL
-
 #' @title Internal parameters for reuse in functions
 #' @name connector-databricks-options-params
 #' @eval zephyr::list_options(as = "params", .envir = "connector")
@@ -15,12 +13,6 @@ NULL
 NULL
 zephyr::create_option(
   name = "overwrite",
-  default = FALSE,
-  desc = "Overwrite existing content if it exists in the connector?"
-)
-
-zephyr::create_option(
-  name = "overwrite_write_table",
-  default = TRUE,
+  default = zephyr::get_option("overwrite", "connector"),
   desc = "Overwrite existing content if it exists in the connector?"
 )
