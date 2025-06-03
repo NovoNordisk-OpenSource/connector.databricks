@@ -1,5 +1,5 @@
 Package: connector.databricks
-Version: 0.0.5.9001
+Version: 0.0.6.9001
 Title: Expansion of the connector package for enabling connections to
     databricks
 Authors@R: c(
@@ -7,6 +7,7 @@ Authors@R: c(
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = "aut"),
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = "aut"),
     person("Cervan", "Girard", , "cgid@novonordisk.com", role = "aut"),
+    person("Oliver", "Lundsgaard", , "ovlr@novonordisk.com", role = "aut"),
     person("Novo Nordisk A/S", role = "cph")
   )
 Description: Expands the connector package to handle databricks. This

@@ -13,7 +13,7 @@ write_cnt(connector_object, x, name, ...)
   connector_object,
   x,
   name,
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...,
   method = "volume",
   tags = NULL

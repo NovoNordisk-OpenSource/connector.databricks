@@ -42,7 +42,7 @@ write_cnt.ConnectorDatabricksTable <- function(
   connector_object,
   x,
   name,
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...,
   method = "volume",
   tags = NULL

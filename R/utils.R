@@ -42,7 +42,7 @@ parquet_to_table <- function(
   connector_object,
   tmp_volume,
   name,
-  overwrite = zephyr::get_option("overwrite", "connector")
+  overwrite = zephyr::get_option("overwrite", "connector.databricks")
 ) {
   catalog <- connector_object$catalog
   schema <- connector_object$schema
