@@ -5,11 +5,11 @@
 
 # connector.databricks 0.0.5.9002
 
+## New features and improvements
+
 * Updated `volume_methods` to use zephyr::msg_info(), replacing cli::cli_alert()
 * Updated `volume_methods`, `table_utils` and `table_methods` to use zephyr::get_option() replacing a bool
 * Updated tests to use zephyr-option, with verbosity = quiet
-
-## New features and improvements
 
 # connector.databricks 0.0.5
 
