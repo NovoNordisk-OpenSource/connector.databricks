@@ -3,6 +3,14 @@
 * Set dependency `brickster (>= 0.2.7)`
 * Add github templates for issues, features and PRs
 
+# connector.databricks 0.0.5.9002
+
+## New features and improvements
+
+* Updated `volume_methods` to use zephyr::msg_info(), replacing cli::cli_alert()
+* Updated `volume_methods`, `table_utils` and `table_methods` to use zephyr::get_option() replacing a bool
+* Updated tests to use zephyr-option, with verbosity = quiet
+
 # connector.databricks 0.0.5
 
 ## New features and improvements

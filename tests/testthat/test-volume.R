@@ -1,4 +1,7 @@
 test_that("ConnectorDatabricksVolume creation fails", {
+  withr::local_options(
+    list(connector.verbosity_level = "quite")
+  )
   # Invalid full path
   expect_error(ConnectorDatabricksVolume$new(full_path = 1))
 

@@ -7,8 +7,7 @@
 #' with Databricks
 #' @param x The data to be written to the table
 #' @param name The name of the table
-#' @param overwrite Boolean indicating whether to overwrite the table if it
-#' already exists
+#' @param overwrite Overwrite existing content if it exists in the connector. Default: \code{FALSE}.
 #' @param tags Named list containing tag names and tag values, e.g.
 #' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").
 #' More info [here](https://docs.databricks.com/aws/en/database-objects/tags)
@@ -19,7 +18,7 @@
 #'  write_table_volume(connector_object,
 #'     data,
 #'     "my_table",
-#'     overwrite = TRUE,
+#'     overwrite = zephyr::get_option("overwrite", "connector.databricks"),
 #'     tags = list("tag_name1" = "tag_value1")
 #'  )
 #' }
@@ -27,7 +26,7 @@ write_table_volume <- function(
   connector_object,
   x,
   name,
-  overwrite = TRUE,
+  overwrite = zephyr::get_option("overwrite", "connector"),
   tags = NULL
 ) {
   checkmate::assert_r6(

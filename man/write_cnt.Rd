@@ -7,25 +7,25 @@
 \alias{write_cnt.ConnectorDatabricksVolume}
 \title{Write content to the connector}
 \usage{
-write_cnt(
-  connector_object,
-  x,
-  name,
-  overwrite = zephyr::get_option("overwrite", "connector"),
-  ...
-)
+write_cnt(connector_object, x, name, ...)
 
 \method{write_cnt}{ConnectorDatabricksTable}(
   connector_object,
   x,
   name,
-  overwrite = FALSE,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...,
   method = "volume",
   tags = NULL
 )
 
-\method{write_cnt}{ConnectorDatabricksVolume}(connector_object, x, name, overwrite = FALSE, ...)
+\method{write_cnt}{ConnectorDatabricksVolume}(
+  connector_object,
+  x,
+  name,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
+  ...
+)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
@@ -34,9 +34,9 @@ write_cnt(
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{overwrite}{Overwrite a file if it already exists}
-
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+
+\item{overwrite}{Overwrite existing content if it exists in the connector. Default: \code{FALSE}.}
 
 \item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the
 table. Options:
