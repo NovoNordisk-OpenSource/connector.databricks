@@ -36,7 +36,7 @@ Suggests:
     knitr,
     mockery (>= 0.4.4),
     rmarkdown,
-    testthat (>= 3.0.0),
+    testthat (>= 3.2.3),
     tibble,
     whirl (>= 0.1.8.9000)
 VignetteBuilder:

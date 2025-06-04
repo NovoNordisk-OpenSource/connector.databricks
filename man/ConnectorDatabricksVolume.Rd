@@ -4,7 +4,7 @@
 \alias{ConnectorDatabricksVolume}
 \title{Connector for databricks volume storage}
 \description{
-The ConnectorDatabricksVolume class, built on top of \link[connector:connector-package]{connector::connector}
+The ConnectorDatabricksVolume class, built on top of \link[connector:Connector]{connector::connector}
 class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
