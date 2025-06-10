@@ -35,7 +35,7 @@ tmp_volume <- function(connector_object, volume_name, envir = parent.frame()) {
 #' @param connector_object Connector object
 #' @param tmp_volume Temporary Volume
 #' @param name Table name
-#' @param overwrite Overwrite existing content if it exists in the connector. Default: \code{FALSE}.
+#' @param overwrite Overwrite existing content if it exists in the connector.
 #' @keywords internal
 #' @noRd
 parquet_to_table <- function(

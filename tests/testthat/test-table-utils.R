@@ -58,7 +58,7 @@ test_that("write_table_volume works", {
     connector_object = setup_table_connector,
     x = mtcars_dataset(),
     name = table_name,
-    overwrite = zephyr::get_option("overwrite", "connector.databricks"),
+    overwrite = FALSE,
     tags = list("test_tag" = tag_value)
   ) |>
     expect_no_failure()
@@ -111,7 +111,7 @@ test_that("list_content_tags works", {
     connector_object = setup_table_connector,
     x = mtcars_dataset(),
     name = table_name,
-    overwrite = zephyr::get_option("overwrite", "connector.databricks"),
+    overwrite = TRUE,
     tags = list("test_tag" = tag_value)
   ) |>
     expect_no_failure()

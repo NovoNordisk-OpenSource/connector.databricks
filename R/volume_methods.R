@@ -23,7 +23,7 @@ read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #'  `schema` as defined in when initializing the connector.
 #'
 #' @rdname write_cnt
-#' @param overwrite Overwrite existing content if it exists in the connector. Default: \code{FALSE}.
+#' @param overwrite Overwrite existing content if it exists in the connector.
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the [brickster::db_volume_write()] method
 #' @return [ConnectorDatabricksVolume] object
 #' @export
@@ -114,7 +114,7 @@ download_cnt.ConnectorDatabricksVolume <- function(
 #'
 #' @rdname upload_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the [brickster::db_volume_write()] method
-#' @param overwrite Overwrites existing content if it exists in the connector. Default: \code{FALSE}.
+#' @param overwrite Overwrites existing content if it exists in the connector.
 #' @return [ConnectorDatabricksVolume] object
 #' @export
 upload_cnt.ConnectorDatabricksVolume <- function(

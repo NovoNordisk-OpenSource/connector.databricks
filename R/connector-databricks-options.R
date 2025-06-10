@@ -2,12 +2,12 @@
 #' @name connector-options-databricks
 #' @description
 #' Configuration options for the connector.databricks
-#' `r zephyr::list_options(as = "markdown", .envir = "connector")`
+#' `r zephyr::list_options(as = "markdown", .envir = "connector.databricks")`
 NULL
 
 #' @title Internal parameters for reuse in functions
 #' @name connector-databricks-options-params
-#' @eval zephyr::list_options(as = "params", .envir = "connector")
+#' @eval zephyr::list_options(as = "params", .envir = "connector.databricks")
 #' @details
 #' See [connector-options-databricks] for more information.
 #' @keywords internal
@@ -21,6 +21,6 @@ zephyr::create_option(
 
 zephyr::create_option(
   name = "verbosity_level",
-  default = "verbose",
+  default = zephyr::get_option("overwrite", "connector"),
   desc = "Verbosity level for functions in connector. See [zephyr::verbosity_level] for details."
 )

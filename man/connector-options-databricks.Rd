@@ -5,4 +5,23 @@
 \title{Options for connector.databricks}
 \description{
 Configuration options for the connector.databricks
+\subsection{overwrite}{
+
+Overwrite existing content if it exists in the connector?
+\itemize{
+\item Default: \code{FALSE}
+\item Option: \code{connector.databricks.overwrite}
+\item Environment: \code{R_CONNECTOR.DATABRICKS_OVERWRITE}
+}
+}
+
+\subsection{verbosity_level}{
+
+Verbosity level for functions in connector. See \link[zephyr:verbosity_level]{zephyr::verbosity_level} for details.
+\itemize{
+\item Default: \code{FALSE}
+\item Option: \code{connector.databricks.verbosity_level}
+\item Environment: \code{R_CONNECTOR.DATABRICKS_VERBOSITY_LEVEL}
+}
+}
 }
