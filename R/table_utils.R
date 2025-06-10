@@ -18,7 +18,7 @@
 #'  write_table_volume(connector_object,
 #'     data,
 #'     "my_table",
-#'     overwrite = zephyr::get_option("overwrite", "connector.databricks"),
+#'     overwrite = zephyr::option,
 #'     tags = list("tag_name1" = "tag_value1")
 #'  )
 #' }
