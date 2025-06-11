@@ -18,7 +18,7 @@
 #'  write_table_volume(connector_object,
 #'     data,
 #'     "my_table",
-#'     overwrite = zephyr::option,
+#'     overwrite = TRUE,
 #'     tags = list("tag_name1" = "tag_value1")
 #'  )
 #' }
