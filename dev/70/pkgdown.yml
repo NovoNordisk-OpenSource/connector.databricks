@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   connector-databricks: connector-databricks.html
   articles/read_write: read_write.html
-last_built: 2025-06-11T08:14Z
+last_built: 2025-06-11T08:16Z
 urls:
   reference: https://novonordisk-opensource.github.io/connector.databricks/reference
   article: https://novonordisk-opensource.github.io/connector.databricks/articles
