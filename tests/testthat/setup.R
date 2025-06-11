@@ -7,6 +7,7 @@ testing_env_variables <- c(
 
 withr::local_options(
   .new = list(
+    connector.databricks.verbosity_level = "quiet",
     zephyr.verbosity_level = "quiet"
   ),
   .local_envir = teardown_env()
