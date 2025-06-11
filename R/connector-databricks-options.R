@@ -21,6 +21,6 @@ zephyr::create_option(
 
 zephyr::create_option(
   name = "verbosity_level",
-  default = zephyr::get_option("overwrite", "connector"),
+  default = zephyr::get_option("verbosity_level", "connector"),
   desc = "Verbosity level for functions in connector. See [zephyr::verbosity_level] for details."
 )
