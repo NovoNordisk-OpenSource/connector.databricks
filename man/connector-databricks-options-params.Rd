@@ -6,7 +6,7 @@
 \arguments{
 \item{overwrite}{Overwrite existing content if it exists in the connector?. Default: \code{FALSE}.}
 
-\item{verbosity_level}{Verbosity level for functions in connector. See \link[zephyr:verbosity_level]{zephyr::verbosity_level} for details.. Default: \code{FALSE}.}
+\item{verbosity_level}{Verbosity level for functions in connector. See \link[zephyr:verbosity_level]{zephyr::verbosity_level} for details.. Default: \code{"verbose"}.}
 }
 \description{
 Internal parameters for reuse in functions

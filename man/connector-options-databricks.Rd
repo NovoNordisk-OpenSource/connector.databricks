@@ -19,7 +19,7 @@ Overwrite existing content if it exists in the connector?
 
 Verbosity level for functions in connector. See \link[zephyr:verbosity_level]{zephyr::verbosity_level} for details.
 \itemize{
-\item Default: \code{FALSE}
+\item Default: \code{"verbose"}
 \item Option: \code{connector.databricks.verbosity_level}
 \item Environment: \code{R_CONNECTOR.DATABRICKS_VERBOSITY_LEVEL}
 }

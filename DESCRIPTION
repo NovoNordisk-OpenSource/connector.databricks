@@ -1,5 +1,5 @@
 Package: connector.databricks
-Version: 0.0.5.9002
+Version: 0.0.5.9000
 Title: Expansion of the connector package for enabling connections to
     databricks
 Authors@R: c(
