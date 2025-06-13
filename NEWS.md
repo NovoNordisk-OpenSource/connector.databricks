@@ -6,7 +6,6 @@
 * Updated `volume_methods`, `table_utils` and `table_methods` to use zephyr::get_option() replacing a bool
 * Updated tests to use zephyr-option, with verbosity = quiet
 
-
 # connector.databricks 0.0.5
 
 ## New features and improvements
