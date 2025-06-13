@@ -4,7 +4,13 @@
 \alias{write_table_volume}
 \title{Write data to a table using Databricks Volume}
 \usage{
-write_table_volume(connector_object, x, name, overwrite = TRUE, tags = NULL)
+write_table_volume(
+  connector_object,
+  x,
+  name,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
+  tags = NULL
+)
 }
 \arguments{
 \item{connector_object}{A \link{ConnectorDatabricksTable} object for interacting
@@ -14,8 +20,7 @@ with Databricks}
 
 \item{name}{The name of the table}
 
-\item{overwrite}{Boolean indicating whether to overwrite the table if it
-already exists}
+\item{overwrite}{Overwrite existing content if it exists in the connector.}
 
 \item{tags}{Named list containing tag names and tag values, e.g.
 list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2").

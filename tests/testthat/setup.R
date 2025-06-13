@@ -5,6 +5,14 @@ testing_env_variables <- c(
   "DATABRICKS_SCHEMA_NAME"
 )
 
+withr::local_options(
+  .new = list(
+    connector.databricks.verbosity_level = "quiet",
+    zephyr.verbosity_level = "quiet"
+  ),
+  .local_envir = teardown_env()
+)
+
 rlang::check_installed("glue")
 
 if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {

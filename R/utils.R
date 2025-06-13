@@ -35,13 +35,14 @@ tmp_volume <- function(connector_object, volume_name, envir = parent.frame()) {
 #' @param connector_object Connector object
 #' @param tmp_volume Temporary Volume
 #' @param name Table name
+#' @param overwrite Overwrite existing content if it exists in the connector.
 #' @keywords internal
 #' @noRd
 parquet_to_table <- function(
   connector_object,
   tmp_volume,
   name,
-  overwrite = TRUE
+  overwrite = zephyr::get_option("overwrite", "connector.databricks")
 ) {
   catalog <- connector_object$catalog
   schema <- connector_object$schema
