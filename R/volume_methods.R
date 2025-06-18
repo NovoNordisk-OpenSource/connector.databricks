@@ -189,8 +189,9 @@ tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' Check if databricks volume exists
 #'
 #'
-#' Utility function used as a private function for [ConnectorDatabricksVolume] object
-#' to check if volume already exists, if not it will promt user to create a new one.
+#' Utility function used as a private function for [ConnectorDatabricksVolume]
+#' object to check if volume already exists, if not it will prompt user to
+#' create a new one.
 #'
 #'
 #' @param catalog [character] The name of the catalog
