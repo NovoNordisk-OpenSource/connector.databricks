@@ -51,7 +51,10 @@ write_table_volume <- function(
     }
   )
 
-  zephyr::msg_info("Writing to a table...")
+  zephyr::msg_info(
+    "Writing to a table
+    {connector_object$catalog}/{connector_object$schema}/{name}..."
+  )
 
   temporary_volume$write_cnt(
     x = x,
@@ -81,7 +84,6 @@ write_table_volume <- function(
       volume = volume_name
     )
   })
-  zephyr::msg_info("Temporary volume deleted.")
 }
 
 #' List Databricks tables in a catalog based on tag values
@@ -180,7 +182,10 @@ read_table_timepoint <- function(
 
   warehouse_id <- brickster::db_sql_warehouse_list()[[1]]$id
 
-  zephyr::msg_info("Reading from a table...")
+  zephyr::msg_info(
+    "Reading from a table
+    {connector_object$catalog}.{connector_object$schema}.`{name}`..."
+  )
   query_result <- execute_sql_query(
     query_string = sql_statement,
     warehouse_id = warehouse_id,
