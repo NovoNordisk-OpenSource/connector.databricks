@@ -195,6 +195,11 @@ read_table_timepoint <- function(
     format = "ARROW_STREAM"
   )
 
+  if (query_result$manifest$total_chunk_count == 0) {
+    return(DBI::dbGetQuery(connector_object$conn, sql_statement))
+    zephyr::msg_success("Table read successfully!")
+  }
+
   statement_id <- query_result$statement_id
   chunk_count <- query_result$manifest$total_chunk_count - 1
 

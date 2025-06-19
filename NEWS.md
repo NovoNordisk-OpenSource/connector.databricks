@@ -5,6 +5,7 @@
 * Updated `volume_methods` to use zephyr::msg_info(), replacing cli::cli_alert()
 * Updated `volume_methods`, `table_utils` and `table_methods` to use zephyr::get_option() replacing a bool
 * Updated tests to use zephyr-option, with verbosity = quiet
+* Fix bug regarding empty tables [#73](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/73)
 
 # connector.databricks 0.0.5
 
