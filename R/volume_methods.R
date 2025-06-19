@@ -189,8 +189,9 @@ tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' Check if databricks volume exists
 #'
 #'
-#' Utility function used as a private function for [ConnectorDatabricksVolume] object
-#' to check if volume already exists, if not it will promt user to create a new one.
+#' Utility function used as a private function for [ConnectorDatabricksVolume]
+#' object to check if volume already exists, if not it will prompt user to
+#' create a new one.
 #'
 #'
 #' @param catalog [character] The name of the catalog
@@ -217,23 +218,20 @@ check_databricks_volume_exists <- function(
       return(NULL)
     },
     error = function(e) {
-      zephyr::msg_info("Volume does not exist.")
       if (force) {
-        zephyr::msg_info("Creating volume...")
         invisible(brickster::db_uc_volumes_create(
           volume = volume,
           catalog = catalog,
           schema = schema
         ))
-        zephyr::msg_info("Volume created!")
         return(NULL)
       }
       menu <- menu(
         c("Create volume", "Exit"),
-        title = "What would you like to do?"
+        title = "Volume does not exist. What would you like to do?"
       )
       if (menu == 1) {
-        zephyr::msg_info("Creating volume...")
+        zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
         invisible(brickster::db_uc_volumes_create(
           volume = volume,
           catalog = catalog,
