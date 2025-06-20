@@ -240,3 +240,28 @@ test_that("read and write empty table works", {
 
   expect_equal(empty_table, empty_result)
 })
+
+test_that("tmp volume removal works", {
+  # Bad data input to break the test
+  x <- list("1", "2", "3")
+
+  expect_error(write_table_volume(
+    connector_object = setup_table_connector,
+    x,
+    "empty_table",
+    overwrite = TRUE
+  ))
+
+  list_of_volumes <- brickster::db_uc_volumes_list(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema
+  )
+
+  expect_no_error(
+    for (volume in list_of_volumes) {
+      if (startsWith(volume[["name"]], "tmp_")) {
+        stop("tmp volume exists")
+      }
+    }
+  )
+})

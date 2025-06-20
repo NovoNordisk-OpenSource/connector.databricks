@@ -51,6 +51,14 @@ write_table_volume <- function(
     }
   )
 
+  withr::defer({
+    brickster::db_uc_volumes_delete(
+      catalog = temporary_volume$catalog,
+      schema = temporary_volume$schema,
+      volume = volume_name
+    )
+  })
+
   zephyr::msg_info(
     "Writing to a table
     {connector_object$catalog}/{connector_object$schema}/{name}..."
@@ -76,14 +84,6 @@ write_table_volume <- function(
     )
   }
   zephyr::msg_success("Table written successfully!")
-
-  withr::defer({
-    brickster::db_uc_volumes_delete(
-      catalog = temporary_volume$catalog,
-      schema = temporary_volume$schema,
-      volume = volume_name
-    )
-  })
 }
 
 #' List Databricks tables in a catalog based on tag values
