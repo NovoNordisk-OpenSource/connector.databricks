@@ -243,7 +243,7 @@ test_that("read and write empty table works", {
 
 test_that("tmp volume removal works", {
   # Bad data input to break the test
-  x = list("1", "2", "3")
+  x <- list("1", "2", "3")
 
   expect_error(write_table_volume(
     connector_object = setup_table_connector,
