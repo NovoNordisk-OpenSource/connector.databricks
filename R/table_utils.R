@@ -196,8 +196,8 @@ read_table_timepoint <- function(
   )
 
   if (query_result$manifest$total_chunk_count == 0) {
-    return(DBI::dbGetQuery(connector_object$conn, sql_statement))
     zephyr::msg_success("Table read successfully!")
+    return(DBI::dbGetQuery(connector_object$conn, sql_statement))
   }
 
   statement_id <- query_result$statement_id
