@@ -152,7 +152,6 @@ test_that("read_table_timepoint fails when needed", {
     )
 })
 
-
 test_that("read_table_timepoint works", {
   table_name <- temp_table_name()
 
@@ -215,4 +214,29 @@ test_that("read_table_timepoint works", {
   )
 
   expect_equal(data2, read_data)
+})
+
+test_that("read and write empty table works", {
+  empty_table <- data.frame(
+    Date = as.Date(character()),
+    File = character(),
+    User = character(),
+    stringsAsFactors = FALSE
+  )
+
+  expect_no_failure(write_table_volume(
+    connector_object = setup_table_connector,
+    empty_table,
+    "empty_table",
+    overwrite = TRUE
+  ))
+
+  expect_no_failure(
+    empty_result <- read_table_timepoint(
+      connector_object = setup_table_connector,
+      name = "empty_table"
+    )
+  )
+
+  expect_equal(empty_table, empty_result)
 })
