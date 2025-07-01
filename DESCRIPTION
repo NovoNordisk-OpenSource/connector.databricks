@@ -30,7 +30,8 @@ Imports:
     withr,
     zephyr,
     dbplyr,
-    arrow
+    arrow,
+    fs
 Suggests:
     glue,
     knitr,

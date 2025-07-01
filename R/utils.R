@@ -1,7 +1,8 @@
 #' Create temporary volume name
 #'
 #' @param prefix Prefix to use for newly created volume. Default: `tmp_`
-#' @param length Character length to be used for random characters. Default: `10`
+#' @param length Character length to be used for random characters.
+#' Default: `10`
 #' @keywords internal
 #' @noRd
 tmp_volume_name <- function(prefix = "tmp_", length = 10) {

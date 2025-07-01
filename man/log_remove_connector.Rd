@@ -2,21 +2,39 @@
 % Please edit documentation in R/connector_imports.R
 \name{log_remove_connector}
 \alias{log_remove_connector}
-\title{Log Remove Connector}
+\title{Connector Logging Functions}
 \usage{
 log_remove_connector(connector_object, name, ...)
 }
 \arguments{
-\item{connector_object}{The connector object to log the removal of.}
+\item{connector_object}{The connector object to log operations for. Can be
+any connector class (ConnectorFS, ConnectorDBI, ConnectorLogger, etc.)}
 
-\item{name}{The name of the connector.}
+\item{name}{Character string specifying the name or identifier of the
+resource being operated on (e.g., file name, table name)}
 
-\item{...}{Additional parameters passed to the specific method implementation}
+\item{...}{Additional parameters passed to specific method implementations.
+May include connector-specific options or metadata.}
 }
 \value{
-The result of the specific method implementation.
+These are primarily side-effect functions that perform logging. The actual
+return value depends on the specific method implementation, typically:
+\itemize{
+\item \code{log_read_connector}: Result of the read operation
+\item \code{log_write_connector}: Invisible result of write operation
+\item \code{log_remove_connector}: Invisible result of remove operation
+\item \code{log_list_content_connector}: List of connector contents
+}
 }
 \description{
 Addition log remove methods for databricks connectors implemented for
-\code{\link[connector:log_remove_connector]{connector::log_remove_connector()}}:
+\code{\link[connector:log-functions]{connector::log_remove_connector()}}:
+}
+\details{
+Connector Logging Functions
+
+The logging system is built around S3 generic functions that dispatch to
+specific implementations based on the connector class. Each operation is
+logged with contextual information including connector details, operation
+type, and resource names.
 }

@@ -7,8 +7,8 @@ mtcars_dataset <- function() {
   x
 }
 
-# in DBI::dbGetQuery the - characters in arguments are being interpreted as minus operators
-# quoting it with back-quotes to mask the - character
+# in DBI::dbGetQuery the - characters in arguments are being interpreted as
+# minus operators quoting it with back-quotes to mask the - character
 # Custom paste function to add back quotes to individual strings
 custom_paste_with_back_quotes <- function(..., sep = " ") {
   args <- list(...)
@@ -53,4 +53,28 @@ create_temp_dataset <- function(rows = 10, cols = 5) {
   colnames(df) <- paste0("col_", 1:cols)
 
   return(df)
+}
+
+create_nested_directories <- function(
+  base_dir,
+  num_nested_dirs,
+  num_files_per_dir
+) {
+  if (!dir.exists(base_dir)) {
+    dir.create(base_dir)
+  }
+
+  for (j in 1:num_files_per_dir) {
+    file_name <- file.path(base_dir, paste0("file_", j, ".txt"))
+    writeLines(paste("This is file", j, "in", base_dir), file_name)
+  }
+
+  for (i in 1:num_nested_dirs) {
+    dir_name <- file.path(base_dir, paste0("dir_", i))
+    dir.create(dir_name, showWarnings = FALSE)
+    for (j in 1:num_files_per_dir) {
+      file_name <- file.path(dir_name, paste0("file_", j, ".txt"))
+      writeLines(paste("This is file", j, "in", dir_name), file_name)
+    }
+  }
 }

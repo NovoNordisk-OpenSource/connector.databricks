@@ -7,6 +7,9 @@
 * Updated tests to use zephyr-option, with verbosity = quiet
 * Fix bug regarding empty tables [#73](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/73)
 * Fix tmp volume bug [#63](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/63)
+* Add `upload_directory_cnt()` and `download_directory_cnt()` methods for
+`ConnectorDatabricksVolume` class. Solves [#77](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/77)
+* Update `remove_directory_cnt()` method for `ConnectorDatabricksVolume` class, now iterates over directories and erases all the subdirectories and files. Solve [#78](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/78)
 
 # connector.databricks 0.0.5
 
