@@ -1,3 +1,7 @@
+# Skip interactive tests on CI and CRAN
+skip_on_ci()
+skip_on_cran()
+
 test_that("directory upload and removal fails when needed", {
   expect_error(remove_directory(dir_path = 1))
   expect_error(remove_directory(dir_path = "/Volumes/random_directory"))
