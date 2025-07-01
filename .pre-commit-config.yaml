@@ -61,7 +61,6 @@ repos:
           CRAN-SUBMISSION|
           )$
     -   id: lintr
-        args: ['object_name_linter = NULL']
     -   id: readme-rmd-rendered
     -   id: parsable-R
     -   id: no-browser-statement

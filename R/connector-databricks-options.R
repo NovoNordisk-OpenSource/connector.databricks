@@ -8,8 +8,7 @@ NULL
 #' @title Internal parameters for reuse in functions
 #' @name connector-databricks-options-params
 #' @eval zephyr::list_options(as = "params", .envir = "connector.databricks")
-#' @details
-#' See [connector-options-databricks] for more information.
+#' @details See [connector-options-databricks] for more information.
 #' @keywords internal
 NULL
 
