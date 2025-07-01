@@ -1,1 +1,0 @@
-This is file 2 in nested_structure_volumes/dir_2
