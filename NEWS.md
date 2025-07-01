@@ -10,6 +10,7 @@
 * Add `upload_directory_cnt()` and `download_directory_cnt()` methods for
 `ConnectorDatabricksVolume` class. Solves [#77](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/77)
 * Update `remove_directory_cnt()` method for `ConnectorDatabricksVolume` class, now iterates over directories and erases all the subdirectories and files. Solve [#78](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/78)
+* Update `connector` dependency to `0.1.0` official CRAN version.
 
 # connector.databricks 0.0.5
 

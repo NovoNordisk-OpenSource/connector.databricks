@@ -20,7 +20,7 @@ Imports:
     brickster (>= 0.2.7),
     checkmate,
     cli,
-    connector (>= 0.0.8),
+    connector (>= 0.1.0),
     DBI,
     dplyr,
     odbc (>= 1.4.0),
@@ -43,7 +43,6 @@ Suggests:
 VignetteBuilder:
     knitr, rmarkdown
 Remotes:
-    github::NovoNordisk-OpenSource/connector,
     github::NovoNordisk-Opensource/whirl
 Config/testthat/edition: 3
 Encoding: UTF-8
