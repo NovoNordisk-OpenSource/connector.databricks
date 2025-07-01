@@ -16,7 +16,8 @@ list_content_cnt(connector_object, ...)
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_list]{brickster::db_volume_list()}} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\code{\link[brickster:db_volume_list]{brickster::db_volume_list()}} method}
 
 \item{tags}{Expression to be translated to SQL using
 \code{\link[dbplyr:translate_sql]{dbplyr::translate_sql()}} e.g.
@@ -38,7 +39,8 @@ method for \link[connector:connector_dbi]{connector::connector_dbi}, but always 
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
-method for \link{ConnectorDatabricksVolume}, but always sets the
-\code{catalog} and \code{schema} as defined in when initializing the connector.
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
 }
 }

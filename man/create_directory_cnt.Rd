@@ -16,10 +16,12 @@ create_directory_cnt(connector_object, name, open = TRUE, ...)
 
 \item{open}{create a new connector object}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \link[brickster:db_volume_dir_create]{brickster::db_volume_dir_create} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\link[brickster:db_volume_dir_create]{brickster::db_volume_dir_create} method}
 }
 \value{
-\link{ConnectorDatabricksVolume} object or \link{ConnectorDatabricksVolume} object of a newly built directory
+\link{ConnectorDatabricksVolume} object or \link{ConnectorDatabricksVolume}
+object of a newly built directory
 }
 \description{
 Addition list content methods for databricks connectors implemented for

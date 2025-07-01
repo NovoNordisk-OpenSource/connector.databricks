@@ -16,7 +16,8 @@ download_cnt(connector_object, name, file = basename(name), ...)
 
 \item{file}{\link{character} Path to the file to download to or upload from}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
 }
 \value{
 \link{ConnectorDatabricksVolume} object
@@ -27,7 +28,7 @@ Addition list content methods for databricks connectors implemented for
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:download_cnt]{connector::download_cnt()}} method
-for \link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+for \link{ConnectorDatabricksVolume}, but always sets the
+\code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }

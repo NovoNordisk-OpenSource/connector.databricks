@@ -42,7 +42,8 @@ write_cnt(
 
 \item{overwrite}{Overwrite existing content if it exists in the connector.}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 
 \item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the
 table. Options:
@@ -69,7 +70,7 @@ parquet file and then convert it to a table.
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}} method for
-\link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+\link{ConnectorDatabricksVolume}, but always sets the
+\code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }

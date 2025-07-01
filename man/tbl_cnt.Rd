@@ -34,6 +34,7 @@ defined in when initializing the connector.
 }
 
 \itemize{
-\item \link{ConnectorDatabricksVolume}: Uses \code{\link[=read_cnt]{read_cnt()}} to allow redundancy between Volumes and DBI.
+\item \link{ConnectorDatabricksVolume}: Uses \code{\link[=read_cnt]{read_cnt()}} to allow redundancy between
+Volumes and DBI.
 }
 }

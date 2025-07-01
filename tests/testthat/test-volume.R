@@ -286,16 +286,10 @@ test_that("ConnectorDatabricksVolume upload/download works", {
     fs::dir_delete("nested_structure_volumes")
   )
 
-  # Upload directory
   expect_no_failure(setup_volume_connector$upload_directory_cnt(
     dir = "nested_structure_volumes",
     overwrite = TRUE
   ))
-
-  expect_no_failure(setup_volume_connector$download_directory_cnt(
-    name = "nested_structure_volumes"
-  ))
-
   withr::defer({
     setup_volume_connector$remove_directory_cnt(
       name = "nested_structure_volumes"
@@ -305,5 +299,13 @@ test_that("ConnectorDatabricksVolume upload/download works", {
       setup_db_volume_path,
       "/nested_structure_volumes"
     )))
+  })
+
+  expect_no_failure(setup_volume_connector$download_directory_cnt(
+    name = "nested_structure_volumes",
+    dir = "nested_structure_volumes_downloaded"
+  ))
+  withr::defer({
+    fs::dir_delete("nested_structure_volumes_downloaded")
   })
 })
