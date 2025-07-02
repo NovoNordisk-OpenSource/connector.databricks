@@ -122,7 +122,6 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
     # Skip tests if the connector.databricks package is not installed
     skip_if_not_installed("whirl")
 
-    # Create a mock ConnectorDatabricksVolume object with a temporary folder path
     db_vol_connector <- connector.databricks::ConnectorDatabricksVolume$new(
       full_path = setup_db_volume_path,
       extra_class = "connector_logger",

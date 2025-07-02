@@ -18,7 +18,8 @@ read_cnt(connector_object, name, ...)
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
 
 \item{timepoint}{Timepoint in \href{https://docs.databricks.com/gcp/en/delta/history#delta-time-travel-syntax}{Delta time travel syntax}  # nolint
 format.}
@@ -40,7 +41,8 @@ defined in when initializing the connector.
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}}
-method for \link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
 }
 }

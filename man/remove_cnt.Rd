@@ -35,7 +35,7 @@ as defined in when initializing the connector.
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}} method
-for \link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+for \link{ConnectorDatabricksVolume}, but always sets the
+\code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }

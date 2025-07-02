@@ -30,7 +30,8 @@ upload_cnt(
 
 \item{overwrite}{Overwrites existing content if it exists in the connector.}
 
-\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
+\item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
+\code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 }
 \value{
 \link{ConnectorDatabricksVolume} object
@@ -41,7 +42,7 @@ Addition list content methods for databricks connectors implemented for
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:upload_cnt]{connector::upload_cnt()}} method
-for \link{ConnectorDatabricksVolume}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+for \link{ConnectorDatabricksVolume}, but always sets the
+\code{catalog} and \code{schema} as defined in when initializing the connector.
 }
 }

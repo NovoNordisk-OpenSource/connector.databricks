@@ -276,3 +276,36 @@ test_that("ConnectorDatabricksVolume methods work", {
   # Delete local test file
   unlink("test_file.csv")
 })
+
+test_that("ConnectorDatabricksVolume upload/download works", {
+  skip_on_cran()
+  skip_on_ci()
+
+  create_nested_directories("nested_structure_volumes", 3, 2)
+  withr::defer(
+    fs::dir_delete("nested_structure_volumes")
+  )
+
+  expect_no_failure(setup_volume_connector$upload_directory_cnt(
+    dir = "nested_structure_volumes",
+    overwrite = TRUE
+  ))
+  withr::defer({
+    setup_volume_connector$remove_directory_cnt(
+      name = "nested_structure_volumes"
+    )
+    expect_error(brickster::db_volume_dir_exists(paste0(
+      "/Volumes/",
+      setup_db_volume_path,
+      "/nested_structure_volumes"
+    )))
+  })
+
+  expect_no_failure(setup_volume_connector$download_directory_cnt(
+    name = "nested_structure_volumes",
+    dir = "nested_structure_volumes_downloaded"
+  ))
+  withr::defer({
+    fs::dir_delete("nested_structure_volumes_downloaded")
+  })
+})

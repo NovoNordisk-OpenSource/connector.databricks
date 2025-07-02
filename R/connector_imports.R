@@ -88,6 +88,26 @@ connector::create_directory_cnt
 connector::remove_directory_cnt
 
 #' @description
+#' Addition list content methods for databricks connectors implemented for
+#' [connector::upload_directory_cnt()]:
+#' @inherit connector::upload_directory_cnt title description params return
+#' details
+#' @importFrom connector upload_directory_cnt
+#' @name upload_directory_cnt
+#' @export
+connector::upload_directory_cnt
+
+#' @description
+#' Addition list content methods for databricks connectors implemented for
+#' [connector::download_directory_cnt()]:
+#' @inherit connector::download_directory_cnt title description params return
+#' details
+#' @importFrom connector download_directory_cnt
+#' @name download_directory_cnt
+#' @export
+connector::download_directory_cnt
+
+#' @description
 #' Addition log read methods for databricks connectors implemented for
 #' [connector::log_read_connector()]:
 #' @inherit connector::log_read_connector params return title details
