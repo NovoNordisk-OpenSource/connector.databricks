@@ -5,6 +5,8 @@ aut
 autoupdate
 brickster
 calatog
+callr
+cbt
 Cervan
 cgid
 cli
@@ -29,13 +31,16 @@ DatabricksClient
 databrickslabs
 dataframe
 datasources
+dbConnect
 dbi
 dbplyr
 dev
 dname
+doesnt
 dontrun
 dplyr
 dw
+env
 envir
 expr
 Falgreen
@@ -67,6 +72,7 @@ nn
 nolint
 Nordisk
 Novo
+NovoAccess
 novonordisk
 NovoNordisk
 Obucina
@@ -92,6 +98,8 @@ roxygenize
 RoxygenNote
 Rproj
 sffl
+Skander
+sktf
 sparklyr
 sqlpath
 src
@@ -100,6 +108,7 @@ sublicense
 sudo
 superclass
 Sys
+Tahar
 tbl
 testthat
 tfl
@@ -119,3 +128,4 @@ Yk
 yml
 ƣ
 ϥ
+ℹ

@@ -8,6 +8,7 @@ Authors@R: c(
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = "aut"),
     person("Cervan", "Girard", , "cgid@novonordisk.com", role = "aut"),
     person("Oliver", "Lundsgaard", , "ovlr@novonordisk.com", role = "ctb"),
+    person("Skander Tahar", "Mulder", , "sktf@novonordisk.com", role = "cbt"),
     person("Novo Nordisk A/S", role = "cph")
   )
 Description: Expands the connector package to handle databricks. This
@@ -31,7 +32,8 @@ Imports:
     zephyr,
     dbplyr,
     arrow,
-    fs
+    fs,
+    callr
 Suggests:
     glue,
     knitr,
