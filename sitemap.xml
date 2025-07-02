@@ -17,9 +17,9 @@
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/create_directory_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/disconnect_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/download_cnt.html</loc></url>
+<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/download_directory_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/index.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_tags.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksTable.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksVolume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.html</loc></url>
@@ -30,12 +30,11 @@
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.ConnectorDatabricksVolume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/read_table_timepoint.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/remove_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/remove_directory_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/tbl_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/upload_cnt.html</loc></url>
+<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/upload_directory_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/write_cnt.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/write_table_volume.html</loc></url>
 </urlset>
 
