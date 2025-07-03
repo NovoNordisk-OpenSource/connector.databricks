@@ -150,7 +150,8 @@ ConnectorDatabricksTable <- R6::R6Class(
         httpPath = http_path,
         useNativeQuery = FALSE,
         extra_class = extra_class
-      )
+      ) |>
+        spinner("Starting session")
     }
   ),
   active = list(
