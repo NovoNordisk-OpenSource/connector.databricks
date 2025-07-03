@@ -173,7 +173,7 @@ ConnectorDatabricksVolume <- R6::R6Class(
       private$.schema <- schema
       with_spinner(
         super$initialize(path = path, extra_class = extra_class, ...),
-        msg = "Initializing directory"
+        msg = "Initializing Databricks directory"
       )
     }
   ),

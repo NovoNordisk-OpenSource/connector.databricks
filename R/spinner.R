@@ -20,40 +20,39 @@ spinner <- function(x = NULL, msg = "Processing...") {
     total = NA
   )
 
-  if (is.function(x)) {
-    # Use future to run the function asynchronously
-    future_result <- future::future(
-      {
-        x()
-      },
-      globals = TRUE,
-      packages = (.packages()),
-      seed = TRUE
-    )
-
-    # Check the status and update spinner until done
-    while (!future::resolved(future_result)) {
-      cli::cli_progress_update(force = TRUE)
-      Sys.sleep(0.1) # A shorter sleep time for more responsive spinner
-    }
-
-    # Get the result
-    tryCatch(
-      {
-        result <- future::value(future_result)
-        cli::cli_progress_done()
-        return(result)
-      },
-      error = function(e) {
-        cli::cli_progress_done()
-        stop("Error in background process: ", e$message)
-      }
-    )
-  } else {
+  if (!is.function(x)) {
     cli::cli_progress_done()
     stop("Error: Please pass a function to spinner()")
   }
+
+  # Use future to run the function asynchronously
+  future_result <- future::future(
+    x(),
+    globals = TRUE,
+    packages = (.packages()),
+    seed = TRUE
+  )
+
+  # Check the status and update spinner until done
+  while (!future::resolved(future_result)) {
+    cli::cli_progress_update(force = TRUE)
+    Sys.sleep(0.1) # A shorter sleep time for more responsive spinner
+  }
+
+  # Get the result
+  tryCatch(
+    {
+      result <- future::value(future_result)
+      cli::cli_progress_done()
+      return(result)
+    },
+    error = function(e) {
+      cli::cli_progress_done()
+      stop("Error in background process: ", e$message)
+    }
+  )
 }
+
 
 #' `spinner` wrapper to avoid LHS piority eval imiltations with `|>`
 #'
