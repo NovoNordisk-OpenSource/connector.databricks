@@ -1,6 +1,6 @@
 test_that("spinner works", {
   expect_null(
-    spinner(
+    with_spinner(
       x = function() Sys.sleep(4.54),
       msg = "testing: spinner works"
     ),

@@ -60,7 +60,6 @@ connector_databricks_volume <- function(
     extra_class = extra_class,
     ...
   )
-
   return(connector)
 }
 
@@ -153,23 +152,29 @@ ConnectorDatabricksVolume <- R6::R6Class(
       path <- paste(split_path[5:length(split_path)], collapse = "/")
 
       # Check if volume exists and create it if it does not
-      private$.check_databricks_volume_exists(
-        catalog = catalog,
-        schema = schema,
-        volume = volume,
-        force = force
+      with_spinner(
+        private$.check_databricks_volume_exists(
+          catalog = catalog,
+          schema = schema,
+          volume = volume,
+          force = force
+        ),
+        msg = "Checking if Databricks volume exists"
       )
 
       # Try and create a directory, if it already exists, it will be returned
-      brickster::db_volume_dir_create(path = full_path, ...)
-
+      with_spinner(
+        brickster::db_volume_dir_create(path = full_path, ...)
+      )
       private$.full_path <- full_path
       private$.path <- path
       private$.volume <- volume
       private$.catalog <- catalog
       private$.schema <- schema
-
-      super$initialize(path = path, extra_class = extra_class, ...)
+      with_spinner(
+        super$initialize(path = path, extra_class = extra_class, ...),
+        msg = "Initializing directory"
+      )
     }
   ),
   active = list(
