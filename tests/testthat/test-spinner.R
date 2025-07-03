@@ -1,13 +1,20 @@
 test_that("spinner works", {
   expect_null(
-    spinner(function() Sys.sleep(4.54), "testing: spinner works"),
-    "Error"
+    spinner(
+      x = function() Sys.sleep(4.54),
+      msg = "testing: spinner works"
+    ),
+    info = "Should return NULL when process completes successfully"
   )
 })
 
 test_that("spinner fails", {
   expect_error(
-    spinner(function() stop("Error"), "testing: spinner fails"),
-    "Error"
+    spinner(
+      x = function() stop("Error"),
+      msg = "testing: spinner fails"
+    ),
+    regexp = "Error",
+    info = "Should propagate error from background process"
   )
 })
