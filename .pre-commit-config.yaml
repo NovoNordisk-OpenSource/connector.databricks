@@ -10,6 +10,7 @@ repos:
         # roxygen requires loading pkg -> add dependencies from DESCRIPTION
         additional_dependencies:
         -    brickster
+        -    mirai
         -    checkmate
         -    cli
         -    NovoNordisk-OpenSource/connector

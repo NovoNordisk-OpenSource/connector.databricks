@@ -15,7 +15,7 @@ test_that("spinner works correctly", {
       Sys.sleep(0.5),
       msg = "testing: spinner with expression"
     ),
-    info = "Should return NULL if ram siccessfullys"
+    info = "Should return NULL if ran successfully"
   )
 })
 
@@ -23,14 +23,13 @@ test_that("spinner handles errors appropriately", {
   # Test error propagation from function
   expect_error(
     spinner(
-      x = function() stop("Error in background"),
+      x = function() stop("something wrong"),
       msg = "testing: spinner fails"
     ),
-    regexp = "Error in background process",
+    regexp = "something wrong",
     info = "Should propagate error from background process"
   )
 
-  # Test invalid argument error
   expect_error(
     spinner(
       x = "not a function",

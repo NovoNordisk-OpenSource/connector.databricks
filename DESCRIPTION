@@ -33,7 +33,7 @@ Imports:
     dbplyr,
     arrow,
     fs,
-    future
+    mirai
 Suggests:
     glue,
     knitr,
