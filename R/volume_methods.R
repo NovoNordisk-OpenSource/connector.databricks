@@ -11,10 +11,7 @@
 read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
   withr::with_tempdir({
-    with_spinner(
-      brickster::db_volume_read(path = file_path, destination = name, ...),
-      msg = "Reading from volume"
-    )
+    brickster::db_volume_read(path = file_path, destination = name, ...)
     content <- connector::read_file(name)
     unlink(name)
   })
@@ -44,14 +41,12 @@ write_cnt.ConnectorDatabricksVolume <- function(
     pattern = basename(name),
     fileext = paste0(".", tools::file_ext(name))
   )
+  #Note: unable to do async / spinner
   connector::write_file(x = x, file = tmp_name)
-  with_spinner(
-    brickster::db_volume_write(
-      path = file_path,
-      file = tmp_name,
-      overwrite = overwrite
-    ),
-    msg = "Writing to volume"
+  brickster::db_volume_write(
+    path = file_path,
+    file = tmp_name,
+    overwrite = overwrite
   )
 
   invisible(connector_object)
@@ -68,13 +63,11 @@ write_cnt.ConnectorDatabricksVolume <- function(
 #' [brickster::db_volume_list()] method
 #' @export
 list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
-  list_of_items <- with_spinner(
+  list_of_items <-
     brickster::db_volume_list(
       path = connector_object$full_path,
       ...
-    ),
-    msg = "Listing volume contents"
-  )
+    )
   content_names <- unlist(
     purrr::map(list_of_items, ~ purrr::map(.x, "name")),
     use.names = FALSE
@@ -93,10 +86,7 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
 #' @export
 remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
-  with_spinner(
-    brickster::db_volume_delete(path = file_path),
-    msg = "Deleting from volume"
-  )
+  brickster::db_volume_delete(path = file_path)
 
   invisible(connector_object)
 }
@@ -119,10 +109,8 @@ download_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
-  with_spinner(
-    brickster::db_volume_read(path = file_path, destination = file, ...),
-    msg = "Reading from volume"
-  )
+
+  brickster::db_volume_read(path = file_path, destination = file, ...)
 
   invisible(connector_object)
 }
@@ -146,16 +134,12 @@ upload_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
-  with_spinner(
-    brickster::db_volume_write(
-      path = file_path,
-      file = file,
-      overwrite = overwrite,
-      ...
-    ),
-    msg = "Uploading to volume"
+  brickster::db_volume_write(
+    path = file_path,
+    file = file,
+    overwrite = overwrite,
+    ...
   )
-
   invisible(connector_object)
 }
 
@@ -177,10 +161,7 @@ create_directory_cnt.ConnectorDatabricksVolume <- function(
 ) {
   directory_path <- file.path(connector_object$full_path, name)
 
-  with_spinner(
-    brickster::db_volume_dir_create(path = directory_path, ...),
-    msg = "Creating directory in volume"
-  )
+  brickster::db_volume_dir_create(path = directory_path, ...)
   if (open) {
     connector_object <- connector_databricks_volume(full_path = directory_path)
   }
@@ -201,10 +182,8 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   directory_path <- file.path(connector_object$full_path, name)
-  with_spinner(
-    remove_directory(dir_path = directory_path),
-    msg = "Removing directory from volume"
-  )
+
+  remove_directory(dir_path = directory_path)
 
   invisible(connector_object)
 }
@@ -235,17 +214,14 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   dir_path <- file.path(connector_object$full_path, dir)
-  with_spinner(
-    upload_directory(
-      dir = dir,
-      name = name,
-      dir_path = dir_path,
-      overwrite = overwrite,
-      ...
-    ),
-    msg = "Uploading directory to volume"
+  #Note: unable to do async / spinner
+  upload_directory(
+    dir = dir,
+    name = name,
+    dir_path = dir_path,
+    overwrite = overwrite,
+    ...
   )
-
   # create a new connector object from the new path with persistent extra class
   if (open) {
     extra_class <- class(connector_object)
@@ -275,13 +251,11 @@ download_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   dir_path <- file.path(connector_object$full_path, name)
-  with_spinner(
-    download_directory(
-      dir_path = dir_path,
-      name = dir,
-      ...
-    ),
-    msg = "Downloading directory from volume"
+
+  download_directory(
+    dir_path = dir_path,
+    name = dir,
+    ...
   )
 
   return(

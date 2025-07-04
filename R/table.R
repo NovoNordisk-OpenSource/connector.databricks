@@ -144,15 +144,15 @@ ConnectorDatabricksTable <- R6::R6Class(
 
       private$.catalog <- catalog
       private$.schema <- schema
-      with_spinner(
-        super$initialize(
-          drv = odbc::databricks(),
-          httpPath = http_path,
-          useNativeQuery = FALSE,
-          extra_class = extra_class
-        ),
-        msg = "Initializing connection to Databricks"
-      )
+      #with_spinner(
+      super$initialize(
+        drv = odbc::databricks(),
+        httpPath = http_path,
+        useNativeQuery = FALSE,
+        extra_class = extra_class
+      ) #,
+      # msg = "Initializing connection to Databricks"
+      #)
     }
   ),
   active = list(

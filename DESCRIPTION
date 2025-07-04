@@ -8,7 +8,7 @@ Authors@R: c(
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = "aut"),
     person("Cervan", "Girard", , "cgid@novonordisk.com", role = "aut"),
     person("Oliver", "Lundsgaard", , "ovlr@novonordisk.com", role = "ctb"),
-    person("Skander Tahar", "Mulder", , "sktf@novonordisk.com", role = "cbt"),
+    person("Skander Tahar", "Mulder", , "sktf@novonordisk.com", role = "ctb"),
     person("Novo Nordisk A/S", role = "cph")
   )
 Description: Expands the connector package to handle databricks. This
@@ -33,8 +33,9 @@ Imports:
     dbplyr,
     arrow,
     fs,
-    mirai,
-    future.mirai
+    future,          
+    future.mirai,
+    mirai           
 Suggests:
     glue,
     knitr,

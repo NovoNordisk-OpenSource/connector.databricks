@@ -151,30 +151,28 @@ ConnectorDatabricksVolume <- R6::R6Class(
       volume <- split_path[5]
       path <- paste(split_path[5:length(split_path)], collapse = "/")
 
-      # Check if volume exists and create it if it does not
-      with_spinner(
-        private$.check_databricks_volume_exists(
-          catalog = catalog,
-          schema = schema,
-          volume = volume,
-          force = force
-        ),
-        msg = "Checking if Databricks volume exists"
+      # Check if volume exists and create it if it does not (NB: cannot be async)
+      private$.check_databricks_volume_exists(
+        catalog = catalog,
+        schema = schema,
+        volume = volume,
+        force = force
       )
 
-      # Try and create a directory, if it already exists, it will be returned
-      with_spinner(
-        brickster::db_volume_dir_create(path = full_path, ...)
-      )
+      # Try and create a directory, if it already exists, it will be returned (NB: cannot be async)
+      brickster::db_volume_dir_create(path = full_path, ...)
+
       private$.full_path <- full_path
       private$.path <- path
       private$.volume <- volume
       private$.catalog <- catalog
       private$.schema <- schema
-      with_spinner(
-        super$initialize(path = path, extra_class = extra_class, ...),
-        msg = "Initializing Databricks directory"
-      )
+      #with_spinner(
+      # {
+      super$initialize(path = path, extra_class = extra_class, ...)
+      #},
+      #msg = "Initializing Databricks directory"
+      #)
     }
   ),
   active = list(
