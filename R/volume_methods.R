@@ -11,7 +11,11 @@
 read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
   withr::with_tempdir({
-    brickster::db_volume_read(path = file_path, destination = name, ...)
+    {
+      brickster::db_volume_read(path = file_path, destination = name, ...)
+    } |>
+      with_spinner("Reading from volume")
+
     content <- connector::read_file(name)
     unlink(name)
   })
@@ -41,13 +45,15 @@ write_cnt.ConnectorDatabricksVolume <- function(
     pattern = basename(name),
     fileext = paste0(".", tools::file_ext(name))
   )
-  #Note: unable to do async / spinner
   connector::write_file(x = x, file = tmp_name)
-  brickster::db_volume_write(
-    path = file_path,
-    file = tmp_name,
-    overwrite = overwrite
-  )
+  {
+    brickster::db_volume_write(
+      path = file_path,
+      file = tmp_name,
+      overwrite = overwrite
+    )
+  } |>
+    with_spinner("Writing to volume")
 
   invisible(connector_object)
 }
@@ -86,7 +92,10 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
 #' @export
 remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
-  brickster::db_volume_delete(path = file_path)
+  {
+    brickster::db_volume_delete(path = file_path)
+  } |>
+    with_spinner("Deleting volume")
 
   invisible(connector_object)
 }
@@ -109,9 +118,10 @@ download_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
-
-  brickster::db_volume_read(path = file_path, destination = file, ...)
-
+  {
+    brickster::db_volume_read(path = file_path, destination = file, ...)
+  } |>
+    with_spinner("Reading volume")
   invisible(connector_object)
 }
 
@@ -134,12 +144,15 @@ upload_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   file_path <- file.path(connector_object$full_path, name)
-  brickster::db_volume_write(
-    path = file_path,
-    file = file,
-    overwrite = overwrite,
-    ...
-  )
+  {
+    brickster::db_volume_write(
+      path = file_path,
+      file = file,
+      overwrite = overwrite,
+      ...
+    )
+  } |>
+    with_spinner("Writing to volume")
   invisible(connector_object)
 }
 
@@ -160,8 +173,11 @@ create_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   directory_path <- file.path(connector_object$full_path, name)
+  {
+    brickster::db_volume_dir_create(path = directory_path, ...)
+  } |>
+    with_spinner("Creating directory in volume")
 
-  brickster::db_volume_dir_create(path = directory_path, ...)
   if (open) {
     connector_object <- connector_databricks_volume(full_path = directory_path)
   }
@@ -182,8 +198,10 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   directory_path <- file.path(connector_object$full_path, name)
-
-  remove_directory(dir_path = directory_path)
+  {
+    remove_directory(dir_path = directory_path)
+  } |>
+    with_spinner("Remove directory for volume")
 
   invisible(connector_object)
 }
@@ -214,14 +232,17 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   dir_path <- file.path(connector_object$full_path, dir)
-  #Note: unable to do async / spinner
-  upload_directory(
-    dir = dir,
-    name = name,
-    dir_path = dir_path,
-    overwrite = overwrite,
-    ...
-  )
+  {
+    upload_directory(
+      dir = dir,
+      name = name,
+      dir_path = dir_path,
+      overwrite = overwrite,
+      ...
+    )
+  } |>
+    with_spinner("Uploading directory to volume")
+
   # create a new connector object from the new path with persistent extra class
   if (open) {
     extra_class <- class(connector_object)
@@ -251,12 +272,14 @@ download_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   dir_path <- file.path(connector_object$full_path, name)
-
-  download_directory(
-    dir_path = dir_path,
-    name = dir,
-    ...
-  )
+  {
+    download_directory(
+      dir_path = dir_path,
+      name = dir,
+      ...
+    )
+  } |>
+    with_spinner("Downloading directory from volume")
 
   return(
     invisible(connector_object)

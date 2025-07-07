@@ -17,20 +17,28 @@ check_databricks_volume_exists <- function(
 ) {
   tryCatch(
     {
-      brickster::db_uc_volumes_get(
-        volume = volume,
-        catalog = catalog,
-        schema = schema
-      )
+      {
+        brickster::db_uc_volumes_get(
+          volume = volume,
+          catalog = catalog,
+          schema = schema
+        )
+      } |>
+        with_spinner("Getting volume")
       return(NULL)
     },
     error = function(e) {
       if (force) {
-        invisible(brickster::db_uc_volumes_create(
-          volume = volume,
-          catalog = catalog,
-          schema = schema
-        ))
+        invisible(
+          {
+            brickster::db_uc_volumes_create(
+              volume = volume,
+              catalog = catalog,
+              schema = schema
+            )
+          } |>
+            with_spinner("Creating volume")
+        )
         return(NULL)
       }
       menu <- menu(
@@ -39,11 +47,14 @@ check_databricks_volume_exists <- function(
       )
       if (menu == 1) {
         zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
-        invisible(brickster::db_uc_volumes_create(
-          volume = volume,
-          catalog = catalog,
-          schema = schema
-        ))
+        {
+          invisible(brickster::db_uc_volumes_create(
+            volume = volume,
+            catalog = catalog,
+            schema = schema
+          ))
+        } |>
+          with_spinner("Creating  volume")
         zephyr::msg_info("Volume created!")
       } else {
         cli::cli_abort("Exiting...")

@@ -1,5 +1,17 @@
 # connector.databricks dev
 
+* Added spinners to ConnectorDatabricksVolume methods with context-specific messages:
+  - `read_cnt()`: "Reading from volume"
+  - `write_cnt()`: "Writing to volume"
+  - `remove_cnt()`: "Deleting from volume"
+  - `download_cnt()`: "Reading from volume"
+  - `upload_cnt()`: "Uploading to volume"
+  - `create_directory_cnt()`: "Creating directory in volume"
+  - `remove_directory_cnt()`: "Removing directory from volume"
+  - `upload_directory_cnt()`: "Uploading directory to volume"
+  - `download_directory_cnt()`: "Downloading directory from volume"
+  - `initialize()` methods in both connectors: "Starting session"
+
 * Set dependency `brickster (>= 0.2.7)`
 * Add github templates for issues, features and PRs
 * Updated `volume_methods` to use zephyr::msg_info(), replacing cli::cli_alert()
