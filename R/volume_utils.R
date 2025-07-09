@@ -16,52 +16,52 @@ check_databricks_volume_exists <- function(
   force = FALSE
 ) {
   {
-    {
-      tryCatch(
-        {
-          brickster::db_uc_volumes_get(
-            volume = volume,
-            catalog = catalog,
-            schema = schema
-          )
+    tryCatch(
+      {
+        brickster::db_uc_volumes_get(
+          volume = volume,
+          catalog = catalog,
+          schema = schema
+        )
 
-          return(NULL)
-        },
-        error = function(e) {
-          if (force) {
-            invisible(
+        return(NULL)
+      },
+      error = function(e) {
+        if (force) {
+          invisible(
+            {
               brickster::db_uc_volumes_create(
                 volume = volume,
                 catalog = catalog,
                 schema = schema
               )
-            )
-            return(NULL)
-          }
-          menu <- menu(
-            c("Create volume", "Exit"),
-            title = "Volume does not exist. What would you like to do?"
-          )
-          if (menu == 1) {
-            zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
-            {
-              invisible(brickster::db_uc_volumes_create(
-                volume = volume,
-                catalog = catalog,
-                schema = schema
-              ))
             } |>
               with_spinner("Creating  volume")
-            zephyr::msg_info("Volume created!")
-          } else {
-            cli::cli_abort("Exiting...")
-          }
+          )
+          return(NULL)
         }
-      )
-      return(NULL)
-    }
-  } |>
-    with_spinner("Creating volume")
+        menu <- menu(
+          c("Create volume", "Exit"),
+          title = "Volume does not exist. What would you like to do?"
+        )
+        if (menu == 1) {
+          zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
+          {
+            invisible(brickster::db_uc_volumes_create(
+              volume = volume,
+              catalog = catalog,
+              schema = schema
+            ))
+          } |>
+            with_spinner("Creating  volume")
+          zephyr::msg_info("Volume created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
+      }
+    )
+    return(NULL)
+  }
 }
 
 #' Utility function for recursive removal of directory

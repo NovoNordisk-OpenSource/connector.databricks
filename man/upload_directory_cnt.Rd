@@ -3,6 +3,7 @@
 \name{upload_directory_cnt}
 \alias{upload_directory_cnt}
 \alias{upload_directory_cnt.ConnectorDatabricksVolume}
+\alias{load_directory_cnt.ConnectorDatabricksVolume}
 \title{Upload a directory}
 \usage{
 upload_directory_cnt(
@@ -22,6 +23,13 @@ upload_directory_cnt(
   open = FALSE,
   ...
 )
+
+load_directory_cnt.ConnectorDatabricksVolume(
+  connector_object,
+  name,
+  dir = basename(name),
+  ...
+)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
@@ -38,6 +46,8 @@ upload_directory_cnt(
 the \code{\link[brickster:db_volume_dir_create]{brickster::db_volume_dir_create()}} method}
 }
 \value{
+\link{ConnectorDatabricksVolume} object
+
 \link{ConnectorDatabricksVolume} object
 }
 \description{

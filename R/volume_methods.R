@@ -232,7 +232,6 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
 ) {
   dir_path <- file.path(connector_object$full_path, dir)
 
-  #browser()
   upload_directory(
     dir = dir,
     name = name,

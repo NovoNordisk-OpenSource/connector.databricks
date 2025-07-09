@@ -11,6 +11,7 @@ repos:
         additional_dependencies:
         -    brickster
         -    interprocess
+        -    callr
         -    checkmate
         -    cli
         -    NovoNordisk-OpenSource/connector
