@@ -33,6 +33,7 @@ Imports:
     dbplyr,
     arrow,
     fs,
+    callr,
     interprocess          
 Suggests:
     glue,
