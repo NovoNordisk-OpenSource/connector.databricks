@@ -5,10 +5,6 @@
 #' @keywords internal
 #' @noRd
 start_spinner <- function(msg = "Processing...") {
-  if (!requireNamespace("interprocess", quietly = TRUE)) {
-    return(NULL)
-  }
-
   # Create resources with unique ID
   spinner_id <- interprocess::uid()
   mq <- interprocess::msg_queue(
@@ -26,7 +22,7 @@ start_spinner <- function(msg = "Processing...") {
   # Start background spinner process
   spinner_process <- callr::r_bg(
     function(id, text) {
-      library(interprocess)
+      requireNamespace(interprocess)
 
       mq <- interprocess::msg_queue(name = id, assert = "exists")
       sem <- interprocess::semaphore(name = paste0("s", id), assert = "exists")
