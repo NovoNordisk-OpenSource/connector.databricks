@@ -141,9 +141,10 @@ ConnectorDatabricksTable <- R6::R6Class(
         any.missing = FALSE,
         null.ok = TRUE
       )
-
       private$.catalog <- catalog
       private$.schema <- schema
+
+      zephyr::msg_info("Connecting to cluster, please wait..")
 
       super$initialize(
         drv = odbc::databricks(),

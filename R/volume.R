@@ -152,6 +152,8 @@ ConnectorDatabricksVolume <- R6::R6Class(
       volume <- split_path[5]
       path <- paste(split_path[5:length(split_path)], collapse = "/")
 
+      zephyr::msg_info("Connecting to cluster, please wait..")
+
       # Check if volume exists and create it if it does not
       private$.check_databricks_volume_exists(
         catalog = catalog,
