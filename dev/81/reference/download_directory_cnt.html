@@ -36,7 +36,7 @@ connector::download_directory_cnt():"><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Download a directory</h1>
-      <small class="dont-index">Source: <a href="https://github.com/novonordisk-opensource/connector.databricks/blob/feat/spinner/R/connector_imports.R" class="external-link"><code>R/connector_imports.R</code></a>, <a href="https://github.com/novonordisk-opensource/connector.databricks/blob/feat/spinner/R/volume_methods.R" class="external-link"><code>R/volume_methods.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/novonordisk-opensource/connector.databricks/blob/feat/spinner/R/connector_imports.R" class="external-link"><code>R/connector_imports.R</code></a></small>
       <div class="d-none name"><code>download_directory_cnt.Rd</code></div>
     </div>
 
@@ -47,10 +47,7 @@ connector::download_directory_cnt():"><meta property="og:image" content="https:/
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, dir <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for class 'ConnectorDatabricksVolume'</span></span>
-<span><span class="fu">download_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_directory_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, dir <span class="op">=</span> <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -70,13 +67,12 @@ connector::download_directory_cnt():"><meta property="og:image" content="https:/
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p><a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a>: Additional parameters to pass to
-the <code><a href="https://rdrr.io/pkg/brickster/man/db_volume_dir_create.html" class="external-link">brickster::db_volume_dir_create()</a></code> method</p></dd>
+<dd><p>Additional arguments passed to the method for the individual connector.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><a href="ConnectorDatabricksVolume.html">ConnectorDatabricksVolume</a> object</p>
+    <p><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a> connector_object.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
