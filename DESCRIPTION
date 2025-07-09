@@ -33,7 +33,7 @@ Imports:
     dbplyr,
     arrow,
     fs,
-    future          
+    interprocess          
 Suggests:
     glue,
     knitr,

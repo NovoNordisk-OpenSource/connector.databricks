@@ -15,53 +15,53 @@ check_databricks_volume_exists <- function(
   volume,
   force = FALSE
 ) {
-  tryCatch(
-    {
+  {
+    #{
+    tryCatch(
       {
         brickster::db_uc_volumes_get(
           volume = volume,
           catalog = catalog,
           schema = schema
         )
-      } |>
-        with_spinner("Getting volume")
-      return(NULL)
-    },
-    error = function(e) {
-      if (force) {
-        invisible(
-          {
+
+        return(NULL)
+      },
+      error = function(e) {
+        if (force) {
+          invisible(
             brickster::db_uc_volumes_create(
               volume = volume,
               catalog = catalog,
               schema = schema
             )
-          } |>
-            with_spinner("Creating volume")
+          )
+          return(NULL)
+        }
+        menu <- menu(
+          c("Create volume", "Exit"),
+          title = "Volume does not exist. What would you like to do?"
         )
-        return(NULL)
+        if (menu == 1) {
+          zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
+          {
+            invisible(brickster::db_uc_volumes_create(
+              volume = volume,
+              catalog = catalog,
+              schema = schema
+            ))
+          } |>
+            with_spinner("Creating  volume")
+          zephyr::msg_info("Volume created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
       }
-      menu <- menu(
-        c("Create volume", "Exit"),
-        title = "Volume does not exist. What would you like to do?"
-      )
-      if (menu == 1) {
-        zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
-        {
-          invisible(brickster::db_uc_volumes_create(
-            volume = volume,
-            catalog = catalog,
-            schema = schema
-          ))
-        } |>
-          with_spinner("Creating  volume")
-        zephyr::msg_info("Volume created!")
-      } else {
-        cli::cli_abort("Exiting...")
-      }
-    }
-  )
-  return(NULL)
+    )
+    return(NULL)
+  }
+  #} |>
+  #  with_spinner("Creating volume")
 }
 
 #' Utility function for recursive removal of directory
@@ -80,9 +80,13 @@ remove_directory <- function(dir_path) {
     item_path <- paste0(dir_path, "/", content)
     if (directory_exists(path = item_path)) {
       remove_directory(item_path)
+
       next
     }
-    brickster::db_volume_delete(path = item_path)
+    {
+      brickster::db_volume_delete(path = item_path)
+    } |>
+      with_spinner("Remove directory for volume")
   }
 
   brickster::db_volume_dir_delete(dir_path)
@@ -107,7 +111,6 @@ upload_directory <- function(
   checkmate::assert_string(name, null.ok = TRUE)
   checkmate::assert_string(dir_path)
   checkmate::assert_logical(overwrite, null.ok = FALSE)
-
   if (is.null(name)) {
     name <- basename(dir)
   }
@@ -119,7 +122,6 @@ upload_directory <- function(
   }
 
   brickster::db_volume_dir_create(full_dir_path, ...)
-
   files_list <- fs::dir_ls(path = dir, recurse = FALSE, type = "file")
   dir_list <- fs::dir_ls(
     path = dir,

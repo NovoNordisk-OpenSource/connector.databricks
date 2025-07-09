@@ -9,17 +9,18 @@
 #' [brickster::db_volume_read()] method
 #' @export
 read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
-  file_path <- file.path(connector_object$full_path, name)
-  withr::with_tempdir({
-    {
+  {
+    file_path <- file.path(connector_object$full_path, name)
+    content <- withr::with_tempdir({
       brickster::db_volume_read(path = file_path, destination = name, ...)
-    } |>
-      with_spinner("Reading from volume")
+      content <- connector::read_file(name)
+      unlink(name)
+      content
+    })
 
-    content <- connector::read_file(name)
-    unlink(name)
-  })
-  content
+    return(content)
+  } |>
+    with_spinner("Reading from volume")
 }
 
 #' @description
@@ -198,10 +199,8 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   directory_path <- file.path(connector_object$full_path, name)
-  {
-    remove_directory(dir_path = directory_path)
-  } |>
-    with_spinner("Remove directory for volume")
+
+  remove_directory(dir_path = directory_path)
 
   invisible(connector_object)
 }
@@ -232,16 +231,15 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
   ...
 ) {
   dir_path <- file.path(connector_object$full_path, dir)
-  {
-    upload_directory(
-      dir = dir,
-      name = name,
-      dir_path = dir_path,
-      overwrite = overwrite,
-      ...
-    )
-  } |>
-    with_spinner("Uploading directory to volume")
+
+  #browser()
+  upload_directory(
+    dir = dir,
+    name = name,
+    dir_path = dir_path,
+    overwrite = overwrite,
+    ...
+  )
 
   # create a new connector object from the new path with persistent extra class
   if (open) {
@@ -257,15 +255,14 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
     invisible(connector_object)
   )
 }
-
-#' Download a directory
+#' Upload a directory
 #'
-#' @rdname download_directory_cnt
+#' @rdname upload_directory_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to
 #' the [brickster::db_volume_dir_create()] method
 #' @return [ConnectorDatabricksVolume] object
 #' @export
-download_directory_cnt.ConnectorDatabricksVolume <- function(
+load_directory_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
   name,
   dir = basename(name),
@@ -278,10 +275,7 @@ download_directory_cnt.ConnectorDatabricksVolume <- function(
       name = dir,
       ...
     )
+    return(invisible(connector_object))
   } |>
-    with_spinner("Downloading directory from volume")
-
-  return(
-    invisible(connector_object)
-  )
+    with_spinner(msg = "Downloading directory from volume")
 }

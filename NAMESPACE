@@ -2,7 +2,6 @@
 
 S3method(create_directory_cnt,ConnectorDatabricksVolume)
 S3method(download_cnt,ConnectorDatabricksVolume)
-S3method(download_directory_cnt,ConnectorDatabricksVolume)
 S3method(list_content_cnt,ConnectorDatabricksTable)
 S3method(list_content_cnt,ConnectorDatabricksVolume)
 S3method(log_read_connector,ConnectorDatabricksTable)
