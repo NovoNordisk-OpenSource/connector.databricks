@@ -1,5 +1,6 @@
 # connector.databricks dev
 
+* Added `Connecting to cluster, please wait..` as a zephyr::msg_info prior to initialization of table and volume connection
 * Set dependency `brickster (>= 0.2.7)`
 * Add github templates for issues, features and PRs
 * Updated `volume_methods` to use zephyr::msg_info(), replacing cli::cli_alert()
