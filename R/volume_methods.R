@@ -226,7 +226,11 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
       extra_class,
       which(extra_class == "ConnectorDatabricksVolume") - 1
     )
-    connector_object <- connector_databricks_volume(paste0(dir, "/", name))
+    connector_object <- connector_databricks_volume(paste0(
+      connector_object$full_path,
+      "/",
+      name
+    ))
   }
 
   return(
