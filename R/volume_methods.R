@@ -206,17 +206,15 @@ tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 upload_directory_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
   dir,
-  name,
+  name = basename(dir),
   overwrite = zephyr::get_option("overwrite", "connector"),
   open = FALSE,
   ...
 ) {
-  dir_path <- file.path(connector_object$full_path, dir)
-
   upload_directory(
     dir = dir,
     name = name,
-    dir_path = dir_path,
+    dir_path = connector_object$full_path,
     overwrite = overwrite,
     ...
   )
@@ -228,7 +226,11 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
       extra_class,
       which(extra_class == "ConnectorDatabricksVolume") - 1
     )
-    connector_object <- connector_databricks_volume(dir_path)
+    connector_object <- connector_databricks_volume(paste0(
+      connector_object$full_path,
+      "/",
+      name
+    ))
   }
 
   return(

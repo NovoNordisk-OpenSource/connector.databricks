@@ -87,17 +87,16 @@ remove_directory <- function(dir_path) {
 #' @noRd
 upload_directory <- function(
   dir,
-  name = NULL,
+  name,
   dir_path,
   overwrite = TRUE,
   ...
 ) {
   checkmate::assert_directory_exists(dir)
-  checkmate::assert_string(name, null.ok = TRUE)
   checkmate::assert_string(dir_path)
   checkmate::assert_logical(overwrite, null.ok = FALSE)
 
-  if (is.null(name)) {
+  if (missing(name)) {
     name <- basename(dir)
   }
 

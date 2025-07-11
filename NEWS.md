@@ -1,5 +1,6 @@
 # connector.databricks dev
 
+* Fix naming convention in `upload_directory_cnt.DatabricksVolume` [#84](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/84)
 * Added `Connecting to cluster, please wait..` as a zephyr::msg_info prior to initialization of table and volume connection
 * Set dependency `brickster (>= 0.2.7)`
 * Add github templates for issues, features and PRs
@@ -10,7 +11,7 @@
 * Fix tmp volume bug [#63](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/63)
 * Add `upload_directory_cnt()` and `download_directory_cnt()` methods for
 `ConnectorDatabricksVolume` class. Solves [#77](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/77)
-* Update `remove_directory_cnt()` method for `ConnectorDatabricksVolume` class, now iterates over directories and erases all the subdirectories and files. Solve [#78](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/78)
+* Update `remove_directory_cnt()` method for `ConnectorDatabricksVolume` class, now iterates over directories and erases all the subdirectories and files. Solves [#78](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/78)
 * Update `connector` dependency to `0.1.0` official CRAN version.
 
 # connector.databricks 0.0.5
