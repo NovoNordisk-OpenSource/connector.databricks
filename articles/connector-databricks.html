@@ -214,7 +214,7 @@ and <code>mtcars</code> datasets.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarise_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mean</span>, <span class="va">median</span>, <span class="va">sd</span>, <span class="va">min</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Mtcars data</span></span>
+<span><span class="co">## mtcars data</span></span>
 <span><span class="va">cars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span></span>
 <span></span>
@@ -267,7 +267,7 @@ different formats.</p>
 <span><span class="va">gttable</span> <span class="op">&lt;-</span> <span class="va">table</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"gear"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Save nontabular data to databricks volume</span></span>
+<span><span class="co"># Save non-tabular data to databricks volume</span></span>
 <span><span class="va">tmp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".docx"</span><span class="op">)</span></span>
 <span><span class="fu">gtsave</span><span class="op">(</span><span class="va">gttable</span>, <span class="va">tmp_file</span><span class="op">)</span></span>
 <span><span class="va">db</span><span class="op">$</span><span class="va">volume</span> <span class="op">|&gt;</span></span>
