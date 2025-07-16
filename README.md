@@ -24,15 +24,22 @@ package to support Databricks **volumes** and **tables**.
 
 ## Installation
 
-You can install the connector.databricks package using the following
-command:
+You can install the connector.databricks from CRAN package using the
+following command:
 
 ``` r
 # Install from CRAN
 install.packages("connector.databricks")
+```
 
-# Alternatively, you can install the development version from GitHub:
-devtools::install_github("novonordisk-opensource/connector.databricks")
+### Development version
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of connector.databricks from GitHub.
+
+``` r
+# install.packages("pak")
+pak::pak("novonordisk-opensource/connector.databricks")
 ```
 
 ## Usage
