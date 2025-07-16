@@ -167,7 +167,7 @@ if (isFALSE(as.logical(Sys.getenv("CI", "false")))) {
       mockery::expect_args(log_mock, 1, expected_msg)
     })
 
-    test_that("log_remove_connecto for volumes logs correct message", {
+    test_that("log_remove_connector for volumes logs correct message", {
       # Create mock for whirl::log_delete
       log_mock <- mockery::mock()
       mockery::stub(

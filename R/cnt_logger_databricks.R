@@ -118,7 +118,7 @@ log_remove_connector.ConnectorDatabricksVolume <- function(
 
 #' Log connector message
 #'
-#' Generate connector object log message with all the informations
+#' Generate connector object log message with all the information
 #' about the object.
 #' @noRd
 #' @keywords internal
