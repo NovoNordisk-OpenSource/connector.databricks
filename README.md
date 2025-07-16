@@ -11,15 +11,16 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The connector.databricks package provides a convenient interface for
-accessing and interacting with Databricks volumes and tables directly
-from R. This vignette will guide you through the process of connecting
-to databricks, retrieving data, and performing various operations using
-this package.
+accessing and interacting with [Databricks](https://www.databricks.com/)
+volumes and tables directly from R. This vignette will guide you through
+the process of connecting to Databricks, retrieving data, and performing
+various operations using this package.
 
-This package is meant to be used with {connector} package, which
-provides a common interface for interacting with various data sources.
-The connector.databricks package extends the connector package to
-support Databricks **volumes** and **tables**.
+This package is meant to be used with
+[connector](https://github.com/NovoNordisk-OpenSource/connector)
+package, which provides a common interface for interacting with various
+data sources. The connector.databricks package extends the connector
+package to support Databricks **volumes** and **tables**.
 
 ## Installation
 
@@ -62,14 +63,16 @@ When connecting to **Databricks tables**, authentication to databricks
 is handled by the `odbc::databricks()` driver and supports general use
 of personal access tokens and credentials through Posit Workbench. See
 also `odbc::databricks()` On more information on how the connection to
-Databricks is established.
+Databricks is established. Currently, most package functions rely on
+[brickster](https://github.com/databrickslabs/brickster) package.
 
 When connecting to **Databricks volumes**, authentication is handled
-using `DatabricksClient()` function, whenever a call to the API is made.
-Environments should have configurations available via the environment
-variable `DATABRICKS_CONFIG_FILE` or located at `~/.databrickscfg` in
-order for this to work. For more info have a look at the function
-documentation.
+using `brickster` package. See also this
+[vignette](https://databrickslabs.github.io/brickster/articles/setup-auth.html)
+on more information how the authentication is handled.
+
+Hopefully in the future whole backend will rely completely only on
+`brickster` package.
 
 Both types of connections share similar interfaces for reading and
 writing data. Tables should be used with tabular types of data, while
