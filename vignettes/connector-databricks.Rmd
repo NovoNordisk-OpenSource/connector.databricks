@@ -14,12 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-The connector.databricks package provides a convenient interface for accessing and 
-interacting with Databricks tables and volumes directly from R. 
+The connector.databricks package provides a convenient interface for accessing and
+interacting with Databricks tables and volumes directly from R.
 
 
-## Introduction 
-This vignette will guide you through the process of connecting to a Databricks, 
+## Introduction
+This vignette will guide you through the process of connecting to a Databricks,
 retrieving data, and performing various operations using this package.
 
 ## Connecting to a Databricks
@@ -53,10 +53,10 @@ con <- connector_databricks_volume(
 
 ### With connector package (recommended)
 
-If you are using the connector package, you can connect to a Databricks datasources 
-using the `connect()` function. This function based on a configuration file or 
-a list creates a `connectors()` object with a `connector`for each of the 
-specified datasources (for detailed explanation have a look at the `connector` package). 
+If you are using the connector package, you can connect to a Databricks datasources
+using the `connect()` function. This function based on a configuration file or
+a list creates a `connectors()` object with a `connector`for each of the
+specified datasources (for detailed explanation have a look at the `connector` package).
 
 Configuration file for connecting to Databricks should look like this:
 
@@ -85,7 +85,7 @@ datasources:
 # nolint end
 ```
 
-Save this to `_connector.yml` file and use the `connect()` function to connect 
+Save this to `_connector.yml` file and use the `connect()` function to connect
 to Databricks:
 
 ```{r, eval=FALSE}
@@ -95,7 +95,7 @@ library(connector)
 db <- connect()
 ```
 
-Now you can access the Databricks cluster and volume using the `db` object and 
+Now you can access the Databricks cluster and volume using the `db` object and
 `tables` or `volume` field, respectively.
 
 
@@ -157,7 +157,7 @@ mean_for_all_iris <- iris |>
   group_by(Species) |>
   summarise_all(list(mean, median, sd, min, max))
 
-## Mtcars data
+## mtcars data
 cars <- mtcars |>
   filter(mpg > 22)
 
@@ -212,7 +212,7 @@ table <- db$tables |>
 gttable <- table |>
   gt(groupname_col = "gear")
 
-# Save nontabular data to databricks volume
+# Save non-tabular data to databricks volume
 tmp_file <- tempfile(fileext = ".docx")
 gtsave(gttable, tmp_file)
 db$volume |>
