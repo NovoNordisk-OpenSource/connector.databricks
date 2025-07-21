@@ -4,7 +4,7 @@
 \alias{log_remove_connector.ConnectorDatabricksTable}
 \alias{log_remove_connector.ConnectorDatabricksVolume}
 \alias{log_remove_connector}
-\title{Log Remove Operation for Databricks Table connector}
+\title{Log Remove Connector}
 \usage{
 \method{log_remove_connector}{ConnectorDatabricksTable}(connector_object, name, ...)
 

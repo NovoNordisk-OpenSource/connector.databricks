@@ -1,10 +1,11 @@
+#' @rdname read_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::read_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname read_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #' [brickster::db_volume_read()] method
 #' @export
@@ -19,13 +20,14 @@ read_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   content
 }
 
+
+#' @rdname write_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::write_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
-#'
-#' @rdname write_cnt
 #' @param overwrite Overwrite existing content if it exists in the connector.
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #'  [brickster::db_volume_write()] method
@@ -52,13 +54,14 @@ write_cnt.ConnectorDatabricksVolume <- function(
   invisible(connector_object)
 }
 
+#' @rdname list_content_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::list_content_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname list_content_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #' [brickster::db_volume_list()] method
 #' @export
@@ -75,13 +78,14 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
   content_names
 }
 
+#' @rdname remove_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::remove_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname remove_cnt
 #' @export
 remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
@@ -90,13 +94,14 @@ remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   invisible(connector_object)
 }
 
+#' @rdname download_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::download_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname download_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #'  [brickster::db_volume_read()] method
 #'
@@ -113,13 +118,14 @@ download_cnt.ConnectorDatabricksVolume <- function(
   invisible(connector_object)
 }
 
+#' @rdname upload_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::upload_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname upload_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #' [brickster::db_volume_write()] method
 #' @param overwrite Overwrites existing content if it exists in the connector.
@@ -142,13 +148,14 @@ upload_cnt.ConnectorDatabricksVolume <- function(
   invisible(connector_object)
 }
 
+#' @rdname create_directory_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::create_directory_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname create_directory_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to the
 #' [brickster::db_volume_dir_create] method
 #' @param open create a new connector object
@@ -171,13 +178,14 @@ create_directory_cnt.ConnectorDatabricksVolume <- function(
   invisible(connector_object)
 }
 
+#' @rdname remove_directory_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::remove_directory_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname remove_directory_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to
 #' the [brickster::db_volume_dir_delete()] method
 #' @export
@@ -192,6 +200,8 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
   invisible(connector_object)
 }
 
+#' @rdname tbl_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::remove_directory_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
@@ -199,19 +209,19 @@ remove_directory_cnt.ConnectorDatabricksVolume <- function(
 #' connector. Uses [read_cnt()] to allow redundancy between
 #' Volumes and Tables.
 #'
-#' @rdname tbl_cnt
 #' @export
 tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   read_cnt(connector_object = connector_object, name = name, ...)
 }
 
+#' @rdname upload_directory_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the [connector::upload_directory_cnt()]
 #'  method for [connector.databricks::ConnectorDatabricksVolume], but always
 #' sets the `catalog`, `schema` and `path` as defined in when initializing the
 #' connector.
 #'
-#' @rdname upload_directory_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to
 #' the [brickster::db_volume_dir_create()] method
 #' @export
@@ -250,13 +260,14 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
   )
 }
 
+#' @rdname download_directory_cnt
+#'
 #' @description
 #' * [ConnectorDatabricksVolume]: Reuses the
 #' [connector::download_directory_cnt()] method for
 #' [connector.databricks::ConnectorDatabricksVolume], but always sets the
 #' `catalog`, `schema` and `path` as defined in when initializing the connector.
 #'
-#' @rdname download_directory_cnt
 #' @param ... [ConnectorDatabricksVolume]: Additional parameters to pass to
 #' the [brickster::db_volume_dir_create()] method
 #' @export

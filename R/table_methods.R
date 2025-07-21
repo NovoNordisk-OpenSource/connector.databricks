@@ -34,14 +34,15 @@ read_cnt.ConnectorDatabricksTable <- function(
 #' parquet file and then convert it to a table.
 #'
 #' @rdname write_cnt
-#' @param method [ConnectorDatabricksTable]: Which method to use for writing the
+#' @param method * [ConnectorDatabricksTable]: Which method to use for writing the
 #'  table. Options:
 #' \itemize{
 #'   \item `volume` - using temporary volume to write data and then convert it
 #'     to a table.
 #' }
-#' @param tags Named list containing tag names and tag values, e.g.
-#' list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
+#' @param tags * [ConnectorDatabricksTable]: Named list containing tag names
+#' and tag values, e.g.
+#' `list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")`.
 #' More info [here](https://docs.databricks.com/aws/en/database-objects/tags)
 #' @export
 write_cnt.ConnectorDatabricksTable <- function(

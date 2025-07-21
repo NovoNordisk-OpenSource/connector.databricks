@@ -4,7 +4,7 @@
 \alias{log_write_connector.ConnectorDatabricksTable}
 \alias{log_write_connector.ConnectorDatabricksVolume}
 \alias{log_write_connector}
-\title{Log Write Operation for Databricks Table connector}
+\title{Log Write Connector}
 \usage{
 \method{log_write_connector}{ConnectorDatabricksTable}(connector_object, name, ...)
 

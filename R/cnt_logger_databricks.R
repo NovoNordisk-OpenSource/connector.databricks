@@ -1,10 +1,9 @@
-#' Log Read Operation for Databricks Table connector
+#' @rdname log_read_connector
 #'
 #' @description
 #' * [ConnectorDatabricksTable]: Implementation of the `log_read_connector`
 #' function for the ConnectorDatabricksTable class.
 #'
-#' @rdname log_read_connector
 #'
 #' @export
 log_read_connector.ConnectorDatabricksTable <- function(
@@ -16,13 +15,12 @@ log_read_connector.ConnectorDatabricksTable <- function(
   whirl::log_read(msg)
 }
 
-#' Log Write Operation for Databricks Table connector
+#' @rdname log_write_connector
 #'
 #' @description
 #' * [ConnectorDatabricksTable]: Implementation of the `log_write_connector`
 #' function for the ConnectorDatabricksTable class.
 #'
-#' @rdname log_write_connector
 #'
 #' @export
 log_write_connector.ConnectorDatabricksTable <- function(
@@ -34,13 +32,12 @@ log_write_connector.ConnectorDatabricksTable <- function(
   whirl::log_write(msg)
 }
 
-#' Log Remove Operation for Databricks Table connector
+#' @rdname log_remove_connector
 #'
 #' @description
 #' * [ConnectorDatabricksTable]: Implementation of the `log_remove_connector`
 #' function for the ConnectorDatabricksTable class.
 #'
-#' @rdname log_remove_connector
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksTable <- function(
@@ -52,13 +49,12 @@ log_remove_connector.ConnectorDatabricksTable <- function(
   whirl::log_delete(msg)
 }
 
-#' Log Read Operation for Databricks Volume connector
+#' @rdname log_read_connector
 #'
 #' @description
 #' * [ConnectorDatabricksVolume]: Implementation of the `log_read_connector`
 #' function for the ConnectorDatabricksVolume class.
 #'
-#' @rdname log_read_connector
 #'
 #' @export
 log_read_connector.ConnectorDatabricksVolume <- function(
@@ -71,13 +67,12 @@ log_read_connector.ConnectorDatabricksVolume <- function(
   whirl::log_read(msg)
 }
 
-#' Log Write Operation for Databricks Volume connector
+#' @rdname log_write_connector
 #'
 #' @description
 #' * [ConnectorDatabricksVolume]: Implementation of the `log_write_connector`
 #' function for the ConnectorDatabricksVolume class.
 #'
-#' @rdname log_write_connector
 #'
 #' @export
 log_write_connector.ConnectorDatabricksVolume <- function(
@@ -90,13 +85,12 @@ log_write_connector.ConnectorDatabricksVolume <- function(
   whirl::log_write(msg)
 }
 
-#' Log Remove Operation for Databricks Volume connector
+#' @rdname log_remove_connector
 #'
 #' @description
 #' * [ConnectorDatabricksVolume]: Implementation of the `log_remove_connector`
 #' function for the ConnectorDatabricksVolume class.
 #'
-#' @rdname log_remove_connector
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksVolume <- function(
