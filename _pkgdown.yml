@@ -3,14 +3,15 @@ reference:
   - title: Connectors
     contents:
     - connector_databricks_table
+    - ConnectorDatabricksTable
     - connector_databricks_volume
-    - matches("$Connector.*")
+    - ConnectorDatabricksVolume
+    - connector-options
   - title: Connector functions
     contents:
     - matches(".*_cnt$")
-  - title: Placeholder for other stuff
+  - title: Logs
     contents:
-    - -matches("connector_databricks_table|.*_cnt$")
-    - matches(".*log.*$")
+    - matches("log_.*")
 template:
   bootstrap: 5
