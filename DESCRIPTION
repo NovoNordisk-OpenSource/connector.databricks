@@ -1,6 +1,6 @@
 Package: connector.databricks
 Version: 0.0.5.9000
-Title: Expansion of the Connector Package for Databricks
+Title: Expand Connector Package for Databricks Tables and Volumes
 Authors@R: c(
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = c("aut", "cre")),
     person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = "aut"),
@@ -11,7 +11,7 @@ Authors@R: c(
     person("Novo Nordisk A/S", role = "cph")
   )
 Description: Expands the 'connector' package and provides a convenient interface
-    for accessing and interacting with 'Databricks' volumes and tables directly from R.
+    for accessing and interacting with 'Databricks' Volumes and Tables directly from R.
 License: Apache License (>= 2)
 URL: https://novonordisk-opensource.github.io/connector.databricks/, https://github.com/novonordisk-opensource/connector.databricks, https://github.com/NovoNordisk-OpenSource/connector.databricks
 Imports:
