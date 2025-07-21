@@ -13,8 +13,7 @@ Authors@R: c(
 Description: Expands the 'connector' package and provides a convenient interface
     for accessing and interacting with 'Databricks' volumes and tables directly from R.
 License: Apache License (>= 2)
-URL: https://novonordisk-opensource.github.io/connector.databricks,
-    https://github.com/novonordisk-opensource/connector.databricks
+URL: https://novonordisk-opensource.github.io/connector.databricks, https://github.com/novonordisk-opensource/connector.databricks, https://github.com/NovoNordisk-OpenSource/connector.databricks
 Imports:
     brickster (>= 0.2.7),
     checkmate,
@@ -46,3 +45,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.3.2
 Config/Needs/website: rmarkdown
+BugReports: https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
