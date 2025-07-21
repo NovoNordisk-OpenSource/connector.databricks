@@ -126,28 +126,26 @@ of the specified datasources (for detailed explanation have a look at
 the <code>connector</code> package).</p>
 <p>Configuration file for connecting to Databricks should look like
 this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># nolint start</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">  </span><span class="fu">catalog</span><span class="kw">:</span><span class="at">  </span><span class="st">"databricks_calatog"</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">  </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"path-to-cluster"</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"path-to-file-storage"</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="at">  </span><span class="fu">project</span><span class="kw">:</span><span class="at"> </span><span class="st">"project_name"</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="at">  </span><span class="fu">trial</span><span class="kw">:</span><span class="at"> </span><span class="st">"trial_name"</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_table"</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">      </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.http_path}"</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.catalog}"</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.project}_{metadata.trial}_adam"</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"volume"</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_volume"</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.path}"</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.catalog}"</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.project}_{metadata.trial}_tfl"</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co"># nolint end</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="at">  </span><span class="fu">catalog</span><span class="kw">:</span><span class="at">  </span><span class="st">"databricks_calatog"</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">  </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"path-to-cluster"</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">  </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"path-to-file-storage"</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="fu">project</span><span class="kw">:</span><span class="at"> </span><span class="st">"project_name"</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="at">  </span><span class="fu">trial</span><span class="kw">:</span><span class="at"> </span><span class="st">"trial_name"</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_table"</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="at">      </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.http_path}"</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.catalog}"</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.project}_{metadata.trial}_adam"</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"volume"</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_volume"</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.path}"</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.catalog}"</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"{metadata.project}_{metadata.trial}_tfl"</span></span></code></pre></div>
 <p>Save this to <code>_connector.yml</code> file and use the
 <code><a href="https://novonordisk-opensource.github.io/connector/reference/connect.html" class="external-link">connect()</a></code> function to connect to Databricks:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
