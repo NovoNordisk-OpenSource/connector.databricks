@@ -18,24 +18,27 @@ remove_cnt(connector_object, name, ...)
 
 \item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{...}{Additional arguments passed to the method for the individual connector.}
+\item{...}{\link{ConnectorDatabricksTable}: Additional parameters to pass to the
+\code{\link[brickster:db_uc_tables_delete]{brickster::db_uc_tables_delete()}} method}
 }
 \value{
-\link{ConnectorDatabricksVolume} object
+\link{invisible} connector_object.
 }
 \description{
-Addition remove methods for databricks connectors implemented for
+Additional remove methods for Databricks connectors implemented for
 \code{\link[connector:remove_cnt]{connector::remove_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}} method
-for \link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and \code{schema}
-as defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
+method for \link{ConnectorDatabricksTable}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
 }
 
 \itemize{
-\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}} method
-for \link{ConnectorDatabricksVolume}, but always sets the
-\code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
+connector.
 }
 }

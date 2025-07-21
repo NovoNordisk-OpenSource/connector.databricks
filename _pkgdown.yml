@@ -6,7 +6,7 @@ reference:
     - ConnectorDatabricksTable
     - connector_databricks_volume
     - ConnectorDatabricksVolume
-    - connector-options
+    - matches("connector-options*")
   - title: Connector functions
     contents:
     - matches(".*_cnt$")

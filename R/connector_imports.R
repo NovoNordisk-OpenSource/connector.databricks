@@ -1,5 +1,5 @@
 #' @description
-#' Addition read methods for databricks connectors implemented for
+#' Additional read methods for Databricks connectors implemented for
 #' [connector::read_cnt()]:
 #' @inherit connector::read_cnt params return title details
 #' @importFrom connector read_cnt
@@ -8,7 +8,7 @@
 connector::read_cnt
 
 #' @description
-#' Addition write methods for databricks connectors implemented for
+#' Additional write methods for Databricks connectors implemented for
 #' [connector::write_cnt()]:
 #' @inherit connector::write_cnt params return title details
 #' @importFrom connector write_cnt
@@ -17,7 +17,7 @@ connector::read_cnt
 connector::write_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::list_content_cnt()]:
 #' @inherit connector::list_content_cnt params return title details
 #' @importFrom connector list_content_cnt
@@ -26,7 +26,7 @@ connector::write_cnt
 connector::list_content_cnt
 
 #' @description
-#' Addition remove methods for databricks connectors implemented for
+#' Additional remove methods for Databricks connectors implemented for
 #' [connector::remove_cnt()]:
 #' @inherit connector::remove_cnt params return title details
 #' @importFrom connector remove_cnt
@@ -35,7 +35,7 @@ connector::list_content_cnt
 connector::remove_cnt
 
 #' @description
-#' Addition tbl methods for databricks connectors implemented for
+#' Additional tbl methods for Databricks connectors implemented for
 #' [connector::tbl_cnt()]:
 #' @inherit connector::tbl_cnt params return title details
 #' @importFrom connector tbl_cnt
@@ -50,7 +50,7 @@ connector::tbl_cnt
 connector::disconnect_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::download_cnt()]:
 #' @inherit connector::download_cnt title description params return details
 #' @importFrom connector download_cnt
@@ -59,7 +59,7 @@ connector::disconnect_cnt
 connector::download_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::upload_cnt()]:
 #' @inherit connector::upload_cnt title description params return details
 #' @importFrom connector upload_cnt
@@ -68,7 +68,7 @@ connector::download_cnt
 connector::upload_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::create_directory_cnt()]:
 #' @inherit connector::create_directory_cnt title description params return
 #' details
@@ -78,7 +78,7 @@ connector::upload_cnt
 connector::create_directory_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::remove_directory_cnt()]:
 #' @inherit connector::remove_directory_cnt title description params return
 #' details
@@ -88,7 +88,7 @@ connector::create_directory_cnt
 connector::remove_directory_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::upload_directory_cnt()]:
 #' @inherit connector::upload_directory_cnt title description params return
 #' details
@@ -98,7 +98,7 @@ connector::remove_directory_cnt
 connector::upload_directory_cnt
 
 #' @description
-#' Addition list content methods for databricks connectors implemented for
+#' Additional list content methods for Databricks connectors implemented for
 #' [connector::download_directory_cnt()]:
 #' @inherit connector::download_directory_cnt title description params return
 #' details
@@ -108,7 +108,7 @@ connector::upload_directory_cnt
 connector::download_directory_cnt
 
 #' @description
-#' Addition log read methods for databricks connectors implemented for
+#' Additional log read methods for Databricks connectors implemented for
 #' [connector::log_read_connector()]:
 #' @inherit connector::log_read_connector params return title details
 #' @importFrom connector log_read_connector
@@ -117,7 +117,7 @@ connector::download_directory_cnt
 connector::log_read_connector
 
 #' @description
-#' Addition log write methods for databricks connectors implemented for
+#' Additional log write methods for Databricks connectors implemented for
 #' [connector::log_write_connector()]:
 #' @inherit connector::log_write_connector params return title details
 #' @importFrom connector log_write_connector
@@ -126,7 +126,7 @@ connector::log_read_connector
 connector::log_write_connector
 
 #' @description
-#' Addition log remove methods for databricks connectors implemented for
+#' Additional log remove methods for Databricks connectors implemented for
 #' [connector::log_remove_connector()]:
 #' @inherit connector::log_remove_connector params return title details
 #' @importFrom connector log_remove_connector

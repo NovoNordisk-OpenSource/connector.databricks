@@ -20,15 +20,16 @@ download_cnt(connector_object, name, file = basename(name), ...)
 \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
 }
 \value{
-\link{ConnectorDatabricksVolume} object
+\link{invisible} connector_object.
 }
 \description{
-Addition list content methods for databricks connectors implemented for
+Additional list content methods for Databricks connectors implemented for
 \code{\link[connector:download_cnt]{connector::download_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:download_cnt]{connector::download_cnt()}} method
-for \link{ConnectorDatabricksVolume}, but always sets the
-\code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:download_cnt]{connector::download_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
+connector.
 }
 }

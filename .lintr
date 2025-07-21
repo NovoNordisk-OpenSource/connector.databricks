@@ -4,3 +4,8 @@ linters: linters_with_defaults(
     object_usage_linter = NULL,
     object_name_linter = NULL
     )
+exclusions: list(
+    "vignettes/connector-databricks.Rmd" = list(
+        indentation_linter = 63:84
+    )
+  )

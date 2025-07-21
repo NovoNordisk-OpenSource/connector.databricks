@@ -1,11 +1,10 @@
-#' Log Read Operation for Databricks dbi connector
+#' Log Read Operation for Databricks Table connector
 #'
-#' Implementation of the log_read_connector function for the
-#' ConnectorDatabricksTable class.
+#' @description
+#' * [ConnectorDatabricksTable]: Implementation of the `log_read_connector`
+#' function for the ConnectorDatabricksTable class.
 #'
-#' @param connector_object The ConnectorDatabricksTable object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_read_connector
 #'
 #' @export
 log_read_connector.ConnectorDatabricksTable <- function(
@@ -17,14 +16,13 @@ log_read_connector.ConnectorDatabricksTable <- function(
   whirl::log_read(msg)
 }
 
-#' Log Write Operation for Databricks dbi connector
+#' Log Write Operation for Databricks Table connector
 #'
-#' Implementation of the log_write_connector function for the
-#' ConnectorDatabricksTable class.
+#' @description
+#' * [ConnectorDatabricksTable]: Implementation of the `log_write_connector`
+#' function for the ConnectorDatabricksTable class.
 #'
-#' @param connector_object The ConnectorDatabricksTable object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_write_connector
 #'
 #' @export
 log_write_connector.ConnectorDatabricksTable <- function(
@@ -36,14 +34,13 @@ log_write_connector.ConnectorDatabricksTable <- function(
   whirl::log_write(msg)
 }
 
-#' Log Remove Operation for Databricks dbi connector
+#' Log Remove Operation for Databricks Table connector
 #'
-#' Implementation of the log_remove_connector function for the
-#' ConnectorDatabricksTable class.
+#' @description
+#' * [ConnectorDatabricksTable]: Implementation of the `log_remove_connector`
+#' function for the ConnectorDatabricksTable class.
 #'
-#' @param connector_object The ConnectorDatabricksTable object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_remove_connector
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksTable <- function(
@@ -55,14 +52,13 @@ log_remove_connector.ConnectorDatabricksTable <- function(
   whirl::log_delete(msg)
 }
 
-#' Log Read Operation for ConnectorDatabricksVolume connector
+#' Log Read Operation for Databricks Volume connector
 #'
-#' Implementation of the log_read_connector function for the
-#' ConnectorDatabricksVolume class.
+#' @description
+#' * [ConnectorDatabricksVolume]: Implementation of the `log_read_connector`
+#' function for the ConnectorDatabricksVolume class.
 #'
-#' @param connector_object The ConnectorDatabricksVolume object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_read_connector
 #'
 #' @export
 log_read_connector.ConnectorDatabricksVolume <- function(
@@ -75,14 +71,13 @@ log_read_connector.ConnectorDatabricksVolume <- function(
   whirl::log_read(msg)
 }
 
-#' Log Write Operation for ConnectorDatabricksVolume connector
+#' Log Write Operation for Databricks Volume connector
 #'
-#' Implementation of the log_write_connector function for the
-#' ConnectorDatabricksVolume class.
+#' @description
+#' * [ConnectorDatabricksVolume]: Implementation of the `log_write_connector`
+#' function for the ConnectorDatabricksVolume class.
 #'
-#' @param connector_object The ConnectorDatabricksVolume object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_write_connector
 #'
 #' @export
 log_write_connector.ConnectorDatabricksVolume <- function(
@@ -95,10 +90,11 @@ log_write_connector.ConnectorDatabricksVolume <- function(
   whirl::log_write(msg)
 }
 
-#' Log Remove Operation for ConnectorDatabricksVolume connector
+#' Log Remove Operation for Databricks Volume connector
 #'
-#' @description: Implementation of the `log_remove_connector` function for the
-#' ConnectorDatabricksVolume class.
+#' @description
+#' * [ConnectorDatabricksVolume]: Implementation of the `log_remove_connector`
+#' function for the ConnectorDatabricksVolume class.
 #'
 #' @rdname log_remove_connector
 #'
