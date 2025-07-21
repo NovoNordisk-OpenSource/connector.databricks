@@ -57,3 +57,6 @@ inst/doc
 dev/
 
 /.quarto/
+
+.claude/
+CLAUDE.md

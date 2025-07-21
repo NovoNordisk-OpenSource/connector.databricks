@@ -97,12 +97,10 @@ log_write_connector.ConnectorDatabricksVolume <- function(
 
 #' Log Remove Operation for ConnectorDatabricksVolume connector
 #'
-#' Implementation of the log_remove_connector function for the
+#' @description: Implementation of the `log_remove_connector` function for the
 #' ConnectorDatabricksVolume class.
 #'
-#' @param connector_object The ConnectorDatabricksVolume object.
-#' @param name The name of the connector.
-#' @param ... Additional parameters.
+#' @rdname log_remove_connector
 #'
 #' @export
 log_remove_connector.ConnectorDatabricksVolume <- function(
@@ -118,7 +116,7 @@ log_remove_connector.ConnectorDatabricksVolume <- function(
 
 #' Log connector message
 #'
-#' Generate connector object log message with all the information
+#' Generate connector object log message with all the informations
 #' about the object.
 #' @noRd
 #' @keywords internal

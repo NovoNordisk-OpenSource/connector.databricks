@@ -10,8 +10,7 @@ inside Databricks volumes.
 }
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Create file storage connector
-
+# Create Volume file storage connector
 cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 
 cnt

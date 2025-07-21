@@ -74,8 +74,7 @@ connector_databricks_volume <- function(
 #' @importFrom R6 R6Class
 #'
 #' @examplesIf FALSE
-#' # Create file storage connector
-#'
+#' # Create Volume file storage connector
 #' cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 #'
 #' cnt
