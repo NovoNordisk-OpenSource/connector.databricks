@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# connector.databricks <a href="https://novonordisk-opensource.github.io/connector.databricks"><img src="man/figures/logo.png" align="right" height="138" alt="connector.databricks website" /></a>
+# connector.databricks <a href="https://novonordisk-opensource.github.io/connector.databricks/"><img src="man/figures/logo.png" align="right" height="138" alt="connector.databricks website" /></a>
 
 <!-- badges: start -->
 
