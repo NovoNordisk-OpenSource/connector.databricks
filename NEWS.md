@@ -1,4 +1,6 @@
-# connector.databricks dev
+# connector.databricks 0.0.6
+
+## New features and improvements
 
 * Fix naming convention in `upload_directory_cnt.DatabricksVolume` [#84](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/84)
 * Added `Connecting to cluster, please wait..` as a zephyr::msg_info prior to initialization of table and volume connection
