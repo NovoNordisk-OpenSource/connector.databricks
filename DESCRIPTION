@@ -37,7 +37,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.2.3),
     tibble,
-    whirl (>= 0.1.8.9000)
+    whirl (>= 0.3.0)
 VignetteBuilder:
     knitr, rmarkdown
 Config/testthat/edition: 3

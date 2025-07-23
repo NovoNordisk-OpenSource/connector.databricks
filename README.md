@@ -38,15 +38,12 @@ To get a bug fix or to use a feature from the development version, you
 can install the development version of connector.databricks from GitHub.
 
 ``` r
-# install.packages("pak")
 pak::pak("novonordisk-opensource/connector.databricks")
 ```
 
 ## Usage
 
-Package is meant to be used alongside connector package, but it can be
-used independently as well. Here is an example of how to connect to
-databricks and retrieve data:
+Here is an example of how to connect to databricks and retrieve data:
 
 ``` r
 library(connector.databricks)
