@@ -1,22 +1,19 @@
 Package: connector.databricks
-Version: 0.0.5.9000
-Title: Expansion of the connector package for enabling connections to
-    databricks
+Version: 0.0.6
+Title: Expand Connector Package for Databricks Tables and Volumes
 Authors@R: c(
-    person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = c("aut", "cre")),
+    person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = c("aut", "cre")),
+    person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = "aut"),
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = "aut"),
-    person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = "aut"),
     person("Cervan", "Girard", , "cgid@novonordisk.com", role = "aut"),
     person("Oliver", "Lundsgaard", , "ovlr@novonordisk.com", role = "ctb"),
     person("Skander", "Mulder", , "sktf@novonordisk.com", role = "ctb"),
     person("Novo Nordisk A/S", role = "cph")
   )
-Description: Expands the connector package to handle databricks. This
-    includes reading and writing of files to volumes as well as
-    connections to sparklyr.
+Description: Expands the 'connector' package and provides a convenient interface
+    for accessing and interacting with 'Databricks' Volumes and Tables directly from R.
 License: Apache License (>= 2)
-URL: https://novonordisk-opensource.github.io/connector.databricks,
-    https://github.com/novonordisk-opensource/connector.databricks
+URL: https://novonordisk-opensource.github.io/connector.databricks/, https://github.com/novonordisk-opensource/connector.databricks, https://github.com/NovoNordisk-OpenSource/connector.databricks
 Imports:
     brickster (>= 0.2.7),
     checkmate,
@@ -40,13 +37,12 @@ Suggests:
     rmarkdown,
     testthat (>= 3.2.3),
     tibble,
-    whirl (>= 0.1.8.9000)
+    whirl (>= 0.3.0)
 VignetteBuilder:
     knitr, rmarkdown
-Remotes:
-    github::NovoNordisk-Opensource/whirl
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.3.2
 Config/Needs/website: rmarkdown
+BugReports: https://github.com/NovoNordisk-OpenSource/connector.databricks/issues

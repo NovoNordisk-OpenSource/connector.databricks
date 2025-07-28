@@ -55,3 +55,8 @@ inst/doc
 /doc/
 /Meta/
 dev/
+
+/.quarto/
+
+.claude/
+CLAUDE.md

@@ -45,32 +45,41 @@ write_cnt(
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
 \code{\link[brickster:db_volume_write]{brickster::db_volume_write()}} method}
 
-\item{method}{\link{ConnectorDatabricksTable}: Which method to use for writing the
+\item{method}{\itemize{
+\item \link{ConnectorDatabricksTable}: Which method to use for writing the
 table. Options:
 \itemize{
 \item \code{volume} - using temporary volume to write data and then convert it
 to a table.
+}
 }}
 
-\item{tags}{Named list containing tag names and tag values, e.g.
-list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")
-More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}}
+\item{tags}{\itemize{
+\item \link{ConnectorDatabricksTable}: Named list containing tag names
+and tag values, e.g.
+\code{list("tag_name1" = "tag_value1", "tag_name2" = "tag_value2")}.
+More info \href{https://docs.databricks.com/aws/en/database-objects/tags}{here}
+}}
 }
 \value{
-\link{ConnectorDatabricksVolume} object
+\link{invisible} connector_object.
 }
 \description{
-Addition write methods for databricks connectors implemented for
+Additional write methods for Databricks connectors implemented for
 \code{\link[connector:write_cnt]{connector::write_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Creates temporary volume to write object as a
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}}
+method for \link{ConnectorDatabricksTable}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector. Creates temporary volume to write object as a
 parquet file and then convert it to a table.
 }
 
 \itemize{
-\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}} method for
-\link{ConnectorDatabricksVolume}, but always sets the
-\code{catalog} and \code{schema} as defined in when initializing the connector.
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:write_cnt]{connector::write_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
+connector.
 }
 }

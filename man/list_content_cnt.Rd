@@ -28,19 +28,20 @@ It should contain \code{tag_name} and \code{tag_value} values to filter by.}
 A \link{character} vector of content names
 }
 \description{
-Addition list content methods for databricks connectors implemented for
+Additional list content methods for Databricks connectors implemented for
 \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}:
 
 \itemize{
 \item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
-method for \link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and
-\code{schema} as defined in when initializing the connector.
+method for \link{ConnectorDatabricksTable}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
 }
 
 \itemize{
 \item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
 method for \link{ConnectorDatabricksVolume}, but always
-sets the \code{catalog} and \code{schema} as defined in when initializing the
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
 connector.
 }
 }

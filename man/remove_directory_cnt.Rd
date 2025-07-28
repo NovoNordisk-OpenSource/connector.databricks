@@ -18,9 +18,16 @@ remove_directory_cnt(connector_object, name, ...)
 the \code{\link[brickster:db_volume_dir_delete]{brickster::db_volume_dir_delete()}} method}
 }
 \value{
-\link{ConnectorDatabricksVolume} object
+\link{invisible} connector_object.
 }
 \description{
-Addition list content methods for databricks connectors implemented for
+Additional list content methods for Databricks connectors implemented for
 \code{\link[connector:remove_directory_cnt]{connector::remove_directory_cnt()}}:
+
+\itemize{
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:remove_directory_cnt]{connector::remove_directory_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
+connector.
+}
 }

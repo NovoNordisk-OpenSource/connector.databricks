@@ -24,17 +24,21 @@ tbl_cnt(connector_object, name, ...)
 A \link[dplyr:tbl]{dplyr::tbl} object.
 }
 \description{
-Addition tbl methods for databricks connectors implemented for
+Additional tbl methods for Databricks connectors implemented for
 \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}}:
 
 \itemize{
-\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:tbl_cnt]{connector::tbl_cnt()}} method for
-\link[connector:connector_dbi]{connector::connector_dbi}, but always sets the \code{catalog} and \code{schema} as
-defined in when initializing the connector.
+\item \link{ConnectorDatabricksTable}: Reuses the \code{\link[connector:list_content_cnt]{connector::list_content_cnt()}}
+method for \link{ConnectorDatabricksTable}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
 }
 
 \itemize{
-\item \link{ConnectorDatabricksVolume}: Uses \code{\link[=read_cnt]{read_cnt()}} to allow redundancy between
-Volumes and DBI.
+\item \link{ConnectorDatabricksVolume}: Reuses the \code{\link[connector:remove_directory_cnt]{connector::remove_directory_cnt()}}
+method for \link{ConnectorDatabricksVolume}, but always
+sets the \code{catalog}, \code{schema} and \code{path} as defined in when initializing the
+connector. Uses \code{\link[=read_cnt]{read_cnt()}} to allow redundancy between
+Volumes and Tables.
 }
 }
