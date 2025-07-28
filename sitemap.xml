@@ -20,14 +20,8 @@
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/download_directory_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/index.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksTable.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.ConnectorDatabricksVolume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_remove_connector.ConnectorDatabricksTable.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_remove_connector.ConnectorDatabricksVolume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_remove_connector.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.ConnectorDatabricksTable.html</loc></url>
-<url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.ConnectorDatabricksVolume.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.html</loc></url>
 <url><loc>https://novonordisk-opensource.github.io/connector.databricks/reference/remove_cnt.html</loc></url>

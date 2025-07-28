@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/novonordisk-opensource/connector.databricks/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/NovoNordisk-OpenSource/connector.databricks/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -34,9 +34,33 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/novonordisk-opensource/connector.databricks/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.6" id="connectordatabricks-006">connector.databricks 0.0.6<a class="anchor" aria-label="anchor" href="#connectordatabricks-006"></a></h2>
+<div class="section level3">
+<h3 id="new-features-and-improvements-0-0-6">New features and improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-0-0-6"></a></h3>
+<ul><li>Fix naming convention in <code>upload_directory_cnt.DatabricksVolume</code> <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/84" class="external-link">#84</a>
+</li>
+<li>Added <code>Connecting to cluster, please wait..</code> as a zephyr::msg_info prior to initialization of table and volume connection</li>
+<li>Set dependency <code>brickster (&gt;= 0.2.7)</code>
+</li>
+<li>Add github templates for issues, features and PRs</li>
+<li>Updated <code>volume_methods</code> to use zephyr::msg_info(), replacing cli::cli_alert()</li>
+<li>Updated <code>volume_methods</code>, <code>table_utils</code> and <code>table_methods</code> to use zephyr::get_option() replacing a bool</li>
+<li>Updated tests to use zephyr-option, with verbosity = quiet</li>
+<li>Fix bug regarding empty tables <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/73" class="external-link">#73</a>
+</li>
+<li>Fix tmp volume bug <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/63" class="external-link">#63</a>
+</li>
+<li>Add <code><a href="../reference/upload_directory_cnt.html">upload_directory_cnt()</a></code> and <code><a href="../reference/download_directory_cnt.html">download_directory_cnt()</a></code> methods for <code>ConnectorDatabricksVolume</code> class. Solves <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/77" class="external-link">#77</a>
+</li>
+<li>Update <code><a href="../reference/remove_directory_cnt.html">remove_directory_cnt()</a></code> method for <code>ConnectorDatabricksVolume</code> class, now iterates over directories and erases all the subdirectories and files. Solves <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/78" class="external-link">#78</a>
+</li>
+<li>Update <code>connector</code> dependency to <code>0.1.0</code> official CRAN version.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="connectordatabricks-005">connector.databricks 0.0.5<a class="anchor" aria-label="anchor" href="#connectordatabricks-005"></a></h2>
 <div class="section level3">
@@ -85,7 +109,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Steffen Falgreen Larsen, Aksel Thomsen, Vladimir Obucina, Cervan Girard.</p>
+  <p>Developed by Vladimir Obucina, Steffen Falgreen Larsen, Aksel Thomsen, Cervan Girard.</p>
 </div>
 
 <div class="pkgdown-footer-right">
