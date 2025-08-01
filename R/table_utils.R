@@ -66,7 +66,8 @@ write_table_volume <- function(
 
   temporary_volume$write_cnt(
     x = x,
-    name = paste0(name, ".parquet")
+    name = paste0(name, ".parquet"),
+    overwrite = overwrite
   )
 
   parquet_to_table(
