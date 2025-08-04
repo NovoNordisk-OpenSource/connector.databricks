@@ -120,22 +120,39 @@ execute_sql_query <- function(query_string, warehouse_id, ...) {
     ...
   )
 
-  if (result$status$state == "FAILED") {
-    cli::cli_abort(paste0(
-      "Execution failed with error: ",
-      result$status$error$message
-    ))
-  }
-
   time_ <- Sys.time()
-  while (result$status$state != "SUCCEEDED" || time_ < 120) {
+  test_time <- 0
+  while (result$status$state != "SUCCEEDED") {
+    test_time <- test_time + as.numeric(Sys.time() - time_)
+    time_ <- Sys.time()
     try(
       {
         result <- brickster::db_sql_exec_status(result$statement_id)
-        time_ <- Sys.time() - time_
       },
       silent = TRUE
     )
+
+    if (result$status$state == "FAILED") {
+      cli::cli_abort(
+        paste0(
+          "Execution failed with error: ",
+          result$status$error$message
+        )
+      )
+      break
+    }
+
+    if (test_time >= 60) {
+      cli::cli_warn(
+        paste0(
+          "The query was too long.\n
+        Status : ",
+          result$status
+        )
+      )
+
+      break
+    }
   }
 
   result
