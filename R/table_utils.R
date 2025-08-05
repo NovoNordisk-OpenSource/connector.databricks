@@ -64,13 +64,12 @@ write_table_volume <- function(
     {connector_object$catalog}/{connector_object$schema}/{name}..."
   )
 
-  # hms not suported by parquet
-  classes <- purrr::map(x, class)
-  test_hms <- any(purrr::flatten_chr(classes) %in% "hms")
-  if (test_hms) {
+  # hms is not supported by parquet
+  are_hms_variables_present <- any(purrr::map_lgl(x, hms::is_hms))
+  if (are_hms_variables_present) {
     zephyr::msg_warning(
-      "Some of your variables are in HMS format, this format is not possible in Databricks.\n
-       We have to change them for character."
+      "Some variables are in HMS format, this format is not supported by Databricks.\n
+       We have to convert them to character."
     )
     x <- x |>
       dplyr::mutate(

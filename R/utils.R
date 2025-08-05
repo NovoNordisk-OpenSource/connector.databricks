@@ -134,20 +134,18 @@ execute_sql_query <- function(query_string, warehouse_id, ...) {
 
     if (result$status$state == "FAILED") {
       cli::cli_abort(
-        paste0(
-          "Execution failed with error: ",
-          result$status$error$message
-        )
+          "Execution failed with error:  {result$status$error$message}"
       )
       break
     }
 
     if (test_time >= 60) {
       cli::cli_warn(
-        paste0(
-          "The query was too long.\n
-        Status : ",
-          result$status
+        c(
+          "The query was too long.",
+          "",
+          "Status: {result$status$error_code}",
+          "Message: {result$status$message}"
         )
       )
 
