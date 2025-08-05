@@ -74,7 +74,7 @@ write_table_volume <- function(
     )
     x <- x |>
       dplyr::mutate(
-        dplyr::across(where(hms::is_hms), as.character)
+        dplyr::across(dplyr::where(hms::is_hms), as.character)
       )
   }
 

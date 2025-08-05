@@ -29,7 +29,8 @@ Imports:
     zephyr,
     dbplyr,
     arrow,
-    fs
+    fs,
+    hms
 Suggests:
     glue,
     knitr,
