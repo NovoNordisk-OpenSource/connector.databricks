@@ -108,12 +108,12 @@ remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @export
 download_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
-  name,
-  file = basename(name),
+  src,
+  dest = basename(src),
   ...
 ) {
-  file_path <- file.path(connector_object$full_path, name)
-  brickster::db_volume_read(path = file_path, destination = file, ...)
+  file_path <- file.path(connector_object$full_path, src)
+  brickster::db_volume_read(path = file_path, destination = dest, ...)
 
   invisible(connector_object)
 }
@@ -132,15 +132,15 @@ download_cnt.ConnectorDatabricksVolume <- function(
 #' @export
 upload_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
-  file,
-  name = basename(file),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 ) {
-  file_path <- file.path(connector_object$full_path, name)
+  file_path <- file.path(connector_object$full_path, dest)
   brickster::db_volume_write(
     path = file_path,
-    file = file,
+    file = src,
     overwrite = overwrite,
     ...
   )
@@ -227,15 +227,15 @@ tbl_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
 #' @export
 upload_directory_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
-  dir,
-  name = basename(dir),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector"),
   open = FALSE,
   ...
 ) {
   upload_directory(
-    dir = dir,
-    name = name,
+    dir = src,
+    name = dest,
     dir_path = connector_object$full_path,
     overwrite = overwrite,
     ...
@@ -251,7 +251,7 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
     connector_object <- connector_databricks_volume(paste0(
       connector_object$full_path,
       "/",
-      name
+      dest
     ))
   }
 
@@ -273,15 +273,15 @@ upload_directory_cnt.ConnectorDatabricksVolume <- function(
 #' @export
 download_directory_cnt.ConnectorDatabricksVolume <- function(
   connector_object,
-  name,
-  dir = basename(name),
+  src,
+  dest = basename(src),
   ...
 ) {
-  dir_path <- file.path(connector_object$full_path, name)
+  dir_path <- file.path(connector_object$full_path, src)
 
   download_directory(
     dir_path = dir_path,
-    name = dir,
+    name = dest,
     ...
   )
 

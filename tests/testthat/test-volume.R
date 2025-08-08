@@ -287,7 +287,7 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   )
 
   expect_no_failure(setup_volume_connector$upload_directory_cnt(
-    dir = "nested_structure_volumes",
+    src = "nested_structure_volumes",
     overwrite = TRUE
   ))
 
@@ -298,7 +298,7 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   expect_no_failure(
     setup_volume_connector |>
       upload_directory_cnt(
-        dir = "nested_structure_volumes"
+        src = "nested_structure_volumes"
       )
   )
 
@@ -315,15 +315,15 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   })
 
   expect_no_failure(setup_volume_connector$download_directory_cnt(
-    name = "nested_structure_volumes",
-    dir = "nested_structure_volumes_downloaded"
+    src = "nested_structure_volumes",
+    dest = "nested_structure_volumes_downloaded"
   ))
 
   expect_no_failure(
     setup_volume_connector |>
       download_directory_cnt(
-        name = "nested_structure_volumes",
-        dir = "nested_structure_volumes_downloaded_pipe"
+        src = "nested_structure_volumes",
+        dest = "nested_structure_volumes_downloaded_pipe"
       )
   )
 
