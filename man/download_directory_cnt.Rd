@@ -5,16 +5,16 @@
 \alias{download_directory_cnt.ConnectorDatabricksVolume}
 \title{Download a directory}
 \usage{
-download_directory_cnt(connector_object, name, dir = name, ...)
+download_directory_cnt(connector_object, src, dest = basename(src), ...)
 
-\method{download_directory_cnt}{ConnectorDatabricksVolume}(connector_object, name, dir = basename(name), ...)
+\method{download_directory_cnt}{ConnectorDatabricksVolume}(connector_object, src, dest = basename(src), ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
-\item{name}{\link{character} The name of the directory to download}
+\item{src}{\link{character} The name of the directory to download from the connector}
 
-\item{dir}{\link{character} Path to the directory to download to}
+\item{dest}{\link{character} Path to the directory to download to}
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to
 the \code{\link[brickster:db_volume_dir_create]{brickster::db_volume_dir_create()}} method}

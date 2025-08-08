@@ -7,16 +7,16 @@
 \usage{
 upload_cnt(
   connector_object,
-  file,
-  name = basename(file),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector"),
   ...
 )
 
 \method{upload_cnt}{ConnectorDatabricksVolume}(
   connector_object,
-  file,
-  name = basename(file),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 )
@@ -24,9 +24,9 @@ upload_cnt(
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
-\item{file}{\link{character} Path to the file to download to or upload from}
+\item{src}{\link{character} Path to the file to download to or upload from}
 
-\item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
+\item{dest}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
 \item{overwrite}{Overwrites existing content if it exists in the connector.}
 
