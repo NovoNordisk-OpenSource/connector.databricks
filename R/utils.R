@@ -134,7 +134,7 @@ execute_sql_query <- function(query_string, warehouse_id, ...) {
 
     if (result$status$state == "FAILED") {
       cli::cli_abort(
-          "Execution failed with error:  {result$status$error$message}"
+        "Execution failed with error:  {result$status$error$message}"
       )
       break
     }

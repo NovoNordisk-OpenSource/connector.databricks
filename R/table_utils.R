@@ -68,7 +68,8 @@ write_table_volume <- function(
   are_hms_variables_present <- any(purrr::map_lgl(x, hms::is_hms))
   if (are_hms_variables_present) {
     zephyr::msg_warning(
-      "Some variables are in HMS format, this format is not supported by Databricks.\n
+      "Some variables are in HMS format.
+       This format is not supported by Databricks.\n
        We have to convert them to character."
     )
     x <- x |>
