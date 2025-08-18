@@ -64,9 +64,24 @@ write_table_volume <- function(
     {connector_object$catalog}/{connector_object$schema}/{name}..."
   )
 
+  # hms is not supported by parquet
+  are_hms_variables_present <- any(purrr::map_lgl(x, hms::is_hms))
+  if (are_hms_variables_present) {
+    zephyr::msg_warning(
+      "Some variables are in HMS format.
+       This format is not supported by Databricks.\n
+       We have to convert them to character."
+    )
+    x <- x |>
+      dplyr::mutate(
+        dplyr::across(dplyr::where(hms::is_hms), as.character)
+      )
+  }
+
   temporary_volume$write_cnt(
     x = x,
-    name = paste0(name, ".parquet")
+    name = paste0(name, ".parquet"),
+    overwrite = overwrite
   )
 
   parquet_to_table(

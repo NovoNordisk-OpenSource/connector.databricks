@@ -5,16 +5,16 @@
 \alias{download_cnt.ConnectorDatabricksVolume}
 \title{Download content from the connector}
 \usage{
-download_cnt(connector_object, name, file = basename(name), ...)
+download_cnt(connector_object, src, dest = basename(src), ...)
 
 \method{download_cnt}{ConnectorDatabricksVolume}(connector_object, src, dest = basename(src), ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
 
-\item{name}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
+\item{src}{\link{character} Name of the content to read, write, or remove. Typically the table name.}
 
-\item{file}{\link{character} Path to the file to download to or upload from}
+\item{dest}{\link{character} Path to the file to download to or upload from}
 
 \item{...}{\link{ConnectorDatabricksVolume}: Additional parameters to pass to the
 \code{\link[brickster:db_volume_read]{brickster::db_volume_read()}} method}
