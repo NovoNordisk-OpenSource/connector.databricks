@@ -15,8 +15,8 @@ upload_cnt(
 
 \method{upload_cnt}{ConnectorDatabricksVolume}(
   connector_object,
-  file,
-  name = basename(file),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 )

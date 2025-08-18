@@ -16,8 +16,8 @@ upload_directory_cnt(
 
 \method{upload_directory_cnt}{ConnectorDatabricksVolume}(
   connector_object,
-  dir,
-  name = basename(dir),
+  src,
+  dest = basename(src),
   overwrite = zephyr::get_option("overwrite", "connector"),
   open = FALSE,
   ...

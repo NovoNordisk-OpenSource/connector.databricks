@@ -1,5 +1,36 @@
 # connector.databricks 0.0.6
 
+## Breaking Changes
+
+### Parameter Name Changes in Volume Methods
+
+**BREAKING:** The following methods have renamed parameters to improve consistency:
+
+- `upload_cnt()`: `file` → `src`, `name` → `dest`
+- `download_cnt()`: `name` → `src`, `file` → `dest`  
+- `upload_directory_cnt()`: `dir` → `src`, `name` → `dest`
+- `download_directory_cnt()`: `name` → `src`, `dir` → `dest`
+
+#### Migration Examples
+
+**Before:**
+```r
+# Old parameter names
+conn$upload_cnt(file = "local_file.csv", name = "remote_file.csv")
+conn$download_cnt(name = "remote_file.csv", file = "local_file.csv")
+conn$upload_directory_cnt(dir = "local_dir", name = "remote_dir")  
+conn$download_directory_cnt(name = "remote_dir", dir = "local_dir")
+```
+
+**After:**
+```r  
+# New parameter names
+conn$upload_cnt(src = "local_file.csv", dest = "remote_file.csv")
+conn$download_cnt(src = "remote_file.csv", dest = "local_file.csv")
+conn$upload_directory_cnt(src = "local_dir", dest = "remote_dir")
+conn$download_directory_cnt(src = "remote_dir", dest = "local_dir")
+```
+
 ## New features and improvements
 
 * Fix naming convention in `upload_directory_cnt.DatabricksVolume` [#84](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/84)

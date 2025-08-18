@@ -238,7 +238,7 @@ test_that("ConnectorDatabricksVolume methods work", {
   expect_contains(list_of_items, basename("test_file.csv"))
 
   # Download the file
-  con$download_cnt("test_file.csv", "test_file.csv")
+  con$download_cnt(src = "test_file.csv", dest = "test_file.csv")
 
   # Check if file exists
   expect_true(file.exists("test_file.csv"))
@@ -262,7 +262,7 @@ test_that("ConnectorDatabricksVolume methods work", {
   write.table(x = tibble::tibble(x = 1, y = 2), file = "test_file.csv")
 
   # Create a test file
-  con$upload_cnt("test_file.csv", "test_file.csv")
+  con$upload_cnt(src = "test_file.csv", dest = "test_file.csv")
 
   # List contents of root folder
   list_of_items <- con$list_content_cnt()
@@ -287,7 +287,7 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   )
 
   expect_no_failure(setup_volume_connector$upload_directory_cnt(
-    dir = "nested_structure_volumes",
+    src = "nested_structure_volumes",
     overwrite = TRUE
   ))
 
@@ -298,7 +298,7 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   expect_no_failure(
     setup_volume_connector |>
       upload_directory_cnt(
-        dir = "nested_structure_volumes"
+        src = "nested_structure_volumes"
       )
   )
 
@@ -315,15 +315,15 @@ test_that("ConnectorDatabricksVolume upload/download works", {
   })
 
   expect_no_failure(setup_volume_connector$download_directory_cnt(
-    name = "nested_structure_volumes",
-    dir = "nested_structure_volumes_downloaded"
+    src = "nested_structure_volumes",
+    dest = "nested_structure_volumes_downloaded"
   ))
 
   expect_no_failure(
     setup_volume_connector |>
       download_directory_cnt(
-        name = "nested_structure_volumes",
-        dir = "nested_structure_volumes_downloaded_pipe"
+        src = "nested_structure_volumes",
+        dest = "nested_structure_volumes_downloaded_pipe"
       )
   )
 

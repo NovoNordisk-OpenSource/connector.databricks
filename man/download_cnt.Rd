@@ -7,7 +7,7 @@
 \usage{
 download_cnt(connector_object, name, file = basename(name), ...)
 
-\method{download_cnt}{ConnectorDatabricksVolume}(connector_object, name, file = basename(name), ...)
+\method{download_cnt}{ConnectorDatabricksVolume}(connector_object, src, dest = basename(src), ...)
 }
 \arguments{
 \item{connector_object}{\link[connector]{Connector} The connector object to use.}
