@@ -18,7 +18,7 @@ Imports:
     brickster (>= 0.2.7),
     checkmate,
     cli,
-    connector (>= 0.1.1.9003),
+    connector (>= 1.0.0),
     DBI,
     dplyr,
     odbc (>= 1.4.0),
@@ -47,5 +47,5 @@ Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.3.2
 Config/Needs/website: rmarkdown
 BugReports: https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
-Remotes:  
+Remotes:
     NovoNordisk-OpenSource/connector
