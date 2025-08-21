@@ -88,10 +88,9 @@ test_that("connector_databricks_volume creation fails", {
   )
 })
 
-test_that("ConnectorDatabricksVolume creation works", {
-  skip_on_cran()
-  skip_on_ci()
+skip_offline_test()
 
+test_that("ConnectorDatabricksVolume creation works", {
   ### Using already existing volume
   # Create connectors using two different ways with valid full path
   cons <- list(
@@ -197,9 +196,6 @@ test_that("ConnectorDatabricksVolume creation works", {
 })
 
 test_that("ConnectorDatabricksVolume methods work", {
-  skip_on_cran()
-  skip_on_ci()
-
   ### Testing scenario
 
   ## 1. Test directory method works
@@ -278,9 +274,6 @@ test_that("ConnectorDatabricksVolume methods work", {
 })
 
 test_that("ConnectorDatabricksVolume upload/download works", {
-  skip_on_cran()
-  skip_on_ci()
-
   create_nested_directories("nested_structure_volumes", 3, 2)
   withr::defer(
     fs::dir_delete("nested_structure_volumes")

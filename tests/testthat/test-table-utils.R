@@ -1,13 +1,9 @@
-# Skip interactive tests on CI and CRAN
-skip_on_ci()
-skip_on_cran()
-
 test_that("write_table_volume fails when needed", {
   write_table_volume(connector_object = "bad_volume") |>
     expect_error(regexp = "Assertion on 'connector_object' failed")
 
   write_table_volume(
-    connector_object = setup_table_connector,
+    connector_object = dummy_table_connector,
     x = iris,
     name = 1
   ) |>
@@ -16,7 +12,7 @@ test_that("write_table_volume fails when needed", {
     )
 
   write_table_volume(
-    connector_object = setup_table_connector,
+    connector_object = dummy_table_connector,
     x = iris,
     name = "iris",
     overwrite = 1
@@ -26,7 +22,7 @@ test_that("write_table_volume fails when needed", {
     )
 
   write_table_volume(
-    connector_object = setup_table_connector,
+    connector_object = dummy_table_connector,
     x = iris,
     name = "iris",
     overwrite = TRUE,
@@ -41,11 +37,36 @@ test_that("list_content_tags fails when needed", {
   list_content_tags(connector_object = "bad_connector") |>
     expect_error(regexp = "Assertion on 'connector_object' failed")
 
-  list_content_tags(connector_object = setup_table_connector, tags = 1) |>
+  list_content_tags(connector_object = dummy_table_connector, tags = 1) |>
     expect_error(
       regexp = "Assertion on 'tags' failed: Must be of type 'character'"
     )
 })
+
+test_that("read_table_timepoint fails when needed", {
+  read_table_timepoint(connector_object = "bad_volume") |>
+    expect_error(regexp = "Assertion on 'connector_object' failed")
+
+  read_table_timepoint(
+    connector_object = dummy_table_connector,
+    name = 1
+  ) |>
+    expect_error(
+      regexp = "Assertion on 'name' failed: Must be of type 'character'"
+    )
+
+  read_table_timepoint(
+    connector_object = dummy_table_connector,
+    name = "iris",
+    timepoint = "2019-01-01T00:00:00.000Z",
+    version = "bad_version"
+  ) |>
+    expect_error(
+      regexp = "Assertion on 'version' failed: Must be of type 'numeric'"
+    )
+})
+
+skip_offline_test()
 
 test_that("write_table_volume works", {
   table_name <- temp_table_name()
@@ -127,29 +148,6 @@ test_that("list_content_tags works", {
 
   # Remove table
   setup_table_connector |> remove_cnt(name = table_name)
-})
-
-test_that("read_table_timepoint fails when needed", {
-  read_table_timepoint(connector_object = "bad_volume") |>
-    expect_error(regexp = "Assertion on 'connector_object' failed")
-
-  read_table_timepoint(
-    connector_object = setup_table_connector,
-    name = 1
-  ) |>
-    expect_error(
-      regexp = "Assertion on 'name' failed: Must be of type 'character'"
-    )
-
-  read_table_timepoint(
-    connector_object = setup_table_connector,
-    name = "iris",
-    timepoint = "2019-01-01T00:00:00.000Z",
-    version = "bad_version"
-  ) |>
-    expect_error(
-      regexp = "Assertion on 'version' failed: Must be of type 'numeric'"
-    )
 })
 
 test_that("read_table_timepoint works", {

@@ -1,9 +1,5 @@
 # connector.databricks 0.1.0
 
-# connector.databricks 0.2.0
-
-# connector.databricks 0.1.0
-
 * Initial CRAN release
 
 # connector.databricks 0.0.6

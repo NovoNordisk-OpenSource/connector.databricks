@@ -1,7 +1,3 @@
-# Skip interactive tests on CI and CRAN
-skip_on_ci()
-skip_on_cran()
-
 test_that("directory upload and removal fails when needed", {
   expect_error(remove_directory(dir_path = 1))
   expect_error(remove_directory(dir_path = "/Volumes/random_directory"))
@@ -18,6 +14,8 @@ test_that("directory upload and removal fails when needed", {
     overwrite = 1
   ))
 })
+
+skip_offline_test()
 
 test_that("directory upload and removal works", {
   create_nested_directories("nested_structure", 3, 2)
