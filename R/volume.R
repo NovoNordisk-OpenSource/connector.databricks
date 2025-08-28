@@ -25,8 +25,8 @@
 #' a custom connection object for easier dispatch of new s3 methods, while still
 #' inheriting the methods from the `ConnectorDatabricksVolume` object.
 #'
-#' @examplesIf FALSE
-#'
+#' @examples
+#' \dontrun{
 #' # Connect to a file system
 #' databricks_volume <- "catalog/schema/path"
 #' db <- connector_databricks_volume(databricks_volume)
@@ -40,7 +40,7 @@
 #'
 #' db_subclass
 #' class(db_subclass)
-#'
+#' }
 #' @export
 connector_databricks_volume <- function(
   full_path = NULL,
@@ -73,7 +73,8 @@ connector_databricks_volume <- function(
 #'
 #' @importFrom R6 R6Class
 #'
-#' @examplesIf FALSE
+#' @examples
+#' \dontrun{
 #' # Create Volume file storage connector
 #' cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 #'
@@ -91,7 +92,7 @@ connector_databricks_volume <- function(
 #' # Read the result back
 #' cnt$read_cnt("iris.rds") |>
 #'   head()
-#'
+#' }
 #' @export
 # nolint start
 ConnectorDatabricksVolume <- R6::R6Class(

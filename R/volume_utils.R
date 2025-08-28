@@ -56,7 +56,7 @@ check_databricks_volume_exists <- function(
 #' Utility function for recursive removal of directory
 #' @param dir_path Full directory path in Volume
 #' @noRd
-remove_directory <- function(dir_path) {
+remove_directory <- function(dir_path, ...) {
   checkmate::assert_string(dir_path)
 
   if (!directory_exists(dir_path)) {
@@ -71,7 +71,7 @@ remove_directory <- function(dir_path) {
       remove_directory(item_path)
       next
     }
-    brickster::db_volume_delete(path = item_path)
+    brickster::db_volume_delete(path = item_path, ...)
   }
 
   brickster::db_volume_dir_delete(dir_path)

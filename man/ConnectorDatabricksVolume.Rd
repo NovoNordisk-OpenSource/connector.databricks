@@ -9,7 +9,7 @@ class. It is a file storage connector for accessing and manipulating files
 inside Databricks volumes.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # Create Volume file storage connector
 cnt <- ConnectorDatabricksVolume$new(full_path = "catalog/schema/path")
 
@@ -27,7 +27,7 @@ cnt$list_content_cnt()
 # Read the result back
 cnt$read_cnt("iris.rds") |>
   head()
-\dontshow{\}) # examplesIf}
+}
 }
 \section{Super classes}{
 \code{\link[connector:Connector]{connector::Connector}} -> \code{\link[connector:ConnectorFS]{connector::ConnectorFS}} -> \code{ConnectorDatabricksVolume}

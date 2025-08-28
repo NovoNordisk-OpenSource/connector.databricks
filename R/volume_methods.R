@@ -89,7 +89,7 @@ list_content_cnt.ConnectorDatabricksVolume <- function(connector_object, ...) {
 #' @export
 remove_cnt.ConnectorDatabricksVolume <- function(connector_object, name, ...) {
   file_path <- file.path(connector_object$full_path, name)
-  brickster::db_volume_delete(path = file_path)
+  brickster::db_volume_delete(path = file_path, ...)
 
   invisible(connector_object)
 }

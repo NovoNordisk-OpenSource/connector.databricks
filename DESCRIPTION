@@ -1,5 +1,5 @@
 Package: connector.databricks
-Title: Expand Connector Package for 'Databricks' Tables and Volumes
+Title: Expand 'connector' Package for 'Databricks' Tables and Volumes
 Version: 0.1.0
 Authors@R: c(
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = c("aut", "cre")),
@@ -10,12 +10,11 @@ Authors@R: c(
     person("Skander", "Mulder", , "sktf@novonordisk.com", role = "ctb"),
     person("Novo Nordisk A/S", role = "cph")
   )
-Description: Expands the 'connector' package and provides a convenient
-    interface for accessing and interacting with 'Databricks' Volumes and
-    Tables directly from R.
+Description: Expands the 'connector' <https://novonordisk-opensource.github.io/connector> package and provides a convenient
+    interface for accessing and interacting with 'Databricks' <https://www.databricks.com> volumes and
+    tables directly from R.
 License: Apache License (>= 2)
 URL: https://novonordisk-opensource.github.io/connector.databricks/,
-    https://github.com/novonordisk-opensource/connector.databricks,
     https://github.com/NovoNordisk-OpenSource/connector.databricks
 BugReports:
     https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
@@ -45,8 +44,7 @@ Suggests:
     tibble,
     whirl (>= 0.3.0)
 VignetteBuilder:
-    knitr,
-    rmarkdown
+    knitr
 Config/Needs/website: rmarkdown
 Config/testthat/edition: 3
 Encoding: UTF-8

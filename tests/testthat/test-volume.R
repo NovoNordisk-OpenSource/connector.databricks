@@ -274,54 +274,50 @@ test_that("ConnectorDatabricksVolume methods work", {
 })
 
 test_that("ConnectorDatabricksVolume upload/download works", {
-  create_nested_directories("nested_structure_volumes", 3, 2)
-  withr::defer(
-    fs::dir_delete("nested_structure_volumes")
-  )
+  withr::with_tempdir(
+    {
+      create_nested_directories("nested_structure_volumes", 3, 2)
 
-  expect_no_failure(setup_volume_connector$upload_directory_cnt(
-    src = "nested_structure_volumes",
-    overwrite = TRUE
-  ))
-
-  expect_no_failure(setup_volume_connector$remove_directory_cnt(
-    name = "nested_structure_volumes"
-  ))
-
-  expect_no_failure(
-    setup_volume_connector |>
-      upload_directory_cnt(
-        src = "nested_structure_volumes"
-      )
-  )
-
-  withr::defer({
-    setup_volume_connector |>
-      remove_directory_cnt(
-        name = "nested_structure_volumes"
-      )
-    expect_error(brickster::db_volume_dir_exists(paste0(
-      "/Volumes/",
-      setup_db_volume_path,
-      "/nested_structure_volumes"
-    )))
-  })
-
-  expect_no_failure(setup_volume_connector$download_directory_cnt(
-    src = "nested_structure_volumes",
-    dest = "nested_structure_volumes_downloaded"
-  ))
-
-  expect_no_failure(
-    setup_volume_connector |>
-      download_directory_cnt(
+      expect_no_failure(setup_volume_connector$upload_directory_cnt(
         src = "nested_structure_volumes",
-        dest = "nested_structure_volumes_downloaded_pipe"
-      )
-  )
+        overwrite = TRUE
+      ))
 
-  withr::defer({
-    fs::dir_delete("nested_structure_volumes_downloaded")
-    fs::dir_delete("nested_structure_volumes_downloaded_pipe")
-  })
+      expect_no_failure(setup_volume_connector$remove_directory_cnt(
+        name = "nested_structure_volumes"
+      ))
+
+      expect_no_failure(
+        setup_volume_connector |>
+          upload_directory_cnt(
+            src = "nested_structure_volumes"
+          )
+      )
+
+      withr::defer({
+        setup_volume_connector |>
+          remove_directory_cnt(
+            name = "nested_structure_volumes"
+          )
+        expect_error(brickster::db_volume_dir_exists(paste0(
+          "/Volumes/",
+          setup_db_volume_path,
+          "/nested_structure_volumes"
+        )))
+      })
+
+      expect_no_failure(setup_volume_connector$download_directory_cnt(
+        src = "nested_structure_volumes",
+        dest = "nested_structure_volumes_downloaded"
+      ))
+
+      expect_no_failure(
+        setup_volume_connector |>
+          download_directory_cnt(
+            src = "nested_structure_volumes",
+            dest = "nested_structure_volumes_downloaded_pipe"
+          )
+      )
+    }
+  )
 })

@@ -18,7 +18,8 @@
 #' a custom connection object for easier dispatch of new s3 methods, while still
 #' inheriting the methods from the `ConnectorDatabricksTable` object.
 #'
-#' @examplesIf FALSE
+#' @examples
+#' \dontrun{
 #' # Establish connection to your cluster
 #'
 #' con_databricks <- connector_databricks_table(
@@ -48,7 +49,7 @@
 #' # Disconnect
 #'
 #' con_databricks$disconnect()
-#'
+#' }
 #' @export
 connector_databricks_table <- function(
   http_path,
@@ -86,7 +87,8 @@ connector_databricks_table <- function(
 #' connection to Databricks is established.
 #'
 #' @importFrom odbc databricks
-#' @examplesIf FALSE
+#' @examples
+#' \dontrun{
 #' # Establish connection to your cluster
 #'
 #' con_databricks <- ConnectorDatabricksTable$new(
@@ -116,7 +118,7 @@ connector_databricks_table <- function(
 #' # Disconnect
 #'
 #' con_databricks$disconnect()
-#'
+#' }
 #' @export
 # nolint start
 ConnectorDatabricksTable <- R6::R6Class(

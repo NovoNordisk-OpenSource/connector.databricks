@@ -23,7 +23,7 @@ Workbench. See also \code{\link[odbc:databricks]{odbc::databricks()}} On more in
 connection to Databricks is established.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # Establish connection to your cluster
 
 con_databricks <- ConnectorDatabricksTable$new(
@@ -53,7 +53,7 @@ con_databricks$remove("my_mtcars_table")
 # Disconnect
 
 con_databricks$disconnect()
-\dontshow{\}) # examplesIf}
+}
 }
 \section{Super classes}{
 \code{\link[connector:Connector]{connector::Connector}} -> \code{\link[connector:ConnectorDBI]{connector::ConnectorDBI}} -> \code{ConnectorDatabricksTable}

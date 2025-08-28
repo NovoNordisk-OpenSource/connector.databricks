@@ -48,8 +48,7 @@ a custom connection object for easier dispatch of new s3 methods, while still
 inheriting the methods from the \code{ConnectorDatabricksVolume} object.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
+\dontrun{
 # Connect to a file system
 databricks_volume <- "catalog/schema/path"
 db <- connector_databricks_volume(databricks_volume)
@@ -63,5 +62,5 @@ db_subclass <- connector_databricks_volume(databricks_volume,
 
 db_subclass
 class(db_subclass)
-\dontshow{\}) # examplesIf}
+}
 }
