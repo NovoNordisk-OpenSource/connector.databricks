@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![Checks](https://github.com/novonordisk-opensource/connector.databricks/actions/workflows/check_and_co.yaml/badge.svg)](https://github.com/novonordisk-opensource/connector.databricks/actions/workflows/check_and_co.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/NovoNordisk-OpenSource/connector.databricks/graph/badge.svg)](https://app.codecov.io/gh/NovoNordisk-OpenSource/connector.databricks)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->

@@ -13,6 +13,7 @@ CLI
 cloneable
 CMD
 cnt
+Codecov
 Config
 connectordatabricks
 ConnectorDatabricksTable
@@ -141,3 +142,4 @@ Yk
 yml
 ƣ
 ϥ
+Codecov
