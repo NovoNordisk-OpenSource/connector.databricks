@@ -1,4 +1,5 @@
 test_that("write_table_volume fails when needed", {
+  skip_on_cran()
   write_table_volume(connector_object = "bad_volume") |>
     expect_error(regexp = "Assertion on 'connector_object' failed")
 
@@ -69,6 +70,7 @@ test_that("read_table_timepoint fails when needed", {
 skip_offline_test()
 
 test_that("write_table_volume works", {
+  skip_on_cran()
   table_name <- temp_table_name()
 
   # Custom tag to search for
@@ -122,6 +124,7 @@ test_that("write_table_volume works", {
 })
 
 test_that("list_content_tags works", {
+  skip_on_cran()
   table_name <- temp_table_name()
 
   # Custom tag to search for
@@ -151,6 +154,7 @@ test_that("list_content_tags works", {
 })
 
 test_that("read_table_timepoint works", {
+  skip_on_cran()
   table_name <- temp_table_name()
 
   # First timepoint test - mtcars
@@ -215,6 +219,7 @@ test_that("read_table_timepoint works", {
 })
 
 test_that("read and write empty table works", {
+  skip_on_cran()
   empty_table <- data.frame(
     Date = as.Date(character()),
     File = character(),
@@ -240,6 +245,7 @@ test_that("read and write empty table works", {
 })
 
 test_that("tmp volume removal works", {
+  skip_on_cran()
   # Bad data input to break the test
   x <- list("1", "2", "3")
 

@@ -1,6 +1,7 @@
 skip_offline_test()
 
 test_that("Table generics work for connector_databricks_table", {
+  skip_on_cran()
   temp_table_name <- paste0(
     "temp-mtcars_",
     format(Sys.time(), "%Y%m%d%H%M%S")

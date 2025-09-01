@@ -19,6 +19,7 @@ test_that("directory upload and removal fails when needed", {
 skip_offline_test()
 
 test_that("directory upload and removal works", {
+  skip_on_cran()
   withr::with_tempdir(
     {
       create_nested_directories("nested_structure", 3, 2)
