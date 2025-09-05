@@ -30,7 +30,7 @@ a custom connection object for easier dispatch of new s3 methods, while still
 inheriting the methods from the \code{ConnectorDatabricksTable} object.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # Establish connection to your cluster
 
 con_databricks <- connector_databricks_table(
@@ -60,5 +60,5 @@ con_databricks$remove("my_mtcars_table")
 # Disconnect
 
 con_databricks$disconnect()
-\dontshow{\}) # examplesIf}
+}
 }

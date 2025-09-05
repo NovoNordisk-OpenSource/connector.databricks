@@ -1,3 +1,7 @@
+# connector.databricks 0.1.0
+
+* Initial CRAN release
+
 # connector.databricks 0.0.6
 
 ## New features and improvements

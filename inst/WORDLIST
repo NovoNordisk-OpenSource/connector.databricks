@@ -13,6 +13,7 @@ CLI
 cloneable
 CMD
 cnt
+Codecov
 Config
 connectordatabricks
 ConnectorDatabricksTable
@@ -55,6 +56,7 @@ github
 groupname
 gtsave
 gttable
+hms
 http
 https
 httr
@@ -134,8 +136,10 @@ VignetteBuilder
 vlob
 withr
 WORDLIST
+www
 YAML
 Yk
 yml
 ƣ
 ϥ
+Codecov
