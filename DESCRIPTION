@@ -1,6 +1,6 @@
 Package: connector.databricks
 Title: Expand 'connector' Package for 'Databricks' Tables and Volumes
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person("Vladimir", "Obucina", , "vlob@novonordisk.com", role = c("aut", "cre")),
     person("Steffen Falgreen", "Larsen", , "sffl@novonordisk.com", role = "aut"),
