@@ -33,20 +33,22 @@ check_databricks_volume_exists <- function(
         ))
         return(NULL)
       }
-      menu <- menu(
-        c("Create volume", "Exit"),
-        title = "Volume does not exist. What would you like to do?"
-      )
-      if (menu == 1) {
-        zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
-        invisible(brickster::db_uc_volumes_create(
-          volume = volume,
-          catalog = catalog,
-          schema = schema
-        ))
-        zephyr::msg_info("Volume created!")
-      } else {
-        cli::cli_abort("Exiting...")
+      if (e$resp$status_code == 404) {
+        menu <- menu(
+          c("Create volume", "Exit"),
+          title = "Volume does not exist. What would you like to do?"
+        )
+        if (menu == 1) {
+          zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
+          invisible(brickster::db_uc_volumes_create(
+            volume = volume,
+            catalog = catalog,
+            schema = schema
+          ))
+          zephyr::msg_info("Volume created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
       }
     }
   )
@@ -230,18 +232,20 @@ check_databricks_directory_exists <- function(
         ))
         return(NULL)
       }
-      menu <- menu(
-        c("Create directory", "Exit"),
-        title = "Directory does not exist. What would you like to do?"
-      )
-      if (menu == 1) {
-        zephyr::msg_info("Creating directory {full_path}...")
-        invisible(brickster::db_volume_dir_create(
-          path = full_path
-        ))
-        zephyr::msg_info("Directory created!")
-      } else {
-        cli::cli_abort("Exiting...")
+      if (e$resp$status_code == 404) {
+        menu <- menu(
+          c("Create directory", "Exit"),
+          title = "Directory does not exist. What would you like to do?"
+        )
+        if (menu == 1) {
+          zephyr::msg_info("Creating directory {full_path}...")
+          invisible(brickster::db_volume_dir_create(
+            path = full_path
+          ))
+          zephyr::msg_info("Directory created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
       }
     }
   )

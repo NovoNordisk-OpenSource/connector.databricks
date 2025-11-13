@@ -324,3 +324,5 @@ test_that("ConnectorDatabricksVolume upload/download works", {
     }
   )
 })
+
+test_that("connector_databricks_volume creation works read only(#99)", {})
