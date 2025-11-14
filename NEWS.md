@@ -1,3 +1,7 @@
+# connector.databricks dev
+
+* Fix [#99](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/99)
+
 # connector.databricks 0.1.0
 
 * Initial CRAN release

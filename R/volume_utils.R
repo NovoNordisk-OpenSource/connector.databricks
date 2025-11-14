@@ -33,20 +33,22 @@ check_databricks_volume_exists <- function(
         ))
         return(NULL)
       }
-      menu <- menu(
-        c("Create volume", "Exit"),
-        title = "Volume does not exist. What would you like to do?"
-      )
-      if (menu == 1) {
-        zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
-        invisible(brickster::db_uc_volumes_create(
-          volume = volume,
-          catalog = catalog,
-          schema = schema
-        ))
-        zephyr::msg_info("Volume created!")
-      } else {
-        cli::cli_abort("Exiting...")
+      if (e$resp$status_code == 404) {
+        menu <- menu(
+          c("Create volume", "Exit"),
+          title = "Volume does not exist. What would you like to do?"
+        )
+        if (menu == 1) {
+          zephyr::msg_info("Creating volume {catalog}/{schema}/{volume}...")
+          invisible(brickster::db_uc_volumes_create(
+            volume = volume,
+            catalog = catalog,
+            schema = schema
+          ))
+          zephyr::msg_info("Volume created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
       }
     }
   )
@@ -200,4 +202,52 @@ directory_exists <- function(path) {
   )
 
   result
+}
+
+
+#' Utility function used as a private function for [ConnectorDatabricksVolume]
+#' object to check if a volume directory already exists, if not it will prompt
+#' user to create a new one.
+#'
+#' @param full_path [character] The path of the directory to check
+#' @param force [boolean] If TRUE, the directory will be created without asking
+#'
+#' @keywords internal
+#' @noRd
+check_databricks_directory_exists <- function(
+  full_path,
+  force = FALSE
+) {
+  tryCatch(
+    {
+      brickster::db_volume_dir_exists(
+        path = full_path
+      )
+      return(NULL)
+    },
+    error = function(e) {
+      if (force) {
+        invisible(brickster::db_volume_dir_create(
+          path = full_path
+        ))
+        return(NULL)
+      }
+      if (e$resp$status_code == 404) {
+        menu <- menu(
+          c("Create directory", "Exit"),
+          title = "Directory does not exist. What would you like to do?"
+        )
+        if (menu == 1) {
+          zephyr::msg_info("Creating directory {full_path}...")
+          invisible(brickster::db_volume_dir_create(
+            path = full_path
+          ))
+          zephyr::msg_info("Directory created!")
+        } else {
+          cli::cli_abort("Exiting...")
+        }
+      }
+    }
+  )
+  return(NULL)
 }

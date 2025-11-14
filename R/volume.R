@@ -162,8 +162,12 @@ ConnectorDatabricksVolume <- R6::R6Class(
         force = force
       )
 
-      # Try and create a directory, if it already exists, it will be returned
-      brickster::db_volume_dir_create(path = full_path, ...)
+      if (!is.null(path)) {
+        private$.check_databricks_directory_exists(
+          full_path = full_path,
+          force = force
+        )
+      }
 
       private$.full_path <- full_path
       private$.path <- path
@@ -222,6 +226,16 @@ ConnectorDatabricksVolume <- R6::R6Class(
     #  the user
     .check_databricks_volume_exists = function(catalog, schema, volume, force) {
       check_databricks_volume_exists(catalog, schema, volume, force)
+    },
+    # Check if directory does not exist and create it if user wants.
+    # @param full_path [character] Full path to the file storage in format
+    # @param force [boolean] If TRUE, the directory will be created without
+    # asking the user
+    .check_databricks_directory_exists = function(
+      full_path,
+      force
+    ) {
+      check_databricks_directory_exists(full_path, force)
     }
   )
 )
