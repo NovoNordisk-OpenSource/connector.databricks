@@ -1,0 +1,200 @@
+# connector.databricks
+
+The connector.databricks package provides a convenient interface for
+accessing and interacting with [Databricks](https://www.databricks.com/)
+volumes and tables directly from R. This vignette will guide you through
+the process of connecting to Databricks, retrieving data, and performing
+various operations using this package.
+
+This package is meant to be used with
+[connector](https://github.com/NovoNordisk-OpenSource/connector)
+package, which provides a common interface for interacting with various
+data sources. The connector.databricks package extends the connector
+package to support Databricks **volumes** and **tables**.
+
+## Installation
+
+You can install the connector.databricks from CRAN package using the
+following command:
+
+``` r
+# Install from CRAN
+install.packages("connector.databricks")
+```
+
+### Development version
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of connector.databricks from GitHub.
+
+``` r
+pak::pak("novonordisk-opensource/connector.databricks")
+```
+
+## Usage
+
+Here is an example of how to connect to databricks and retrieve data:
+
+``` r
+library(connector.databricks)
+
+# Connect to databricks tables using DBI
+con <- connector_databricks_table(
+  http_path = "path-to-cluster",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+
+# Connect to databricks volume
+con <- connector_databricks_volume(
+  catalog = "my_catalog",
+  schema = "my_schema",
+  path = "path-to-file-storage"
+)
+```
+
+When connecting to **Databricks tables**, authentication to databricks
+is handled by the
+[`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+driver and supports general use of personal access tokens and
+credentials through Posit Workbench. See also
+[`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+On more information on how the connection to Databricks is established.
+Currently, most package functions rely on
+[brickster](https://github.com/databrickslabs/brickster) package.
+
+When connecting to **Databricks volumes**, authentication is handled
+using `brickster` package. See also this
+[vignette](https://databrickslabs.github.io/brickster/articles/setup-auth.html)
+on more information how the authentication is handled.
+
+Hopefully in the future whole backend will rely completely only on
+`brickster` package.
+
+Both types of connections share similar interfaces for reading and
+writing data. Tables should be used with tabular types of data, while
+volumes should be used with unstructured data.
+
+Example of how to use the connector object:
+
+``` r
+# List content
+con$list_content_cnt()
+
+# Write a file
+con$write_cnt(iris, "iris.rds")
+
+# Read a file
+con$read_cnt("iris.rds") |>
+  head()
+
+# Remove a file
+con$remove_cnt("file_name.csv")
+```
+
+## Usage with connector package
+
+Here is an example how it can be used with connector package and
+configuration YAML file (for more information take a look at the
+connector package):
+
+``` r
+# Connect using configuration file
+connector <- connector::connect(
+  config = system.file(
+    "config",
+    "example_yaml.yaml",
+    package = "connector.databricks"
+  )
+)
+
+# List contents in Volume
+connector$volumes$list_content_cnt()
+
+# Get databricks connection object from Tables
+connector$tables$get_conn()
+
+# Write a file
+connector$volumes$write_cnt(iris, "Test/iris.csv")
+
+# Read a file
+connector$tables$read_cnt("example_data")
+```
+
+## Contributing
+
+We welcome contributions to the connector.databricks package. If you
+have any suggestions or find any issues, please open an issue or submit
+a pull request on GitHub.
+
+## License
+
+This package is licensed under the Apache License.
+
+# Package index
+
+## Connectors
+
+- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
+  :
+
+  Create `ConnectorDatabricksTable` connector
+
+- [`ConnectorDatabricksTable`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md)
+  : Connector for connecting to Databricks using DBI
+
+- [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md)
+  : Create databricks volume connector
+
+- [`ConnectorDatabricksVolume`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksVolume.md)
+  : Connector for databricks volume storage
+
+- [`connector-options-databricks`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector-options-databricks.md)
+  : Options for connector.databricks
+
+## Connector functions
+
+- [`create_directory_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/create_directory_cnt.md)
+  : Create a directory
+- [`disconnect_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/disconnect_cnt.md)
+  : Disconnect (close) the connection of the connector
+- [`download_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/download_cnt.md)
+  : Download content from the connector
+- [`download_directory_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/download_directory_cnt.md)
+  : Download a directory
+- [`list_content_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.md)
+  : List available content from the connector
+- [`read_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.md)
+  : Read content from the connector
+- [`remove_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/remove_cnt.md)
+  : Remove content from the connector
+- [`remove_directory_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/remove_directory_cnt.md)
+  : Remove a directory
+- [`tbl_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/tbl_cnt.md)
+  : Use dplyr verbs to interact with the remote database table
+- [`upload_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/upload_cnt.md)
+  : Upload content to the connector
+- [`upload_directory_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/upload_directory_cnt.md)
+  : Upload a directory
+- [`write_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/write_cnt.md)
+  : Write content to the connector
+
+## Logs
+
+- [`log_read_connector()`](https://novonordisk-opensource.github.io/connector.databricks/reference/log_read_connector.md)
+  : Connector Logging Functions
+- [`log_remove_connector()`](https://novonordisk-opensource.github.io/connector.databricks/reference/log_remove_connector.md)
+  : Connector Logging Functions
+- [`log_write_connector()`](https://novonordisk-opensource.github.io/connector.databricks/reference/log_write_connector.md)
+  : Connector Logging Functions
+
+# Articles
+
+### All vignettes
+
+- [Getting started with
+  connector.databricks](https://novonordisk-opensource.github.io/connector.databricks/articles/connector-databricks.md):
+- [Understanding Connector Package
+  Methods](https://novonordisk-opensource.github.io/connector.databricks/articles/Consistent-API.md):
+- [Reading and Writing Databricks
+  Tables](https://novonordisk-opensource.github.io/connector.databricks/articles/read_write.md):
