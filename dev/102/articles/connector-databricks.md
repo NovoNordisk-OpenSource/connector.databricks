@@ -1,0 +1,242 @@
+# Getting started with connector.databricks
+
+The connector.databricks package provides a convenient interface for
+accessing and interacting with Databricks tables and volumes directly
+from R.
+
+## Introduction
+
+This vignette will guide you through the process of connecting to a
+Databricks, retrieving data, and performing various operations using
+this package.
+
+## Connecting to a Databricks
+
+### Without connector package
+
+To get started, you need to establish a connection to your Databricks
+cluster or volume storage. Use:
+
+- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
+  function to authenticate and connect to your Databricks cluster
+- [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md)
+  function to connect to your Databricks volume storage
+
+Here’s an example of how to do this:
+
+``` r
+library(connector.databricks)
+
+# Connect to databricks tables using DBI
+con <- connector_databricks_table(
+  http_path = "path-to-cluster",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+
+# Connect to databricks volume
+con <- connector_databricks_volume(
+  catalog = "my_catalog",
+  schema = "my_schema",
+  path = "path-to-file-storage"
+)
+```
+
+### With connector package (recommended)
+
+If you are using the connector package, you can connect to a Databricks
+datasources using the
+[`connect()`](https://novonordisk-opensource.github.io/connector/reference/connect.html)
+function. This function based on a configuration file or a list creates
+a
+[`connectors()`](https://novonordisk-opensource.github.io/connector/reference/connectors.html)
+object with a `connector`for each of the specified datasources (for
+detailed explanation have a look at the `connector` package).
+
+Configuration file for connecting to Databricks should look like this:
+
+``` yaml
+metadata:
+  catalog:  "databricks_calatog"
+  http_path: "path-to-cluster"
+  path: "path-to-file-storage"
+  project: "project_name"
+  trial: "trial_name"
+
+datasources:
+  - name: "tables"
+    backend:
+      type: "connector.databricks::connector_databricks_table"
+      http_path: "{metadata.http_path}"
+      catalog: "{metadata.catalog}"
+      schema: "{metadata.project}_{metadata.trial}_adam"
+  - name: "volume"
+    backend:
+      type: "connector.databricks::connector_databricks_volume"
+      path: "{metadata.path}"
+      catalog: "{metadata.catalog}"
+      schema: "{metadata.project}_{metadata.trial}_tfl"
+```
+
+Save this to `_connector.yml` file and use the
+[`connect()`](https://novonordisk-opensource.github.io/connector/reference/connect.html)
+function to connect to Databricks:
+
+``` r
+library(connector)
+
+# Create connector object
+db <- connect()
+```
+
+Now you can access the Databricks cluster and volume using the `db`
+object and `tables` or `volume` field, respectively.
+
+``` r
+# Connection to Databricks cluster. This will print object details
+db$tables
+
+# Connection to Databricks cluster. This will print object details
+db$volume
+```
+
+After the setup is done we can use these connections to manipulate
+Databricks data.
+
+## Listing data
+
+You can do some basic directory operations, such as creating, removing,
+and listing data inside directory, or listing tables inside database.
+
+``` r
+# Create a directory
+db$volume |>
+  create_directory_cnt("new_directory")
+
+# Remove a directory
+db$volume |>
+  remove_directory_cnt("new_directory")
+
+# List content inside volume directory
+db$volume |>
+  list_content_cnt()
+
+# List tables inside database
+db$tables |>
+  list_content_cnt()
+```
+
+## Reading and writing data
+
+The `connector` packages provide a set of functions to read and write
+data from/to the datasources. They all have similar interface, so it’s
+easy to switch between them.
+
+Now, we will show how to read and write different types of data from/to
+Databricks. In these examples we will be using `iris` and `mtcars`
+datasets.
+
+Here is an example of writing data to a table on a cluster:
+
+``` r
+library(dplyr)
+
+# Manipulate data
+
+## Iris data
+setosa <- iris |>
+  filter(Species == "setosa")
+
+mean_for_all_iris <- iris |>
+  group_by(Species) |>
+  summarise_all(list(mean, median, sd, min, max))
+
+## mtcars data
+cars <- mtcars |>
+  filter(mpg > 22)
+
+mean_for_all_mtcars <- mtcars |>
+  group_by(gear) |>
+  summarise(across(
+    everything(),
+    list(
+      "mean" = mean,
+      "median" = median,
+      "sd" = sd,
+      "min" = min,
+      "max" = max
+    ),
+    .names = "{.col}_{.fn}"
+  )) |>
+  tidyr::pivot_longer(
+    cols = -gear,
+    names_to = c(".value", "stat"),
+    names_sep = "_"
+  )
+
+## Store data
+db$tables |>
+  write_cnt(setosa, "setosa", overwrite = TRUE)
+
+db$tables |>
+  write_cnt(mean_for_all_iris, "mean_iris", overwrite = TRUE)
+
+db$tables |>
+  write_cnt(cars, "cars_mpg", overwrite = TRUE)
+
+db$tables |>
+  write_cnt(mean_for_all_mtcars, "mean_mtcars", overwrite = TRUE)
+```
+
+Now, let’s read the data back manipulate it a bit and write it to the
+Databricks volume. This way we can save different types of data in
+different formats.
+
+``` r
+library(gt)
+library(tidyr)
+library(ggplot2)
+
+# List and load data from cluster
+db$tables |>
+  list_content_cnt()
+
+table <- db$tables |>
+  read_cnt("mean_mtcars")
+
+gttable <- table |>
+  gt(groupname_col = "gear")
+
+# Save non-tabular data to databricks volume
+tmp_file <- tempfile(fileext = ".docx")
+gtsave(gttable, tmp_file)
+db$volume |>
+  upload_cnt(tmp_file, "tmeanallmtcars.docx")
+
+# Manipulate data
+setosa_fsetosa <- db$tables |>
+  read_cnt("setosa") |>
+  filter(Sepal.Length > 5)
+
+fsetosa <- ggplot(setosa) +
+  aes(x = Sepal.Length, y = Sepal.Width) +
+  geom_point()
+
+## Store data into output location
+db$volume |>
+  write_cnt(fsetosa$data, "fsetosa.csv")
+db$volume |>
+  write_cnt(fsetosa, "fsetosa.rds")
+
+tmp_file <- tempfile(fileext = ".png")
+ggsave(tmp_file, fsetosa)
+db$volume |>
+  upload_cnt(tmp_file, "fsetosa.png")
+```
+
+## Conclusion
+
+In this vignette we showed how to connect to Databricks datasources,
+read and write data from them. We also showed how to use the connector
+package to connect to Databricks and how to manipulate data using the
+connector package.
