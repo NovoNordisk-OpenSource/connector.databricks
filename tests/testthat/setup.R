@@ -31,7 +31,8 @@ dummy_table_connector <- structure(
 testing_env_variables <- c(
   "DATABRICKS_VOLUME",
   "DATABRICKS_CATALOG_NAME",
-  "DATABRICKS_SCHEMA_NAME"
+  "DATABRICKS_SCHEMA_NAME",
+  "DATABRICKS_WAREHOUSE_ID"
 )
 
 # Utility function for skipping tests if ENV variables are not set
@@ -58,6 +59,9 @@ if (!all(testing_env_variables %in% names(Sys.getenv()))) {
   # Setup Databricks table http path
   setup_db_http_path <- Sys.getenv("DATABRICKS_HTTP_PATH")
 
+  # Setup Databricks warehouse_id
+  setup_db_warehouse_id <- Sys.getenv("DATABRICKS_WAREHOUSE_ID")
+
   # Databricks volume used throughout tests
   setup_db_volume_path <- paste(
     setup_db_catalog,
@@ -79,6 +83,13 @@ if (!all(testing_env_variables %in% names(Sys.getenv()))) {
     catalog = setup_db_catalog,
     schema = setup_db_schema,
     http_path = setup_db_http_path
+  )
+
+  # Connector SQL object testing
+  setup_sql_connector <- connector_databricks_sql(
+    catalog = setup_db_catalog,
+    schema = setup_db_schema,
+    warehouse_id = setup_db_warehouse_id
   )
 
   ##  Run after all tests

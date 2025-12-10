@@ -33,10 +33,11 @@ test_that("directory upload and removal works", {
       )
 
       # Upload directory
-      expect_no_failure(upload_directory(
+      upload_directory(
         dir = "nested_structure",
         dir_path = dir_path
-      ))
+      ) |>
+        expect_no_error()
 
       withr::defer({
         remove_directory(
@@ -50,11 +51,12 @@ test_that("directory upload and removal works", {
       })
 
       # Upload and overwrite directory TRUE
-      expect_no_failure(upload_directory(
+      upload_directory(
         dir = "nested_structure",
         dir_path = dir_path,
         overwrite = TRUE
-      ))
+      ) |>
+        expect_no_error()
 
       # Upload and overwrite directory FALSE
       expect_error(upload_directory(
@@ -63,11 +65,13 @@ test_that("directory upload and removal works", {
         overwrite = FALSE
       ))
 
-      expect_no_failure(upload_directory(
+      upload_directory(
         dir = "nested_structure",
         dir_path = dir_path,
         name = "uploaded_directory"
-      ))
+      ) |>
+        expect_no_error()
+
       withr::defer(
         remove_directory(
           dir_path = paste0(
@@ -79,20 +83,23 @@ test_that("directory upload and removal works", {
       )
 
       # Download and overwrite directory TRUE
-      expect_no_failure(download_directory(
+      download_directory(
         dir_path = dir_path_nested,
         overwrite = TRUE
-      ))
+      ) |>
+        expect_no_error()
 
       # Download directory
-      expect_no_failure(download_directory(
+      download_directory(
         dir_path = paste0(
           "/Volumes/",
           setup_db_volume_path,
           "/uploaded_directory"
         ),
         name = "downloaded_directory"
-      ))
+      ) |>
+        expect_no_error()
+
       expect_equal(
         list.files("nested_structure", recursive = TRUE),
         list.files("downloaded_directory", recursive = TRUE)
