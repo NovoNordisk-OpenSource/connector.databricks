@@ -18,7 +18,7 @@ remove_cnt.ConnectorDatabricksSQL <- function(
     ...
   )
 
-  connector_object
+  invisible(connector_object)
 }
 
 #' @description
@@ -38,7 +38,8 @@ list_content_cnt.ConnectorDatabricksSQL <- function(
     schema = connector_object$schema,
     ...
   )
-  return(sapply(tables, "[[", "name"))
+
+  sapply(tables, "[[", "name")
 }
 
 #' @description
@@ -64,7 +65,6 @@ write_cnt.ConnectorDatabricksSQL <- function(
       staging_volume = connector_object$staging_volume,
       ...
     )
-  return(
-    invisible(connector_object)
-  )
+
+  invisible(connector_object)
 }
