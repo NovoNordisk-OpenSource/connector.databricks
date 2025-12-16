@@ -4,7 +4,7 @@
 * Add new class `ConnectorDatabricksSQL` which uses `brickster::DatabricksSQL()` as a driver.
 This class will replace `ConnectorDatabricksTable` as preferred way of working with tables in
 Databricks. This driver will be using SQL Warehouse instead of Compute Cluster, which was used
-by `odbc` driver.
+by `odbc` driver. Also update dependency on `brickster` version >= 0.2.11
 
 # connector.databricks 0.1.0
 

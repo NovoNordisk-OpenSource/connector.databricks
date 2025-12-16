@@ -58,7 +58,7 @@ write_cnt.ConnectorDatabricksSQL <- function(
   ...
 ) {
   connector_object$conn |>
-    DBI::dbWriteTable(
+    brickster::dbWriteTable(
       name = name,
       value = x,
       overwrite = overwrite,
@@ -67,4 +67,25 @@ write_cnt.ConnectorDatabricksSQL <- function(
     )
 
   invisible(connector_object)
+}
+
+#' @description
+#' * [ConnectorDatabricksSQL]: Reuses the [connector::read_cnt()]
+#'  method for [connector.databricks::ConnectorDatabricksSQL], but always
+#' sets the `catalog` and `schema` as defined in when initializing the
+#' connector.
+#'
+#' @rdname read_cnt
+#' @export
+read_cnt.ConnectorDatabricksTable <- function(
+  connector_object,
+  name,
+  ...
+) {
+  read_table_timepoint(
+    connector_object = connector_object,
+    name = name,
+    timepoint = NULL,
+    version = NULL
+  )
 }

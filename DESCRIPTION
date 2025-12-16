@@ -20,7 +20,7 @@ BugReports:
     https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
 Imports:
     arrow,
-    brickster (>= 0.2.9),
+    brickster (>= 0.2.11),
     checkmate,
     cli,
     connector (>= 1.0.0),
