@@ -14,6 +14,8 @@ read_cnt(connector_object, name, ...)
 
 \method{read_cnt}{ConnectorDatabricksTable}(connector_object, name, ..., timepoint = NULL, version = NULL)
 
+\method{read_cnt}{ConnectorDatabricksTable}(connector_object, name, ..., timepoint = NULL, version = NULL)
+
 \method{read_cnt}{ConnectorDatabricksVolume}(connector_object, name, ...)
 }
 \arguments{
@@ -38,6 +40,13 @@ Additional read methods for Databricks connectors implemented for
 
 \itemize{
 \item \link{ConnectorDatabricksSQL}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}}
+method for \link{ConnectorDatabricksSQL}, but always
+sets the \code{catalog} and \code{schema} as defined in when initializing the
+connector.
+}
+
+\itemize{
+\item \link{ConnectorDatabricksSQL}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}}
 method for \link{ConnectorDatabricksSQL}, but always
 sets the \code{catalog} and \code{schema} as defined in when initializing the
 connector.
