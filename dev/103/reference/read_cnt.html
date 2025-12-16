@@ -9,6 +9,13 @@ connector.
 
 
 
+ConnectorDatabricksSQL: Reuses the connector::read_cnt()
+method for ConnectorDatabricksSQL, but always
+sets the catalog and schema as defined in when initializing the
+connector.
+
+
+
 ConnectorDatabricksTable: Reuses the connector::read_cnt()
 method for ConnectorDatabricksTable, but always
 sets the catalog and schema as defined in when initializing the
@@ -25,6 +32,13 @@ connector.
 connector::read_cnt():
 
 ConnectorDatabricksSQL: Reuses the connector::remove_cnt()
+method for ConnectorDatabricksSQL, but always
+sets the catalog and schema as defined in when initializing the
+connector.
+
+
+
+ConnectorDatabricksSQL: Reuses the connector::read_cnt()
 method for ConnectorDatabricksSQL, but always
 sets the catalog and schema as defined in when initializing the
 connector.
@@ -89,6 +103,10 @@ connector.
 method for <a href="ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a>, but always
 sets the <code>catalog</code> and <code>schema</code> as defined in when initializing the
 connector.</p></li>
+</ul><ul><li><p><a href="ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a>: Reuses the <code><a href="https://novonordisk-opensource.github.io/connector/reference/read_cnt.html" class="external-link">connector::read_cnt()</a></code>
+method for <a href="ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a>, but always
+sets the <code>catalog</code> and <code>schema</code> as defined in when initializing the
+connector.</p></li>
 </ul><ul><li><p><a href="ConnectorDatabricksTable.html">ConnectorDatabricksTable</a>: Reuses the <code><a href="https://novonordisk-opensource.github.io/connector/reference/read_cnt.html" class="external-link">connector::read_cnt()</a></code>
 method for <a href="ConnectorDatabricksTable.html">ConnectorDatabricksTable</a>, but always
 sets the <code>catalog</code> and <code>schema</code> as defined in when initializing the
@@ -105,6 +123,9 @@ connector.</p></li>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksSQL'</span></span>
 <span><span class="fu"><a href="remove_cnt.html">remove_cnt</a></span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'ConnectorDatabricksTable'</span></span>
+<span><span class="fu">read_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, <span class="va">...</span>, timepoint <span class="op">=</span> <span class="cn">NULL</span>, version <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ConnectorDatabricksTable'</span></span>
 <span><span class="fu">read_cnt</span><span class="op">(</span><span class="va">connector_object</span>, <span class="va">name</span>, <span class="va">...</span>, timepoint <span class="op">=</span> <span class="cn">NULL</span>, version <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
