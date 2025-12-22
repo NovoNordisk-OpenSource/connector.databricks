@@ -40,7 +40,6 @@
 - [`list_content_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.md)
   : List available content from the connector
 - [`read_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.md)
-  [`remove_cnt(`*`<ConnectorDatabricksSQL>`*`)`](https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.md)
   : Read content from the connector
 - [`remove_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/remove_cnt.md)
   : Remove content from the connector

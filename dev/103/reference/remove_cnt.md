@@ -3,6 +3,16 @@
 Additional remove methods for Databricks connectors implemented for
 [`connector::remove_cnt()`](https://novonordisk-opensource.github.io/connector/reference/remove_cnt.html):
 
+- [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md):
+  Reuses the
+  [`connector::remove_cnt()`](https://novonordisk-opensource.github.io/connector/reference/remove_cnt.html)
+  method for
+  [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md),
+  but always sets the `catalog` and `schema` as defined in when
+  initializing the connector.
+
+&nbsp;
+
 - [ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md):
   Reuses the
   [`connector::list_content_cnt()`](https://novonordisk-opensource.github.io/connector/reference/list_content_cnt.html)
@@ -24,6 +34,9 @@ Additional remove methods for Databricks connectors implemented for
 ## Usage
 
 ``` r
+remove_cnt(connector_object, name, ...)
+
+# S3 method for class 'ConnectorDatabricksSQL'
 remove_cnt(connector_object, name, ...)
 
 # S3 method for class 'ConnectorDatabricksTable'
