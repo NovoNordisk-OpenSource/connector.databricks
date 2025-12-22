@@ -3,16 +3,14 @@
 %   R/table_methods.R, R/volume_methods.R
 \name{read_cnt}
 \alias{read_cnt}
-\alias{remove_cnt.ConnectorDatabricksSQL}
+\alias{read_cnt.ConnectorDatabricksSQL}
 \alias{read_cnt.ConnectorDatabricksTable}
 \alias{read_cnt.ConnectorDatabricksVolume}
 \title{Read content from the connector}
 \usage{
 read_cnt(connector_object, name, ...)
 
-\method{remove_cnt}{ConnectorDatabricksSQL}(connector_object, name, ...)
-
-\method{read_cnt}{ConnectorDatabricksTable}(connector_object, name, ..., timepoint = NULL, version = NULL)
+\method{read_cnt}{ConnectorDatabricksSQL}(connector_object, name, ...)
 
 \method{read_cnt}{ConnectorDatabricksTable}(connector_object, name, ..., timepoint = NULL, version = NULL)
 
@@ -37,13 +35,6 @@ R object with the content. For rectangular data a \link{data.frame}.
 \description{
 Additional read methods for Databricks connectors implemented for
 \code{\link[connector:read_cnt]{connector::read_cnt()}}:
-
-\itemize{
-\item \link{ConnectorDatabricksSQL}: Reuses the \code{\link[connector:remove_cnt]{connector::remove_cnt()}}
-method for \link{ConnectorDatabricksSQL}, but always
-sets the \code{catalog} and \code{schema} as defined in when initializing the
-connector.
-}
 
 \itemize{
 \item \link{ConnectorDatabricksSQL}: Reuses the \code{\link[connector:read_cnt]{connector::read_cnt()}}

@@ -1,50 +1,23 @@
 #' @description
-#' * [ConnectorDatabricksSQL]: Reuses the [connector::remove_cnt()]
-#'  method for [connector.databricks::ConnectorDatabricksSQL], but always
+#' * [ConnectorDatabricksSQL]: Reuses the [connector::read_cnt()]
+#' method for [connector.databricks::ConnectorDatabricksSQL], but always
 #' sets the `catalog` and `schema` as defined in when initializing the
 #' connector.
 #'
 #' @rdname read_cnt
 #' @export
-remove_cnt.ConnectorDatabricksSQL <- function(
+read_cnt.ConnectorDatabricksSQL <- function(
   connector_object,
   name,
   ...
 ) {
-  brickster::db_uc_tables_delete(
-    catalog = connector_object$catalog,
-    schema = connector_object$schema,
-    table = name,
-    ...
-  )
-
-  invisible(connector_object)
-}
-
-#' @description
-#' * [ConnectorDatabricksSQL]: Reuses the [connector::list_content_cnt()]
-#'  method for [connector.databricks::ConnectorDatabricksSQL], but always
-#' sets the `catalog` and `schema` as defined in when initializing the
-#' connector.
-#'
-#' @rdname list_content_cnt
-#' @export
-list_content_cnt.ConnectorDatabricksSQL <- function(
-  connector_object,
-  ...
-) {
-  tables <- brickster::db_uc_tables_list(
-    catalog = connector_object$catalog,
-    schema = connector_object$schema,
-    ...
-  )
-
-  sapply(tables, "[[", "name")
+  name <- DBI::Id(connector_object$catalog, connector_object$schema, name)
+  NextMethod()
 }
 
 #' @description
 #' * [ConnectorDatabricksSQL]: Reuses the [connector::write_cnt()]
-#'  method for [connector.databricks::ConnectorDatabricksSQL], but always
+#' method for [connector.databricks::ConnectorDatabricksSQL], but always
 #' sets the `catalog`, `schema` and `staging_volume` as defined in when
 #' initializing the connector.
 #'
@@ -57,35 +30,59 @@ write_cnt.ConnectorDatabricksSQL <- function(
   overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 ) {
-  connector_object$conn |>
-    brickster::dbWriteTable(
-      name = name,
-      value = x,
-      overwrite = overwrite,
-      staging_volume = connector_object$staging_volume,
-      ...
-    )
+  brickster::dbWriteTable(
+    conn = connector_object$conn,
+    name = DBI::Id(connector_object$catalog, connector_object$schema, name),
+    value = x,
+    overwrite = overwrite,
+    staging_volume = connector_object$staging_volume,
+    ...
+  )
 
-  invisible(connector_object)
+  connector_object
 }
 
 #' @description
-#' * [ConnectorDatabricksSQL]: Reuses the [connector::read_cnt()]
-#'  method for [connector.databricks::ConnectorDatabricksSQL], but always
+#' * [ConnectorDatabricksSQL]: Reuses the [connector::list_content_cnt()]
+#' method for [connector.databricks::ConnectorDatabricksSQL], but always
 #' sets the `catalog` and `schema` as defined in when initializing the
 #' connector.
 #'
-#' @rdname read_cnt
+#' @rdname list_content_cnt
 #' @export
-read_cnt.ConnectorDatabricksTable <- function(
+list_content_cnt.ConnectorDatabricksSQL <- function(
+  connector_object,
+  ...
+) {
+  NextMethod()
+}
+
+#' @description
+#' * [ConnectorDatabricksSQL]: Reuses the [connector::remove_cnt()]
+#' method for [connector.databricks::ConnectorDatabricksSQL], but always
+#' sets the `catalog` and `schema` as defined in when initializing the
+#' connector.
+#'
+#' @rdname remove_cnt
+#' @export
+remove_cnt.ConnectorDatabricksSQL <- function(
   connector_object,
   name,
   ...
 ) {
-  read_table_timepoint(
-    connector_object = connector_object,
-    name = name,
-    timepoint = NULL,
-    version = NULL
-  )
+  name <- DBI::Id(connector_object$catalog, connector_object$schema, name)
+  NextMethod()
+}
+
+#' @description
+#' * [ConnectorDatabricksSQL]: Reuses the [connector::tbl_cnt()]
+#'  method for [connector.databricks::ConnectorDatabricksTable], but always
+#' sets the `catalog` and `schema` as defined in when initializing the
+#' connector.
+#'
+#' @rdname tbl_cnt
+#' @export
+tbl_cnt.ConnectorDatabricksSQL <- function(connector_object, name, ...) {
+  name <- DBI::Id(connector_object$catalog, connector_object$schema, name)
+  NextMethod()
 }
