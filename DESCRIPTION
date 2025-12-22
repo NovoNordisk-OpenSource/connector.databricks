@@ -29,6 +29,7 @@ Imports:
     dplyr,
     fs,
     hms,
+    lifecycle,
     odbc (>= 1.4.0),
     purrr,
     R6 (>= 2.4.0),
