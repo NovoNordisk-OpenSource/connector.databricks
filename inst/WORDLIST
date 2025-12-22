@@ -30,6 +30,7 @@ Databricks
 databrickscfg
 DatabricksClient
 databrickslabs
+DatabricksSQL
 dataframe
 datasources
 dbi
@@ -142,4 +143,3 @@ Yk
 yml
 ƣ
 ϥ
-Codecov

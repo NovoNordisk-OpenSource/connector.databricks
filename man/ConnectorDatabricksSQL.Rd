@@ -2,7 +2,8 @@
 % Please edit documentation in R/sql.R
 \name{ConnectorDatabricksSQL}
 \alias{ConnectorDatabricksSQL}
-\title{Connector for connecting to Databricks using brickster DatabricksSQL}
+\title{Connector for connecting to Databricks using brickster DatabricksSQL
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \description{
 Extension of the \link[connector:connector_dbi]{connector::connector_dbi} making it easier to connect to,
 and work with tables in Databricks using SQL warehouses.

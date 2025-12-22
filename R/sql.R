@@ -1,5 +1,5 @@
 #' Create `ConnectorDatabricksSQL` connector
-#'
+#' `r lifecycle::badge("experimental")`
 #' @description
 #' Initializes the connector for SQL warehouse type of storage.
 #' See [ConnectorDatabricksSQL] for details.
@@ -75,7 +75,7 @@ connector_databricks_sql <- function(
 }
 
 #' Connector for connecting to Databricks using brickster DatabricksSQL
-#'
+#' `r lifecycle::badge("experimental")`
 #' @description
 #' Extension of the [connector::connector_dbi] making it easier to connect to,
 #' and work with tables in Databricks using SQL warehouses.
