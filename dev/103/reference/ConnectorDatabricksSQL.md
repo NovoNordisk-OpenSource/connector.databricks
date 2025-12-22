@@ -1,4 +1,4 @@
-# Connector for connecting to Databricks using brickster DatabricksSQL
+# Connector for connecting to Databricks using brickster DatabricksSQL **\[experimental\]**
 
 Extension of the
 [connector::connector_dbi](https://novonordisk-opensource.github.io/connector/reference/connector_dbi.html)
