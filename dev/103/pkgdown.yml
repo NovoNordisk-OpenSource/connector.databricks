@@ -5,7 +5,7 @@ articles:
   connector-databricks: connector-databricks.html
   articles/Consistent-API: Consistent-API.html
   articles/read_write: read_write.html
-last_built: 2026-01-14T08:58Z
+last_built: 2026-01-19T13:07Z
 urls:
   reference: https://novonordisk-opensource.github.io/connector.databricks/reference
   article: https://novonordisk-opensource.github.io/connector.databricks/articles
