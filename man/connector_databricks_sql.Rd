@@ -6,7 +6,7 @@
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 connector_databricks_sql(
-  warehouse_id,
+  warehouse_id = Sys.getenv("DATABRICKS_WAREHOUSE_ID"),
   catalog,
   schema,
   staging_volume = NULL,
@@ -16,7 +16,8 @@ connector_databricks_sql(
 }
 \arguments{
 \item{warehouse_id}{\link{character} The ID of the Databricks SQL warehouse
-you want to connect to}
+you want to connect to. Defaults to \code{DATABRICKS_WAREHOUSE_ID} environment
+variable.}
 
 \item{catalog}{\link{character} The catalog to use}
 

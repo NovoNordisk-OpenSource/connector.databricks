@@ -6,7 +6,8 @@
 #'
 #' @description Initialize the connection to Databricks
 #' @param warehouse_id [character] The ID of the Databricks SQL warehouse
-#' you want to connect to
+#' you want to connect to. Defaults to `DATABRICKS_WAREHOUSE_ID` environment
+#' variable.
 #' @param catalog [character] The catalog to use
 #' @param schema [character] The schema to use
 #' @param staging_volume [character] Optional volume path for large dataset
@@ -57,7 +58,7 @@
 #' }
 #' @export
 connector_databricks_sql <- function(
-  warehouse_id,
+  warehouse_id = Sys.getenv("DATABRICKS_WAREHOUSE_ID"),
   catalog,
   schema,
   staging_volume = NULL,
