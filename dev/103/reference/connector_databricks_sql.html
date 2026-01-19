@@ -51,7 +51,7 @@ See <a href="ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a> for details
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">connector_databricks_sql</span><span class="op">(</span></span>
-<span>  <span class="va">warehouse_id</span>,</span>
+<span>  warehouse_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATABRICKS_WAREHOUSE_ID"</span><span class="op">)</span>,</span>
 <span>  <span class="va">catalog</span>,</span>
 <span>  <span class="va">schema</span>,</span>
 <span>  staging_volume <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -66,7 +66,8 @@ See <a href="ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a> for details
 
 <dl><dt id="arg-warehouse-id">warehouse_id<a class="anchor" aria-label="anchor" href="#arg-warehouse-id"></a></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The ID of the Databricks SQL warehouse
-you want to connect to</p></dd>
+you want to connect to. Defaults to <code>DATABRICKS_WAREHOUSE_ID</code> environment
+variable.</p></dd>
 
 
 <dt id="arg-catalog">catalog<a class="anchor" aria-label="anchor" href="#arg-catalog"></a></dt>

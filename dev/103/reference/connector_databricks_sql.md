@@ -10,7 +10,7 @@ Initialize the connection to Databricks
 
 ``` r
 connector_databricks_sql(
-  warehouse_id,
+  warehouse_id = Sys.getenv("DATABRICKS_WAREHOUSE_ID"),
   catalog,
   schema,
   staging_volume = NULL,
@@ -24,7 +24,8 @@ connector_databricks_sql(
 - warehouse_id:
 
   [character](https://rdrr.io/r/base/character.html) The ID of the
-  Databricks SQL warehouse you want to connect to
+  Databricks SQL warehouse you want to connect to. Defaults to
+  `DATABRICKS_WAREHOUSE_ID` environment variable.
 
 - catalog:
 
