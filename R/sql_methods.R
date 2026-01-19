@@ -39,7 +39,7 @@ write_cnt.ConnectorDatabricksSQL <- function(
     ...
   )
 
-  connector_object
+  invisible(connector_object)
 }
 
 #' @description
