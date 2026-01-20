@@ -34,7 +34,8 @@ test_that("Table generics work for connector_databricks_table", {
     method = "volume",
     tags = list("tag_name" = tag_value)
   ) |>
-    expect_no_failure()
+    expect_equal(cnt) |>
+    expect_success()
 
   cnt$list_content_cnt(tags = tag_name == tag_value) |>
     expect_contains(temp_table_name)
@@ -49,7 +50,8 @@ test_that("Table generics work for connector_databricks_table", {
     expect_equal(dplyr::tibble(car = "Mazda RX4", mpg = 21))
 
   cnt$write_cnt(mtcars_dataset(), temp_table_name, overwrite = TRUE) |>
-    expect_no_failure()
+    expect_equal(cnt) |>
+    expect_success()
 
   cnt$list_content_cnt() |>
     expect_contains(temp_table_name)

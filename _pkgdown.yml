@@ -6,6 +6,8 @@ reference:
     - ConnectorDatabricksTable
     - connector_databricks_volume
     - ConnectorDatabricksVolume
+    - connector_databricks_sql
+    - ConnectorDatabricksSQL
     - matches("connector-options*")
   - title: Connector functions
     contents:

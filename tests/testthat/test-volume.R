@@ -281,21 +281,25 @@ test_that("ConnectorDatabricksVolume upload/download works", {
     {
       create_nested_directories("nested_structure_volumes", 3, 2)
 
-      expect_no_failure(setup_volume_connector$upload_directory_cnt(
+      setup_volume_connector$upload_directory_cnt(
         src = "nested_structure_volumes",
         overwrite = TRUE
-      ))
+      ) |>
+        expect_equal(setup_volume_connector) |>
+        expect_success()
 
-      expect_no_failure(setup_volume_connector$remove_directory_cnt(
+      setup_volume_connector$remove_directory_cnt(
         name = "nested_structure_volumes"
-      ))
+      ) |>
+        expect_equal(setup_volume_connector) |>
+        expect_success()
 
-      expect_no_failure(
-        setup_volume_connector |>
-          upload_directory_cnt(
-            src = "nested_structure_volumes"
-          )
-      )
+      setup_volume_connector |>
+        upload_directory_cnt(
+          src = "nested_structure_volumes"
+        ) |>
+        expect_equal(setup_volume_connector) |>
+        expect_success()
 
       withr::defer({
         setup_volume_connector |>
@@ -309,18 +313,20 @@ test_that("ConnectorDatabricksVolume upload/download works", {
         )))
       })
 
-      expect_no_failure(setup_volume_connector$download_directory_cnt(
+      setup_volume_connector$download_directory_cnt(
         src = "nested_structure_volumes",
         dest = "nested_structure_volumes_downloaded"
-      ))
+      ) |>
+        expect_equal(setup_volume_connector) |>
+        expect_success()
 
-      expect_no_failure(
-        setup_volume_connector |>
-          download_directory_cnt(
-            src = "nested_structure_volumes",
-            dest = "nested_structure_volumes_downloaded_pipe"
-          )
-      )
+      setup_volume_connector |>
+        download_directory_cnt(
+          src = "nested_structure_volumes",
+          dest = "nested_structure_volumes_downloaded_pipe"
+        ) |>
+        expect_equal(setup_volume_connector) |>
+        expect_success()
     }
   )
 })

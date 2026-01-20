@@ -30,6 +30,7 @@ Databricks
 databrickscfg
 DatabricksClient
 databrickslabs
+DatabricksSQL
 dataframe
 datasources
 dbi
@@ -69,6 +70,7 @@ knitr
 licensable
 Licensor
 Lifecycle
+lifecycle
 lintr
 Lundsgaard
 MacOS
@@ -132,6 +134,7 @@ Timepoint
 tmeanallmtcars
 tmp
 unixodbc
+usethis
 VignetteBuilder
 vlob
 withr
@@ -142,4 +145,3 @@ Yk
 yml
 ƣ
 ϥ
-Codecov

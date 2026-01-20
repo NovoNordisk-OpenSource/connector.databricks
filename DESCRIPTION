@@ -20,7 +20,7 @@ BugReports:
     https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
 Imports:
     arrow,
-    brickster (>= 0.2.7),
+    brickster (>= 0.2.11),
     checkmate,
     cli,
     connector (>= 1.0.0),
@@ -29,6 +29,7 @@ Imports:
     dplyr,
     fs,
     hms,
+    lifecycle,
     odbc (>= 1.4.0),
     purrr,
     R6 (>= 2.4.0),
