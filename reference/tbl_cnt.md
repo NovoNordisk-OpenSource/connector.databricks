@@ -3,6 +3,16 @@
 Additional tbl methods for Databricks connectors implemented for
 [`connector::tbl_cnt()`](https://novonordisk-opensource.github.io/connector/reference/tbl_cnt.html):
 
+- [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md):
+  Reuses the
+  [`connector::tbl_cnt()`](https://novonordisk-opensource.github.io/connector/reference/tbl_cnt.html)
+  method for
+  [ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md),
+  but always sets the `catalog` and `schema` as defined in when
+  initializing the connector.
+
+&nbsp;
+
 - [ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md):
   Reuses the
   [`connector::list_content_cnt()`](https://novonordisk-opensource.github.io/connector/reference/list_content_cnt.html)
@@ -26,6 +36,9 @@ Additional tbl methods for Databricks connectors implemented for
 ## Usage
 
 ``` r
+tbl_cnt(connector_object, name, ...)
+
+# S3 method for class 'ConnectorDatabricksSQL'
 tbl_cnt(connector_object, name, ...)
 
 # S3 method for class 'ConnectorDatabricksTable'

@@ -3,6 +3,16 @@
 Additional write methods for Databricks connectors implemented for
 [`connector::write_cnt()`](https://novonordisk-opensource.github.io/connector/reference/write_cnt.html):
 
+- [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md):
+  Reuses the
+  [`connector::write_cnt()`](https://novonordisk-opensource.github.io/connector/reference/write_cnt.html)
+  method for
+  [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md),
+  but always sets the `catalog`, `schema` and `staging_volume` as
+  defined in when initializing the connector.
+
+&nbsp;
+
 - [ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md):
   Reuses the
   [`connector::write_cnt()`](https://novonordisk-opensource.github.io/connector/reference/write_cnt.html)
@@ -30,6 +40,15 @@ write_cnt(
   x,
   name,
   overwrite = zephyr::get_option("overwrite", "connector"),
+  ...
+)
+
+# S3 method for class 'ConnectorDatabricksSQL'
+write_cnt(
+  connector_object,
+  x,
+  name,
+  overwrite = zephyr::get_option("overwrite", "connector.databricks"),
   ...
 )
 

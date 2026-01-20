@@ -3,6 +3,16 @@
 Additional read methods for Databricks connectors implemented for
 [`connector::read_cnt()`](https://novonordisk-opensource.github.io/connector/reference/read_cnt.html):
 
+- [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md):
+  Reuses the
+  [`connector::read_cnt()`](https://novonordisk-opensource.github.io/connector/reference/read_cnt.html)
+  method for
+  [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md),
+  but always sets the `catalog` and `schema` as defined in when
+  initializing the connector.
+
+&nbsp;
+
 - [ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md):
   Reuses the
   [`connector::read_cnt()`](https://novonordisk-opensource.github.io/connector/reference/read_cnt.html)
@@ -24,6 +34,9 @@ Additional read methods for Databricks connectors implemented for
 ## Usage
 
 ``` r
+read_cnt(connector_object, name, ...)
+
+# S3 method for class 'ConnectorDatabricksSQL'
 read_cnt(connector_object, name, ...)
 
 # S3 method for class 'ConnectorDatabricksTable'
