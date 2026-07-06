@@ -25,6 +25,7 @@ cluster or volume storage. Use:
 Here’s an example of how to do this:
 
 ``` r
+
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
@@ -83,6 +84,7 @@ Save this to `_connector.yml` file and use the
 function to connect to Databricks:
 
 ``` r
+
 library(connector)
 
 # Create connector object
@@ -93,6 +95,7 @@ Now you can access the Databricks cluster and volume using the `db`
 object and `tables` or `volume` field, respectively.
 
 ``` r
+
 # Connection to Databricks cluster. This will print object details
 db$tables
 
@@ -109,6 +112,7 @@ You can do some basic directory operations, such as creating, removing,
 and listing data inside directory, or listing tables inside database.
 
 ``` r
+
 # Create a directory
 db$volume |>
   create_directory_cnt("new_directory")
@@ -139,6 +143,7 @@ datasets.
 Here is an example of writing data to a table on a cluster:
 
 ``` r
+
 library(dplyr)
 
 # Manipulate data
@@ -193,6 +198,7 @@ Databricks volume. This way we can save different types of data in
 different formats.
 
 ``` r
+
 library(gt)
 library(tidyr)
 library(ggplot2)

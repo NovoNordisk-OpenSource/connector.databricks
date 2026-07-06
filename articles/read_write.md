@@ -14,6 +14,7 @@ travel](https://docs.databricks.com/aws/en/delta/history) and
 First, let’s load the necessary libraries and create a connector object:
 
 ``` r
+
 library(connector.databricks)
 library(dplyr)
 
@@ -31,6 +32,7 @@ To write data to a Databricks table, we use the
 method:
 
 ``` r
+
 # Create sample data
 data <- data.frame(
   id = 1:5,
@@ -77,6 +79,7 @@ To read data from a Databricks table, we use the
 method:
 
 ``` r
+
 # Read the entire table
 table_data <- connector_object |>
   read_cnt("my_table")
@@ -115,6 +118,7 @@ To list tables in the Databricks catalog, use the
 method:
 
 ``` r
+
 # List all tables
 all_tables <- connector_object |>
   list_content_cnt()
@@ -135,6 +139,7 @@ You can create a reference to a Databricks table using the
 method:
 
 ``` r
+
 table_ref <- connector_object |>
   tbl_cnt("my_table")
 

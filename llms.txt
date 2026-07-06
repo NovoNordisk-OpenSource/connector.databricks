@@ -18,6 +18,7 @@ You can install the connector.databricks from CRAN package using the
 following command:
 
 ``` r
+
 # Install from CRAN
 install.packages("connector.databricks")
 ```
@@ -28,6 +29,7 @@ To get a bug fix or to use a feature from the development version, you
 can install the development version of connector.databricks from GitHub.
 
 ``` r
+
 pak::pak("novonordisk-opensource/connector.databricks")
 ```
 
@@ -36,6 +38,7 @@ pak::pak("novonordisk-opensource/connector.databricks")
 Here is an example of how to connect to databricks and retrieve data:
 
 ``` r
+
 library(connector.databricks)
 
 # Connect to databricks tables using DBI
@@ -78,6 +81,7 @@ volumes should be used with unstructured data.
 Example of how to use the connector object:
 
 ``` r
+
 # List content
 con$list_content_cnt()
 
@@ -99,6 +103,7 @@ configuration YAML file (for more information take a look at the
 connector package):
 
 ``` r
+
 # Connect using configuration file
 connector <- connector::connect(
   config = system.file(
