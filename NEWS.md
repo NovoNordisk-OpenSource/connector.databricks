@@ -1,5 +1,6 @@
 # connector.databricks dev
 
+* Fix [#105](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/105) `list_content_cnt()` for `ConnectorDatabricksTable` returning `NULL` with brickster >= 0.2.14, where `db_uc_tables_list()` now returns a paginated response with a `tables` element. Results from all pages are now collected.
 * Fix [#99](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/99)
 * Add new class `ConnectorDatabricksSQL` which uses `brickster::DatabricksSQL()` as a driver.
 This class will replace `ConnectorDatabricksTable` as preferred way of working with tables in
