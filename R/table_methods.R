@@ -92,10 +92,7 @@ list_content_cnt.ConnectorDatabricksTable <- function(
         page_token = page_token,
         ...
       )
-      tables <- c(
-        tables,
-        if (is.null(response$tables)) response else response$tables
-      )
+      tables <- c(tables, response$tables)
       page_token <- response$next_page_token
       if (is.null(page_token) || !nzchar(page_token)) {
         break
