@@ -258,7 +258,7 @@ test_that("tmp volume removal works", {
   list_of_volumes <- brickster::db_uc_volumes_list(
     catalog = setup_db_catalog,
     schema = setup_db_schema
-  )
+  )$volumes
 
   expect_no_error(
     for (volume in list_of_volumes) {
