@@ -1,5 +1,6 @@
 # connector.databricks dev
 
+* `connector_databricks_table()` and `ConnectorDatabricksTable$new()` gain `...`, passed on to `DBI::dbConnect()` for the `odbc::databricks()` driver, so driver parameters such as `workspace`, `uid`, `pwd` or `useNativeQuery` can be set [#109](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/109). `extra_class` now has to be passed by name.
 * Update dependency on `brickster` version >= 0.2.14.
 * Fix [#105](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/105) `list_content_cnt()` for `ConnectorDatabricksTable` returning `NULL` with brickster >= 0.2.14, where `db_uc_tables_list()` now returns a paginated response with a `tables` element. Results from all pages are now collected.
 * Fix [#99](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/99)

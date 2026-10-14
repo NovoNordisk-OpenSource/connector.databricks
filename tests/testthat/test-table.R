@@ -1,6 +1,34 @@
-skip_offline_test()
+test_that("connector_databricks_table passes ... to the odbc driver", {
+  args <- capture_dbconnect_args(
+    http_path = "path-to-cluster",
+    catalog = "my_catalog",
+    schema = "my_schema",
+    workspace = "https://my-workspace.cloud.databricks.com",
+    uid = "token"
+  )
+
+  expect_s4_class(args$drv, "DatabricksOdbcDriver")
+  expect_equal(args$httpPath, "path-to-cluster")
+  expect_equal(args$workspace, "https://my-workspace.cloud.databricks.com")
+  expect_equal(args$uid, "token")
+  expect_false(args$useNativeQuery)
+  expect_null(args$extra_class)
+})
+
+test_that("connector_databricks_table allows overriding useNativeQuery", {
+  args <- capture_dbconnect_args(
+    http_path = "path-to-cluster",
+    catalog = "my_catalog",
+    schema = "my_schema",
+    useNativeQuery = TRUE
+  )
+
+  expect_true(args$useNativeQuery)
+  expect_length(args[names(args) == "useNativeQuery"], 1)
+})
 
 test_that("Table generics work for connector_databricks_table", {
+  skip_offline_test()
   skip_on_cran()
   temp_table_name <- paste0(
     "temp-mtcars_",

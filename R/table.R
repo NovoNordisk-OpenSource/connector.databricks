@@ -8,6 +8,9 @@
 #' warehouse you want to connect to
 #' @param catalog [character] The catalog to use
 #' @param schema [character] The schema to use
+#' @param ... Additional parameters sent to `DBI::dbConnect()` for the
+#' [odbc::databricks()] driver, e.g. `workspace`, `uid`, `pwd` or `driver`.
+#' `useNativeQuery` defaults to `FALSE`.
 #' @param extra_class [character] Extra class to assign to the new connector
 #'
 #' @return A new [ConnectorDatabricksTable] object
@@ -55,12 +58,14 @@ connector_databricks_table <- function(
   http_path,
   catalog,
   schema,
+  ...,
   extra_class = NULL
 ) {
   ConnectorDatabricksTable$new(
     http_path = http_path,
     catalog = catalog,
     schema = schema,
+    ...,
     extra_class = extra_class
   )
 }
@@ -84,7 +89,8 @@ connector_databricks_table <- function(
 #' Authentication to databricks is handed by the `odbc::databricks()` driver and
 #'  supports general use of personal access tokens and credentials through Posit
 #'  Workbench. See also [odbc::databricks()] On more information on how the
-#' connection to Databricks is established.
+#' connection to Databricks is established. Additional driver parameters can
+#' be passed through `...`.
 #'
 #' @importFrom odbc databricks
 #' @examples
@@ -131,9 +137,17 @@ ConnectorDatabricksTable <- R6::R6Class(
     #' warehouse you want to connect to
     #' @param catalog [character] The catalog to use
     #' @param schema [character] The schema to use
+    #' @param ... Additional parameters sent to `DBI::dbConnect()` for the
+    #' [odbc::databricks()] driver. `useNativeQuery` defaults to `FALSE`.
     #' @param extra_class [character] Extra class to assign to the new connector
     #' @return A [ConnectorDatabricksTable] object
-    initialize = function(http_path, catalog, schema, extra_class = NULL) {
+    initialize = function(
+      http_path,
+      catalog,
+      schema,
+      ...,
+      extra_class = NULL
+    ) {
       checkmate::assert_character(x = http_path, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = catalog, len = 1, any.missing = FALSE)
       checkmate::assert_character(x = schema, len = 1, any.missing = FALSE)
@@ -148,11 +162,19 @@ ConnectorDatabricksTable <- R6::R6Class(
 
       zephyr::msg_info("Connecting to cluster, please wait..")
 
-      super$initialize(
-        drv = odbc::databricks(),
-        httpPath = http_path,
+      driver_args <- rlang::dots_list(
+        ...,
         useNativeQuery = FALSE,
-        extra_class = extra_class
+        .homonyms = "first"
+      )
+
+      rlang::inject(
+        super$initialize(
+          drv = odbc::databricks(),
+          httpPath = http_path,
+          !!!driver_args,
+          extra_class = extra_class
+        )
       )
     }
   ),
