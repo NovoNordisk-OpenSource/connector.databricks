@@ -1,0 +1,170 @@
+# connector.databricks
+
+The connector.databricks package provides a convenient interface for
+accessing and interacting with [Databricks](https://www.databricks.com/)
+volumes and tables directly from R.
+
+This package is meant to be used with
+[connector](https://github.com/NovoNordisk-OpenSource/connector)
+package, which provides a common interface for interacting with various
+data sources. The connector.databricks package extends the connector
+package to support Databricks **tables** and **volumes** through three
+connectors:
+
+- [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md):
+  tables, using a SQL warehouse through the
+  [brickster](https://github.com/databrickslabs/brickster)
+  `DatabricksSQL()` driver. This is the preferred way of working with
+  tables.
+- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md):
+  tables, using a cluster through the
+  [`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+  driver.
+- [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md):
+  files in Unity Catalog volumes, using brickster.
+
+## Installation
+
+You can install the connector.databricks from CRAN package using the
+following command:
+
+``` r
+
+# Install from CRAN
+install.packages("connector.databricks")
+```
+
+### Development version
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of connector.databricks from GitHub.
+
+``` r
+
+pak::pak("novonordisk-opensource/connector.databricks")
+```
+
+## Usage
+
+Here is an example of how to connect to databricks and retrieve data:
+
+``` r
+
+library(connector.databricks)
+
+# Connect to databricks tables using a SQL warehouse
+tables <- connector_databricks_sql(
+  warehouse_id = "your-warehouse-id",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+
+# Connect to databricks volume
+volume <- connector_databricks_volume(
+  catalog = "my_catalog",
+  schema = "my_schema",
+  path = "path-to-file-storage"
+)
+```
+
+Authentication for SQL warehouse and volume connections is handled by
+the `brickster` package, which reads credentials such as
+`DATABRICKS_HOST` and `DATABRICKS_TOKEN` from the environment. See
+[Authentication](https://novonordisk-opensource.github.io/connector.databricks/articles/authentication.html)
+for how to set this up locally, on Posit Workbench and on Posit Connect.
+`warehouse_id` defaults to the `DATABRICKS_WAREHOUSE_ID` environment
+variable.
+
+If you need to work with tables through a cluster, use
+[`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
+instead. It connects with the
+[`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+driver, which requires the Databricks ODBC driver to be installed, and
+passes any additional arguments on to it:
+
+``` r
+
+tables <- connector_databricks_table(
+  http_path = "path-to-cluster",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+```
+
+See [Choosing between ConnectorDatabricksSQL and
+ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/articles/table-vs-sql.html)
+for a comparison of the two table connectors.
+
+All connectors share similar interfaces for reading and writing data.
+Tables should be used with tabular types of data, while volumes should
+be used with unstructured data.
+
+Example of how to use the connector objects:
+
+``` r
+
+# Write, read, list and remove a table
+tables |>
+  write_cnt(mtcars, "mtcars")
+
+tables |>
+  read_cnt("mtcars") |>
+  head()
+
+tables |>
+  list_content_cnt()
+
+tables |>
+  remove_cnt("mtcars")
+
+# Write, read and remove a file in a volume
+volume |>
+  write_cnt(iris, "iris.rds")
+
+volume |>
+  read_cnt("iris.rds") |>
+  head()
+
+volume |>
+  remove_cnt("iris.rds")
+```
+
+## Usage with connector package
+
+Here is an example how it can be used with connector package and
+configuration YAML file (for more information take a look at the
+connector package):
+
+``` r
+
+# Connect using configuration file
+connector <- connector::connect(
+  config = system.file(
+    "config",
+    "example_yaml.yaml",
+    package = "connector.databricks"
+  )
+)
+
+# List contents in Volume
+connector$volume$list_content_cnt()
+
+# Get databricks connection object from Tables
+connector$tables$conn
+
+# Write a file
+connector$volume$write_cnt(iris, "Test/iris.csv")
+
+# Read a table
+connector$tables$read_cnt("example_data")
+```
+
+## Contributing
+
+We welcome contributions to the connector.databricks package. If you
+have any suggestions or find any issues, please open an issue or submit
+a pull request on GitHub.
+
+## License
+
+This package is licensed under the Apache License.

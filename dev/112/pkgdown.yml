@@ -1,0 +1,13 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  articles/authentication: authentication.html
+  connector-databricks: connector-databricks.html
+  articles/Consistent-API: Consistent-API.html
+  articles/read_write: read_write.html
+  articles/table-vs-sql: table-vs-sql.html
+last_built: 2026-10-14T12:09Z
+urls:
+  reference: https://novonordisk-opensource.github.io/connector.databricks/reference
+  article: https://novonordisk-opensource.github.io/connector.databricks/articles
