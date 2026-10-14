@@ -83,12 +83,22 @@ list_content_cnt.ConnectorDatabricksTable <- function(
 ) {
   tags <- dbplyr::translate_sql({{ tags }}, con = connector_object$conn)
   if (is.na(tags["sql"])) {
-    tables <- brickster::db_uc_tables_list(
-      catalog = connector_object$catalog,
-      schema = connector_object$schema,
-      ...
-    )
-    return(sapply(tables, "[[", "name"))
+    tables <- list()
+    page_token <- NULL
+    repeat {
+      response <- brickster::db_uc_tables_list(
+        catalog = connector_object$catalog,
+        schema = connector_object$schema,
+        page_token = page_token,
+        ...
+      )
+      tables <- c(tables, response$tables)
+      page_token <- response$next_page_token
+      if (is.null(page_token) || !nzchar(page_token)) {
+        break
+      }
+    }
+    return(vapply(tables, "[[", "name", FUN.VALUE = character(1)))
   }
 
   return(list_content_tags(connector_object, tags))
