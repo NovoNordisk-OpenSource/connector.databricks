@@ -4,7 +4,7 @@
 \alias{connector_databricks_table}
 \title{Create \code{ConnectorDatabricksTable} connector}
 \usage{
-connector_databricks_table(http_path, catalog, schema, extra_class = NULL)
+connector_databricks_table(http_path, catalog, schema, ..., extra_class = NULL)
 }
 \arguments{
 \item{http_path}{\link{character} The path to the Databricks cluster or SQL
@@ -13,6 +13,10 @@ warehouse you want to connect to}
 \item{catalog}{\link{character} The catalog to use}
 
 \item{schema}{\link{character} The schema to use}
+
+\item{...}{Additional parameters sent to \code{DBI::dbConnect()} for the
+\code{\link[odbc:databricks]{odbc::databricks()}} driver, e.g. \code{workspace}, \code{uid}, \code{pwd} or \code{driver}.
+\code{useNativeQuery} defaults to \code{FALSE}.}
 
 \item{extra_class}{\link{character} Extra class to assign to the new connector}
 }

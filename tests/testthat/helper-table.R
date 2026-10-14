@@ -1,3 +1,22 @@
+# Capture arguments sent to DBI::dbConnect() without opening a connection
+capture_dbconnect_args <- function(...) {
+  local_mocked_bindings(
+    dbConnect = function(drv, ...) {
+      rlang::abort(
+        "dbConnect() mocked",
+        class = "mocked_dbconnect",
+        args = list(drv = drv, ...)
+      )
+    },
+    .package = "DBI"
+  )
+  cnd <- expect_error(
+    connector_databricks_table(...),
+    class = "mocked_dbconnect"
+  )
+  cnd$args
+}
+
 # Create a temporary dataset for testing
 mtcars_dataset <- function() {
   # Sample data
