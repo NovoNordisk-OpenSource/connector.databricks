@@ -35,8 +35,6 @@ from one to the other.
 | [`write_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/write_cnt.md) | `brickster::dbWriteTable()`, optionally through a staging volume | Always through a temporary volume |
 | Appending rows | `append = TRUE` | Not supported |
 | [`read_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.md) | [`DBI::dbReadTable()`](https://dbi.r-dbi.org/reference/dbReadTable.html) | Arrow results from the SQL warehouse |
-| Time travel | SQL through `$conn` | `timepoint` and `version` arguments of [`read_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/read_cnt.md) |
-| Tags | SQL through `$conn` | `tags` argument of [`write_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/write_cnt.md) and [`list_content_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.md) |
 | [`list_content_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.md) | [`DBI::dbListTables()`](https://dbi.r-dbi.org/reference/dbListTables.html) | Unity Catalog API |
 | [`remove_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/remove_cnt.md) | [`DBI::dbRemoveTable()`](https://dbi.r-dbi.org/reference/dbRemoveTable.html) | Unity Catalog API |
 | [`tbl_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/tbl_cnt.md) | dbplyr, executed on the SQL warehouse | dbplyr, executed on the cluster |
@@ -89,66 +87,6 @@ it creates and removes for every write.
 See
 [`vignette("articles/read_write")`](https://novonordisk-opensource.github.io/connector.databricks/articles/read_write.md)
 for details on both.
-
-## Time travel and tags
-
-Time travel and tags have dedicated arguments in
-`ConnectorDatabricksTable`. With `ConnectorDatabricksSQL` the same is
-done with SQL on the connection object.
-
-### Time travel
-
-``` r
-
-# ConnectorDatabricksTable
-con_table |>
-  read_cnt("my_table", version = 2)
-
-con_table |>
-  read_cnt("my_table", timepoint = "2024-01-01 00:00:00 UTC")
-
-# ConnectorDatabricksSQL
-DBI::dbGetQuery(
-  con_sql$conn,
-  "SELECT * FROM my_catalog.my_schema.my_table VERSION AS OF 2"
-)
-
-DBI::dbGetQuery(
-  con_sql$conn,
-  "SELECT * FROM my_catalog.my_schema.my_table TIMESTAMP AS OF '2024-01-01'"
-)
-```
-
-### Tags
-
-``` r
-
-# ConnectorDatabricksTable
-con_table |>
-  write_cnt(data, "my_table", tags = list(source = "example"))
-
-con_table |>
-  list_content_cnt(tags = (tag_name == "source" && tag_value == "example"))
-
-# ConnectorDatabricksSQL
-con_sql |>
-  write_cnt(data, "my_table")
-
-DBI::dbExecute(
-  con_sql$conn,
-  "ALTER TABLE my_catalog.my_schema.my_table SET TAGS ('source' = 'example')"
-)
-
-DBI::dbGetQuery(
-  con_sql$conn,
-  "SELECT DISTINCT table_name
-   FROM system.information_schema.table_tags
-   WHERE catalog_name = 'my_catalog'
-     AND schema_name = 'my_schema'
-     AND tag_name = 'source'
-     AND tag_value = 'example'"
-)
-```
 
 ## Driver parameters
 
@@ -240,5 +178,6 @@ Calls to
 and
 [`tbl_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/tbl_cnt.md)
 stay the same, except for the `timepoint`, `version` and `tags`
-arguments, which are replaced by SQL as shown above. Consider setting
-`staging_volume` if you write tables with more than a few thousand rows.
+arguments, which `ConnectorDatabricksSQL` does not have. Consider
+setting `staging_volume` if you write tables with more than a few
+thousand rows.

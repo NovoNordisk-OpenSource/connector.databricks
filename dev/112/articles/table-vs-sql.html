@@ -169,24 +169,6 @@ volume</td>
 <td>Arrow results from the SQL warehouse</td>
 </tr>
 <tr class="even">
-<td>Time travel</td>
-<td>SQL through <code>$conn</code>
-</td>
-<td>
-<code>timepoint</code> and <code>version</code> arguments of
-<code><a href="../reference/read_cnt.html">read_cnt()</a></code>
-</td>
-</tr>
-<tr class="odd">
-<td>Tags</td>
-<td>SQL through <code>$conn</code>
-</td>
-<td>
-<code>tags</code> argument of <code><a href="../reference/write_cnt.html">write_cnt()</a></code> and
-<code><a href="../reference/list_content_cnt.html">list_content_cnt()</a></code>
-</td>
-</tr>
-<tr class="even">
 <td><code><a href="../reference/list_content_cnt.html">list_content_cnt()</a></code></td>
 <td><code><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">DBI::dbListTables()</a></code></td>
 <td>Unity Catalog API</td>
@@ -250,66 +232,6 @@ temporary volume that it creates and removes for every write.</p>
 both.</p>
 </div>
 <div class="section level2">
-<h2 id="time-travel-and-tags">Time travel and tags<a class="anchor" aria-label="anchor" href="#time-travel-and-tags"></a>
-</h2>
-<p>Time travel and tags have dedicated arguments in
-<code>ConnectorDatabricksTable</code>. With
-<code>ConnectorDatabricksSQL</code> the same is done with SQL on the
-connection object.</p>
-<div class="section level3">
-<h3 id="time-travel">Time travel<a class="anchor" aria-label="anchor" href="#time-travel"></a>
-</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ConnectorDatabricksTable</span></span>
-<span><span class="va">con_table</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/read_cnt.html">read_cnt</a></span><span class="op">(</span><span class="st">"my_table"</span>, version <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">con_table</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/read_cnt.html">read_cnt</a></span><span class="op">(</span><span class="st">"my_table"</span>, timepoint <span class="op">=</span> <span class="st">"2024-01-01 00:00:00 UTC"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># ConnectorDatabricksSQL</span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span></span>
-<span>  <span class="va">con_sql</span><span class="op">$</span><span class="va">conn</span>,</span>
-<span>  <span class="st">"SELECT * FROM my_catalog.my_schema.my_table VERSION AS OF 2"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span></span>
-<span>  <span class="va">con_sql</span><span class="op">$</span><span class="va">conn</span>,</span>
-<span>  <span class="st">"SELECT * FROM my_catalog.my_schema.my_table TIMESTAMP AS OF '2024-01-01'"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="tags">Tags<a class="anchor" aria-label="anchor" href="#tags"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ConnectorDatabricksTable</span></span>
-<span><span class="va">con_table</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/write_cnt.html">write_cnt</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"my_table"</span>, tags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"example"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">con_table</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/list_content_cnt.html">list_content_cnt</a></span><span class="op">(</span>tags <span class="op">=</span> <span class="op">(</span><span class="va">tag_name</span> <span class="op">==</span> <span class="st">"source"</span> <span class="op">&amp;&amp;</span> <span class="va">tag_value</span> <span class="op">==</span> <span class="st">"example"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># ConnectorDatabricksSQL</span></span>
-<span><span class="va">con_sql</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/write_cnt.html">write_cnt</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"my_table"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExecute.html" class="external-link">dbExecute</a></span><span class="op">(</span></span>
-<span>  <span class="va">con_sql</span><span class="op">$</span><span class="va">conn</span>,</span>
-<span>  <span class="st">"ALTER TABLE my_catalog.my_schema.my_table SET TAGS ('source' = 'example')"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span></span>
-<span>  <span class="va">con_sql</span><span class="op">$</span><span class="va">conn</span>,</span>
-<span>  <span class="st">"SELECT DISTINCT table_name</span></span>
-<span><span class="st">   FROM system.information_schema.table_tags</span></span>
-<span><span class="st">   WHERE catalog_name = 'my_catalog'</span></span>
-<span><span class="st">     AND schema_name = 'my_schema'</span></span>
-<span><span class="st">     AND tag_name = 'source'</span></span>
-<span><span class="st">     AND tag_value = 'example'"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
 <h2 id="driver-parameters">Driver parameters<a class="anchor" aria-label="anchor" href="#driver-parameters"></a>
 </h2>
 <p>Both constructors pass <code>...</code> on to
@@ -318,7 +240,7 @@ connection object.</p>
 the brickster driver, for example <code>disposition</code>,
 <code>fetch_timeout</code>, <code>max_active_connections</code>,
 <code>show_progress</code>, <code>host</code> or <code>token</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connector_databricks_sql.html">connector_databricks_sql</a></span><span class="op">(</span></span>
 <span>  warehouse_id <span class="op">=</span> <span class="st">"your-warehouse-id"</span>,</span>
 <span>  catalog <span class="op">=</span> <span class="st">"my_catalog"</span>,</span>
@@ -331,7 +253,7 @@ the brickster driver, for example <code>disposition</code>,
 <code>uid</code>, <code>pwd</code> or <code>driver</code>.
 <code>useNativeQuery</code> defaults to <code>FALSE</code> and can be
 overridden:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connector_databricks_table.html">connector_databricks_table</a></span><span class="op">(</span></span>
 <span>  http_path <span class="op">=</span> <span class="st">"path-to-cluster"</span>,</span>
 <span>  catalog <span class="op">=</span> <span class="st">"my_catalog"</span>,</span>
@@ -347,7 +269,7 @@ want to use. If your <code>http_path</code> already points to a SQL
 warehouse, it has the form
 <code>/sql/1.0/warehouses/&lt;warehouse-id&gt;</code> and the last part
 is the ID.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Before</span></span>
 <span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/connector_databricks_table.html">connector_databricks_table</a></span><span class="op">(</span></span>
 <span>  http_path <span class="op">=</span> <span class="st">"/sql/1.0/warehouses/abc123"</span>,</span>
@@ -364,30 +286,30 @@ is the ID.</p>
 <p>In a connector configuration file, change the backend
 <code>type</code> and replace <code>http_path</code> with
 <code>warehouse_id</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Before</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_table"</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="at">      </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/sql/1.0/warehouses/abc123"</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_catalog"</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_schema"</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co"># After</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_sql"</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="at">      </span><span class="fu">warehouse_id</span><span class="kw">:</span><span class="at"> </span><span class="st">"abc123"</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_catalog"</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_schema"</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Before</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_table"</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">      </span><span class="fu">http_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/sql/1.0/warehouses/abc123"</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_catalog"</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_schema"</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># After</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="fu">datasources</span><span class="kw">:</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"tables"</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="at">    </span><span class="fu">backend</span><span class="kw">:</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"connector.databricks::connector_databricks_sql"</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="at">      </span><span class="fu">warehouse_id</span><span class="kw">:</span><span class="at"> </span><span class="st">"abc123"</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="at">      </span><span class="fu">catalog</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_catalog"</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> </span><span class="st">"my_schema"</span></span></code></pre></div>
 <p>Calls to <code><a href="../reference/read_cnt.html">read_cnt()</a></code>, <code><a href="../reference/write_cnt.html">write_cnt()</a></code>,
 <code><a href="../reference/list_content_cnt.html">list_content_cnt()</a></code>, <code><a href="../reference/remove_cnt.html">remove_cnt()</a></code> and
 <code><a href="../reference/tbl_cnt.html">tbl_cnt()</a></code> stay the same, except for the
 <code>timepoint</code>, <code>version</code> and <code>tags</code>
-arguments, which are replaced by SQL as shown above. Consider setting
-<code>staging_volume</code> if you write tables with more than a few
-thousand rows.</p>
+arguments, which <code>ConnectorDatabricksSQL</code> does not have.
+Consider setting <code>staging_volume</code> if you write tables with
+more than a few thousand rows.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
