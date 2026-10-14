@@ -23,10 +23,10 @@ You can have a look at original article [here](https://novonordisk-opensource.gi
 
 ## Why This Vignette?
 
-We realized it might be confusing for users to understand which method returns which value. This vignette explains what each method does and provides an overview of general rules for both `ConnectorDatabricksVolume` and `ConnectorDatabricksTable` objects.
+We realized it might be confusing for users to understand which method returns which value. This vignette explains what each method does and provides an overview of general rules for `ConnectorDatabricksVolume`, `ConnectorDatabricksSQL` and `ConnectorDatabricksTable` objects.
 
 Apart from this vignette, we have made vignette explaining mechanisms behind some of the functions.
-More info can be find `vignette("articles/read_write")`
+More info can be found in `vignette("articles/read_write")`, and the two table connectors are compared in `vignette("articles/table-vs-sql")`.
 
 ## Methods and Return Values
 

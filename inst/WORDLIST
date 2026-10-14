@@ -5,7 +5,6 @@ aut
 autoupdate
 brickster
 BugReports
-calatog
 Cervan
 cgid
 cli
@@ -16,6 +15,7 @@ cnt
 Codecov
 Config
 connectordatabricks
+ConnectorDatabricksSQL
 ConnectorDatabricksTable
 ConnectorDatabricksVolume
 ConnectorDBI
@@ -103,6 +103,7 @@ rdname
 README
 renv
 Renviron
+reusability
 rlang
 rmarkdown
 Roxygen
