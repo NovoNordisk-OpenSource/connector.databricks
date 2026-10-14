@@ -18,9 +18,137 @@ knitr::opts_chunk$set(
 
 This vignette demonstrates how to **read from** and **write to** Databricks tables using the custom functions. These functions provide a convenient interface for interacting with Databricks tables, including features like [time travel](https://docs.databricks.com/aws/en/delta/history) and [tagging](https://docs.databricks.com/aws/en/database-objects/tags).
 
-## Setup
+The package has two table connectors:
 
-First, let's load the necessary libraries and create a connector object:
+* `ConnectorDatabricksSQL`, created with `connector_databricks_sql()`, which connects to a SQL warehouse through `brickster::DatabricksSQL()`. This is the preferred connector.
+* `ConnectorDatabricksTable`, created with `connector_databricks_table()`, which connects to a cluster through `odbc::databricks()`.
+
+Both are covered below. See `vignette("articles/table-vs-sql")` for a side by side comparison.
+
+## ConnectorDatabricksSQL
+
+### Setup
+
+```{r sql_setup, eval=FALSE}
+library(connector.databricks)
+library(dplyr)
+
+# Create a ConnectorDatabricksSQL object
+connector_object <- connector_databricks_sql(
+  warehouse_id = "your-warehouse-id",
+  catalog = "my_catalog",
+  schema = "my_schema"
+)
+```
+
+### Writing to a Databricks Table
+
+```{r sql_write_example, eval=FALSE}
+# Create sample data
+data <- data.frame(
+  id = 1:5,
+  name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  age = c(25, 30, 35, 40, 45)
+)
+
+# Write data to a table
+connector_object |>
+  write_cnt(x = data, name = "my_table", overwrite = TRUE)
+
+# Append rows to an existing table
+connector_object |>
+  write_cnt(x = data, name = "my_table", append = TRUE)
+```
+
+`write_cnt()` is passed on to `brickster::dbWriteTable()`, which can write the
+data in two ways:
+
+* **Without a staging volume**, the data is sent as `VALUES` inside the SQL
+statement. This is fine for small tables, but slow for larger ones. It warns
+from 20,000 rows and refuses to write more than 50,000 rows.
+* **With a staging volume**, the data is written locally to a
+[**Parquet**](https://www.databricks.com/glossary/what-is-parquet) file,
+uploaded to the volume and loaded into the table. The staging files are removed
+afterwards. This is the recommended way for anything but small tables.
+
+The staging volume is set once, when creating the connector, and is used for
+every write:
+
+```{r sql_staging, eval=FALSE}
+connector_object <- connector_databricks_sql(
+  warehouse_id = "your-warehouse-id",
+  catalog = "my_catalog",
+  schema = "my_schema",
+  staging_volume = "/Volumes/my_catalog/my_schema/my_volume"
+)
+```
+
+Writing an empty data frame is not supported, and `overwrite` and `append`
+cannot both be `TRUE`.
+
+### Reading from a Databricks Table
+
+```{r sql_read_example, eval=FALSE}
+table_data <- connector_object |>
+  read_cnt("my_table")
+```
+
+`read_cnt()` uses `DBI::dbReadTable()` and reads the current version of the
+table. Older versions can be read with Delta time travel syntax through the
+connection object:
+
+```{r sql_time_travel, eval=FALSE}
+# Read a specific version of the table
+version_data <- DBI::dbGetQuery(
+  connector_object$conn,
+  "SELECT * FROM my_catalog.my_schema.my_table VERSION AS OF 2"
+)
+
+# Read the table at a specific timepoint
+historical_data <- DBI::dbGetQuery(
+  connector_object$conn,
+  "SELECT * FROM my_catalog.my_schema.my_table TIMESTAMP AS OF '2023-06-01'"
+)
+```
+
+### Tags
+
+`ConnectorDatabricksSQL` has no `tags` argument, but tags can be set with SQL
+through the connection object:
+
+```{r sql_tags, eval=FALSE}
+DBI::dbExecute(
+  connector_object$conn,
+  "ALTER TABLE my_catalog.my_schema.my_table SET TAGS ('source' = 'example')"
+)
+```
+
+### Listing and Removing Tables
+
+```{r sql_list_example, eval=FALSE}
+connector_object |>
+  list_content_cnt()
+
+connector_object |>
+  remove_cnt("my_table")
+```
+
+### Working with Table References
+
+```{r sql_tbl_example, eval=FALSE}
+filtered_data <- connector_object |>
+  tbl_cnt("my_table") |>
+  filter(age > 30) |>
+  collect()
+```
+
+The `tbl_cnt()` method creates a reference to the table that can be used with
+dplyr operations. These operations are translated to SQL and executed on the
+SQL warehouse.
+
+## ConnectorDatabricksTable
+
+### Setup
 
 ```{r setup, eval=FALSE}
 library(connector.databricks)
@@ -28,12 +156,13 @@ library(dplyr)
 
 # Create a ConnectorDatabricksTable object
 connector_object <- connector_databricks_table(
+  http_path = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema"
 )
 ```
 
-## Writing to a Databricks Table
+### Writing to a Databricks Table
 
 To write data to a Databricks table, we use the `write_cnt()` method:
 
@@ -55,7 +184,7 @@ connector_object |>
   )
 ```
 
-### Mechanism for Writing
+#### Mechanism for Writing
 
 The `write_cnt()` method for `ConnectorDatabricksTable` objects uses a **temporary volume approach** to write data. Here's how it works:
 
@@ -67,7 +196,7 @@ The `write_cnt()` method for `ConnectorDatabricksTable` objects uses a **tempora
 
 This approach allows for **efficient writing of large datasets** and provides a way to add metadata (tags) to the table. The use of Parquet as an intermediate format ensures good performance and compatibility with [Databricks' Delta Lake architecture](https://docs.databricks.com/aws/en/delta/).
 
-## Reading from a Databricks Table
+### Reading from a Databricks Table
 
 To read data from a Databricks table, we use the `read_cnt()` method:
 
@@ -85,9 +214,9 @@ version_data <- connector_object |>
   read_cnt("my_table", version = 2)
 ```
 
-### Mechanism for Reading
+#### Mechanism for Reading
 
-The `read_cnt` method for `ConnectorDatabricksTable` objects leverages Databricks' SQL interface and [Delta Lake time travel capabilities]((https://docs.databricks.com/aws/en/delta/history)). Here's how it works:
+The `read_cnt` method for `ConnectorDatabricksTable` objects leverages Databricks' SQL interface and [Delta Lake time travel capabilities](https://docs.databricks.com/aws/en/delta/history). Here's how it works:
 
 1. A SQL query is constructed based on the table name and any time travel parameters (timepoint or version).
 2. The query is executed on a Databricks SQL warehouse.
@@ -97,7 +226,10 @@ The `read_cnt` method for `ConnectorDatabricksTable` objects leverages Databrick
 This method supports time travel, allowing you to read historical versions of the table.
 The use of Arrow for data transfer provides good performance, especially for large datasets.
 
-## Listing Tables
+Note that writing, reading and tagging run on the first SQL warehouse returned by
+`brickster::db_sql_warehouse_list()`, not on the cluster given in `http_path`.
+
+### Listing Tables
 
 To list tables in the Databricks catalog, use the `list_content_cnt()` method:
 
@@ -113,7 +245,7 @@ tagged_tables <- connector_object |>
 
 The `list_content_cnt` method can filter tables based on their tags. It translates the tag filtering expression into SQL and queries the Databricks system tables to find matching tables.
 
-## Working with Table References
+### Working with Table References
 
 You can create a reference to a Databricks table using the `tbl_cnt()` method:
 
@@ -131,8 +263,10 @@ The `tbl_cnt()` method creates a reference to the table that can be used with dp
 
 ## Conclusion
 
-This vignette demonstrated the basic usage of custom functions for reading from and writing to Databricks tables. These functions provide a convenient interface for working with Databricks, including features like time travel, tagging, and easy integration with dplyr operations.
+This vignette demonstrated how to read from and write to Databricks tables with both table connectors.
 
-The writing mechanism uses temporary volumes and Parquet files for efficient data transfer, while the reading mechanism leverages SQL queries and Arrow streaming for performance. Both methods take advantage of Databricks' Delta Lake architecture, providing features like ACID transactions, time travel, and metadata management.
+`ConnectorDatabricksSQL` relies on the standard DBI methods of the `brickster` driver, with an optional staging volume for efficient writes. Time travel and tags are available through SQL on the connection object.
+
+`ConnectorDatabricksTable` uses temporary volumes and Parquet files for writing, and SQL queries with Arrow streaming for reading, with built-in arguments for time travel and tags.
 
 Remember to refer to the documentation of individual functions for more detailed information on their usage and parameters.
