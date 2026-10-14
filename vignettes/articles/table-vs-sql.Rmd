@@ -64,6 +64,7 @@ That connection is only used by `tbl_cnt()`. Reading, writing, listing,
 removing and tagging tables are done with brickster, on the first SQL warehouse
 returned by `brickster::db_sql_warehouse_list()`. It therefore needs both odbc
 and brickster authentication, and you cannot choose which warehouse is used.
+See `vignette("articles/authentication")` for how to set up both.
 
 ## Writing
 

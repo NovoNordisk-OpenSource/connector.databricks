@@ -51,10 +51,10 @@ con <- connector_databricks_volume(
 )
 ```
 
-Both connections authenticate through the
-[brickster](https://databrickslabs.github.io/brickster/articles/setup-auth.html)
-package. `warehouse_id` defaults to the `DATABRICKS_WAREHOUSE_ID` environment
-variable.
+Both connections authenticate through the brickster package. See
+[Authentication](https://novonordisk-opensource.github.io/connector.databricks/articles/authentication.html)
+for how to set up your credentials. `warehouse_id` defaults to the
+`DATABRICKS_WAREHOUSE_ID` environment variable.
 
 Tables can also be accessed through a cluster with `connector_databricks_table()`,
 which uses the `odbc::databricks()` driver. See

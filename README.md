@@ -74,11 +74,12 @@ volume <- connector_databricks_volume(
 ```
 
 Authentication for SQL warehouse and volume connections is handled by
-the `brickster` package, using personal access tokens or credentials
-through Posit Workbench. See this
-[vignette](https://databrickslabs.github.io/brickster/articles/setup-auth.html)
-for more information on how authentication is set up. `warehouse_id`
-defaults to the `DATABRICKS_WAREHOUSE_ID` environment variable.
+the `brickster` package, which reads credentials such as
+`DATABRICKS_HOST` and `DATABRICKS_TOKEN` from the environment. See
+[Authentication](https://novonordisk-opensource.github.io/connector.databricks/articles/authentication.html)
+for how to set this up locally, on Posit Workbench and on Posit Connect.
+`warehouse_id` defaults to the `DATABRICKS_WAREHOUSE_ID` environment
+variable.
 
 If you need to work with tables through a cluster, use
 `connector_databricks_table()` instead. It connects with the

@@ -14,6 +14,7 @@ CMD
 cnt
 Codecov
 Config
+connectcreds
 connectordatabricks
 ConnectorDatabricksSQL
 ConnectorDatabricksTable
@@ -63,6 +64,7 @@ https
 httr
 ignorePaths
 ignoreRegExpList
+integrations
 io
 jsonlite
 JW
@@ -85,6 +87,7 @@ Nordisk
 Novo
 novonordisk
 NovoNordisk
+OAuth
 Obucina
 odbc
 odbcdriver
