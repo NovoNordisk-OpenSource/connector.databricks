@@ -7,7 +7,7 @@ for details.
 ## Usage
 
 ``` r
-connector_databricks_table(http_path, catalog, schema, extra_class = NULL)
+connector_databricks_table(http_path, catalog, schema, ..., extra_class = NULL)
 ```
 
 ## Arguments
@@ -24,6 +24,15 @@ connector_databricks_table(http_path, catalog, schema, extra_class = NULL)
 - schema:
 
   [character](https://rdrr.io/r/base/character.html) The schema to use
+
+- ...:
+
+  Additional parameters sent to
+  [`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html)
+  for the
+  [`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+  driver, e.g. `workspace`, `uid`, `pwd` or `driver`. `useNativeQuery`
+  defaults to `FALSE`.
 
 - extra_class:
 

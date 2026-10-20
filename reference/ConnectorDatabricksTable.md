@@ -21,6 +21,7 @@ driver and supports general use of personal access tokens and
 credentials through Posit Workbench. See also
 [`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
 On more information on how the connection to Databricks is established.
+Additional driver parameters can be passed through `...`.
 
 ## Super classes
 
@@ -69,7 +70,13 @@ Initialize the connection to Databricks
 
 #### Usage
 
-    ConnectorDatabricksTable$new(http_path, catalog, schema, extra_class = NULL)
+    ConnectorDatabricksTable$new(
+      http_path,
+      catalog,
+      schema,
+      ...,
+      extra_class = NULL
+    )
 
 #### Arguments
 
@@ -85,6 +92,14 @@ Initialize the connection to Databricks
 - `schema`:
 
   [character](https://rdrr.io/r/base/character.html) The schema to use
+
+- `...`:
+
+  Additional parameters sent to
+  [`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html)
+  for the
+  [`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+  driver. `useNativeQuery` defaults to `FALSE`.
 
 - `extra_class`:
 
