@@ -20,7 +20,8 @@ sqlpath to Databricks cluster or the SQL warehouse you want to connect to.
 Authentication to databricks is handed by the \code{odbc::databricks()} driver and
 supports general use of personal access tokens and credentials through Posit
 Workbench. See also \code{\link[odbc:databricks]{odbc::databricks()}} On more information on how the
-connection to Databricks is established.
+connection to Databricks is established. Additional driver parameters can
+be passed through \code{...}.
 }
 \examples{
 \dontrun{
@@ -95,7 +96,13 @@ con_databricks$disconnect()
 \subsection{Method \code{new()}}{
 Initialize the connection to Databricks
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksTable$new(http_path, catalog, schema, extra_class = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksTable$new(
+  http_path,
+  catalog,
+  schema,
+  ...,
+  extra_class = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -107,6 +114,9 @@ warehouse you want to connect to}
 \item{\code{catalog}}{\link{character} The catalog to use}
 
 \item{\code{schema}}{\link{character} The schema to use}
+
+\item{\code{...}}{Additional parameters sent to \code{DBI::dbConnect()} for the
+\code{\link[odbc:databricks]{odbc::databricks()}} driver. \code{useNativeQuery} defaults to \code{FALSE}.}
 
 \item{\code{extra_class}}{\link{character} Extra class to assign to the new connector}
 }
