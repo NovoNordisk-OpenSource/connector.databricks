@@ -2,12 +2,12 @@ url: https://novonordisk-opensource.github.io/connector.databricks
 reference:
   - title: Connectors
     contents:
-    - connector_databricks_table
-    - ConnectorDatabricksTable
-    - connector_databricks_volume
-    - ConnectorDatabricksVolume
     - connector_databricks_sql
     - ConnectorDatabricksSQL
+    - connector_databricks_volume
+    - ConnectorDatabricksVolume
+    - connector_databricks_table
+    - ConnectorDatabricksTable
     - matches("connector-options*")
   - title: Connector functions
     contents:
