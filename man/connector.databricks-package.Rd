@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Vladimir Obucina \email{vlob@novonordisk.com}
   \item Steffen Falgreen Larsen \email{sffl@novonordisk.com}
   \item Aksel Thomsen \email{oath@novonordisk.com}
   \item Cervan Girard \email{cgid@novonordisk.com}

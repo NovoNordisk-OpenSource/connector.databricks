@@ -60,87 +60,85 @@ con_databricks$disconnect()
 \code{\link[connector:Connector]{connector::Connector}} -> \code{\link[connector:ConnectorDBI]{connector::ConnectorDBI}} -> \code{ConnectorDatabricksTable}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{conn}}{The DBI connection object of the connector}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{conn}}{The DBI connection object of the connector}
 
-\item{\code{catalog}}{The catalog used in the connector}
+    \item{\code{catalog}}{The catalog used in the connector}
 
-\item{\code{schema}}{The schema used in the connector}
-}
-\if{html}{\out{</div>}}
+    \item{\code{schema}}{The schema used in the connector}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ConnectorDatabricksTable-new}{\code{ConnectorDatabricksTable$new()}}
-\item \href{#method-ConnectorDatabricksTable-clone}{\code{ConnectorDatabricksTable$clone()}}
+  \itemize{
+    \item \href{#method-ConnectorDatabricksTable-initialize}{\code{ConnectorDatabricksTable$new()}}
+    \item \href{#method-ConnectorDatabricksTable-clone}{\code{ConnectorDatabricksTable$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="list_content_cnt"><a href='../../connector/html/Connector.html#method-Connector-list_content_cnt'><code>connector::Connector$list_content_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href='../../connector/html/Connector.html#method-Connector-print'><code>connector::Connector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href='../../connector/html/Connector.html#method-Connector-read_cnt'><code>connector::Connector$read_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href='../../connector/html/Connector.html#method-Connector-remove_cnt'><code>connector::Connector$remove_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href='../../connector/html/Connector.html#method-Connector-write_cnt'><code>connector::Connector$write_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="disconnect_cnt"><a href='../../connector/html/ConnectorDBI.html#method-ConnectorDBI-disconnect_cnt'><code>connector::ConnectorDBI$disconnect_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="tbl_cnt"><a href='../../connector/html/ConnectorDBI.html#method-ConnectorDBI-tbl_cnt'><code>connector::ConnectorDBI$tbl_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="list_content_cnt"><a href='../../connector/html/Connector.html#method-Connector-list_content_cnt'><code>connector::Connector$list_content_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href='../../connector/html/Connector.html#method-Connector-print'><code>connector::Connector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href='../../connector/html/Connector.html#method-Connector-read_cnt'><code>connector::Connector$read_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href='../../connector/html/Connector.html#method-Connector-remove_cnt'><code>connector::Connector$remove_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href='../../connector/html/Connector.html#method-Connector-write_cnt'><code>connector::Connector$write_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="disconnect_cnt"><a href='../../connector/html/ConnectorDBI.html#method-ConnectorDBI-disconnect_cnt'><code>connector::ConnectorDBI$disconnect_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="tbl_cnt"><a href='../../connector/html/ConnectorDBI.html#method-ConnectorDBI-tbl_cnt'><code>connector::ConnectorDBI$tbl_cnt()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ConnectorDatabricksTable-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ConnectorDatabricksTable-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the connection to Databricks
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksTable$new(
+\if{html}{\out{<a id="method-ConnectorDatabricksTable-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ConnectorDatabricksTable-initialize}{}}}
+\subsection{\code{ConnectorDatabricksTable$new()}}{
+  Initialize the connection to Databricks
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ConnectorDatabricksTable$new(
   http_path,
   catalog,
   schema,
   ...,
   extra_class = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{http_path}}{\link{character} The path to the Databricks cluster or SQL
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{http_path}}{\link{character} The path to the Databricks cluster or SQL
 warehouse you want to connect to}
-
-\item{\code{catalog}}{\link{character} The catalog to use}
-
-\item{\code{schema}}{\link{character} The schema to use}
-
-\item{\code{...}}{Additional parameters sent to \code{DBI::dbConnect()} for the
+      \item{\code{catalog}}{\link{character} The catalog to use}
+      \item{\code{schema}}{\link{character} The schema to use}
+      \item{\code{...}}{Additional parameters sent to \code{DBI::dbConnect()} for the
 \code{\link[odbc:databricks]{odbc::databricks()}} driver. \code{useNativeQuery} defaults to \code{FALSE}.}
+      \item{\code{extra_class}}{\link{character} Extra class to assign to the new connector}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \link{ConnectorDatabricksTable} object
+  }
+}
 
-\item{\code{extra_class}}{\link{character} Extra class to assign to the new connector}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \link{ConnectorDatabricksTable} object
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ConnectorDatabricksTable-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ConnectorDatabricksTable-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ConnectorDatabricksTable$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ConnectorDatabricksTable$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ConnectorDatabricksTable$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

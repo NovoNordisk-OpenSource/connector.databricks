@@ -44,7 +44,7 @@ function for the ConnectorDatabricksVolume class.
 }
 
 Additional log remove methods for Databricks connectors implemented for
-\code{\link[connector:log-functions]{connector::log_remove_connector()}}:
+\code{\link[connector:log_remove_connector]{connector::log_remove_connector()}}:
 }
 \details{
 Connector Logging Functions
