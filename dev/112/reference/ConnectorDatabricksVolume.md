@@ -36,7 +36,7 @@ files inside Databricks volumes.
 
 ### Public methods
 
-- [`ConnectorDatabricksVolume$new()`](#method-ConnectorDatabricksVolume-new)
+- [`ConnectorDatabricksVolume$new()`](#method-ConnectorDatabricksVolume-initialize)
 
 - [`ConnectorDatabricksVolume$clone()`](#method-ConnectorDatabricksVolume-clone)
 
@@ -57,7 +57,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ConnectorDatabricksVolume$new()`
 
 Initializes the connector for Databricks volume storage.
 
@@ -114,7 +114,7 @@ A new ConnectorDatabricksVolume object
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ConnectorDatabricksVolume$clone()`
 
 The objects of this class are cloneable with this method.
 

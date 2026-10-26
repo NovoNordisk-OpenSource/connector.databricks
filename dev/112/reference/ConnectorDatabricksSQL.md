@@ -52,7 +52,7 @@ for more information on how the connection to Databricks is established.
 
 ### Public methods
 
-- [`ConnectorDatabricksSQL$new()`](#method-ConnectorDatabricksSQL-new)
+- [`ConnectorDatabricksSQL$new()`](#method-ConnectorDatabricksSQL-initialize)
 
 - [`ConnectorDatabricksSQL$clone()`](#method-ConnectorDatabricksSQL-clone)
 
@@ -68,7 +68,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ConnectorDatabricksSQL$new()`
 
 Initialize the connection to Databricks
 
@@ -120,7 +120,7 @@ A ConnectorDatabricksSQL object
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ConnectorDatabricksSQL$clone()`
 
 The objects of this class are cloneable with this method.
 

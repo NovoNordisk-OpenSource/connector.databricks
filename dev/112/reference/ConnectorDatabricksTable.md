@@ -48,7 +48,7 @@ Additional driver parameters can be passed through `...`.
 
 ### Public methods
 
-- [`ConnectorDatabricksTable$new()`](#method-ConnectorDatabricksTable-new)
+- [`ConnectorDatabricksTable$new()`](#method-ConnectorDatabricksTable-initialize)
 
 - [`ConnectorDatabricksTable$clone()`](#method-ConnectorDatabricksTable-clone)
 
@@ -64,7 +64,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ConnectorDatabricksTable$new()`
 
 Initialize the connection to Databricks
 
@@ -112,7 +112,7 @@ A ConnectorDatabricksTable object
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ConnectorDatabricksTable$clone()`
 
 The objects of this class are cloneable with this method.
 

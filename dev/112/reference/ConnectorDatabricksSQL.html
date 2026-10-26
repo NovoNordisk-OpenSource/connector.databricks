@@ -73,15 +73,15 @@ information on how the connection to Databricks is established.</p>
 <dd><p>The DBI connection object of the connector</p></dd>
 
 
-<dt><code>catalog</code></dt>
+    <dt><code>catalog</code></dt>
 <dd><p>The catalog used in the connector</p></dd>
 
 
-<dt><code>schema</code></dt>
+    <dt><code>schema</code></dt>
 <dd><p>The schema used in the connector</p></dd>
 
 
-<dt><code>staging_volume</code></dt>
+    <dt><code>staging_volume</code></dt>
 <dd><p>Optional volume path for large dataset staging</p></dd>
 
 
@@ -92,18 +92,17 @@ information on how the connection to Databricks is established.</p>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-ConnectorDatabricksSQL-new"><code>ConnectorDatabricksSQL$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-ConnectorDatabricksSQL-initialize"><code>ConnectorDatabricksSQL$new()</code></a></p></li>
 <li><p><a href="#method-ConnectorDatabricksSQL-clone"><code>ConnectorDatabricksSQL$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="list_content_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-list_content_cnt"><code>connector::Connector$list_content_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-print"><code>connector::Connector$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-read_cnt"><code>connector::Connector$read_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-remove_cnt"><code>connector::Connector$remove_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-write_cnt"><code>connector::Connector$write_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="disconnect_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorDBI.html#method-disconnect_cnt"><code>connector::ConnectorDBI$disconnect_cnt()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="tbl_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorDBI.html#method-tbl_cnt"><code>connector::ConnectorDBI$tbl_cnt()</code></a></span></li>
-</ul></details></p><hr><a id="method-ConnectorDatabricksSQL-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="print"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-print"><code>connector::Connector$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="read_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-read_cnt"><code>connector::Connector$read_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="remove_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-remove_cnt"><code>connector::Connector$remove_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="Connector" data-id="write_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/Connector.html#method-write_cnt"><code>connector::Connector$write_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="disconnect_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorDBI.html#method-disconnect_cnt"><code>connector::ConnectorDBI$disconnect_cnt()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="connector" data-topic="ConnectorDBI" data-id="tbl_cnt"><a href="https://novonordisk-opensource.github.io/connector/reference/ConnectorDBI.html#method-tbl_cnt"><code>connector::ConnectorDBI$tbl_cnt()</code></a></span></li>
+</ul></details></p><hr><a id="method-ConnectorDatabricksSQL-initialize"></a><div class="section">
+<h3 id="connectordatabrickssql-new-"><code>ConnectorDatabricksSQL$new()</code><a class="anchor" aria-label="anchor" href="#connectordatabrickssql-new-"></a></h3>
 <p>Initialize the connection to Databricks</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ConnectorDatabricksSQL.html">ConnectorDatabricksSQL</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
@@ -114,52 +113,44 @@ information on how the connection to Databricks is established.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  extra_class <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>warehouse_id</code></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The ID of the Databricks SQL warehouse
 you want to connect to</p></dd>
 
-
-<dt><code>catalog</code></dt>
+      <dt><code>catalog</code></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The catalog to use</p></dd>
 
-
-<dt><code>schema</code></dt>
+      <dt><code>schema</code></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> The schema to use</p></dd>
 
-
-<dt><code>staging_volume</code></dt>
+      <dt><code>staging_volume</code></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> Optional volume path for large dataset
 staging</p></dd>
 
-
-<dt><code>...</code></dt>
+      <dt><code>...</code></dt>
 <dd><p>Additional parameters sent to <code><a href="https://rdrr.io/pkg/brickster/man/DatabricksSQL.html" class="external-link">brickster::DatabricksSQL()</a></code>
 driver.</p></dd>
 
-
-<dt><code>extra_class</code></dt>
+      <dt><code>extra_class</code></dt>
 <dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> Extra class to assign to the new connector</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>A ConnectorDatabricksSQL object</p>
 </div>
 
-</div><p></p><hr><a id="method-ConnectorDatabricksSQL-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ConnectorDatabricksSQL-clone"></a><div class="section">
+<h3 id="connectordatabrickssql-clone-"><code>ConnectorDatabricksSQL$clone()</code><a class="anchor" aria-label="anchor" href="#connectordatabrickssql-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ConnectorDatabricksSQL</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -169,6 +160,7 @@ driver.</p></dd>
 </div>
 
 </div>
+
 
     </div>
 

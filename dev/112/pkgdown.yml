@@ -7,7 +7,7 @@ articles:
   articles/Consistent-API: Consistent-API.html
   articles/read_write: read_write.html
   articles/table-vs-sql: table-vs-sql.html
-last_built: 2026-10-26T09:06Z
+last_built: 2026-10-26T10:03Z
 urls:
   reference: https://novonordisk-opensource.github.io/connector.databricks/reference
   article: https://novonordisk-opensource.github.io/connector.databricks/articles
