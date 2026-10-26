@@ -1,5 +1,6 @@
 # connector.databricks dev
 
+* `connector_databricks_sql()` and `ConnectorDatabricksSQL` are no longer marked as experimental.
 * README, getting started vignette and the example configuration in `inst/config/example_yaml.yaml` now use `connector_databricks_sql()`. The reading and writing article covers `ConnectorDatabricksSQL`, a new article compares `ConnectorDatabricksSQL` and `ConnectorDatabricksTable`, and a new authentication article explains how brickster and odbc find credentials locally, on Posit Workbench and on Posit Connect [#104](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/104).
 * `connector_databricks_table()` and `ConnectorDatabricksTable$new()` gain `...`, passed on to `DBI::dbConnect()` for the `odbc::databricks()` driver, so driver parameters such as `workspace`, `uid`, `pwd` or `useNativeQuery` can be set [#109](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/109). `extra_class` now has to be passed by name.
 * Update dependency on `brickster` version >= 0.2.14.

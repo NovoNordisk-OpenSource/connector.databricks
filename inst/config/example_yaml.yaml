@@ -1,7 +1,7 @@
 # An example of the configuration file for Databricks Tables and Volumes
 metadata:
-  catalog:  !!expr Sys.getenv("databricks_catalog")
-  warehouse_id: !!expr Sys.getenv("DATABRICKS_WAREHOUSE_ID")
+  catalog: "{env.databricks_catalog}"
+  warehouse_id: "{env.DATABRICKS_WAREHOUSE_ID}"
   path: "path-to-file-storage"
   project: "project_name"
   trial: "trial_name"
