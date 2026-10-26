@@ -16,8 +16,7 @@ connector.databricks has two connectors for Databricks tables:
   DBI driver.
 
 `ConnectorDatabricksSQL` is the preferred way of working with tables and
-is where new development happens. It is marked as experimental, so its
-interface may still change. `ConnectorDatabricksTable` is still
+is where new development happens. `ConnectorDatabricksTable` is still
 available for existing code and for features `ConnectorDatabricksSQL`
 does not have yet. This article compares the two and shows how to move
 from one to the other.
@@ -120,7 +119,7 @@ con <- connector_databricks_table(
   http_path = "path-to-cluster",
   catalog = "my_catalog",
   schema = "my_schema",
-  workspace = "https://my-workspace.cloud.databricks.com"
+  workspace = "https://<workspace>.cloud.databricks.com"
 )
 ```
 

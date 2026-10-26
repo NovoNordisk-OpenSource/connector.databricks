@@ -5,13 +5,10 @@
 - [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md)
   :
 
-  Create `ConnectorDatabricksSQL` connector **\[experimental\]**
+  Create `ConnectorDatabricksSQL` connector
 
 - [`ConnectorDatabricksSQL`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md)
-  :
-
-  Connector for connecting to Databricks using brickster DatabricksSQL
-  **\[experimental\]**
+  : Connector for connecting to Databricks using brickster DatabricksSQL
 
 - [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md)
   : Create databricks volume connector
