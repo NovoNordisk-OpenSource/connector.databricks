@@ -5,7 +5,6 @@ aut
 autoupdate
 brickster
 BugReports
-calatog
 Cervan
 cgid
 cli
@@ -15,7 +14,9 @@ CMD
 cnt
 Codecov
 Config
+connectcreds
 connectordatabricks
+ConnectorDatabricksSQL
 ConnectorDatabricksTable
 ConnectorDatabricksVolume
 ConnectorDBI
@@ -63,6 +64,7 @@ https
 httr
 ignorePaths
 ignoreRegExpList
+integrations
 io
 jsonlite
 JW
@@ -85,6 +87,7 @@ Nordisk
 Novo
 novonordisk
 NovoNordisk
+OAuth
 Obucina
 odbc
 odbcdriver
@@ -103,6 +106,7 @@ rdname
 README
 renv
 Renviron
+reusability
 rlang
 rmarkdown
 Roxygen

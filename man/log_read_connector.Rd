@@ -44,7 +44,7 @@ function for the ConnectorDatabricksVolume class.
 }
 
 Additional log read methods for Databricks connectors implemented for
-\code{\link[connector:log-functions]{connector::log_read_connector()}}:
+\code{\link[connector:log_read_connector]{connector::log_read_connector()}}:
 }
 \details{
 Connector Logging Functions

@@ -1,0 +1,179 @@
+---
+title: "Authentication"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Authentication}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## How it works
+
+connector.databricks does not handle credentials itself. Authentication is
+done by two packages, which look for credentials in your environment:
+
+* [brickster](https://databrickslabs.github.io/brickster/) is used by
+`ConnectorDatabricksSQL` and `ConnectorDatabricksVolume`. It is also used by
+`ConnectorDatabricksTable` for reading, writing, listing and removing tables.
+* [odbc](https://odbc.r-dbi.org/) opens the DBI connection of
+`ConnectorDatabricksTable` with `odbc::databricks()`.
+
+| Connector                   | brickster | odbc |
+|-----------------------------|-----------|------|
+| `ConnectorDatabricksSQL`    | Yes       | No   |
+| `ConnectorDatabricksVolume` | Yes       | No   |
+| `ConnectorDatabricksTable`  | Yes       | Yes  |
+
+Both packages follow
+[Databricks unified authentication](https://docs.databricks.com/aws/en/dev-tools/auth/unified-auth)
+and read the same environment variables. Set them once and you do not need to
+pass credentials in code. `ConnectorDatabricksTable` needs both packages to
+authenticate, so use a method that both support.
+
+## Environment variables
+
+| Variable                                              | brickster | odbc | Used for                                                       |
+|-------------------------------------------------------|-----------|------|----------------------------------------------------------------|
+| `DATABRICKS_HOST`                                     | Yes       | Yes  | Workspace URL, e.g. `https://<workspace>.cloud.databricks.com` |
+| `DATABRICKS_TOKEN`                                    | Yes       | Yes  | Personal access token                                          |
+| `DATABRICKS_CLIENT_ID`, `DATABRICKS_CLIENT_SECRET`    | Yes       | Yes  | Databricks service principal (OAuth M2M)                       |
+| `ARM_CLIENT_ID`, `ARM_CLIENT_SECRET`, `ARM_TENANT_ID` | Yes       | No   | Azure service principal                                        |
+
+`DATABRICKS_WAREHOUSE_ID` is not a credential. connector.databricks uses it as
+the default `warehouse_id` of `connector_databricks_sql()`.
+
+## Working locally
+
+Put the variables in an `.Renviron` file, for example with
+`usethis::edit_r_environ("project")`, and restart R. Keep this file out of
+version control.
+
+### Personal access token
+
+A [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat)
+is the simplest option and works for every connector:
+
+```
+DATABRICKS_HOST=https://<workspace>.cloud.databricks.com
+DATABRICKS_TOKEN=<your-token>
+DATABRICKS_WAREHOUSE_ID=abc123
+```
+
+Databricks marks personal access tokens as legacy and recommends OAuth instead.
+
+### OAuth sign-in
+
+To sign in with your own Databricks account, set only `DATABRICKS_HOST` and
+sign in in one of two ways:
+
+1. Let brickster open a browser to sign in the first time it makes a request.
+This only works in an interactive session on your own machine, and only covers
+`ConnectorDatabricksSQL` and `ConnectorDatabricksVolume`, or
+2. Sign in once with the
+[Databricks CLI](https://docs.databricks.com/aws/en/dev-tools/cli/authentication).
+This works for every connector, including `ConnectorDatabricksTable`. Install
+the CLI and run this in a terminal:
+
+   ```sh
+   databricks auth login --host https://<workspace>.cloud.databricks.com
+   ```
+
+   odbc uses this sign-in directly. For brickster, set
+   `options(use_databrickscfg = TRUE)`, and select the profile created by
+   `databricks auth login` with `options(db_profile = "<profile>")` if it is
+   not your default profile. See
+   [Connect to a Databricks Workspace](https://databrickslabs.github.io/brickster/articles/setup-auth.html)
+   in brickster for details.
+
+### Service principal
+
+For scheduled jobs and CI, use a service principal with an OAuth secret. Both
+packages support it:
+
+```
+DATABRICKS_HOST=https://<workspace>.cloud.databricks.com
+DATABRICKS_CLIENT_ID=...
+DATABRICKS_CLIENT_SECRET=...
+```
+
+Azure service principals (`ARM_*`) are only supported by brickster, so they do
+not work with `ConnectorDatabricksTable`.
+
+## Posit Workbench
+
+With
+[Workbench managed Databricks credentials](https://docs.posit.co/ide/server-pro/user/posit-workbench/managed-credentials/databricks.html),
+select a workspace under **Session Credentials** when you start a session.
+Workbench sets `DATABRICKS_HOST` and `DATABRICKS_CONFIG_FILE`, which both
+brickster and odbc detect, and refreshes the token for you. You only need to set
+`DATABRICKS_WAREHOUSE_ID` if you want a default warehouse.
+
+Do not set `DATABRICKS_HOST` or `DATABRICKS_TOKEN` yourself in these sessions,
+for example in `.Renviron`. brickster ignores them when Workbench credentials
+are active, but odbc gives `DATABRICKS_TOKEN` priority, so
+`ConnectorDatabricksTable` could end up using two different identities. To use
+your own credentials, start the session with `None` selected.
+
+## Posit Connect
+
+brickster does not use the Posit Connect OAuth integrations. Set the
+credentials as
+[environment variables](https://docs.posit.co/connect/user/content-settings/#environment-variables)
+of the content instead: `DATABRICKS_HOST` with either `DATABRICKS_TOKEN` or a
+service principal's `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET`. This
+works for all connectors.
+
+odbc can use the Connect
+[Databricks OAuth integrations](https://docs.posit.co/connect/user/oauth-integrations/)
+when the connectcreds package is installed, for example to let a Shiny app query
+as its viewer. This only applies to the odbc connection of
+`ConnectorDatabricksTable`. Its reads and writes still go through brickster, and
+run as the identity in the environment variables above.
+
+## Passing credentials in code
+
+Prefer environment variables, because they are picked up by every connector and
+by both packages. If you need to pass credentials directly, use `...`:
+
+```{r in_code, eval=FALSE}
+# Passed to brickster::DatabricksSQL() and used for all operations
+con_sql <- connector_databricks_sql(
+  warehouse_id = "abc123",
+  catalog = "my_catalog",
+  schema = "my_schema",
+  host = "<workspace>.cloud.databricks.com",
+  token = my_token
+)
+
+# Passed to odbc::databricks() only. brickster still uses the environment
+con_table <- connector_databricks_table(
+  http_path = "/sql/1.0/warehouses/abc123",
+  catalog = "my_catalog",
+  schema = "my_schema",
+  workspace = "https://<workspace>.cloud.databricks.com",
+  uid = "token",
+  pwd = my_token
+)
+```
+
+`host` for brickster must not include `https://`. `ConnectorDatabricksVolume`
+has no credential arguments and always uses the environment.
+
+## Checking your setup
+
+* `brickster::db_sql_warehouse_list()` lists the SQL warehouses you can use. If
+it works, brickster is authenticated.
+* `DBI::dbConnect(odbc::databricks(), httpPath = "<http-path>")` does the same
+for odbc.
+* `cannot find token or initiate OAuth flow` comes from brickster. It found no
+token or service principal, and could not open a browser sign-in because the
+session is not interactive or is on a server.
+* `Failed to detect ambient Databricks credentials` comes from odbc. None of
+the methods above were found.

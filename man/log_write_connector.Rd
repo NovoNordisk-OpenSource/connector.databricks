@@ -44,7 +44,7 @@ function for the ConnectorDatabricksVolume class.
 }
 
 Additional log write methods for Databricks connectors implemented for
-\code{\link[connector:log-functions]{connector::log_write_connector()}}:
+\code{\link[connector:log_write_connector]{connector::log_write_connector()}}:
 }
 \details{
 Connector Logging Functions

@@ -2,8 +2,7 @@
 % Please edit documentation in R/sql.R
 \name{connector_databricks_sql}
 \alias{connector_databricks_sql}
-\title{Create \code{ConnectorDatabricksSQL} connector
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+\title{Create \code{ConnectorDatabricksSQL} connector}
 \usage{
 connector_databricks_sql(
   warehouse_id = Sys.getenv("DATABRICKS_WAREHOUSE_ID"),

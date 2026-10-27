@@ -18,6 +18,8 @@ URL: https://novonordisk-opensource.github.io/connector.databricks/,
     https://github.com/NovoNordisk-OpenSource/connector.databricks
 BugReports:
     https://github.com/NovoNordisk-OpenSource/connector.databricks/issues
+Depends:
+    R (>= 4.1.0)
 Imports:
     arrow,
     brickster (>= 0.2.14),
@@ -50,4 +52,4 @@ Config/Needs/website: rmarkdown
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, r6 = TRUE)
-RoxygenNote: 7.3.2
+Config/roxygen2/version: 8.1.0

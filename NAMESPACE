@@ -50,23 +50,27 @@ export(upload_directory_cnt)
 export(write_cnt)
 importFrom(R6,R6Class)
 importFrom(brickster,DatabricksSQL)
-importFrom(checkmate,assert_logical)
-importFrom(checkmate,assert_string)
+importFrom(checkmate,
+  assert_logical,
+  assert_string
+)
 importFrom(cli,cli_abort)
-importFrom(connector,create_directory_cnt)
-importFrom(connector,disconnect_cnt)
-importFrom(connector,download_cnt)
-importFrom(connector,download_directory_cnt)
-importFrom(connector,list_content_cnt)
-importFrom(connector,log_read_connector)
-importFrom(connector,log_remove_connector)
-importFrom(connector,log_write_connector)
-importFrom(connector,read_cnt)
-importFrom(connector,remove_cnt)
-importFrom(connector,remove_directory_cnt)
-importFrom(connector,tbl_cnt)
-importFrom(connector,upload_cnt)
-importFrom(connector,upload_directory_cnt)
-importFrom(connector,write_cnt)
+importFrom(connector,
+  create_directory_cnt,
+  disconnect_cnt,
+  download_cnt,
+  download_directory_cnt,
+  list_content_cnt,
+  log_read_connector,
+  log_remove_connector,
+  log_write_connector,
+  read_cnt,
+  remove_cnt,
+  remove_directory_cnt,
+  tbl_cnt,
+  upload_cnt,
+  upload_directory_cnt,
+  write_cnt
+)
 importFrom(lifecycle,deprecated)
 importFrom(odbc,databricks)

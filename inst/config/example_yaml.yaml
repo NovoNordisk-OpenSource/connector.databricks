@@ -1,7 +1,7 @@
 # An example of the configuration file for Databricks Tables and Volumes
 metadata:
-  catalog:  !!expr Sys.getenv("databricks_catalog")
-  http_path: "path-to-cluster"
+  catalog: "{env.databricks_catalog}"
+  warehouse_id: "{env.DATABRICKS_WAREHOUSE_ID}"
   path: "path-to-file-storage"
   project: "project_name"
   trial: "trial_name"
@@ -9,8 +9,8 @@ metadata:
 datasources:
   - name: "tables"
     backend:
-      type: "connector.databricks::connector_databricks_dbi"
-      http_path: "{metadata.http_path}"
+      type: "connector.databricks::connector_databricks_sql"
+      warehouse_id: "{metadata.warehouse_id}"
       catalog: "{metadata.catalog}"
       schema: "{metadata.project}_{metadata.trial}_adam"
   - name: "volume"
