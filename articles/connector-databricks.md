@@ -6,19 +6,19 @@ from R.
 
 ## Introduction
 
-This vignette will guide you through the process of connecting to a
+This vignette will guide you through the process of connecting to
 Databricks, retrieving data, and performing various operations using
 this package.
 
-## Connecting to a Databricks
+## Connecting to Databricks
 
 ### Without connector package
 
 To get started, you need to establish a connection to your Databricks
-cluster or volume storage. Use:
+SQL warehouse or volume storage. Use:
 
-- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
-  function to authenticate and connect to your Databricks cluster
+- [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md)
+  function to connect to tables through your Databricks SQL warehouse
 - [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md)
   function to connect to your Databricks volume storage
 
@@ -28,9 +28,9 @@ Here’s an example of how to do this:
 
 library(connector.databricks)
 
-# Connect to databricks tables using DBI
-con <- connector_databricks_table(
-  http_path = "path-to-cluster",
+# Connect to databricks tables using a SQL warehouse
+con <- connector_databricks_sql(
+  warehouse_id = "your-warehouse-id",
   catalog = "my_catalog",
   schema = "my_schema"
 )
@@ -42,6 +42,19 @@ con <- connector_databricks_volume(
   path = "path-to-file-storage"
 )
 ```
+
+Both connections authenticate through the brickster package. See
+[Authentication](https://novonordisk-opensource.github.io/connector.databricks/articles/authentication.html)
+for how to set up your credentials. `warehouse_id` defaults to the
+`DATABRICKS_WAREHOUSE_ID` environment variable.
+
+Tables can also be accessed through a cluster with
+[`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md),
+which uses the
+[`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+driver. See [Choosing between ConnectorDatabricksSQL and
+ConnectorDatabricksTable](https://novonordisk-opensource.github.io/connector.databricks/articles/table-vs-sql.html)
+for the differences between the two.
 
 ### With connector package (recommended)
 
@@ -58,8 +71,8 @@ Configuration file for connecting to Databricks should look like this:
 
 ``` yaml
 metadata:
-  catalog:  "databricks_calatog"
-  http_path: "path-to-cluster"
+  catalog: "databricks_catalog"
+  warehouse_id: "your-warehouse-id"
   path: "path-to-file-storage"
   project: "project_name"
   trial: "trial_name"
@@ -67,8 +80,8 @@ metadata:
 datasources:
   - name: "tables"
     backend:
-      type: "connector.databricks::connector_databricks_table"
-      http_path: "{metadata.http_path}"
+      type: "connector.databricks::connector_databricks_sql"
+      warehouse_id: "{metadata.warehouse_id}"
       catalog: "{metadata.catalog}"
       schema: "{metadata.project}_{metadata.trial}_adam"
   - name: "volume"
@@ -91,15 +104,15 @@ library(connector)
 db <- connect()
 ```
 
-Now you can access the Databricks cluster and volume using the `db`
+Now you can access the Databricks tables and volume using the `db`
 object and `tables` or `volume` field, respectively.
 
 ``` r
 
-# Connection to Databricks cluster. This will print object details
+# Connection to Databricks tables. This will print object details
 db$tables
 
-# Connection to Databricks cluster. This will print object details
+# Connection to Databricks volume. This will print object details
 db$volume
 ```
 
@@ -140,7 +153,7 @@ Now, we will show how to read and write different types of data from/to
 Databricks. In these examples we will be using `iris` and `mtcars`
 datasets.
 
-Here is an example of writing data to a table on a cluster:
+Here is an example of writing data to tables:
 
 ``` r
 
@@ -203,7 +216,7 @@ library(gt)
 library(tidyr)
 library(ggplot2)
 
-# List and load data from cluster
+# List and load data from tables
 db$tables |>
   list_content_cnt()
 
@@ -224,7 +237,7 @@ setosa_fsetosa <- db$tables |>
   read_cnt("setosa") |>
   filter(Sepal.Length > 5)
 
-fsetosa <- ggplot(setosa) +
+fsetosa <- ggplot(setosa_fsetosa) +
   aes(x = Sepal.Length, y = Sepal.Width) +
   geom_point()
 

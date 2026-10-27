@@ -1,4 +1,4 @@
-# Create `ConnectorDatabricksSQL` connector **\[experimental\]**
+# Create `ConnectorDatabricksSQL` connector
 
 Initializes the connector for SQL warehouse type of storage. See
 [ConnectorDatabricksSQL](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md)

@@ -39,8 +39,10 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Consistent-API.html">Understanding Connector Package Methods</a></li>
+<li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
+    <li><a class="dropdown-item" href="../articles/Consistent-API.html">Understanding Connector Package Methods</a></li>
     <li><a class="dropdown-item" href="../articles/read_write.html">Reading and Writing Databricks Tables</a></li>
+    <li><a class="dropdown-item" href="../articles/table-vs-sql.html">Choosing between ConnectorDatabricksSQL and ConnectorDatabricksTable</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -88,12 +90,15 @@ can have a look at original article <a href="https://novonordisk-opensource.gith
 </h2>
 <p>We realized it might be confusing for users to understand which
 method returns which value. This vignette explains what each method does
-and provides an overview of general rules for both
-<code>ConnectorDatabricksVolume</code> and
+and provides an overview of general rules for
+<code>ConnectorDatabricksVolume</code>,
+<code>ConnectorDatabricksSQL</code> and
 <code>ConnectorDatabricksTable</code> objects.</p>
 <p>Apart from this vignette, we have made vignette explaining mechanisms
-behind some of the functions. More info can be find
-<code><a href="../articles/read_write.html">vignette("articles/read_write")</a></code></p>
+behind some of the functions. More info can be found in
+<code><a href="../articles/read_write.html">vignette("articles/read_write")</a></code>, and the two table
+connectors are compared in
+<code><a href="../articles/table-vs-sql.html">vignette("articles/table-vs-sql")</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="methods-and-return-values">Methods and Return Values<a class="anchor" aria-label="anchor" href="#methods-and-return-values"></a>

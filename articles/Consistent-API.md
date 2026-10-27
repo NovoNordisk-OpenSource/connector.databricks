@@ -16,12 +16,14 @@ original article
 
 We realized it might be confusing for users to understand which method
 returns which value. This vignette explains what each method does and
-provides an overview of general rules for both
-`ConnectorDatabricksVolume` and `ConnectorDatabricksTable` objects.
+provides an overview of general rules for `ConnectorDatabricksVolume`,
+`ConnectorDatabricksSQL` and `ConnectorDatabricksTable` objects.
 
 Apart from this vignette, we have made vignette explaining mechanisms
-behind some of the functions. More info can be find
-[`vignette("articles/read_write")`](https://novonordisk-opensource.github.io/connector.databricks/articles/read_write.md)
+behind some of the functions. More info can be found in
+[`vignette("articles/read_write")`](https://novonordisk-opensource.github.io/connector.databricks/articles/read_write.md),
+and the two table connectors are compared in
+[`vignette("articles/table-vs-sql")`](https://novonordisk-opensource.github.io/connector.databricks/articles/table-vs-sql.md).
 
 ## Methods and Return Values
 

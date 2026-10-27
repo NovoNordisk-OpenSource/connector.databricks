@@ -23,6 +23,8 @@ Useful links:
 
 Authors:
 
+- Vladimir Obucina <vlob@novonordisk.com>
+
 - Steffen Falgreen Larsen <sffl@novonordisk.com>
 
 - Aksel Thomsen <oath@novonordisk.com>

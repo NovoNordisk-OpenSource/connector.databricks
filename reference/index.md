@@ -2,13 +2,13 @@
 
 ## Connectors
 
-- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
+- [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md)
   :
 
-  Create `ConnectorDatabricksTable` connector
+  Create `ConnectorDatabricksSQL` connector
 
-- [`ConnectorDatabricksTable`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md)
-  : Connector for connecting to Databricks using DBI
+- [`ConnectorDatabricksSQL`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md)
+  : Connector for connecting to Databricks using brickster DatabricksSQL
 
 - [`connector_databricks_volume()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_volume.md)
   : Create databricks volume connector
@@ -16,16 +16,13 @@
 - [`ConnectorDatabricksVolume`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksVolume.md)
   : Connector for databricks volume storage
 
-- [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md)
+- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
   :
 
-  Create `ConnectorDatabricksSQL` connector **\[experimental\]**
+  Create `ConnectorDatabricksTable` connector
 
-- [`ConnectorDatabricksSQL`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksSQL.md)
-  :
-
-  Connector for connecting to Databricks using brickster DatabricksSQL
-  **\[experimental\]**
+- [`ConnectorDatabricksTable`](https://novonordisk-opensource.github.io/connector.databricks/reference/ConnectorDatabricksTable.md)
+  : Connector for connecting to Databricks using DBI
 
 - [`connector-options-databricks`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector-options-databricks.md)
   : Options for connector.databricks
