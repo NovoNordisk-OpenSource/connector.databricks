@@ -1,5 +1,44 @@
 # Changelog
 
+## connector.databricks 0.2.0
+
+- Add new class `ConnectorDatabricksSQL` which uses
+  [`brickster::DatabricksSQL()`](https://rdrr.io/pkg/brickster/man/DatabricksSQL.html)
+  as a driver. This class will replace `ConnectorDatabricksTable` as
+  preferred way of working with tables in Databricks. This driver will
+  be using SQL Warehouse instead of Compute Cluster, which was used by
+  `odbc` driver.
+- [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md)
+  and `ConnectorDatabricksSQL` are no longer marked as experimental.
+- README, getting started vignette and the example configuration in
+  `inst/config/example_yaml.yaml` now use
+  [`connector_databricks_sql()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_sql.md).
+  The reading and writing article covers `ConnectorDatabricksSQL`, a new
+  article compares `ConnectorDatabricksSQL` and
+  `ConnectorDatabricksTable`, and a new authentication article explains
+  how brickster and odbc find credentials locally, on Posit Workbench
+  and on Posit Connect
+  [\#104](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/104).
+- [`connector_databricks_table()`](https://novonordisk-opensource.github.io/connector.databricks/reference/connector_databricks_table.md)
+  and `ConnectorDatabricksTable$new()` gain `...`, passed on to
+  [`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html)
+  for the
+  [`odbc::databricks()`](https://odbc.r-dbi.org/reference/databricks.html)
+  driver, so driver parameters such as `workspace`, `uid`, `pwd` or
+  `useNativeQuery` can be set
+  [\#109](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/109).
+  `extra_class` now has to be passed by name.
+- Update dependency on `brickster` version \>= 0.2.14.
+- Fix
+  [\#105](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/105)
+  [`list_content_cnt()`](https://novonordisk-opensource.github.io/connector.databricks/reference/list_content_cnt.md)
+  for `ConnectorDatabricksTable` returning `NULL` with brickster \>=
+  0.2.14, where `db_uc_tables_list()` now returns a paginated response
+  with a `tables` element. Results from all pages are now collected.
+- Fix
+  [\#99](https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/99)
+  support for working with volumes with read-only permissions.
+
 ## connector.databricks 0.1.0
 
 CRAN release: 2025-09-05

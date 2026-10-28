@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,18 @@
       <small>Source: <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="connectordatabricks-020">connector.databricks 0.2.0<a class="anchor" aria-label="anchor" href="#connectordatabricks-020"></a></h2>
+<ul><li>Add new class <code>ConnectorDatabricksSQL</code> which uses <code><a href="https://rdrr.io/pkg/brickster/man/DatabricksSQL.html" class="external-link">brickster::DatabricksSQL()</a></code> as a driver. This class will replace <code>ConnectorDatabricksTable</code> as preferred way of working with tables in Databricks. This driver will be using SQL Warehouse instead of Compute Cluster, which was used by <code>odbc</code> driver.</li>
+<li>
+<code><a href="../reference/connector_databricks_sql.html">connector_databricks_sql()</a></code> and <code>ConnectorDatabricksSQL</code> are no longer marked as experimental.</li>
+<li>README, getting started vignette and the example configuration in <code>inst/config/example_yaml.yaml</code> now use <code><a href="../reference/connector_databricks_sql.html">connector_databricks_sql()</a></code>. The reading and writing article covers <code>ConnectorDatabricksSQL</code>, a new article compares <code>ConnectorDatabricksSQL</code> and <code>ConnectorDatabricksTable</code>, and a new authentication article explains how brickster and odbc find credentials locally, on Posit Workbench and on Posit Connect <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/104" class="external-link">#104</a>.</li>
+<li>
+<code><a href="../reference/connector_databricks_table.html">connector_databricks_table()</a></code> and <code>ConnectorDatabricksTable$new()</code> gain <code>...</code>, passed on to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code> for the <code><a href="https://odbc.r-dbi.org/reference/databricks.html" class="external-link">odbc::databricks()</a></code> driver, so driver parameters such as <code>workspace</code>, <code>uid</code>, <code>pwd</code> or <code>useNativeQuery</code> can be set <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/109" class="external-link">#109</a>. <code>extra_class</code> now has to be passed by name.</li>
+<li>Update dependency on <code>brickster</code> version &gt;= 0.2.14.</li>
+<li>Fix <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/105" class="external-link">#105</a> <code><a href="../reference/list_content_cnt.html">list_content_cnt()</a></code> for <code>ConnectorDatabricksTable</code> returning <code>NULL</code> with brickster &gt;= 0.2.14, where <code>db_uc_tables_list()</code> now returns a paginated response with a <code>tables</code> element. Results from all pages are now collected.</li>
+<li>Fix <a href="https://github.com/NovoNordisk-OpenSource/connector.databricks/issues/99" class="external-link">#99</a> support for working with volumes with read-only permissions.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="connectordatabricks-010">connector.databricks 0.1.0<a class="anchor" aria-label="anchor" href="#connectordatabricks-010"></a></h2><p class="text-muted">CRAN release: 2025-09-05</p>
 <ul><li>Initial CRAN release</li>
