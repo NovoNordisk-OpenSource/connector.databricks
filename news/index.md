@@ -1,6 +1,10 @@
 # Changelog
 
+## connector.databricks (development version)
+
 ## connector.databricks 0.2.0
+
+CRAN release: 2026-10-28
 
 - Add new class `ConnectorDatabricksSQL` which uses
   [`brickster::DatabricksSQL()`](https://rdrr.io/pkg/brickster/man/DatabricksSQL.html)

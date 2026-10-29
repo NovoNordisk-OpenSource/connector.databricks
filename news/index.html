@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">connector.databricks</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.0" id="connectordatabricks-020">connector.databricks 0.2.0<a class="anchor" aria-label="anchor" href="#connectordatabricks-020"></a></h2>
+<h2 class="pkg-version" data-toc-text="development version" id="connectordatabricks-development-version">connector.databricks (development version)<a class="anchor" aria-label="anchor" href="#connectordatabricks-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="connectordatabricks-020">connector.databricks 0.2.0<a class="anchor" aria-label="anchor" href="#connectordatabricks-020"></a></h2><p class="text-muted">CRAN release: 2026-10-28</p>
 <ul><li>Add new class <code>ConnectorDatabricksSQL</code> which uses <code><a href="https://rdrr.io/pkg/brickster/man/DatabricksSQL.html" class="external-link">brickster::DatabricksSQL()</a></code> as a driver. This class will replace <code>ConnectorDatabricksTable</code> as preferred way of working with tables in Databricks. This driver will be using SQL Warehouse instead of Compute Cluster, which was used by <code>odbc</code> driver.</li>
 <li>
 <code><a href="../reference/connector_databricks_sql.html">connector_databricks_sql()</a></code> and <code>ConnectorDatabricksSQL</code> are no longer marked as experimental.</li>
