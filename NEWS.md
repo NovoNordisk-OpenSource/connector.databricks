@@ -1,3 +1,5 @@
+# connector.databricks (development version)
+
 # connector.databricks 0.2.0
 
 * Add new class `ConnectorDatabricksSQL` which uses `brickster::DatabricksSQL()` as a driver.
