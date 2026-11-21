@@ -194,7 +194,6 @@ directory_exists <- function(path) {
   result <- tryCatch(
     {
       brickster::db_volume_dir_exists(path)
-      TRUE
     },
     error = function(cond) {
       FALSE

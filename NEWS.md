@@ -1,5 +1,7 @@
 # connector.databricks (development version)
 
+* Fix `download_directory_cnt()` treating files as directories when `brickster::db_volume_dir_exists()` returns `FALSE`.
+
 # connector.databricks 0.2.0
 
 * Add new class `ConnectorDatabricksSQL` which uses `brickster::DatabricksSQL()` as a driver.
